@@ -1,0 +1,91 @@
+a:link {text-decoration: none; color:#FBBA2C;}
+a:visited {text-decoration: none; color:#FBBA2C;}
+a:active {text-decoration: none; color:#FBBA2C;}
+a:hover {color: #F86F0A;text-decoration: underline;}
+a.mh_monstres { color:#F86F0A; }
+a.mh_monstres:hover {color: #FFFFFF;text-decoration: underline;}
+a.mh_monstres:visited {color: #FFFFFF;text-decoration: none;}
+a.mh_trolls_1 { color:#FBBA2C; }
+a.mh_trolls_1:hover {color: #FFFFFF;text-decoration: underline;}
+
+body { background-image:url('http://www.pipeshow.net/RM/Fond_profil.gif');
+color:#1E2235; font-family: Verdana, Arial, Helvetica, sans-serif; font-style: normal; scrollbar-base-color: #5D7CC8}
+.mh_tdborder {background-color:#30395D; border: 3px solid #FBBA2C;}
+.mh_tdtitre {background-color:#1E2235; color:#FFFFFF; font-size:11px;}
+.mh_tdpage {background-color:#30395D; color:#FFFFFF; font-size: 12px; hover}
+.mh_texte {color:#FFFFFF}
+.mh_titre1 {font-size: 24px; color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif}
+.mh_links {text-decoration: none; color:#FBBA2C;}
+.mh_links:hover {text-decoration: underline; color:#F86F0A;}
+.mh_form_submit {
+color: #FFFFFF;
+background-color: #30395D;
+border: 1px solid #FBBA2C;
+text-align: center;
+font-family: Verdana;
+font-size: 11px;
+text-indent: 0px;
+; margin-bottom: 2px; margin-left: 3px; vertical-align: middle}
+
+.mh_textbox {
+color: #FFFFFF;
+background-color: #1E2235;
+border: 0px solid #FBBA2C;
+text-align: center;
+font-family: Verdana;
+font-size: 11px;
+text-indent: 0px;
+; margin-left: 3px; margin-top: 1px}
+
+										/* Encadrement */
+blockquote 
+{
+   float:left;
+   width:99%; /* largeur du cadre: en mettant 48% on a 2 colonnes */
+   color:#FFFFFF;
+   margin:1px;
+   margin-right:1px;
+   margin-bottom:100px;
+   border:1px dotted #FBBA2C;
+   padding:5px;
+   /* font-size: 10px; si on veut changer la taille du texte */
+   -moz-border-radius:10px;
+}
+
+										/* Couleurs des barres de defilement. (Internet Explorer:ok Firefox:ko) */
+{scrollbar-face-color:#1E2235;
+scrollbar-shadow-color:#FBBA2C;
+scrollbar-highlight-color:#FBBA2C;
+scrollbar-3dlight-color:#000000;
+scrollbar-darkshadow-color:#000000;
+scrollbar-track-color:#30395D;
+scrollbar-arrow-color:#FBBA2C}
+
+
+
+										/* Info bulles (Firefox:ok Internet Explorer:ko?) */
+span a {
+    color:blue;
+    text-decoration:none;
+    display:inline;
+    }
+
+span a span {
+    color:blue;
+    display:none;
+    text-decoration:none;
+    border:0px none;
+    z-index:1
+    }
+
+span a:hover {
+    color:blue;
+    width:250;
+    display:inline;
+    text-decoration:none;
+}
+
+
+span :hover span  { color: blue; text-decoration: none;
+background-color:black; display: block; padding: 2px; position: absolute;
+left: 75; border: solid 3px #6666ff; -moz-border-radius: 5px }
