@@ -1,0 +1,385 @@
+% Yvonnick Esnault - yvonnick.e@free.fr 
+\documentclass[a4paper,11pt]{article}
+%\frontmatter
+
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[frenchb]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage[french]{minitoc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage [applemac] {inputenc} % les accents pour compiler sur Mac OsX
+
+\usepackage{float}
+
+\evensidemargin=13pt
+\oddsidemargin=13pt
+\topmargin=-\headheight \advance\topmargin by -\headsep
+\textwidth=14.59cm \textheight=23.62cm % normal A4, 1'' margin % 24.62cm
+\setlength{\parindent}{8mm} % on remet le retrait de paragraphe
+
+%%% My Vars %%%
+\def\mytitle{Outils Relais&Mago}
+\def\mysubject{Installation et Utilisation}
+\def\mymail{yvonnick.e@free.fr}
+\def\mydate{\today}
+\def\myversion{1.0}
+\def\me{Yvonnick Esnault}
+\def\meandmail{\me \\{\normalsize\tt \mymail}}
+
+%%% Fancy headers to add logo, line \ldots{} %%%
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headsep}{25pt}
+
+% Header
+%\lhead{\includegraphics[width=3cm]{images/logo_png}}
+\chead{\leftmark} %\leftmark : contient le nom du chapitre courant.
+%\rhead{\includegraphics[width=2cm]{images/logo_.png}}
+
+%Footer
+\lfoot{\textsl{\me\space - alias Bodega 49145} \\
+\mysubject}
+\cfoot{}
+\rfoot{\textsl{Page \thepage \space sur \pageref{LastPage} }}
+
+%Affiche les ligne en haut, et en bas
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%%% bookmarks, linking in pdf %%%
+\hypersetup{pdfauthor={\me},%
+            pdftitle={\mytitle},%
+            pdfsubject={\mysubject},%
+            colorlinks,%
+            citecolor=black,%
+            filecolor=black,%
+            linkcolor=black,%
+            urlcolor=black,%
+            pdftex}
+
+%%% Commande pour supprimer en-têtes
+%%% et pied de page des pages vides
+\newcommand{\clearemptydoublepage}{%
+\newpage{\pagestyle{empty}\cleardoublepage}}
+
+\newlength{\larg}
+\setlength{\larg}{16.5cm}
+
+\title{
+{\rule{\larg}{1mm}}\vspace{7mm}
+\begin{tabular}{p{4cm} r}
+   & {\Huge {\bf {Les Outils Relais\&Mago} }} \\
+   & \\
+   & {\huge Installation, Configuration et Utilisation}
+\end{tabular}\\
+\vspace{2mm}
+{\rule{\larg}{1mm}}
+\vspace{2mm} \\
+\begin{tabular}{p{11cm} r}
+   & {\large \bf Version 0.1} \\
+   & {\large  \today}
+\end{tabular}\\
+\vspace{5.5cm}
+}
+\author{\begin{tabular}{p{13.7cm}}
+Yvonnick Esnault, alias Bodega (49145)
+\end{tabular}\\
+\hline }
+\date{}
+
+\begin{document}
+\pagenumbering{Roman}
+
+\maketitle
+\newpage
+%\addcontentsline{toc}{chapter}{Remerciements}
+%\chapter*{Remerciements}
+%\vspace*{0.1pt}
+
+%\addcontentsline{toc}{chapter}{Table des Figures}
+%\listoffigures
+
+\tableofcontents
+\newpage\pagenumbering{arabic}
+
+\section{Tour d'horizon des outils}
+EN REDACTION
+
+\section{Installation des outils Relais\&Mago}
+\subsection{Informations générales}
+Avant de pouvoir installer les outils, il faut au préalable installer :
+\begin{itemize}
+  \item un serveur web Apache (1 ou 2)
+  \item php4 ou php5, avec les librairies graphiques : php4-gd ou php5-gd
+  \item un serveur de base de données Mysql
+\end{itemize}
+
+\subsection{Serveur Web}
+Il est sans doute possible de pouvoir installer les outils sur un hébergement gratuit du style free.fr. À ce
+jour, cela n'a pas encore été testé.\\
+
+Cette partie concerne les personnes qui souhaitent installer les outils sur un serveur, qui sera accessible tel que : \newline
+\verb#http://outils.mondomaine.com# ou bien \verb#http://www.mondomaine.com/outils#. Dans les deux
+cas, il faut que \verb#outils.mondomaine.com# ou bien \verb#www.mondomaine.com# soient déclarés
+sur un serveur de nom (DNS).
+
+\subsubsection{Configuration du serveur web}
+Dans votre fichier de configuration d'apache, par exemple : \verb#httpd.conf# pour apache, ou 
+\verb#sites-enabled/default# pour apache2, il faut déclarer un domaine virtuel.
+
+Pour un site accessible tel que \verb#http://www.mondomaine.com/outils#, il faut mettre : 
+\begin{verbatim} 
+NameVirtualHost 111.222.333.444 # Adresse IP publique de la machine
+
+<VirtualHost www.mondomaine.com>
+    DocumentRoot /var/www/
+    ServerName www.mondomaine.com
+</VirtualHost> 
+\end{verbatim}
+
+Pour un site accessible tel que \verb#http://outils.mondomaine.com#, c'est : 
+\begin{verbatim} 
+NameVirtualHost 111.222.333.444 # Adresse IP publique de la machine
+
+<VirtualHost outils.mondomaine.com>
+    DocumentRoot /var/www/outils
+    ServerName outils.mondomaine.com
+</VirtualHost> 
+\end{verbatim}
+\subsubsection{Mise en place des sources php}
+Une fois les sources récupérées, il faut les mettre dans le répertoire : \verb#/var/www/outils#. Si
+votre \verb#DocumentRoot# est différent de ceux proposés dans le paragraphe précédent, à vous 
+d'adapter. \\
+
+Le répertoire \verb#vues/# devra être accessible en lecture / écriture par l'utilisateur apache. C'est
+dans ce répertoire que seront stockés des fichiers temporaires lors de mise à jour et d'appels à des 
+scripts publics. \\
+
+De même pour les répertoires \verb#images/avatars/cache/# (génération des avatars, cf. Chapitre 
+Scripts Publics) et \verb#images/wanted/cache/# (génération de la liste des wanted, cf. Chapitre 
+Scripts Publics).
+
+\subsection{Base de données}
+Les outils Relais\&Mago fonctionnent avec une base de données. Dans l'état actuel du projet, elle
+est obligatoire.
+
+\subsubsection{Configuration}
+Dans le fichier \verb#inc_connect.php3#, les variables concernant la base de données sont telles que : 
+\begin{verbatim} 
+$GLOBALS['base_vue'] = 'outilsrm'; // Nom de la base de données
+$GLOBALS['user_vue'] = 'outilsrm'; // Nom de l'utilisateur de la base
+$GLOBALS['pass_vue'] = 'outilsrm'; // Mot de passe de l'utilisateur de la base
+\end{verbatim}
+Soit vous adaptez ces variables à votre installation de mysql, soit vous ajoutez un utilisateur 
+\verb#outilsrm#, avec pour mot de passe \verb#outilsrm#.
+
+Il vous faut cependant créer une nouvelle base de données (à moins que vous ne soyez sur un hébergeur tel
+que Free.fr, où la base de données est déjà créée).
+
+En ligne de commande, vous pouvez le faire tel que : 
+
+\begin{verbatim} 
+# mysql -u root -p
+Password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 78 to server version: 4.1.13-standard
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> CREATE DATABASE `outilsrm` ; 
+\end{verbatim}
+
+\subsubsection{Schéma SQL}
+Une fois la base de données créée, il faut maintenant rentrer le schéma SQL. Le schéma se trouve
+dans le répertoire \verb#db/# des sources, dans le fichier \verb#schema.sql#.
+Vous pouvez importer le schéma à l'aide de \verb#phpMyAdmin# \footnote{phpMyAdmin permet de
+gérer une base de données mysql à l'aide d'une interface web. Généralement fournie chez un 
+hébergeur tel que free.fr}.
+
+En ligne de commande, vous pouvez passer le schéma tel que : 
+\begin{verbatim} 
+ mysql -u outilsrm -p outilsrm < schema.sql
+\end{verbatim}
+Le nom de la base de données est donné par le second \verb#outilsrm#. L'argument \verb#-p# indique
+juste qu'il faut que mysql demande le mot de passe de l'utilisateur nommé après \verb#-u#.
+
+\subsubsection{Importation des premières données}
+À ce moment, les installations d'apache et de mysql doivent être correctes. Il ne manque plus que les premières données
+dans la base pour pouvoir commencer à utiliser les outils.
+
+Vous devez faire appel à la page : \newline
+\verb#http://outils.mondomaine.comm/update_trolls.php3?pass=PASS_ADMIN# \newline
+où \verb#PASS_ADMIN# est une variable définie dans le fichier \verb#inc_define_vars.php#. \\
+
+Voir la section \textbf{Mot de passe externe} dans le chapitre \textbf{Les scripts automatiques}. \\
+
+\section{Les scripts automatiques}
+Les scripts automatiques peuvent être facultatifs dans l'utilisation des outils. Il est pourtant conseillé
+de les faire tourner... Globalement, ils mettent à jour la base de données avec les informations que
+l'on peut recueillir auprès des trolls de la guilde.
+
+\subsection{Mot de passe externe}
+Le mot de passe externe permet de sécuriser l'utilisation des scripts publics. Dans le fichier : 
+\verb#inc_define_vars.php#, vous devez avoir la variable \verb#MD5_PASS_EXTERNE# de définie.
+C'est la valeur md5 qu'il faut mettre ! Vous pouvez calculer le md5 de votre mot de passe avec
+le script \verb#http://outils.mondomaine.com/md5.php#. \\
+
+Par exemple, si votre mot de passe est : \verb#PASS_ADMIN#, vous devez mettre : \newline
+\verb#MD5_PASS_EXTERNE='62475ddfd0707604ac2ee9deb4108fef'#
+
+
+\subsection{Mise à jour de la liste de trolls et guildes}
+Appel : \newline
+\verb#http://outils.mondomaine.comm/update_trolls.php3?pass=PASS_ADMIN# \newline
+
+Exemple d'utilisation dans une crontab unix :  \newline
+\verb#15 6 * * * /root/scripts/maj_trolls_guildes #
+où \verb#maj_trolls_guildes# est : 
+\begin{verbatim}
+$ cat maj_relaismago 
+#!/bin/sh
+wget http://outils.mondomaine.com/update_trolls.php3?pass=PASS_ADMIN
+\end{verbatim}
+Le script se lancera tous les matins à 6h15.\\
+
+Il a pour rôle de : 
+\begin{itemize}
+  \item mettre à jour la liste des guildes, en faisant appel au fichier public : \newline
+  \verb#ftp://ftp.mountyhall.com/Public_Guildes.txt#
+  \item mettre à jour la liste des trolls, en faisant appel au fichier public : \newline
+  \verb#ftp://ftp.mountyhall.com/Public_Trolls.txt#  
+  \item mettre à jour le profil de chaque troll de la guilde (distinction, nombre de kills, nombre de morts etc...) : 
+  en faisant appel au fichier : \newline
+  \verb#http://sp.mountyhall.com/SP_ProfilPublic.php#
+  \item mettre à jour la liste des mouches de chaque trolls de la guilde, en faisant appel à  : 
+  \verb#http://sp.mountyhall.com/SP_Mouche.php#
+\end{itemize}
+
+\subsection{Mise à jour de la vue2d automatique}
+Appel : \newline
+\verb#http://outils.mondomaine.com/shim_refresh.php?auto=PASS_ADMIN# \newline
+
+Exemple d'utilisation dans une crontab unix :  \newline
+\verb#*/8 * * * * /root/scripts/refresh_auto  # \newline
+où \verb#refresh_auto# est : 
+\begin{verbatim}
+$ cat refresh_auto
+#!/bin/sh
+
+wget 'http://outils.mondomaine.com/shim_refresh.php?auto=PASS_ADMIN' &> /dev/null
+rm -f sequence_refresh.php* 
+\end{verbatim}
+
+Le script se lancera toutes les 8 minutes.\\
+
+Il a pour rôle de : 
+\begin{itemize}
+  \item mettre à jour la base de données avec la vue d'un troll au hasard
+\end{itemize}
+
+Il est aussi possible d'appeler le script tel que : 
+
+\verb#http://outils.mondomaine.comm/shim_refresh.php?pass=PASS_ADMIN&refresh_error=oui#
+Dans ce cas, c'est la vue d'un troll qui est en erreur qui est remise à jour. 
+
+\subsection{Mise à jour des affiches wanted}
+Appel : \newline
+\verb#http://outils.mondomaine.comm/wanted.php?id=all&pass=PASS_ADMIN# \newline
+
+Exemple d'utilisation dans une crontab unix :  \newline
+\verb#45 3 * * * /root/scripts/maj_wanted   # \newline
+où \verb#maj_trolls_guildes# est : 
+\begin{verbatim}
+#!/bin/sh
+wget -p 'http://outils.mondomaine.com/wanted.php?id=all&pass=PASS_ADMIN'  &&
+rm -rf outils.mondomaine.com
+\end{verbatim}
+
+Le script se lancera tous les matins à 3h45.\\
+
+Il a pour rôle de : 
+\begin{itemize}
+  \item mettre à jour la liste des wanted, en générant une image pour chacun (nombre d'impacts, image du profil...)
+\end{itemize}
+
+\subsection{Génération des avatars}
+Les avatars sont des images utilisées sur le forum des Relais\&Mago. Ils sont générés automatiquement avec les
+outils permettant d'avoir des petites icônes suivant le rang, le niveau, la race, la distinction.
+ Pour les faire fonctionner, 
+il faut que dans chaque fiche des trolls de la guilde se trouve le nom de l'avatar. Par exemple :  \newline
+\verb#Bodega# pour que les avatars : \verb#Bodega_avatar.gif# et \verb#Bodega_avatar_bleu.gif# soient
+générés. \\
+
+Il y a plusieurs méthodes pour générer les avatars :
+\begin{itemize}
+\item soit un par un en utilisant l'interface graphique :  \newline
+\verb#http://outils.mondomaine.com/engine_view.php?avatar=liste#. 
+\item Soit en les faisant tous d'un coup, en appelant le fichier :  \newline
+\verb#http://outils.mondomaine.com/generate_avatar.php?id=all&pass=PASS_ADMIN#.
+\end{itemize}
+
+Exemple d'utilisation dans une crontab unix :  \newline
+\verb#30 6 * * 2 /root/scripts/avatar_relaismago  # \newline
+où \verb#avatar_relaismago# est : 
+\begin{verbatim}
+#!/bin/sh
+
+MYDATE=`date +%Y%m%d`;
+MYFILE=`date +%Y%m%d`.zip;
+
+wget  -p "http://outils.mondomaine.com/generate_avatar.php?id=all&pass=PASS_ADMIN" &&
+rm -rf outils.mondomaine.com &&
+mkdir $MYDATE &&
+wget  -p "http://outils.mondomaine.com/generate_avatar.php?id=viewall&pass=PASS_ADMIN" &&
+mv outils.mondomaine.com/images/avatars/cache/*.gif  $MYDATE/ &&
+rm -rf outils.mondomaine.com &&
+zip -r $MYDATE $MYDATE '*.gif' && 
+mutt -s "Génération des avatars $MYFILE" -a $MYFILE adresse@mail.net adresse2@mail.fr \
+< /root/message_texte_mail &&
+rm -rf $MYDATE &&
+rm -f $MYFILE    
+\end{verbatim}
+
+Le script se lancera tous les mardis matins à 6h30. Un mail sera envoyé à  \verb# adresse@mail.net# et
+à \verb#adresse2@mail.fr# avec un fichier zippé en pièce jointe, contenant les avatars.\\
+
+
+\subsection{Sauvegarde de la base de données}
+Dans la contab unix :
+\verb#0 6 * * * /root/scripts/backup_bdd#\\
+
+Le fichier backup\_bdd : 
+\begin{verbatim}
+  #!/bin/sh
+
+MYDATE=`date +%Y%m%d`;
+MYFILE=`date +%Y%m%d-%H%M`.dump.sql.gz;
+
+wget -p 'http://outils.mondomaine.com/engine_view.php?bdd=dumpvue&pass=PASS_ADMIN' &&
+rm -rf outils.mondomaine.com* &&
+sleep 30 &&
+wget 'http://outils.mondomaine.com/vues/dump.sql.gz' &&
+sleep 30 &&
+wget 'http://outils.mondomaine.com/engine_view.php?bdd=deldump&pass=PASS_ADMIN'  &&
+rm -rf engine_view.php* &&
+
+mv dump.sql.gz /home/backup/backup_bdd_outils/$MYFILE 
+\end{verbatim}
+Le répertoire \verb#/home/backup/backup_bdd_outils/# contiendra les sauvegardes quotidiennes de la base de
+données. Le nom d'un fichier de sauvegarde pourra être par exemple : \verb#20050816-0600.dump.sql.gz#.
+
+\section{Développement des outils}
+\subsection{TrollForge}
+Les Outils Relais\&Mago sont maintenant développés avec TrollForge : \href{http//trollforge.lipyx.net}. 
+Vous pouvez contribuer au projet en y apportant des retours d'anomalies, des patchs, des nouvelles idées, etc...\\
+
+REDACTION EN COURS
+\subsection{CVS}
+Exemple d'utilisation du CVS.\\
+
+REDACTION EN COURS
+\end{document}

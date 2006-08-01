@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Tour d'horizon des outils}{}
+\BOOKMARK [1][-]{section.2}{Installation des outils Relais\046Mago}{}
+\BOOKMARK [2][-]{subsection.2.1}{Informations g\351n\351rales}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Serveur Web}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Configuration du serveur web}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Mise en place des sources php}{subsection.2.2}
+\BOOKMARK [2][-]{subsection.2.3}{Base de donn\351es}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Configuration}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Sch\351ma SQL}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Importation des premi\350res donn\351es}{subsection.2.3}
+\BOOKMARK [1][-]{section.3}{Les scripts automatiques}{}
+\BOOKMARK [2][-]{subsection.3.1}{Mot de passe externe}{section.3}
+\BOOKMARK [2][-]{subsection.3.2}{Mise \340 jour de la liste de trolls et guildes}{section.3}
+\BOOKMARK [2][-]{subsection.3.3}{Mise \340 jour de la vue2d automatique}{section.3}
+\BOOKMARK [2][-]{subsection.3.4}{Mise \340 jour des affiches wanted}{section.3}
+\BOOKMARK [2][-]{subsection.3.5}{G\351n\351ration des avatars}{section.3}
+\BOOKMARK [2][-]{subsection.3.6}{Sauvegarde de la base de donn\351es}{section.3}
+\BOOKMARK [1][-]{section.4}{D\351veloppement des outils}{}
+\BOOKMARK [2][-]{subsection.4.1}{TrollForge}{section.4}
+\BOOKMARK [2][-]{subsection.4.2}{CVS}{section.4}

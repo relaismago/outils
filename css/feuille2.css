@@ -1,0 +1,51 @@
+.popperlink { POSITION: absolute; VISIBILITY: hidden }
+.popperlink * A, .link * A {
+  color: #a6a6a6;
+	text-decoration: none;
+}
+.floatWin .inner * {
+  background: #30395D;
+}
+.floatWin {
+  background: #000;
+}
+
+/*.formulaire {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 12px;
+  color: #30395D;
+  background-color: #D5D5EA;
+  border: 0px solid;
+}*/
+
+input , textarea,  select  { FONT-FAMILY: "Trebuchet MS", "Times New Roman", "Times, serif";
+          font-size: 11px;
+          background-color: #D5D5EA;
+          color: #30395D;
+  				border: 0px solid;
+          border-top-color: #F9BB2F;
+          border-left-color: #F9BB2F;
+          border-right-color: #F9BB2F;
+          border-bottom-color: #F9BB2F;
+          border-style: inset;
+          border-width: 1; }
+
+.progressBar {
+  margin: 2px;
+}
+
+.progressBar .border {
+  background: url(/images/progress-remainder.gif) repeat-x;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  height: 12x;
+  width: 200px;
+}
+
+.progressBar .background {
+  background: url(/images/progress-bar.gif) repeat-x;
+  height: 12px;
+  width: 0%;
+          color: #30395D;
+}
+

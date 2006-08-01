@@ -1,0 +1,22 @@
+\select@language {french}
+\sectbegin 
+\contentsline {section}{\numberline {1}Tour d'horizon des outils}{1}{section.1}
+\contentsline {section}{\numberline {2}Installation des outils Relais\&Mago}{1}{section.2}
+\contentsline {subsection}{\numberline {2.1}Informations g\'en\'erales}{1}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Serveur Web}{1}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Configuration du serveur web}{1}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Mise en place des sources php}{1}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}Base de donn\'ees}{2}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Configuration}{2}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Sch\'ema SQL}{2}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Importation des premi\`eres donn\'ees}{3}{subsubsection.2.3.3}
+\contentsline {section}{\numberline {3}Les scripts automatiques}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}Mot de passe externe}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Mise \`a jour de la liste de trolls et guildes}{3}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Mise \`a jour de la vue2d automatique}{4}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Mise \`a jour des affiches wanted}{4}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}G\'en\'eration des avatars}{4}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Sauvegarde de la base de donn\'ees}{5}{subsection.3.6}
+\contentsline {section}{\numberline {4}D\'eveloppement des outils}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}TrollForge}{6}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}CVS}{6}{subsection.4.2}

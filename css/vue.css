@@ -1,0 +1,372 @@
+/* Recherchator */
+.conteneur { 
+ height: 180px;
+
+}
+
+/*.masquable{
+  top: 0px;
+  height: 160px;
+  position: relative;
+  display: run-in;
+  float: none;
+  visibility: hidden;
+}*/
+
+/*div#trolls{
+  position: relative;
+  height: 20px;
+  top: 0px;
+}
+
+div#monstres {
+  top: 0px;
+  color: lime;
+}
+
+div#lieux {
+  top: -150px;
+}*/
+
+/* Autres */
+.avatar_clair {
+	background-color: #a9b1d3;
+}
+.avatar_sombre {
+	background-color: #30385c;
+}
+.relais {
+	font-family: Trebuchet MS, Times New Roman, Times, Serif;
+	color: #eec614;
+	font-weight: bold;
+}
+.top_line A:hover {
+	color: #eec614; 
+}
+.top_line A {
+	color: white; 
+}
+.top_line *,
+.top_line {
+	background-color: #89f;
+	color: black;
+	text-decoration:none;
+	font-weight: bold;
+	font-family: helvetica, arial, avant-garde, Sans-serif;
+}
+.pair {
+        background-color: #555;
+        color: white;
+}
+.impair {
+        background-color: #222;
+        color: white;
+}
+.tableVue {
+	border-width: 0; 
+	border: solid #777 9pt;
+	text-align: left;
+	background-color: black;
+	color: #777;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-width: 1pt;
+}
+* .white * {
+	color: white;
+}
+.red {
+	color: red;
+}
+.bgred {
+	background-color: red;
+}
+TD.tableVue{
+	background-image: url("../images/fond.gif")
+}
+TD.tableVue.actif {
+	background-image: url("../images/fond-rouge.gif")
+	}
+TD.tableVue.inconnu {
+	background-image: url("../images/fond-inconnu.gif")
+}
+TD.tableVue.incomplet {
+	background-image: url("../images/fond-incomplet.gif")
+}
+TD.tableVue.h {
+	background-image: url("../images/fond-5h.gif")
+}
+TD.tableVue.hh {
+	background-image: url("../images/fond-12h.gif")
+}
+TD.tableVue.hhh {
+	background-image: url("../images/fond-24h.gif")
+}
+TD.tableVue.hhhh {
+	background-image: url("../images/fond-48h.gif")
+}
+.position {
+	background-color: #282843;
+	border-color:yellow;
+	border:5pt;
+	
+}
+.caseNum {
+	text-align: right;
+	font-size: 7pt;
+	color: #e0ffe0;
+	background-color: #6f5f6f;
+}
+.streumText {
+	color:red;
+}
+.cameText {
+	color:yellow;
+}
+.trollText {
+	color:white;
+}
+.invisible{
+	color:#bbf;
+}
+.lieuxText {
+	color:#9f9;
+}
+.champiText {
+	color:#66f;
+}
+.baronnieText {
+	color:#9f9;
+}
+.contenu {
+	background-color: transparent;
+	text-align: center;
+}
+.floatWin .inner * {
+	background: #30395D;
+}
+.floatWin {
+	background: #000;
+}
+.popperlink * A, .link * A {
+	color: #a6a6a6;
+	text-decoration: none;
+}
+.link#staticdecklink * {
+	font-size: 12pt !important;
+}
+.popperlink { POSITION: absolute; VISIBILITY: hidden }
+
+.fiche td, tr.fiche{
+	font-family: Georgia, Times New Roman, Times, serif;
+	font-size: 12px;
+}
+
+.gps td, tr.gps{
+	font-family: Georgia, Times New Roman, Times, serif;
+	font-size: 12px;
+}
+
+.xl th, td.xl  {
+	background-color: #ccc;
+	color: #000;
+	font-weight: bold;
+}
+
+.controls * {
+	font-size: 10pt;
+}
+.controls .titre {
+	background-color: #777;
+	color: white;
+}
+
+.objetsProches * {
+/*	font-size: 8pt;*/
+}
+
+.titre {
+	background-color: #777;
+	color: white;
+}
+
+.ligne_vide {
+	/*font-size: 8pt;*/
+	background-color: #255;
+}
+
+.amie *{
+	color: #ffeeee;
+	font-weight: bold;
+	background-color: #117;
+}
+
+.alliee *{
+	color: #ffeeee;
+	font-weight: bold;
+	background-color: #161;
+}
+
+.invisible * {
+	color: #bbbbff;
+}
+
+.ennemie *{
+	color: #ffffff;
+	font-weight: bold;
+	background-color: #F42;
+}
+
+.guilde *{
+	color: #ffeeee;
+	font-weight: bold;
+	background-color: #CC9900;
+}
+
+.tk *{
+	color: #ffeeee;
+	font-weight: bold;
+	background-color: #911;
+}
+
+.ligne {
+	font-size: 8pt;
+}
+
+* .recherche * {
+	background-color: #522;
+}
+
+* .urgent * {
+	background-color: #f42;
+}
+
+.objetsProches * A {
+	color: #777;
+	text-decoration: none;
+}
+.objetsProches * A.white {
+	color: white;
+	text-decoration: none;
+}
+
+table.metaObjetsProches th {
+	background-color: #6f5f6f;
+	color: white;	
+}
+table.list * A {
+   color: blue;
+}
+table.list * {
+    color: black;
+}
+table.list
+{
+    border:1px;
+    border-color:#6f7ca2;
+    border-style:solid;
+    width:70%;
+    border-collapse:collapse;
+    background-color:#f0f3f8;
+    color: black;
+}
+tr.titre-tableau
+{
+    text-indent : 1px;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:0.9em;
+    background-color:#6f7ca2;
+    /*font-family : Verdana, Arial, Helvetica, sans-serif;*/
+		FONT-FAMILY: "Trebuchet MS", "Times New Roman", "Times, serif"; 
+}
+
+tr.titre-tableau * td
+{
+    text-indent : 1px;
+    color:#FFFFFF;
+    font-size:0.9em;
+}
+tr.titre-tableau gps {
+    background-color: #20253D;
+}
+tr.titre-colonne
+{
+    text-indent : 1px;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:0.8em;
+    background-color:#97a1bf;
+}
+
+td.titre-colonne-analysis-vertical
+{
+    text-indent : 1px;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:11px;
+    background-color:#97a1bf;
+}
+
+td.colonne-analysis-vertical
+{
+    text-indent : 1px;
+    color:#082168;
+    font-weight:normal;
+    font-size:11px;
+}
+
+tr.titre-colonne td
+{
+    text-indent : 1px;
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size:0.8em;
+}
+
+tr.item-impair
+{
+    background-color:#d8ddea;
+    color:#031751;
+    font-size:11px;
+    padding-top:0px;
+    padding-bottom:0px;
+    margin:0px;
+}
+tr.item-mouseover
+{
+    background-color:#ffe7be;
+    color:#082168;
+    font-size:11px;
+    padding-top:0px;
+    padding-bottom:0px;
+    margin:0px;
+}
+tr.item-pair
+{
+        background-color:#ecf0f4;
+        color:#031751;
+        font-size:11px;
+        padding-top:0px;
+        padding-bottom:0px;
+        margin:0px;
+}
+tr.item-pair a
+{
+        color:blue;
+}
+A:hover.white {
+	text-decoration: underline;
+	color: #eec614;
+}
+.bestiaire td, tr.bestiaire{
+        font-family: Georgia, Times New Roman, Times, serif;
+        font-size: 12px;
+        color:black;
+}
+
+.bestiaire_cailloux {
+        color:black;
+        background-image: url("../images/fond-rouge.gif")
+}
+

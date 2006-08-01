@@ -1,0 +1,96 @@
+NORMES DE CODAGE - PROJET FIREMAGO
+
+I. Normes syntaxiques
+
+	1) blocs logiques
+
+	Les accolades sont mises a la ligne. Pour chaque entree dans un sous-bloc, une indentation par [tab] est utilisee.
+	Exemple :
+		- INCORRECT :
+		if ( foo == '' ) {
+		bar (); }
+	- CORRECT :
+		if ( foo == '' )
+		{
+			bar ();
+		}
+
+	2) separateurs
+
+	a. Sauf regle contraire, les elements sont accoles directement les uns aux autres.
+	b. Les virgules et point-virgules sont suivis d'un espace, et accoles a l'element precedent.
+	Exemple :
+		- INCORRECT :
+		foo ( 10,20 ,30 );bar ( 2 ) ;
+		- CORRECT :
+		foo ( 10, 20, 30 ); bar ( 2 );
+	c. Les parentheses ouvrantes sont precedees et suivies par un espace. Les parentheses fermantes sont precedees d'un espace.
+	Exemple :
+		- INCORRECT :
+		foo(10, 20, 30);
+		- CORRECT :
+		foo ( 10, 20, 30 );
+	d. Les crochets ouvrants et fermants sont directement accoles aux elements voisins.
+	Exemple :
+		- INCORRECT :
+		foo ( 1 ) [ 5 ] ;
+		- CORRECT :
+		foo ( 1 )[5];
+	e. Tous les autres operateurs sont precedes et suivis d'un espace, a l'exception des operateurs unitaires ( ++, --, etc... )
+	Exemple :
+		- INCORRECT :
+		for ( int i=0;i<10||isFinished ( );i++ )
+		- CORRECT :
+		for ( int i = 0; i < 10 || isFinished ( ); i++ )
+
+II. Nommage
+
+	Les normes de nommage suivies sont celles definies par Sun pour le langage Java. Pour memoire :
+		- nom de variable ou de fonction : premier mot en minuscule, mots suivants capitalises sur la premiere lettre, pas de caractere _
+		Exemple : monNomDeVariable
+		- nom de classe : tous les mots capitalises sur la premiere lettre, pas de caractere _
+		Exemple : MonNomDeClasse
+		- nom de constante : tous les mots capitalises, separes par le caractere _
+		Exemple : MON_NOM_DE_CONSTANTE
+
+III. Commentaires
+
+	Pas de norme :)
+
+IV. Normes specifiques au projet
+
+	La totalite du projet depend de la mise en page du site MountyHall. Pour simplifier la maintenance, il est necessaire de minimiser le
+	nombre de lignes ou une reference a la syntaxe MH est utilisee. Lorsque ces references sont presentes, elle doivent etre definies dans une
+	variable, dont le debut de nom est 'anchor', suivie du commentaire // ANCHOR afin de faciliter la recherche
+	Exemple :
+	 - INCORRECT (mon code :) :
+		var styleTroll = new String ( x_trolls[i].childNodes[2].childNodes[1].getAttribute ( 'class' ) );
+		var styleGuild = new String ( x_trolls[i].childNodes[5].childNodes[0].getAttribute ( 'class' ) );
+		
+		var trollID = new String ( x_trolls[i].childNodes[1].firstChild.nodeValue );
+		var trollName = new String ( x_trolls[i].childNodes[2].childNodes[1].firstChild.nodeValue );
+		
+		var guildTD = x_trolls[i].childNodes[5];
+		var guildJS = new String ( guildTD.childNodes[0].getAttribute ( 'href' ) );
+		var guildID = guildJS.substring ( 15, guildJS.indexOf ( ',' ) );
+
+	 - CORRECT :
+		var anchorCellTrollID = tableTrolls[i].childNodes[1]; // ANCHOR
+		var anchorCellTrollDesc = tableTrolls[i].childNodes[2]; // ANCHOR
+		var anchorCellGuildDesc = tableTrolls[i].childNodes[5]; // ANCHOR
+		var anchorTrollID = anchorCellTrollID.childNodes[0]; // ANCHOR
+		var anchorTrollDesc = anchorCellTrollDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
+		var anchorGuildDesc = anchorCellGuildDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
+		
+		var styleGuild = new String ( anchorGuildDesc.getAttribute ( 'class' ) );
+		var styleTroll = new String ( anchorTrollDesc.getAttribute ( 'class' ) );
+		
+		var trollID = new String ( anchorTrollID.nodeValue );
+		var trollName = new String ( flattenNode ( anchorTrollDesc ) );
+		
+		var guildJS = new String ( anchorGuildDesc.getAttribute ( 'href' ) );
+		var guildID = guildJS.substring ( 15, guildJS.indexOf ( ',' ) ); // ANCHOR
+
+	C'est beaucoup plus lourd en texte, mais la maintenance est beaucoup plus facile. Une remarque : la derniere ligne du code
+	corrige est marquee comme // ANCHOR car elle comprend des references ( les valeurs '15' et ',' dans substring ) qui dependent de la mise
+	en page MH. C'est pas obligatoire, mais ca peut etre bien de le mettre quand on y pense ;)
