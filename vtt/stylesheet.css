@@ -1,0 +1,44 @@
+	TH {
+		font-size: x-small;
+		color: black;
+		background-color: #00CC99;
+	}
+	TD {
+		font-size: x-small;
+	}
+	.impair {
+		background-color: #FF9966;
+		color: black;
+	}
+	.pair {
+		background-color: #FFCC99;
+		color: black;
+	}
+	TD.blasong {
+		background-color: #FF9966;
+		color: black;
+		width: 33%;
+	}
+	TD.blasond {
+		background-color: #FFCC99;
+		color: black;
+		width: 67%;
+	}
+	.avatar {
+		background-color: #FFFFFF;
+		color: blue;
+	}
+	.alerte {
+		background-color: #FF0000;
+		color: white;
+	}
+	.deconnecter {
+		background-color: #000000;
+		color: cyan;
+		text-decoration: underline;
+	}
+	.pseudo {
+		color: black;
+		font-weight: bold;
+	  text-decoration: none;
+	}
