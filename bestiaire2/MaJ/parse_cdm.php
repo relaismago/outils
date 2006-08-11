@@ -50,7 +50,7 @@ if(isset($_POST['soumettre'])){
       $pcdm['troll_nom'] = trim($resultat[2]);
       $pcdm['troll_id']  = trim($resultat[1]);
     }
-    if(eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.+)\].-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
       $pcdm['famille'] = trim($resultat[1]);
       $pcdm['monstre'] = trim($resultat[2]);
       $pcdm['age']     = trim($resultat[3]);
