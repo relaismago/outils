@@ -3,9 +3,9 @@
 if (defined("_INC_CONNECT")) return;
 define("_INC_CONNECT", "1");
 
-$GLOBALS['base_vue'] = 'relaismago';
+$GLOBALS['base_vue'] = 'outilsrm';
 $GLOBALS['user_vue'] = 'root';
-$GLOBALS['pass_vue'] = '';
+$GLOBALS['pass_vue'] = 'mysqlroot';
 
 if ($GLOBALS['db_vue_rm'] = mysql_pconnect('localhost',$GLOBALS['user_vue'],$GLOBALS['pass_vue'])) {
   if (mysql_select_db($GLOBALS['base_vue'])) {

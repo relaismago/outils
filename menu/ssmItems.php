@@ -83,6 +83,7 @@ function showToolbar()
   $pos = addItemMenu(true,false,$pos,"Liens", "Liens pratiques", "/pratique/liens.php");
   $pos = addItemMenu(false,false,$pos,"Quincaillerie", "La quincaillerie du Hall", "/pratique/quincaillerie.php");
   $pos = addItemMenu(false,false,$pos,"Ustensiles", "Les ustensiles du Hall", "/pratique/ustensils.php");
+	$pos = addItemMenu(false,false,$pos,"PartagePX", "Partage des PX du groupe", "/partagepx/partage.php");
 	
   $pos = addItemMenu(false,true,'special',"Spécial", "Spécial");
   $pos = addItemMenu(false,false,$pos,"Miss Mountyhall 2005!", "Miss Mountyhall 2005!", "/miss/miss.php");
