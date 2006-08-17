@@ -276,13 +276,13 @@ Vous ne pourrez accéder à la zone de partage, en cliquant sur "Partage", que si 
 Le bouton "Début partage" permet de préciser au script le premier à recevoir les PX.</td></tr></table></p>
 END;
 	echo '<form method="post" name="new_mb" action="'.URL.'?modif=1">
-<table class="mh_tdborder" align="center" width="60%"><tr class="mh_tdtitre"><td align="center" valign="center" style="font-size:20px; font-weight: bold;">'.$gr->nom_gr.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="Supprimer le groupe" href="javascript:if(confirm(\'Etes-vous sûr de vouloir supprimer le groupe '.$gr->nom_gr.'?\n/!\\\ Attention ceci est irréversible et les trolls du groupe seront supprimés de l\\\'outil...\')) document.location.href=\''.URL.'?del_gr='.$gr->num_gr.'&create=1\'; else alert(\'... alors faites pas mumuse avec le bouton!\');" /><img src="images/icone_suppr.gif" alt="supprimer" style="position:relative;top:2px;border:none;" /></a></td></tr></table>';
+<table class="mh_tdborder" align="center" width="60%"><tr class="mh_tdtitre"><td align="center" valign="center" style="font-size:20px; font-weight: bold;">'.$gr->nom_gr.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a title="Supprimer le groupe" href="javascript:if(confirm(\'Etes-vous sûr de vouloir supprimer le groupe '.$gr->nom_gr.'?\n/!\\\ Attention ceci est irréversible et les trolls du groupe seront supprimés de l\\\'outil...\')) document.location.href=\''.URL.'?del_gr='.$gr->num_gr.'&create=1\'; else alert(\'... alors faites pas mumuse avec le bouton!\');" /><img src="../images/icone_suppr.gif" alt="supprimer" style="position:relative;top:2px;border:none;" /></a></td></tr></table>';
 	echo '<br /><table width="90%" class="mh_tdborder" align="center"><tr class="mh_tdtitre"><td style="padding-left: 40px; padding-top: 10px; padding-bottom: 10px;"><ul>';
 	$q = 0;
 	foreach($gr->mb_gr as $nom => $num){
 		$add = ($gr->last==$num) ? ' <-- début prochain' : '<input type="button" class="mh_form_submit" value="Début prochain" style="font-size:9;" onclick="javascript:document.location.href=\''.URL.'?last='.$num.'&modif=1\';" />';
 		if($num!=0){
-			echo '<li>'.$num.' <b>'.stripslashes($nom).'</b> <a title="Supprimer ce troll du groupe" href="javascript:if(confirm(\'Etes-vous sûr de vouloir supprimer '.$nom.' du groupe?\')) document.location.href=\''.URL.'?del='.$num.'&modif=1\'; else alert(\'... alors faites pas mumuse avec le bouton!\');" /><img src="images/icone_suppr.gif" alt="supprimer" style="position:relative;top:2px;border:none;" /></a> '.$add.'</li>';
+			echo '<li>'.$num.' <b>'.stripslashes($nom).'</b> <a title="Supprimer ce troll du groupe" href="javascript:if(confirm(\'Etes-vous sûr de vouloir supprimer '.$nom.' du groupe?\')) document.location.href=\''.URL.'?del='.$num.'&modif=1\'; else alert(\'... alors faites pas mumuse avec le bouton!\');" /><img src="../images/icone_suppr.gif" alt="supprimer" style="position:relative;top:2px;border:none;" /></a> '.$add.'</li>';
 			$q++;
 		}
 	}
