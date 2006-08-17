@@ -23,7 +23,6 @@ function getInfos()
 	var mm = getCookie("MM_TROLL");
  
 	if ( nt == "" || divList.length <= 2 ) { return; }
-	
 	if( divList[2].childNodes[0].nodeValue.indexOf( "Attaque Normale" ) != -1 ) { comp = 1; }
 
 	var pList = document.getElementsByTagName( 'p' );
@@ -138,6 +137,19 @@ function getInfos()
 			}
 			bList[i].parentNode.insertBefore ( document.createElement ( "br" ), bList[i].nextSibling.nextSibling.nextSibling );
 			bList[i].parentNode.insertBefore ( document.createTextNode ( chaine ),bList[i].nextSibling.nextSibling.nextSibling );
+			//Pour le bouton de partage
+			var PXdistrib = nbPX - comp;
+			var espace = document.createTextNode('\t');
+			var myButton = document.createElement('input');
+			myButton.setAttribute('type', 'button');
+            myButton.setAttribute('class', 'mh_form_submit');
+            myButton.setAttribute('id', 'PartageButton');
+            myButton.setAttribute('value', "Partager les PX");
+			var URLPartages = 'http://outils.relaismago.com/partagepx/partage.php';
+            myButton.setAttribute('onclick', "window.open('" + URLPartages + "?distribpx=" + PXdistrib +"&troll=" + getCookie("NUM_TROLL") + "', 'popupPartages', 'width=500, height=" + ( screen.height - 128) + ", toolbar=no, status=no, location=no, resizable=yes'); this.value='Partage effectué'; this.disabled = true;");
+			var bouton=document.getElementsByName('as_Action')[0];
+			bouton.parentNode.insertBefore(espace,bouton);
+            bouton.parentNode.insertBefore(myButton, espace);
 		}
 	}
 }

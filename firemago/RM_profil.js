@@ -591,8 +591,6 @@ Math.floor((Math.floor(deg[0]*2/3))*3.5) + '</b><br/>';
 		texte = 'Portée horizontale : <b>'+Math.floor(vuetotale/2)+'</b> cases<br/>Portée verticale : <b>'+Math.floor(vuetotale/4)+'</b> cases';
 	if(sort.indexOf('Vue Troublee') != -1)
 		texte = 'Vue : <b>-'+Math.floor(vue/3)+'</b>';
-	if(sort.indexOf('Telekinesie') != -1)
-		texte = 'Portée horizontale : <b>' + Math.floor(vuetotale/2) + '</b> cases<br/>Portée verticale : <b>Même niveau</b>';
 	return texte;
 }
 
@@ -727,7 +725,7 @@ try
 
 var myTr = newTR();
 var myTd = document.createElement ( 'td' );
-myTd.setAttribute ( 'colspan', '2' );
+myTd.setAttribute ( 'colspan', '3' );
 var myIFrame = document.createElement ( 'iframe' );
 
 var anchorCss = document.getElementsByTagName ( 'link' )[0];
@@ -753,6 +751,9 @@ myTr = newTR ();
 myTr.appendChild ( myTd1 = newTD () );
 myTd1.setAttribute ( 'align', 'right' );
 myTr.appendChild ( myTd2 = newTD () );
+myTd2.setAttribute ( 'align', 'center' );
+myTr.appendChild ( myTd3 = newTD () );
+myTd3.setAttribute ( 'align', 'left' );
 
 // VTT
 myTd1.appendChild ( myForm = newForm ( 'formVTT', URLVtt ) );
@@ -772,6 +773,14 @@ myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
 myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
 myForm.appendChild ( newHidden ( 'action', 'add' ) );
 myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC' ) );
+
+//Partages
+var URLPartages = 'http://outils.relaismago.com/partagepx/partage.php';
+myTd3.appendChild ( myForm = newForm ( 'formPartages', URLPartages + '?modif=1&troll=' + trim ( trollNomId ) +'' ) );
+var onSubmit = "window.open('', 'popupPartages', 'width=500, height=" + ( screen.height - 128) +
+	", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes'); this.target='popupPartages'";
+myForm.setAttribute ( 'onsubmit', onSubmit );
+myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );
 
 try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'GGC and VTT error' ); }
 
