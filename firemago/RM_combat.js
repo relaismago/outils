@@ -146,7 +146,7 @@ function getInfos()
             myButton.setAttribute('id', 'PartageButton');
             myButton.setAttribute('value', "Partager les PX");
 			var URLPartages = 'http://outils.relaismago.com/partagepx/partage.php';
-            myButton.setAttribute('onclick', "window.open('" + URLPartages + "?distribpx=" + PXdistrib +"&troll=" + getCookie("NUM_TROLL") + "', 'popupPartages', 'width=500, height=" + ( screen.height - 128) + ", toolbar=no, status=no, location=no, resizable=yes'); this.value='Partage effectué'; this.disabled = true;");
+            myButton.setAttribute('onclick', "window.open('" + URLPartages + "?distribpx=" + PXdistrib +"&troll=" + getCookie("NUM_TROLL") + "', 'popupPartages', 'width=" + ( screen.width - 150 ) + ", height=" + ( screen.height - 128) + ", toolbar=no, status=no, location=no, resizable=yes'); this.value='Partage effectué'; this.disabled = true;");
 			var bouton=document.getElementsByName('as_Action')[0];
 			bouton.parentNode.insertBefore(espace,bouton);
             bouton.parentNode.insertBefore(myButton, espace);

@@ -777,7 +777,7 @@ myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC' ) );
 //Partages
 var URLPartages = 'http://outils.relaismago.com/partagepx/partage.php';
 myTd3.appendChild ( myForm = newForm ( 'formPartages', URLPartages + '?modif=1&troll=' + trim ( trollNomId ) +'' ) );
-var onSubmit = "window.open('', 'popupPartages', 'width=500, height=" + ( screen.height - 128) +
+var onSubmit = "window.open('', 'popupPartages', 'width=" + ( screen.width - 150 ) + ", height=" + ( screen.height - 128) +
 	", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes'); this.target='popupPartages'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );
