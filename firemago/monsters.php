@@ -129,6 +129,7 @@ if ($_SESSION['AuthGuilde'] == 450)
 			";
 		}
 		$caracTot = $niv.";".$caracs_moyennes[pdv].";".$caracs_moyennes[att].";".$caracs_moyennes[esq].";".$caracs_moyennes[deg].";".$caracs_moyennes[reg].";".$caracs_moyennes[arm].";".$caracs_moyennes[vue].";".$caracs_spe[4].";".$caracs_spe[5];
+		$monsterNames[$i] = ereg_replace("\'","&#39;",$monsterNames[$i] );
 		echo "
 		newLink.setAttribute ( 'target', '\"_blank\"' );
     newLink.setAttribute ( 'class', monsterStyle );
