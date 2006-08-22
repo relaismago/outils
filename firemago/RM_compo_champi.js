@@ -22,7 +22,7 @@ var nodes = document.evaluate("//table[@id='table_Composant']/descendant::tr/des
 
 var texte="";
 var arrayCompo = "?";
-var begin = 2;
+var begin = 0;
 
 //On définit la couleur
 var anchorCss = document.getElementsByTagName ( 'link' )[0]; // ANCHOR
@@ -43,20 +43,23 @@ for (var i = 0; i < nodes.snapshotLength; i++)
  texte += id_compo+";"+node.childNodes[2].childNodes[3].childNodes[0].nodeValue+";pas défini\n";
  arrayCompo += "composId[]=" + id_compo +"&compo[]=" + escape (node.childNodes[2].childNodes[3].childNodes[0].nodeValue) + "&";
 // Adding script for coloring priorities compos
-	
-	/*if ( i%30 == 0 )
+
+if ( i!=0 )
+{
+if ( i%30 == 0 )
 	{
   	arrayCompo += "begin=" + begin;
   	newCompoScript = document.createElement ( 'script' );
   	newCompoScript.setAttribute ( 'language', 'JavaScript' );
   	newCompoScript.setAttribute ( 'src',  URLTopJs + "compos.php"  + arrayCompo );
 		document.body.appendChild ( newCompoScript );
-  	arrayCompo = "";
+  	arrayCompo = "?";
   	begin = i + 1;
-	}*/
+	}
+}
 }
 
-if ( arrayCompo != "")
+if ( arrayCompo != "?")
 {
 	  arrayCompo += "begin=" + begin;
 	  newCompoScript = document.createElement ( 'script' );
