@@ -168,7 +168,7 @@ class groupe{
 		if(!isset($last_new)) $last_new = $this->last;
 		$sortie = '';
 		for($z=0;$z<count($liste);$z++){
-			$l = ($liste[$z]["num"]==$last_new) ? ' -- début prochain' : '';
+			$l = ($liste[$z]["num"]==$last_new) ? ' | début prochain' : '';
 			$sortie .= $liste[$z]["num"]." ".$liste[$z]["nom"]." : ".$liste[$z]["px"].$l."\n";
 		}
 		$this->liste_distrib = $liste;
@@ -280,7 +280,7 @@ END;
 	echo '<br /><table width="90%" class="mh_tdborder" align="center"><tr class="mh_tdtitre"><td style="padding-left: 40px; padding-top: 10px; padding-bottom: 10px;"><ul>';
 	$q = 0;
 	foreach($gr->mb_gr as $nom => $num){
-		$add = ($gr->last==$num) ? ' -- début prochain' : '<input type="button" class="mh_form_submit" value="Début prochain" style="font-size:9;" onclick="javascript:document.location.href=\''.URL.'?last='.$num.'&modif=1\';" />';
+		$add = ($gr->last==$num) ? ' | début prochain' : '<input type="button" class="mh_form_submit" value="Début prochain" style="font-size:9;" onclick="javascript:document.location.href=\''.URL.'?last='.$num.'&modif=1\';" />';
 		if($num!=0){
 			echo '<li>'.$num.' <b>'.stripslashes($nom).'</b> <a title="Supprimer ce troll du groupe" href="javascript:if(confirm(\'Etes-vous sûr de vouloir supprimer '.$nom.' du groupe?\')) document.location.href=\''.URL.'?del='.$num.'&modif=1\'; else alert(\'... alors faites pas mumuse avec le bouton!\');" /><img src="../images/icone_suppr.gif" alt="supprimer" style="position:relative;top:2px;border:none;" /></a> '.$add.'</li>';
 			$q++;
@@ -311,7 +311,7 @@ END;
 <br />
 <table width="90%" class="mh_tdborder" align="center"><tr class="mh_tdtitre"><td style="padding-left: 40px; padding-top: 10px; padding-bottom: 10px;"><ul>';
 	foreach($gr->mb_gr as $nom => $num){
-		$add = ($gr->last==$num) ? ' -- début prochain' : '';
+		$add = ($gr->last==$num) ? ' | début prochain' : '';
 		if($num!=0)
 		echo '<li>'.$num.' <b>'.stripslashes($nom).'</b> '.$add.'</li>';
 	}
