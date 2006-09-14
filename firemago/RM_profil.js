@@ -591,6 +591,8 @@ Math.floor((Math.floor(deg[0]*2/3))*3.5) + '</b><br/>';
 		texte = 'Portée horizontale : <b>'+Math.floor(vuetotale/2)+'</b> cases<br/>Portée verticale : <b>'+Math.floor(vuetotale/4)+'</b> cases';
 	if(sort.indexOf('Vue Troublee') != -1)
 		texte = 'Vue : <b>-'+Math.floor(vue/3)+'</b>';
+	if(sort.indexOf('Telekinesie') != -1)
+		texte = 'Portée horizontale : <b>'+Math.floor(vuetotale/2)+'</b> cases';
 	return texte;
 }
 
