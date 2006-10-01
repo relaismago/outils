@@ -156,6 +156,8 @@ function init_avatar($id_avatar)
 		$image_rang = PATH_IMG.'rang/'."rang3.png";
 	} elseif ($res[niveau_troll] < 50 ){
 		$image_rang = PATH_IMG.'rang/'."rang4.png";
+	} elseif ($res[niveau_troll] < 100 ){
+		$image_rang = PATH_IMG.'rang/'."rang5.png";
 	}
 
 	if ($_REQUEST["sombre"] == "") {
