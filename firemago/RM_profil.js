@@ -592,7 +592,11 @@ Math.floor((Math.floor(deg[0]*2/3))*3.5) + '</b><br/>';
 	if(sort.indexOf('Vue Troublee') != -1)
 		texte = 'Vue : <b>-'+Math.floor(vue/3)+'</b>';
 	if(sort.indexOf('Telekinesie') != -1)
-		texte = 'Portée horizontale : <b>'+Math.floor(vuetotale/2)+'</b> cases';
+		texte = 'Trésor ciblables (portée horizontale) : <hr> une plume à <b>'+Math.floor(vuetotale/2 + 2)+'</b> cases<br/>';
+		texte += 'léger à <b>'+Math.floor(vuetotale/2 + 1)+'</b> cases<br/>';
+		texte += 'moyen à <b>'+Math.floor(vuetotale/2)+'</b> cases<br/>';
+		texte += 'lourd à <b>'+Math.floor(vuetotale/2 - 1)+'</b> cases<br/>';
+		texte += 'trés lourd à <b>'+Math.floor(vuetotale/2 - 2)+'</b> cases<br/>';
 	return texte;
 }
 
@@ -698,6 +702,49 @@ function cacherInfoBulle() {
                 bulleStyle.visibility="hidden";
 }
 
+// ********************************************************
+// FATIGUE DU KASTAR
+// ********************************************************
+
+function fatigue()
+{
+        var nodes = document.evaluate("descendant::img[contains(@src,'milieu.gif') or contains(@src,'lifebar.gif')]", anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3], null,XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+        if(nodes.snapshotLength>0)
+        {
+            var node = nodes.snapshotItem(0);
+            node.setAttribute('title','1 PV de perdu = + '+Math.floor(250/pvtotal)+' minutes de DLA');
+        }
+			    
+	var td = anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[4].childNodes[3];
+	if(td.childNodes[0].nodeValue.indexOf("Fatigue")!=-1)
+	{
+	   anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[2].appendChild(td);
+	   anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[0].childNodes[3].setAttribute('rowspan',0);
+	   var ntd = document.createElement("td");
+	   //var dla = anchorAllTables[3].childNodes[1].childNodes[2].childNodes[3].childNodes[1].childNodes[0].nodeValue;
+	   var pa = anchorAllTables[3].childNodes[1].childNodes[2].childNodes[3].childNodes[5].childNodes[0].nodeValue;
+	   dla=dla.substr(dla.lastIndexOf('/')+1,5000);
+	   dla=dla.substr(dla.indexOf(' ')+1,5000);
+	   pa=pa.substr(1,1)*1;
+	   var ut=60*60*dla.substring(0,2)+60*dla.substring(3,5)+1*dla.substring(6,8);
+	   var ct=arrTr[arrTr.length-1].childNodes[1].childNodes[3].nodeValue;
+	   if(ct.indexOf('AM')!=-1)
+	     ct=60*60*ct.substr(ct.indexOf('AM')-9,2)+60*ct.substr(ct.indexOf('AM')-6,2)+1*ct.substr(ct.indexOf('AM')-3,2);
+	   else
+	     ct=60*60*ct.substr(ct.indexOf('PM')-9,2)+60*ct.substr(ct.indexOf('PM')-6,2)+1*ct.substr(ct.indexOf('PM')-3,2);
+	   while(ct>ut)
+	     ut+=60*60*24;
+	   var nbmin=1*td.childNodes[0].nodeValue.substring(td.childNodes[0].nodeValue.indexOf('=')+2,td.childNodes[0].nodeValue.indexOf("'"));
+	   if(pa<2)
+	     ntd.appendChild(document.createTextNode("Vous n'avez pas assez de PA pour accélérer"));
+	   else if(pvactuels>(Math.ceil(Math.floor((ut-ct)/60)/nbmin)))
+ 	     ntd.appendChild(document.createTextNode("Vous devez accélérer d'au moins "+(Math.ceil(Math.floor((ut-ct)/60)/nbmin))+" PV pour rejouer de suite"));
+	   else
+	     ntd.appendChild(document.createTextNode("Vous ne pouvez pas rejouer de suite"));
+	   anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[4].appendChild(ntd);
+	}
+}
+
 
 // ********************************************************
 // MAIN CODE
@@ -705,6 +752,7 @@ function cacherInfoBulle() {
 
 var anchorAllTables = document.getElementsByTagName ( 'table' ); // ANCHOR
 var anchorMainTr = anchorAllTables[3].getElementsByTagName ( 'tr' ); // ANCHOR
+var arrTr = document.getElementsByTagName('tr');
 
 try 
 { 
@@ -851,7 +899,6 @@ var arrView = extractBonus ( cleanValue ( anchorView ) );
 var vue = arrView[0];
 var vuetotale = arrView[0] + arrView[1];
 
-
 // Date of the next DLA
 try
 {
@@ -879,6 +926,9 @@ try
 	anchorMainTr[2].childNodes[3].appendChild(itDlaNext);
 }
 catch ( e ) { error ( e, 'Next DLA error' ); }
+
+// fatigue
+fatigue();
 
 
 // *********************************************
