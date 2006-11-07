@@ -592,11 +592,13 @@ Math.floor((Math.floor(deg[0]*2/3))*3.5) + '</b><br/>';
 	if(sort.indexOf('Vue Troublee') != -1)
 		texte = 'Vue : <b>-'+Math.floor(vue/3)+'</b>';
 	if(sort.indexOf('Telekinesie') != -1)
+	{
 		texte = 'Trésor ciblables (portée horizontale) : <hr> une plume à <b>'+Math.floor(vuetotale/2 + 2)+'</b> cases<br/>';
 		texte += 'léger à <b>'+Math.floor(vuetotale/2 + 1)+'</b> cases<br/>';
 		texte += 'moyen à <b>'+Math.floor(vuetotale/2)+'</b> cases<br/>';
 		texte += 'lourd à <b>'+Math.floor(vuetotale/2 - 1)+'</b> cases<br/>';
 		texte += 'trés lourd à <b>'+Math.floor(vuetotale/2 - 2)+'</b> cases<br/>';
+	}
 	return texte;
 }
 
