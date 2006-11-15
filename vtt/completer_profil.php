@@ -121,34 +121,24 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 			$troll_mm_base	= trim($resultat[1]);
 			$troll_mm_bm	= trim($resultat[2]);
 		endif;
-		if (eregi('[ \t]*Sorts[ \t]*', $lignes[$i], $resultat)):
-		  $sorts=1;
+		if (eregi('[ \t]*Comp.tences (.+)', $lignes[$i], $resultat)):
+		  $comps=1;
+		  $i++;
 		endif;
-		if(eregi('[ \t]*(.+)\(niveau.+:(.+)%\)[ \t]*(.+)+\(niveau.+:(.+)%\)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*(.+)*.niveau.(.+)+:(.+)%',$lignes[$i],$resultat)):
 		  if ($sorts):
-		          $troll_cs[$j][0] = trim($resultat[1]);
-		          $troll_cs[$j][1] = trim($resultat[2]);
-			  $j++; $nb_sorts++;
-			  $troll_cs[$j][0] = trim($resultat[3]);
-			  $troll_cs[$j][1] = trim($resultat[4]);
-			  $j++; $nb_sorts++;
-		  else:
-		          $troll_cs[$j][0] = trim($resultat[1]);
-		          $troll_cs[$j][1] = trim($resultat[2]);
-			  $j++; $nb_comps++;
-			  $troll_cs[$j][0] = trim($resultat[3]);
-			  $troll_cs[$j][1] = trim($resultat[4]);
-			  $j++; $nb_comps++;
-		  endif;
-		elseif(eregi('[ \t]*(.+)\(niveau.+:(.+)%\)',$lignes[$i],$resultat)):
-		  if ($sorts):
-			    $troll_cs[$j][0] = trim($resultat[1]);
-			    $troll_cs[$j][1] = trim($resultat[2]);
+			    $troll_cs[$j][0] = trim($resultat[1])." niv ".$resultat[2];
+			    $troll_cs[$j][1] = trim($resultat[3]);
 			    $j++; $nb_sorts++;
 		  else:
-			$troll_cs[$j][0] = trim($resultat[1]);
-			$troll_cs[$j][1] = trim($resultat[2]);
+			$troll_cs[$j][0] = trim($resultat[1])." niv ".$resultat[2];
+			$troll_cs[$j][1] = trim($resultat[3]);
 			$j++; $nb_comps++;
+		  endif;
+		else:
+		  if ( $comps==1 ):
+			$comps=0;
+			$sorts=1;
 		  endif;
 		endif;
 		$i++;
