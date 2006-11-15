@@ -797,7 +797,7 @@ try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth 
 // ********************************************************
 
 var profil;
-try { profil = flattenNode ( anchorAllTables[3] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
+try { profil = flattenNode ( anchorAllTables[3] ) + "Compétences " + flattenNode ( anchorAllTables[9] ) + "\n" + flattenNode ( anchorAllTables[10] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
 
 myTr = newTR ();
 myTr.appendChild ( myTd1 = newTD () );
@@ -939,8 +939,10 @@ fatigue();
 
 var hauteur = 50;
 var bulleStyle = null;
-var listeComp = anchorAllTables[3].childNodes[1].childNodes[20].childNodes[1].childNodes[1].childNodes[1];
-var listeSort = anchorAllTables[3].childNodes[1].childNodes[24].childNodes[1].childNodes[1].childNodes[1];
+//var listeComp = anchorAllTables[3].childNodes[1].childNodes[20].childNodes[1].childNodes[1].childNodes[1];
+var listeComp = anchorAllTables[8].childNodes[1].childNodes[2].childNodes[1].childNodes[1].childNodes[1];
+//var listeSort = anchorAllTables[3].childNodes[1].childNodes[24].childNodes[1].childNodes[1].childNodes[1];
+var listeSort = anchorAllTables[8].childNodes[1].childNodes[2].childNodes[3].childNodes[1].childNodes[1];
 
 creerBulle();
 creerInfoBulles( listeComp , "competences" );
