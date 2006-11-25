@@ -47,7 +47,9 @@ function initBlason($no) {
 $text .= "</td></tr>";
 
 	$text .= "<tr class=mh_tdpage><td class=blasong align=right>Comp&eacute;tences</td><td class=blasond align=left>"
-	.($cacherdata?"--":htmlspecialchars($row["Comps"]))
+//	($cacherdata?"--":htmlspecialchars($row["Comps"]))
+//	vtt.Comps est *deja* htmlspecialchars()-ise !
+	.($cacherdata?"--":$row["Comps"])
 	  ."&nbsp;</td></tr>";
 
 	$text .= "<tr class=mh_tdpage><td class=blasong align=right>Nom (complet)<br>du Troll</td><td class=blasond align=left>";
