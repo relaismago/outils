@@ -70,13 +70,16 @@ function processCdM ()
     { //pas de ligne du type 'Points de Vie : Jamais vu (supérieur à XXX)'
     	var pv1 = parseInt ( pv_line.substring ( pv_line.indexOf ( '(entre ' ) + 7, pv_line.indexOf ( ' et' ) ) );
       var pv2 = parseInt ( pv_line.substring ( pv_line.indexOf ( 'et ' ) + 3, pv_line.indexOf ( ')' ) ) );
-      var pva1 = Math.floor ( pv1 * ( 95 - b ) / 100 );
+			var p = 1 - b/100;
+      /*var pva1 = Math.floor ( pv1 * ( 95 - b ) / 100 );
 	    if ( b == 95 )
 	    {
 	    	pva1 = 1;
 	    	b = 101;
 	    }
-      var pva2 = Math.floor ( pv2 * ( 105 - b ) / 100 ) -1;      
+      var pva2 = Math.floor ( pv2 * ( 105 - b ) / 100 ) -1;*/
+			var pva1 = Math.floor ( pv1 * ( p - 0.05) + 0.99 );
+			var pva2 = Math.floor ( pv2 * ( p + 0.05));
 	    var vieTd = document.createElement( 'td' );
       vieTd.appendChild ( document.createTextNode ( 'Points de Vie restants (Approximatif) :' ) );
       vieTd.setAttribute ( 'style', 'font-weight:bold;' );
