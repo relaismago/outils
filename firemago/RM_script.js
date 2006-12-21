@@ -28,8 +28,8 @@ var URLMenu = '/mountyhall/MH_Play/Play_menu.php';
 var URLAutres = '/mountyhall/MH_Play/Actions';
 
 // Modify HERE for local testing
-var URLOutils = 'http://outils.relaismago.com/';
-var URLTopJs = 'http://outils.relaismago.com/firemago/';
+var URLOutils = 'http://outils.max.lipyx.net/';
+var URLTopJs = 'http://outils.max.lipyx.net/firemago/';
 
 var URLVueJs = 		URLTopJs + 'RM_vue.js';
 var URLMessageBotJs = 	URLTopJs + 'RM_message_bot.js';
