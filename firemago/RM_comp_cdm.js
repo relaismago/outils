@@ -78,7 +78,7 @@ function processCdM ()
 	    	b = 101;
 	    }
       var pva2 = Math.floor ( pv2 * ( 105 - b ) / 100 ) -1;*/
-			var pva1 = Math.floor ( pv1 * ( p - 0.05) + 0.99 );
+			var pva1 = Math.floor ( pv1 * ( p - 0.05) + 1 );
 			var pva2 = Math.floor ( pv2 * ( p + 0.05));
 	    var vieTd = document.createElement( 'td' );
       vieTd.appendChild ( document.createTextNode ( 'Points de Vie restants (Approximatif) :' ) );
