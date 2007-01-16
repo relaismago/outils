@@ -157,17 +157,12 @@ function affiche_ancien_blasons()
 	affiche_ancien("Rodalgen");
 	affiche_ancien("Vengeance");
 	affiche_ancien("Tinette");
-	affiche_ancien("Slayen");
 	echo "<br>";
 	affiche_ancien("Sirlor");
-	affiche_ancien("Ragga");
 	affiche_ancien("Jyha");
 	affiche_ancien("Bouritou");
-	affiche_ancien("Eloso");
-	affiche_ancien("Grem");
 
 	echo "<br>";
-	affiche_ancien("Monos");
 	affiche_ancien("Harpoon");
 	affiche_ancien("Liril");
 	affiche_ancien("Neso");
@@ -175,11 +170,9 @@ function affiche_ancien_blasons()
 	affiche_ancien("Inconnu3");
 
 	echo "<br>";
-	affiche_ancien("Karibou");
 	affiche_ancien("Grokitach");
 	affiche_ancien("Ess");
 	affiche_ancien("Darkdragon");
-	affiche_ancien("Chlagvuk");
 	affiche_ancien("Warkragg");
 
 	echo "<br>";
