@@ -44,6 +44,7 @@ if(isset($_POST['soumettre'])){
   $j=0;
   $max_carac=99;
   $max_pdv=999;
+	$max_mag=9999;
   
   while ($lignes[$i]){	
     if(eregi('[ \t]*Tr.ll.+[nN]°(.+):(.+)',$lignes[$i],$resultat)){
@@ -138,6 +139,47 @@ if(isset($_POST['soumettre'])){
       $pcdm['capspe'] = trim($resultat[1]);
       $pcdm['affecte']  = trim($resultat[2]);
     }
+		if(eregi('[ \t]*Maitrise Magique.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+      $pcdm['mmcom'] = trim($resultat[1]);
+      $mot = explode(' ',$resultat[2]);
+      switch (trim($mot[0])){
+      	case 'entre'    : $pcdm['mmmin']=$mot[1]; $pcdm['mmmax']=$mot[3]; break;
+      	case 'inférieur': $pcdm['mmmin']=0;       $pcdm['mmmax']=$mot[2]; break;
+        case 'supérieur': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$max_mag; break;
+      }
+    }
+    if(eregi('[ \t]*R.sistance.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+    	$pcdm['rmcom'] = trim($resultat[1]);
+			$mot = explode(' ',$resultat[2]);
+			switch (trim($mot[0])){
+				case 'entre'    : $pcdm['rmmin']=$mot[1]; $pcdm['rmmax']=$mot[3]; break;
+				case 'inférieur': $pcdm['rmmin']=0;       $pcdm['rmmax']=$mot[2]; break;
+				case 'supérieur': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$max_mag; break;
+			}
+		}
+		if(eregi('[ \t]*Nombre.+:(.+)',$lignes[$i],$resultat)){
+			$pcdm['nbatt'] = trim($resultat[1]);
+		}
+		if(eregi('[ \t]*Vitesse.+:(.+)',$lignes[$i],$resultat)){
+			$pcdm['vitdep'] = trim($resultat[1]);
+		}
+		if(eregi('[ \t]*Voir.+:(.+)',$lignes[$i],$resultat)){
+      $pcdm['vlc'] = trim($resultat[1]);
+		}
+		if(eregi('[ \t]*Attaque . dist.+:(.+)',$lignes[$i],$resultat)){
+			$pcdm['attdist'] = trim($resultat[1]);
+		}
+		if(eregi('[ \t]*Dur.e.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+		  $pcdm['dlacom'] = trim($resultat[1]);
+			$mot = explode(' ',$resultat[2]);
+			switch (trim($mot[0])){
+				case 'entre'    : $pcdm['dlamin']=$mot[1]; $pcdm['dlamax']=$mot[3]; break;
+				case 'inférieur': $pcdm['dlamin']=0;       $pcdm['dlamax']=$mot[2]; break;
+				case 'supérieur': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$max_carac; break;
+			}
+		}
+
+
     $i++;
   }
 
@@ -216,6 +258,16 @@ if(isset($_POST['soumettre'])){
   print("<INPUT TYPE=HIDDEN NAME=\"ARMMAX\" VALUE=\"".$pcdm['armmax']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"VUEMIN\" VALUE=\"".$pcdm['vuemin']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"VUEMAX\" VALUE=\"".$pcdm['vuemax']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"MMMIN\" VALUE=\"".$pcdm['mmmin']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"MMMAX\" VALUE=\"".$pcdm['mmmax']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"RMMIN\" VALUE=\"".$pcdm['rmmin']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"RMMAX\" VALUE=\"".$pcdm['rmmax']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"NBATT\" VALUE=\"".$pcdm['nbatt']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"VITDEP\" VALUE=\"".$pcdm['vitdep']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"VLC\" VALUE=\"".$pcdm['vlc']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"ATTDIST\" VALUE=\"".$pcdm['attdist']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"DLAMIN\" VALUE=\"".$pcdm['dlamin']."\"></INPUT>");
+	print("<INPUT TYPE=HIDDEN NAME=\"DLAMAX\" VALUE=\"".$pcdm['dlamax']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"CAPSPE\" VALUE=\"".$pcdm['capspe']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"AFFECTE\" VALUE=\"".$pcdm['affecte']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"DATE\" VALUE=\"".$pcdm['date']."\"></INPUT>");

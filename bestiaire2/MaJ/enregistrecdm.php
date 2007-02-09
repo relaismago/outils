@@ -62,6 +62,16 @@ $pcdm['armmin']=stripslashes($_POST['ARMMIN']);
 $pcdm['armmax']=stripslashes($_POST['ARMMAX']);
 $pcdm['vuemin']=stripslashes($_POST['VUEMIN']);
 $pcdm['vuemax']=stripslashes($_POST['VUEMAX']);
+$pcdm['mmmin']=stripslashes($_POST['MMMIN']);
+$pcdm['mmmax']=stripslashes($_POST['MMMAX']);
+$pcdm['rmmin']=stripslashes($_POST['RMMIN']);
+$pcdm['rmmax']=stripslashes($_POST['RMMAX']);
+$pcdm['nbatt']=stripslashes($_POST['NBATT']);
+$pcdm['vitdep']=stripslashes($_POST['VITDEP']);
+$pcdm['vlc']=stripslashes($_POST['VLC']);
+$pcdm['attdist']=stripslashes($_POST['ATTDIST']);
+$pcdm['dlamin']=stripslashes($_POST['DLAMIN']);
+$pcdm['dlamax']=stripslashes($_POST['DLAMAX']);
 $pcdm['capspe']=stripslashes($_POST['CAPSPE']);
 $pcdm['affecte']=stripslashes($_POST['AFFECTE']);
 $pcdm['date']=stripslashes($_POST['DATE']);
@@ -164,12 +174,22 @@ if(mysql_num_rows($query)==0){ // cdm non trouvée
   $cdm['armmax_cdm']	  	= $pcdm['armmax'];
   $cdm['vuemin_cdm']	  	= $pcdm['vuemin'];
   $cdm['vuemax_cdm']	  	= $pcdm['vuemax'];
-  $cdm['capspe_cdm']            = $pcdm['capspe'];
+	$cdm['mmmin_cdm']      = $pcdm['mmmin'];
+	$cdm['mmmax_cdm']      = $pcdm['mmmax'];
+	$cdm['rmmin_cdm']      = $pcdm['rmmin'];
+	$cdm['rmmax_cdm']      = $pcdm['rmmax'];
+	$cdm['nbatt_cdm']      = $pcdm['nbatt'];
+	$cdm['vitdep_cdm']     = $pcdm['vitdep'];
+	$cdm['vlc_cdm']      	 = $pcdm['vlc'];
+	$cdm['attdist_cdm']    = $pcdm['attdist'];
+	$cdm['dlamin_cdm']     = $pcdm['dlamin'];
+	$cdm['dlamax_cdm']     = $pcdm['dlamax'];
+  $cdm['capspe_cdm']        = $pcdm['capspe'];
   $cdm['affecte_cdm']     	= $pcdm['affecte'];
   $cdm['source_cdm']      	= $pcdm['troll_nom'];
   
   // on insère cette nouvelle cdm
-  $sql="INSERT INTO best_cdms(id_mh,id_race_cdm,id_template_cdm,id_age_cdm,id_monstre_cdm,nivmin_cdm,nivmax_cdm,pdvmin_cdm,pdvmax_cdm,attmin_cdm,attmax_cdm,esqmin_cdm,esqmax_cdm,degmin_cdm,degmax_cdm,regmin_cdm,regmax_cdm,armmin_cdm,armmax_cdm,vuemin_cdm,vuemax_cdm,capspe_cdm,affecte_cdm,source_cdm) VALUES(\"".$cdm['id_mh']."\",\"".$cdm['id_race_cdm']."\",\"".$cdm['id_template_cdm']."\",\"".$cdm['id_age_cdm']."\",\"".$cdm['id_monstre_cdm']."\",\"".$cdm['nivmin_cdm']."\",\"".$cdm['nivmax_cdm']."\",\"".$cdm['pdvmin_cdm']."\",\"".$cdm['pdvmax_cdm']."\",\"".$cdm['attmin_cdm']."\",\"".$cdm['attmax_cdm']."\",\"".$cdm['esqmin_cdm']."\",\"".$cdm['esqmax_cdm']."\",\"".$cdm['degmin_cdm']."\",\"".$cdm['degmax_cdm']."\",\"".$cdm['regmin_cdm']."\",\"".$cdm['regmax_cdm']."\",\"".$cdm['armmin_cdm']."\",\"".$cdm['armmax_cdm']."\",\"".$cdm['vuemin_cdm']."\",\"".$cdm['vuemax_cdm']."\",\"".$cdm['capspe_cdm']."\",\"".$cdm['affecte_cdm']."\",\"".$cdm['source_cdm']."\")";
+  $sql="INSERT INTO best_cdms(id_mh,id_race_cdm,id_template_cdm,id_age_cdm,id_monstre_cdm,nivmin_cdm,nivmax_cdm,pdvmin_cdm,pdvmax_cdm,attmin_cdm,attmax_cdm,esqmin_cdm,esqmax_cdm,degmin_cdm,degmax_cdm,regmin_cdm,regmax_cdm,armmin_cdm,armmax_cdm,vuemin_cdm,vuemax_cdm,mmmin_cdm,mmmax_cdm,rmmin_cdm,rmmax_cdm,nbatt_cdm,vitdep_cdm,vlc_cdm,attdist_cdm,dlamin_cdm,dlamax_cdm,capspe_cdm,affecte_cdm,source_cdm) VALUES(\"".$cdm['id_mh']."\",\"".$cdm['id_race_cdm']."\",\"".$cdm['id_template_cdm']."\",\"".$cdm['id_age_cdm']."\",\"".$cdm['id_monstre_cdm']."\",\"".$cdm['nivmin_cdm']."\",\"".$cdm['nivmax_cdm']."\",\"".$cdm['pdvmin_cdm']."\",\"".$cdm['pdvmax_cdm']."\",\"".$cdm['attmin_cdm']."\",\"".$cdm['attmax_cdm']."\",\"".$cdm['esqmin_cdm']."\",\"".$cdm['esqmax_cdm']."\",\"".$cdm['degmin_cdm']."\",\"".$cdm['degmax_cdm']."\",\"".$cdm['regmin_cdm']."\",\"".$cdm['regmax_cdm']."\",\"".$cdm['armmin_cdm']."\",\"".$cdm['armmax_cdm']."\",\"".$cdm['vuemin_cdm']."\",\"".$cdm['vuemax_cdm']."\",\"".$cdm['mmmin_cdm']."\",\"".$cdm['mmmax_cdm']."\",\"".$cdm['rmmin_cdm']."\",\"".$cdm['rmmax_cdm']."\",\"".$cdm['nbatt_cdm']."\",\"".$cdm['vitdep_cdm']."\",\"".$cdm['vlc_cdm']."\",\"".$cdm['attdist_cdm']."\",\"".$cdm['dlamin_cdm']."\",\"".$cdm['dlamax_cdm']."\",\"".$cdm['capspe_cdm']."\",\"".$cdm['affecte_cdm']."\",\"".$cdm['source_cdm']."\")";
   if(!mysql_query($sql,$db_vue_rm)){
     die("l'insertion de la cdm a échoué<br>$sql<br>");
   }
@@ -355,19 +375,69 @@ else{ // une cdm pour cette créature existe déjà
     }
   }
   $carachange=false;
+	// la MM
+	if($pcdm['mmmin']>=$cdm['mmmin_cdm']){
+		$cdm['mmmin_cdm']=$pcdm['mmmin'];
+		$cdmchange=$caracchange=true;
+	}
+	if($pcdm['mmmax']<=$cdm['mmmax_cdm']){
+		$cdm['mmmax_cdm']=$pcdm['mmmax'];
+		$cdmchange=$caracchange=true;
+	}
+	if($caracchange){
+		if($cdm['mmmin_cdm']==$cdm['mmmax_cdm']){
+			$monstre['mmsom_monstre']+=$cdm['mmmin_cdm'];
+			$monstre['mmnbr_monstre']++;
+			$monstrechange=true;
+		}
+	}
+	$carachange=false;
+  // la RM
+	if($pcdm['rmmin']>=$cdm['rmmin_cdm']){
+		$cdm['rmmin_cdm']=$pcdm['rmmin'];
+		$cdmchange=$caracchange=true;
+	}
+	if($pcdm['rmmax']<=$cdm['rmmax_cdm']){
+	  $cdm['rmmax_cdm']=$pcdm['rmmax'];
+	  $cdmchange=$caracchange=true;
+	}
+	if($caracchange){
+		if($cdm['rmmin_cdm']==$cdm['rmmax_cdm']){
+			$monstre['rmsom_monstre']+=$cdm['rmmin_cdm'];
+	  	$monstre['rmnbr_monstre']++;
+	  	$monstrechange=true;
+		}
+  }
+	$carachange=false;
+  // la DLA
+	if($pcdm['dlamin']>=$cdm['dlamin_cdm']){
+		$cdm['dlamin_cdm']=$pcdm['dlamin'];
+		$cdmchange=$caracchange=true;
+	}
+	if($pcdm['dlamax']<=$cdm['dlamax_cdm']){
+	  $cdm['dlamax_cdm']=$pcdm['dlamax'];
+	  $cdmchange=$caracchange=true;
+	}
+	if($caracchange){
+		if($cdm['dlamin_cdm']==$cdm['dlamax_cdm']){
+			$monstre['dlasom_monstre']+=$cdm['dlamin_cdm'];
+			$monstre['dlanbr_monstre']++;
+			$monstrechange=true;																						    }
+	}
+  $carachange=false;
   $cdm['capspe_cdm']           =$pcdm['capspe'];
   $cdm['affecte_cdm']          =$pcdm['affecte'];
   $cdm['source_cdm']           =$pcdm['troll_nom'];
   $monstre['capspe_monstre']   =$pcdm['capspe'];
   $monstre['affecte_monstre']  =$pcdm['affecte'];
   if($cdmchange){ // la cdm a été ajustée, il faut modifier les données dans la base
-    $sql="UPDATE `best_cdms` SET `id_mh`=\"".$cdm['id_mh']."\",`id_race_cdm`=\"".$cdm['id_race_cdm']."\",`id_template_cdm`=\"".$cdm['id_template_cdm']."\",`id_age_cdm`=\"".$cdm['id_age_cdm']."\",`id_monstre_cdm`=\"".$cdm['id_monstre_cdm']."\",`nivmin_cdm`=\"".$cdm['nivmin_cdm']."\",`nivmax_cdm`=\"".$cdm['nivmax_cdm']."\",`pdvmin_cdm`=\"".$cdm['pdvmin_cdm']."\",`pdvmax_cdm`=\"".$cdm['pdvmax_cdm']."\",`attmin_cdm`=\"".$cdm['attmin_cdm']."\",`attmax_cdm`=\"".$cdm['attmax_cdm']."\",`esqmin_cdm`=\"".$cdm['esqmin_cdm']."\",`esqmax_cdm`=\"".$cdm['esqmax_cdm']."\",`degmin_cdm`=\"".$cdm['degmin_cdm']."\",`degmax_cdm`=\"".$cdm['degmax_cdm']."\",`regmin_cdm`=\"".$cdm['regmin_cdm']."\",`regmax_cdm`=\"".$cdm['regmax_cdm']."\",`armmin_cdm`=\"".$cdm['armmin_cdm']."\",`armmax_cdm`=\"".$cdm['armmax_cdm']."\",`vuemin_cdm`=\"".$cdm['vuemin_cdm']."\",`vuemax_cdm`=\"".$cdm['vuemax_cdm']."\",`capspe_cdm`=\"".$cdm['capspe_cdm']."\",`affecte_cdm`=\"".$cdm['affecte_cdm']."\",`source_cdm`=\"".$cdm['source_cdm']."\" WHERE `id_cdm`=".$cdm['id_cdm']." LIMIT 1 ";
+    $sql="UPDATE `best_cdms` SET `id_mh`=\"".$cdm['id_mh']."\",`id_race_cdm`=\"".$cdm['id_race_cdm']."\",`id_template_cdm`=\"".$cdm['id_template_cdm']."\",`id_age_cdm`=\"".$cdm['id_age_cdm']."\",`id_monstre_cdm`=\"".$cdm['id_monstre_cdm']."\",`nivmin_cdm`=\"".$cdm['nivmin_cdm']."\",`nivmax_cdm`=\"".$cdm['nivmax_cdm']."\",`pdvmin_cdm`=\"".$cdm['pdvmin_cdm']."\",`pdvmax_cdm`=\"".$cdm['pdvmax_cdm']."\",`attmin_cdm`=\"".$cdm['attmin_cdm']."\",`attmax_cdm`=\"".$cdm['attmax_cdm']."\",`esqmin_cdm`=\"".$cdm['esqmin_cdm']."\",`esqmax_cdm`=\"".$cdm['esqmax_cdm']."\",`degmin_cdm`=\"".$cdm['degmin_cdm']."\",`degmax_cdm`=\"".$cdm['degmax_cdm']."\",`regmin_cdm`=\"".$cdm['regmin_cdm']."\",`regmax_cdm`=\"".$cdm['regmax_cdm']."\",`armmin_cdm`=\"".$cdm['armmin_cdm']."\",`armmax_cdm`=\"".$cdm['armmax_cdm']."\",`vuemin_cdm`=\"".$cdm['vuemin_cdm']."\",`vuemax_cdm`=\"".$cdm['vuemax_cdm']."\",`mmmin_cdm`=\"".$cdm['mmmin_cdm']."\",`mmmax_cdm`=\"".$cdm['mmmax_cdm']."\",`rmmin_cdm`=\"".$cdm['rmmin_cdm']."\",`rmmax_cdm`=\"".$cdm['rmmax_cdm']."\",`dlamin_cdm`=\"".$cdm['dlamin_cdm']."\",`dlamax_cdm`=\"".$cdm['dlamax_cdm']."\",`capspe_cdm`=\"".$cdm['capspe_cdm']."\",`affecte_cdm`=\"".$cdm['affecte_cdm']."\",`source_cdm`=\"".$cdm['source_cdm']."\" WHERE `id_cdm`=".$cdm['id_cdm']." LIMIT 1 ";
     if(!mysql_query($sql,$db_vue_rm)){
       die("la modification de la cdm a échoué<br>$sql<br>");
     }
   }
   if($monstrechange){ // certaines caracs du monstres ont été ajustées, il faut les modifier dans la base
-    $sql="UPDATE `best_monstres` SET `nivsom_monstre`=\"".$monstre['nivsom_monstre']."\", `nivnbr_monstre`=\"".$monstre['nivnbr_monstre']."\", `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
+    $sql="UPDATE `best_monstres` SET `nivsom_monstre`=\"".$monstre['nivsom_monstre']."\", `nivnbr_monstre`=\"".$monstre['nivnbr_monstre']."\", `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
     if(!mysql_query($sql,$db_vue_rm)){
       die("la modification des caractéristiques du monstre a échoué<br>$sql<br>");
     }

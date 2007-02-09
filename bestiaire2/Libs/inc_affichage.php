@@ -287,6 +287,8 @@ function affiche_liste_cdms(&$tab_cdm,$display=true)
   $text .= "  <td>MH</td><td>Nom</td>";
   $text .= "  <$td>Niv</td><$td>PdV</td><$td>Att</td><$td>Esq</td>";
   $text .= "  <$td>Deg</td><$td>Reg</td><$td>Arm</td><$td>Vue</td>";
+	$text .= "  <$td>MM</td><$td>RM</td><td align=center>NB ATT</td><td align=center>Vit Dep</td>";
+	$text .= "  <td align=center>VLC</td><td align=center>ATT Dist</td><$td>DLA</td>";
   $text .= "  <td align=center>date</td><td align=center>source</td>";
   $text .= "</tr>";
 	if (!$display)
@@ -313,11 +315,25 @@ function affiche_liste_cdms(&$tab_cdm,$display=true)
 		$text .= "  <$td>".$cdm['regmin_cdm']."</td><$td>".$cdm['regmax_cdm']."</td>";
 		$text .= "  <$td>".$cdm['armmin_cdm']."</td><$td>".$cdm['armmax_cdm']."</td>";
 		$text .= "  <$td>".$cdm['vuemin_cdm']."</td><$td>".$cdm['vuemax_cdm']."</td>";
+		$text .= "  <$td>".$cdm['mmmin_cdm']."</td><$td>";
+		if ($cdm['mmmax_cdm'] !=0 ) $text.= $cdm['mmmax_cdm'];
+		else $text.= "&nbsp;";
+		$text .= "</td>";
+		$text .= "  <$td>".$cdm['rmmin_cdm']."</td><$td>";
+		if ($cdm['rmmax_cdm'] !=0 ) $text.= $cdm['rmmax_cdm'];
+		else $text.= "&nbsp;";
+		$text .= "</td>";
+		$text .= "  <$td>".$cdm['nbatt_cdm']."</td><$td>".$cdm['vitdep_cdm']."</td>";
+		$text .= "  <$td>".$cdm['vlc_cdm']."</td><$td>".$cdm['attdist_cdm']."</td>";
+		$text .= "  <$td>".$cdm['dlamin_cdm']."</td><$td>";
+		if ($cdm['dlamax_cdm'] !=0 ) $text.= $cdm['dlamax_cdm'];
+    else $text.= "&nbsp;";
+    $text .= "</td>";
 		$text .= "  <$td>".mysqltimestamp_date($cdm['date_cdm'])."</td><$td>".$cdm['source_cdm']."</td>";
 		$text .= "</tr>";
 	  if($cdm['capspe_cdm']!=""){
 			$text .= "<tr class=mh_tdpage>";
-			$text .= "  <td colspan=20 align=center>".$cdm['capspe_cdm']."&nbsp;";
+			$text .= "  <td colspan=28 align=center>".$cdm['capspe_cdm']."&nbsp;";
 			$text .= "  &nbsp;<em>affecte</em>&nbsp;";
 			$text .= "  &nbsp;".$cdm['affecte_cdm']."</td>";
 			$text .= "</tr>";
@@ -370,6 +386,13 @@ function affiche_cdm_parsed(&$pcdm)
   print("<tr><td class='mh_tdtitre'><b>REG	  </b></td><td class='mh_tdpage'>".$pcdm['regcom']."</td><td class='mh_tdpage'>".$pcdm['regmin']."</td><td class='mh_tdpage'>".$pcdm['regmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>ARM	  </b></td><td class='mh_tdpage'>".$pcdm['armcom']."</td><td class='mh_tdpage'>".$pcdm['armmin']."</td><td class='mh_tdpage'>".$pcdm['armmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>VUE	  </b></td><td class='mh_tdpage'>".$pcdm['vuecom']."</td><td class='mh_tdpage'>".$pcdm['vuemin']."</td><td class='mh_tdpage'>".$pcdm['vuemax']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>MM    </b></td><td class='mh_tdpage'>".$pcdm['mmcom']."</td><td class='mh_tdpage'>".$pcdm['mmmin']."</td><td class='mh_tdpage'>".$pcdm['mmmax']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>RM    </b></td><td class='mh_tdpage'>".$pcdm['rmcom']."</td><td class='mh_tdpage'>".$pcdm['rmmin']."</td><td class='mh_tdpage'>".$pcdm['rmmax']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>NB Att</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['nbatt']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>Vitesse</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vitdep']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>Voir le caché</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vlc']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>Att distance</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['attdist']."</td></tr>");
+	print("<tr><td class='mh_tdtitre'><b>DLA    </b></td><td class='mh_tdpage'>".$pcdm['dlacom']."</td><td class='mh_tdpage'>".$pcdm['dlamin']."</td><td class='mh_tdpage'>".$pcdm['dlamax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>CAPACITE</b></td><td class='mh_tdpage'>".$pcdm['capspe']."</td><td colspan=2 class='mh_tdpage'>".$pcdm['affecte']."</td></tr>");
   print("</table>");
   print("<br>");
@@ -394,7 +417,7 @@ function affiche_monstre(&$monstre,&$capspe,&$caracs)
   $td="td align=center width=70";
   print("<tr class='mh_tdpage'>");
   print("  <td>&nbsp;</td><$td>Niv</td><$td>PdV</td><$td>Att</td><$td>Esq</td>");
-  print("  <$td>Deg</td><$td>Reg</td><$td>Arm</td><$td>Vue</td>");
+  print("  <$td>Deg</td><$td>Reg</td><$td>Arm</td><$td>Vue</td><$td>MM</td><$td>RM</td><$td>dla</td>");
   print("</tr>");
   print("<tr class='mh_tdpage'>");
   print("<td nowrap><em>Valeurs Moyennes</em></td>"); 
@@ -414,6 +437,12 @@ function affiche_monstre(&$monstre,&$capspe,&$caracs)
   print("  <$td>".$carac."</td>"); // Arm
   $carac=carac_monstre($monstre['vuesom_monstre'],$monstre['vuenbr_monstre']);
   print("  <$td>".$carac."</td>"); // Vue
+	$carac=carac_monstre($monstre['mmsom_monstre'],$monstre['mmnbr_monstre']);
+  print("  <$td>".$carac."</td>"); // MM
+	$carac=carac_monstre($monstre['rmsom_monstre'],$monstre['rmnbr_monstre']);
+  print("  <$td>".$carac."</td>"); // RM
+	$carac=carac_monstre($monstre['dlasom_monstre'],$monstre['dlanbr_monstre']);
+	print("  <$td>".$carac."</td>"); // DLA
   print("</tr>");
 
 	
@@ -435,6 +464,12 @@ function affiche_monstre(&$monstre,&$capspe,&$caracs)
   print("<$td>".$monstre['armnbr_monstre']."</td>"); // Arm
   $carac=carac_monstre($monstre['vuesom_monstre'],$monstre['vuenbr_monstre']);
   print("<$td>".$monstre['vuenbr_monstre']."</td>"); // Vue
+	$carac=carac_monstre($monstre['mmsom_monstre'],$monstre['mmnbr_monstre']);
+  print("<$td>".$monstre['mmnbr_monstre']."</td>"); // MM
+	$carac=carac_monstre($monstre['rmsom_monstre'],$monstre['rmnbr_monstre']);
+	print("<$td>".$monstre['rmnbr_monstre']."</td>"); // Vue
+	$carac=carac_monstre($monstre['dlasom_monstre'],$monstre['dlanbr_monstre']);
+	print("<$td>".$monstre['dlanbr_monstre']."</td>"); // DLA
   print("</tr></table>");
   if($capspe){
     $td="td align=center width=80";

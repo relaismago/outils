@@ -425,9 +425,8 @@ function SelectCdMs($Race,$IDTemplate,$IDAge,$NegTemplate,$NegAge,$JustLastCdm =
   // on exclue certaines valeurs
   if($NegTemplate!="-1") $sql.=" AND `id_template_cdm`!=$NegTemplate";
   if($NegAge!="-1")      $sql.=" AND `id_age_cdm`!=$NegAge";
-
+  $sql .= " ORDER BY date_cdm DESC";
 	if ($JustLastCdm) {
-		$sql .= " ORDER BY date_cdm DESC";
 		$sql .= " LIMIT 1";
 	}
 	// print("<div align=center>DEBUG: ".$sql."</div>");
