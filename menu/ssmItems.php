@@ -40,7 +40,7 @@ function showToolbar()
 <?
 	
 	$pos = addItemMenu(false,true,'jouer',"Jouer","Jouer");
-  $pos = addItemMenu(true,false,$pos,"Forum","Accès au Forum Interne R&M", "http://www.haleinesfraiches.com/relaismago/forum/index.php");
+  $pos = addItemMenu(true,false,$pos,"Forum","Accès au Forum Interne R&M", "http://relaismago.forumactif.com/");
 
 	if ( userIsGuilde() ) 
 	  $pos = addItemMenu(true,false,$pos,"Cockpit","Mix vue2d, Recherchator, Radar", "/cockpit.php?id_troll=$_SESSION[AuthTroll]");
@@ -50,7 +50,7 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"Bestiaire","Le Bestiaire", "/bestiaire2/");
   $pos = addItemMenu(true,false,$pos,"GPS","Le GPS Relais&Mago", "/gps_advanced.php3");
   $pos = addItemMenu(true,false,$pos,"GGC","Le Gestionnaire de Groupe de Chasse", "/ggc/accueil.php");
-  $pos = addItemMenu(true,false,$pos,"Magasin","Les boutiques R&M", "/magasin/");
+  //$pos = addItemMenu(true,false,$pos,"Magasin","Les boutiques R&M", "/magasin/");
   $pos = addItemMenu(true,false,$pos,"Trolliaire","Stockage des Ananlyses Anatomiques", "/anatomique/anatomique.php?id_troll=list");
 
 	$pos = addItemMenu(false,true,'rengene',"Renseignements Généraux","Renseignements Généraux");
