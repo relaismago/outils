@@ -117,7 +117,7 @@ if(isset($_POST['soumettre'])){
       case 'supérieur':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$max_carac; break;
       }
     }
-    if(eregi('[ \t]*Armure.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*Armure :(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['armcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch(trim($mot[0])){
@@ -126,7 +126,7 @@ if(isset($_POST['soumettre'])){
       case 'supérieur':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$max_carac; break;
       }
     }
-    if(eregi('[ \t]*Vue.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*Vue :(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['vuecom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
