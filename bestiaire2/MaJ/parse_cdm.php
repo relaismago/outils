@@ -44,7 +44,7 @@ if(isset($_POST['soumettre'])){
   $j=0;
   $max_carac=99;
   $max_pdv=999;
-	$max_mag=9999;
+	$max_mag=99999;
   
   while ($lignes[$i]){	
     if(eregi('[ \t]*Tr.ll.+[nN]°(.+):(.+)',$lignes[$i],$resultat)){

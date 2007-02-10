@@ -315,20 +315,15 @@ function affiche_liste_cdms(&$tab_cdm,$display=true)
 		$text .= "  <$td>".$cdm['regmin_cdm']."</td><$td>".$cdm['regmax_cdm']."</td>";
 		$text .= "  <$td>".$cdm['armmin_cdm']."</td><$td>".$cdm['armmax_cdm']."</td>";
 		$text .= "  <$td>".$cdm['vuemin_cdm']."</td><$td>".$cdm['vuemax_cdm']."</td>";
-		$text .= "  <$td>".$cdm['mmmin_cdm']."</td><$td>";
-		if ($cdm['mmmax_cdm'] !=0 ) $text.= $cdm['mmmax_cdm'];
+		$text .= "  <$td>".$cdm['mmmin_cdm']."</td><$td>".$cdm['mmmax_cdm']."</td>";
+		$text .= "  <$td>".$cdm['rmmin_cdm']."</td><$td>".$cdm['rmmax_cdm']."</td>";
+		$text .= "  <$td>";
+		if ($cdm['nbatt_cdm']!=0) $text.= $cdm['nbatt_cdm'];
 		else $text.= "&nbsp;";
 		$text .= "</td>";
-		$text .= "  <$td>".$cdm['rmmin_cdm']."</td><$td>";
-		if ($cdm['rmmax_cdm'] !=0 ) $text.= $cdm['rmmax_cdm'];
-		else $text.= "&nbsp;";
-		$text .= "</td>";
-		$text .= "  <$td>".$cdm['nbatt_cdm']."</td><$td>".$cdm['vitdep_cdm']."</td>";
+		$text .= "<$td>".$cdm['vitdep_cdm']."</td>";
 		$text .= "  <$td>".$cdm['vlc_cdm']."</td><$td>".$cdm['attdist_cdm']."</td>";
-		$text .= "  <$td>".$cdm['dlamin_cdm']."</td><$td>";
-		if ($cdm['dlamax_cdm'] !=0 ) $text.= $cdm['dlamax_cdm'];
-    else $text.= "&nbsp;";
-    $text .= "</td>";
+		$text .= "  <$td>".$cdm['dlamin_cdm']."</td><$td>".$cdm['dlamax_cdm']."</td>";
 		$text .= "  <$td>".mysqltimestamp_date($cdm['date_cdm'])."</td><$td>".$cdm['source_cdm']."</td>";
 		$text .= "</tr>";
 	  if($cdm['capspe_cdm']!=""){
