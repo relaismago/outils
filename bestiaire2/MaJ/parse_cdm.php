@@ -163,7 +163,7 @@ if(isset($_POST['soumettre'])){
 		if(eregi('[ \t]*Vitesse.+:(.+)',$lignes[$i],$resultat)){
 			$pcdm['vitdep'] = trim($resultat[1]);
 		}
-		if(eregi('[ \t]*Voir.+:(.+)',$lignes[$i],$resultat)){
+		if(eregi('[ \t]*Voir le Cach.+:(.+)',$lignes[$i],$resultat)){
       $pcdm['vlc'] = trim($resultat[1]);
 		}
 		if(eregi('[ \t]*Attaque . dist.+:(.+)',$lignes[$i],$resultat)){
