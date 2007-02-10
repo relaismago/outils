@@ -797,7 +797,7 @@ try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth 
 // ********************************************************
 
 var profil;
-try { profil = flattenNode ( anchorAllTables[3] ) + "Compétences " + flattenNode ( anchorAllTables[9] ) + "\n" + flattenNode ( anchorAllTables[10] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
+try { profil = flattenNode ( anchorAllTables[3] ) + "Compétences " + flattenNode ( anchorAllTables[8] ) + "\n" + flattenNode ( anchorAllTables[9] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
 
 myTr = newTR ();
 myTr.appendChild ( myTd1 = newTD () );
@@ -846,7 +846,7 @@ var numTroll = anchorMainTr[0].childNodes[3].childNodes[1].getAttribute('href');
 numTroll = numTroll.slice ( numTroll.indexOf ( '(' ) + 1, numTroll.indexOf ( ',' ) );
 
 // Next Level
-var anchorCellLevel = anchorMainTr[4].childNodes[3].firstChild;
+var anchorCellLevel = anchorMainTr[3].childNodes[3].firstChild;
 var levelDesc = anchorCellLevel.nodeValue;
 var level = levelDesc.substring( levelDesc.indexOf ( ":" ) + 2, levelDesc.indexOf ( "(" ) - 8 );
 var nextLevel = level * 1 + 1;
@@ -857,23 +857,23 @@ try
 } catch ( e ) { error ( e, 'Next level info error' ); }
 
 // Regen
-var anchorCellRegen = anchorMainTr[9].childNodes[1].firstChild;
+var anchorCellRegen = anchorMainTr[8].childNodes[1].firstChild;
 var regen = fightAverage ( anchorCellRegen );
 
 // Attaque
-var anchorCellAtt = anchorMainTr[10].childNodes[3].childNodes[0];
+var anchorCellAtt = anchorMainTr[9].childNodes[3].childNodes[0];
 var att = fightAverage ( anchorCellAtt );
 
 // Esquive
-var anchorCellEsq = anchorMainTr[10].childNodes[3].childNodes[2];
+var anchorCellEsq = anchorMainTr[9].childNodes[3].childNodes[2];
 var esq = fightAverage ( anchorCellEsq );
 
 // Dégats
-var anchorCellDeg = anchorMainTr[10].childNodes[3].childNodes[4];
+var anchorCellDeg = anchorMainTr[9].childNodes[3].childNodes[4];
 var deg = fightAverage ( anchorCellDeg );
 
 // Esquive after attak subie
-var anchorCellAttEsq = anchorMainTr[10].childNodes[3].childNodes[7].childNodes[0];
+var anchorCellAttEsq = anchorMainTr[9].childNodes[3].childNodes[7].childNodes[0];
 var nbAttak = cleanValue ( anchorCellAttEsq.nodeValue );
 if ( nbAttak != 0 )
 {
@@ -882,11 +882,11 @@ if ( nbAttak != 0 )
 }
 
 // RM
-var anchorCellRM = anchorMainTr[14].childNodes[3].childNodes[0];
+var anchorCellRM = anchorMainTr[13].childNodes[3].childNodes[0];
 var RM = totalMagik ( anchorCellRM );
 
 // MM
-var anchorCellMM = anchorMainTr[14].childNodes[3].childNodes[2];
+var anchorCellMM = anchorMainTr[13].childNodes[3].childNodes[2];
 var MM = totalMagik ( anchorCellMM );
 
 // PV
@@ -904,8 +904,8 @@ var vuetotale = arrView[0] + arrView[1];
 // Date of the next DLA
 try
 {
-	var dla= anchorMainTr[2].childNodes[3].childNodes[1].firstChild.nodeValue;
-	var dlaNext = anchorMainTr[2].childNodes[3].childNodes[8].childNodes[1].firstChild.nodeValue;
+	var dla= anchorMainTr[1].childNodes[3].childNodes[1].firstChild.nodeValue;
+	var dlaNext = anchorMainTr[1].childNodes[3].childNodes[8].childNodes[1].firstChild.nodeValue;
 
 	var datArr = dla.split(" ");
 	var dayArr = datArr[1].split("/");
@@ -925,7 +925,7 @@ try
 	var itDlaNext = document.createElement("i");
 	var txtDlaNext = document.createTextNode("Prochaine dla : " + d.toLocaleString());
 	itDlaNext.appendChild(txtDlaNext);
-	anchorMainTr[2].childNodes[3].appendChild(itDlaNext);
+	anchorMainTr[1].childNodes[3].appendChild(itDlaNext);
 }
 catch ( e ) { error ( e, 'Next DLA error' ); }
 
@@ -940,9 +940,9 @@ fatigue();
 var hauteur = 50;
 var bulleStyle = null;
 //var listeComp = anchorAllTables[3].childNodes[1].childNodes[20].childNodes[1].childNodes[1].childNodes[1];
-var listeComp = anchorAllTables[8].childNodes[1].childNodes[2].childNodes[1].childNodes[1].childNodes[1];
+var listeComp = anchorAllTables[7].childNodes[1].childNodes[2].childNodes[1].childNodes[1].childNodes[1];
 //var listeSort = anchorAllTables[3].childNodes[1].childNodes[24].childNodes[1].childNodes[1].childNodes[1];
-var listeSort = anchorAllTables[8].childNodes[1].childNodes[2].childNodes[3].childNodes[1].childNodes[1];
+var listeSort = anchorAllTables[7].childNodes[1].childNodes[2].childNodes[3].childNodes[1].childNodes[1];
 
 creerBulle();
 creerInfoBulles( listeComp , "competences" );
