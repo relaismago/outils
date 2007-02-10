@@ -139,6 +139,12 @@ if(isset($_POST['soumettre'])){
       $pcdm['capspe'] = trim($resultat[1]);
       $pcdm['affecte']  = trim($resultat[2]);
     }
+
+		if(eregi('[ \t]*Capacit.+:(.+) - Aff.+: (.+)Maitrise',$lignes[$i],$resultat)){
+		  $pcdm['capspe'] = trim($resultat[1]);
+			$pcdm['affecte']  = trim($resultat[2]);
+		}
+
 		if(eregi('[ \t]*Maitrise Magique.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['mmcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
@@ -169,7 +175,7 @@ if(isset($_POST['soumettre'])){
 		if(eregi('[ \t]*Attaque . dist.+:(.+)',$lignes[$i],$resultat)){
 			$pcdm['attdist'] = trim($resultat[1]);
 		}
-		if(eregi('[ \t]*Dur.e.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+		if(eregi('[ \t]*Dur.e DLA :(.+)\((.+)\)',$lignes[$i],$resultat)){
 		  $pcdm['dlacom'] = trim($resultat[1]);
 			$mot = explode(' ',$resultat[2]);
 			switch (trim($mot[0])){
