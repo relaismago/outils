@@ -11,12 +11,42 @@ if ( cdmForm.innerHTML.indexOf ( 'RÉUSSI' ) != -1 )
 	// La connaissance des monstres a résussi
 	processCdM ();
 }
+// ******************************************************************
+// node to text functions
+// ******************************************************************
+
+function flattenNode ( node )
+{
+	var result = '';
+	for ( var i = 0; i < node.childNodes.length; i++ ) 
+ 	{
+ 		if ( node.childNodes[i].hasChildNodes () )
+    {
+    	if ( node.childNodes[i].nodeName == "TR" ) { result += "\n"; }
+      if ( node.childNodes[i].nodeName == "LI" ) { result += "\n"; }
+      if ( node.childNodes[i].nodeName == "TD" ) { result += "\t"; }
+      if ( node.childNodes[i].nodeName == "P" ) { result += "\n"; }
+      result += flattenNode ( node.childNodes[i] );
+    }
+    else
+    {
+    	if ( node.childNodes[i].nodeName == "BR" ) { result += "\n"; }
+      if ( node.childNodes[i].nodeValue != null )
+      {
+      	var text = new String ( node.childNodes[i].nodeValue );
+        result += text.replace ( /\s+/g, " " );
+      }
+    }
+  }
+  return result;
+}
+
 
 function processCdM ()
 {
 	
 	var cdmHTML = cdmForm.childNodes[3]; // cdm
-	var cdmHTMLTable = cdmHTML.childNodes[1].firstChild; // cdmtableau
+/*	var cdmHTMLTable = cdmHTML.childNodes[1].firstChild; // cdmtableau
 
 	// Monster name
 	var cdm = cdmHTML.firstChild.firstChild.nodeValue + "\n";
@@ -34,6 +64,8 @@ function processCdM ()
 		// If monster has a special ability
 		cdm += "Capacité spéciale : " + cdmHTMLTable.childNodes[9].childNodes[1].childNodes[0].firstChild.nodeValue + "\n";
 	}
+*/
+	var cdm = flattenNode (cdmHTML);
 
 	var myForm= document.createElement ( 'form' );
 	myForm.setAttribute ( 'method', 'post' );
@@ -59,8 +91,8 @@ function processCdM ()
 	documentCdm.getElementsByName ( 'as_Action' )[0].parentNode.insertBefore ( myForm, espace);
 
 	/*pour mettre les blessures exactes*/
-	var cdm = cdmForm.childNodes[3];
-	var tableauCdm = cdm.childNodes[1].firstChild;
+	//var cdm = cdmForm.childNodes[3];
+	var tableauCdm = cdmHTML.childNodes[1].firstChild;
   var bless_line = tableauCdm.childNodes[2].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].firstChild.nodeValue; // "95 %"
   var b = parseInt( bless_line.substring(0,bless_line.indexOf(' %')) );
   if ( b != 0 ) 
@@ -92,5 +124,4 @@ function processCdM ()
       tableauCdm.insertBefore ( vieRestTr,  tableauCdm.childNodes[3]);         
     }
   }
-  /*pour mettre les blessures exactes*/
 }
