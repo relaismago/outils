@@ -81,6 +81,15 @@ function view_all()
 			$res[race_troll] = "Durakuir";
 			echo "<img alt=\"[".addslashes($res[nom_troll])."]\"";
 			echo " src='$path/avatars/$res[nom_image_troll]_avatar_bleu.gif' ".afficheInfosTroll($res).">";
+
+			$res[nom_troll] = "Bollocks Le Transplanté";
+			$res[nom_image_troll] = "Bollocks";
+			$res[nom_rang_troll] = "Monument de la Guilde (PNJ)";
+			$res[race_troll] = "Kastar";
+
+			echo "<img alt=\"[".addslashes($res[nom_troll])."]\"";
+			echo " src='$path/avatars/$res[nom_image_troll]_avatar_bleu.gif' ".afficheInfosTroll($res).">";
+
 			$flag_pnj = true;
 		}
   }
