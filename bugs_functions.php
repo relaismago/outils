@@ -97,11 +97,13 @@ function afficherFicheBug($id_bug)
   echo "<td><select name='outil_touche_bug'>";
   afficher_listbox_select("bestiaire", $outil_touche_bug);
   afficher_listbox_select("bugs", $outil_touche_bug);
+  afficher_listbox_select("firemago", $outil_touche_bug);
   afficher_listbox_select("gps", $outil_touche_bug);
   afficher_listbox_select("ggc", $outil_touche_bug);
   afficher_listbox_select("recherchator", $outil_touche_bug);
   afficher_listbox_select("rg", $outil_touche_bug);
   afficher_listbox_select("stats", $outil_touche_bug);
+  afficher_listbox_select("trombinoscope", $outil_touche_bug);
   afficher_listbox_select("vue2d", $outil_touche_bug);
   afficher_listbox_select("vtt", $outil_touche_bug);
   afficher_listbox_select("autre", $outil_touche_bug);
@@ -167,7 +169,7 @@ function afficherListeBugsJs()
 ?>
 <script language='Javascript'>
 function changeOutil() {
- document.location.href='/bugs.php?outil='+document.formList.outil.value+'&criteres=';
+ document.location.href='/bugs.php?outil='+document.formList.outil.value+'&criteres=etat_bug,type_bug%20desc,criticite_bug%20desc';
 }
  </script>
 
@@ -221,11 +223,13 @@ function afficherListeBugs()
   afficher_listbox_select("", $outil,"Tous");
   afficher_listbox_select("bestiaire", $outil);
   afficher_listbox_select("bugs", $outil);
+  afficher_listbox_select("firemago", $outil_touche_bug);
   afficher_listbox_select("gps", $outil);
   afficher_listbox_select("ggc", $outil);
   afficher_listbox_select("recherchator", $outil);
   afficher_listbox_select("rg", $outil);
   afficher_listbox_select("stats", $outil);
+  afficher_listbox_select("trombinoscope", $outil_touche_bug);
   afficher_listbox_select("vue2d", $outil);
   afficher_listbox_select("vtt", $outil);
   afficher_listbox_select("autre", $outil);

@@ -17,30 +17,32 @@ function init_bug($bug)
 
   // Si l'on vient de remplir le formulaire d'ajout ou d"édition 
   // d'un bug, on met à jour la bdd
-/*  if ($bug == "edit" && userIsGuilde()) {
+  if ($bug == "edit" && userIsGuilde()) {
     editDbBug(); // editDbBug ne prend pas de parametre
 
 	// Suppression d'un bug
   } elseif ( (is_numeric($bug)) && ($_REQUEST[action] == "del")  && userIsGuilde()) {
     deleteDbBug($bug);
-*/
+  }
+
   // On affiche le formulaire si l'on connait l'id du bug
   // ou que l'on veut en créer un nouveau
-  if (is_numeric($bug)) {
-		afficher_titre_tableau("Bug Track des outils ".RELAISMAGO,bug_affiche_info());
+  if (is_numeric($bug) || $bug == "new") {
+		afficher_titre_tableau("Bug Track des outils ".RELAISMAGO,"");
     afficherFicheBug($bug);
+	
 
   // Sinon, on affiche la liste des bugs
   } else {
-/*		$text = "<i>Vous venez de découvrir un dysfonctionnement dans les outils, ou vous voulez voir ";
+		$text = "<i>Vous venez de découvrir un dysfonctionnement dans les outils, ou vous voulez voir ";
 		$text .= "une nouvelle fonctionnalité apparaître ? Cet outil est pour vous !</i><br><br>";
 		if (userIsGuilde()) {
 			$text .= "<input type='button' class='mh_form_submit' ";
 			$text .= "onClick=\"Javascript:document.location.href='bugs.php?bug=new'\" value=\"Ajouter un bug ou une demande d'amélioration\">";
 		} else {
 			$text .= "L'ajout de Bug ou Souhait est uniquement accessible par les ".RELAISMAGO." authentifiés pour l'instant.<br>";
-		}*/
-		afficher_titre_tableau("Bug Track ".RELAISMAGO." : Les Bugs ou Souhaits dans les outils",bug_affiche_info());
+		}
+		afficher_titre_tableau("Bug Track ".RELAISMAGO." : Les Bugs ou Souhaits dans les outils",$text);
 
     afficherListeBugs();
   }
