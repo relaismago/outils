@@ -2087,4 +2087,31 @@ function afficheNextSequence($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_trol
 	}
 }
 
+function update_traitement($code,$etat) {
+    global $db_vue_rm;
+    $date=date("Y-m-d H-i-s");
+    $sql = "UPDATE traitements SET ";
+    $sql .= " date_traitement= '$date', ";
+    $sql .= " etat_traitement= '$etat'";
+    $sql .= " WHERE code_traitement='$code'"; 
+
+    mysql_query($sql,$db_vue_rm);
+    echo mysql_error();
+}
+
+function getTraitement($code)
+{
+  global $db_vue_rm;
+
+  $sql = "SELECT date_traitement, etat_traitement";
+  $sql .= " FROM traitements";
+  $sql .= " WHERE code_traitement='$code'";
+
+
+	$result=mysql_query($sql,$db_vue_rm);
+ 	$row = mysql_fetch_array($result);
+	
+	return $row['date_traitement'].":".$row['etat_traitement'];
+	
+}
 ?>

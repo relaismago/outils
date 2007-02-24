@@ -2,11 +2,14 @@
 include_once("inc_connect.php3");
 include_once("inc_define_vars.php");
 
+global $db_vue_rm ;
+
 function getGuildeInFile($id)
 {
   global $db_vue_rm;
 
   echo "Traitement du fichier des guildes pour mettre à jour la bdd<br>";
+  update_traitement("GUILDES", "EN_COURS");
 
 	/* Détection fichier ftp trolls vide */
 	$i = 0;
@@ -16,6 +19,7 @@ function getGuildeInFile($id)
 	}
 	/* s'il y a moins de 100 guildes dans le fichier */	
 	if ($i <100) {
+		update_traitement("GUILDES", "KO : moins de 100 guildes dans le fichier"); 
 		die("Erreur Fichier FTP des Guildes<br>");
 	}
 	fclose($fichtroll);
@@ -51,6 +55,8 @@ function getGuildeInFile($id)
 	}
 	echo "Fin Traitement du fichier des guildes<br>\n";
 	# On ajoute au cache
+
+ 	update_traitement("GUILDES", "OK");
 	return $liste;
 }
 
@@ -60,6 +66,8 @@ function getTrollInFile($id)
 
 	echo "Traitement du fichier des trolls pour mettre à jour la bdd<br>\n";
 
+  update_traitement("TROLLS", "EN_COURS");
+
 	/* Détection fichier ftp trolls vide */
 	$i = 0;
 	$fichtroll=fopen("vues/Public_Trolls.txt","r");
@@ -68,6 +76,7 @@ function getTrollInFile($id)
 	}
 	/* s'il y a moins de 4000 trolls dans le fichier */	
 	if ($i <4000) {
+  		update_traitement("TROLLS", "KO : moins de 4000 trolls dans le fichier");
 		die("Erreur Fichier FTP<br>");
 	}
 	fclose($fichtroll);
@@ -234,6 +243,7 @@ function getTrollInFile($id)
 		}
   }
 
+ 	update_traitement("TROLLS", "OK");
 	return $liste;
 }
 
@@ -242,13 +252,17 @@ function getFilePublicTrolls()
   echo "Récupération du fichier des trolls<br>";
 
   $fp=fopen("ftp://ftp.mountyhall.com/Public_Trolls.txt","r");
-  if ($fp == FALSE)
+  if ($fp == FALSE) {
+    update_traitement("TROLLS", "KO : erreur lors de l''appel du fichier public sur le serveur FTP");
     die ("Erreur lors de l'appel du fichier public sur le serveur FTP. Procédure de refresh stoppée");
+  }
 
   $v2=fopen("vues/Public_Trolls.txt","w");
 
-  if ($v2 == FALSE)
-    die ("Erreur lors de l'écriture du fichier Public_Trolls. Procédure de refresh stoppée");
+  if ($v2 == FALSE) {
+    update_traitement("TROLLS", "KO : erreur lors de l''ecriture du fichier FTP");
+    die ("Erreur lors de l'ecriture du fichier Public_Trolls. Procédure de refresh stoppée");
+  }
 
   while ( $line=fgets($fp) ){
     fputs ($v2, $line);
@@ -261,14 +275,18 @@ function getFilePublicTrolls()
 
 function getFilePublicGuildes()
 {
-  echo "récupération du fichier des guildes<br>";
+  echo "recuperation du fichier des guildes<br>";
   $fp = fopen("ftp://ftp.mountyhall.com/Public_Guildes.txt","r");
-  if ($fp == FALSE)
+  if ($fp == FALSE) {
+    update_traitement("GUILDES", "KO : erreur lors de l''appel du fichier du public");
     die ("Erreur lors de l'appel du fichier public sur le serveur FTP. Procédure de refresh stoppée");
+  }
 
   $v2 = fopen("vues/Public_Guildes.txt","w");
-  if ($v2 == FALSE)
+  if ($v2 == FALSE) {
+    update_traitement("TROLLS", "KO : erreur lors de l''ecriture du fichier FTP");
     die ("Erreur lors de l'écriture du fichier Public_Guildes. Procédure de refresh stoppée");
+  }
 
   while ( $line=fgets($fp) ){
     fputs ($v2, $line);
@@ -610,7 +628,18 @@ function epurerVtt()
 
 }
 
-global $db_vue_rm ;
+function update_traitement($code,$etat) {
+    global $db_vue_rm ;
+    $date=date("Y-m-d H-i-s");
+    $sql = "UPDATE traitements SET ";
+    $sql .= " date_traitement= '$date', ";
+    $sql .= " etat_traitement= '$etat' ";
+    $sql .= " WHERE code_traitement='$code'";
+
+    mysql_query($sql,$db_vue_rm);
+    echo mysql_error();
+}
+
 if (md5($_REQUEST['pass']) == MD5_PASS_EXTERNE) {
 	getFilePublicGuildes();
 	getFilePublicTrolls();

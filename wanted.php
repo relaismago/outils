@@ -181,10 +181,12 @@ function generate_all()
   $lesTrolls = selectDbTrolls("","filter_wanted");
   $nbTrolls = count($lesTrolls);
 
+  update_traitement("AFFICHES_WANTED", "EN_COURS");
   for($i=1;$i<=$nbTrolls;$i++) {
     $res = $lesTrolls[$i];
     echo "<img src='wanted.php?id=$res[id_troll]&pass=".$_REQUEST['pass']."'>";
   }
+  update_traitement("AFFICHES_WANTED", "OK");
 }
 
 

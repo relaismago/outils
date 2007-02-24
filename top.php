@@ -97,12 +97,16 @@ UpdateIt();
 	<tr class="mh_tdtitre">
 		<td>
 			<marquee behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="3" onmouseover='this.stop()' onmouseout='this.start()'>
-
-Si vous trouvez une anomalie, merci de l'inscrire. <a href='http://trollforge.lipyx.net/bugs/?func=additem&group=relaismago'>ici</a> 
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-Nouveau cockpit en d&eacute;veloppement. La recherche n'est pas compl&eacute;tement fonctionnelle, des choses ne sont pas encore remises... Voir forum pour plus d'informations. Fin pr&eacute;vue dans une / deux semaines.
- 
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<? echo "Maj liste trolls : ".getTraitement("TROLLS"); ?>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<? echo "Maj liste guildes: ".getTraitement("GUILDES"); ?>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<? echo "Maj avatars clairs: ".getTraitement("AVATARS_CLAIRS"); ?>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<? echo "Maj avatars sombres: ".getTraitement("AVATARS_SOMBRES"); ?>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<? echo "Maj affiches wanted: ".getTraitement("AFFICHES_WANTED"); ?>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 			</marquee>
 		</td>
 	</tr>

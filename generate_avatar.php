@@ -230,6 +230,12 @@ function init_avatar($id_avatar)
 function generate_all($sombre)
 {
 
+  if ($sombre=='oui') {
+    update_traitement("AVATARS_SOMBRES", "EN_COURS");
+  } else {
+    update_traitement("AVATARS_CLAIRS", "EN_COURS");
+  }
+
   $lesTrolls = selectDbTrolls("",ID_GUILDE);
   $nbTrolls = count($lesTrolls);
 
@@ -243,6 +249,12 @@ function generate_all($sombre)
 				echo "<img src='generate_avatar.php?id=$res[id_troll]&sombre=$sombre&pass=".$_REQUEST['pass']."'>";
 		//	}
 		}
+  }
+
+  if ($sombre=='oui') {
+    update_traitement("AVATARS_SOMBRES", "OK");
+  } else {
+    update_traitement("AVATARS_CLAIRS", "OK");
   }
 }
 
@@ -266,6 +278,18 @@ function view_all($sombre=false)
 			}
 		}
 	}
+}
+
+function update_traitement($code,$etat) {
+    global $db_vue_rm ;
+    $date=date("Y-m-d H-i-s");
+    $sql = "UPDATE traitements SET ";
+    $sql .= " date_traitement= '$date', ";
+    $sql .= " etat_traitement= '$etat' ";
+    $sql .= " WHERE code_traitement='$code'";
+
+    mysql_query($sql,$db_vue_rm);
+    echo mysql_error();
 }
 
 ?>
