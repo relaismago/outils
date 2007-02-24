@@ -2111,7 +2111,14 @@ function getTraitement($code)
 	$result=mysql_query($sql,$db_vue_rm);
  	$row = mysql_fetch_array($result);
 	
-	return $row['date_traitement'].":".$row['etat_traitement'];
+	$date_less_5days=date("Y-m-d H-i-s", mktime(date("H"), date("i"), date("s"), date("m")  , date("d")-5, date("Y")));	
 	
+	if ( $row['date_traitement'] < $date_less_5days) {
+		$rouge = "<font color='red'> (&ccedil;a fait longtemps !) ";	
+	} else {
+		$rouge = "<font color='green'>";	
+	}
+
+	return $rouge.$row['date_traitement'].":".$row['etat_traitement']."</font>";
 }
 ?>

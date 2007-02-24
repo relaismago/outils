@@ -98,15 +98,14 @@ UpdateIt();
 		<td>
 			<marquee behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="3" onmouseover='this.stop()' onmouseout='this.start()'>
 <? echo "Maj liste trolls : ".getTraitement("TROLLS"); ?>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+ &nbsp; &nbsp; &nbsp; &nbsp; 
 <? echo "Maj liste guildes: ".getTraitement("GUILDES"); ?>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+ &nbsp; &nbsp; &nbsp; &nbsp; 
 <? echo "Maj avatars clairs: ".getTraitement("AVATARS_CLAIRS"); ?>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+ &nbsp; &nbsp; &nbsp; &nbsp; 
 <? echo "Maj avatars sombres: ".getTraitement("AVATARS_SOMBRES"); ?>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+ &nbsp; &nbsp; &nbsp; &nbsp; 
 <? echo "Maj affiches wanted: ".getTraitement("AFFICHES_WANTED"); ?>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 			</marquee>
 		</td>
 	</tr>
