@@ -222,7 +222,7 @@ function parseAnalyseAnatomique($lignes,$source,$date)
 			$control .= "8";
 		}
 
-		if ($control == "12345678") {
+		if (($control == "12345678") || ($control == "12345687")) {
 			
 			if ($debug)	echo "editDbTroll($id_troll_anat,$pv_anat,$att_anat,$esq_anat,$deg_anat,";
 			if ($debug)	echo "$reg_anat,$vue_anat,$arm_anat,$source,$date);<br>";
