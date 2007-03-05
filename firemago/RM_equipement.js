@@ -244,31 +244,52 @@ try {
 } catch ( e ) { error ( e, 'Background Image error' ); }
 
 
-// ********************************************************
-// Adding login IFRAME
-// ********************************************************
-/*
-var myTr = document.createElement ( 'tr' );
-myTr.setAttribute ( 'class','mh_tdtitre' );
-var myTd = document.createElement ( 'td' );
-myTd.setAttribute ( 'colspan', '2' );
-var myIFrame = document.createElement ( 'iframe' );
-myIFrame.setAttribute ( 'src', URLLoginRM );
-myIFrame.setAttribute ( 'width', '100%' );
-myIFrame.setAttribute ( 'height', '50' );
-myIFrame.setAttribute ( 'frameborder', '0' );
-myIFrame.setAttribute ( 'scrolling', 'no' );
-myTd.appendChild ( myIFrame );
-myTr.appendChild ( myTd );
-try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth R&M error' ); }
-*/
-// ********************************************************
-// GGC and VVT links
-// ********************************************************
+var nodes = document.evaluate("//table/descendant::tr/descendant::img[@alt = 'Composant - Spécial']/../..", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 
-/*
-var profil;
-try { profil = flattenNode ( anchorAllTables[3] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
-*/
+var arrayCompo = "?";
+var begin = 0;
+
+if ( anchorCss.getAttribute ( 'href' ).indexOf ( 'www.mountyhall.com' ) != -1 || anchorCss.getAttribute ( 'href' ).indexOf ( 'parchemin' ) != -1)
+{
+  var colorSearch = "#ff9f9f";
+}
+else
+{
+  var colorSearch = "#554444";
+}
+
+
+for (var i = 0; i < nodes.snapshotLength; i++)
+{
+ 	var node = nodes.snapshotItem(i);
+  var id_compo = node.childNodes[0].childNodes[1].nodeValue;
+	arrayCompo += "composId[]=" + id_compo +"&compo[]=" + escape (node.childNodes[0].childNodes[2].childNodes[0].nodeValue) + "&";
+	// Adding script for coloring priorities compos
+
+	if ( i!=0 )
+	{
+		if ( i%30 == 0 )
+		{
+			arrayCompo += "begin=" + begin;
+			newCompoScript = document.createElement ( 'script' );
+			newCompoScript.setAttribute ( 'language', 'JavaScript' );
+			newCompoScript.setAttribute ( 'src',  URLTopJs + "compos.php"  + arrayCompo );
+			document.body.appendChild ( newCompoScript );
+			arrayCompo = "?";
+			begin = i + 1;
+		}
+	}
+}
+
+if ( arrayCompo != "?")
+{
+	arrayCompo += "begin=" + begin;
+	newCompoScript = document.createElement ( 'script' );
+	newCompoScript.setAttribute ( 'language', 'JavaScript' );
+	newCompoScript.setAttribute ( 'src',  URLTopJs + "compos.php"  + arrayCompo );
+	document.body.appendChild ( newCompoScript );
+}
+
+
 displayErrors ( anchorAllTables[3] );
 displayDebug ( anchorAllTables[3] );
