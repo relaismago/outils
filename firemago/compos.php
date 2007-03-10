@@ -30,22 +30,23 @@ if ($_SESSION['AuthGuilde'] == 450)
 				{
 
 					$race = substr ( $compoNames[$i], $pos + $nbcar, strpos ( $compoNames[$i], "de Qualité" ) - $pos - $nbcar -1);
+					$loc = substr ($compoNames[$i],strpos ( $compoNames[$i], "["), strpos ( $compoNames[$i], "]") - strpos ( $compoNames[$i], "[")+1);
 
-					$sql = " SELECT id_composant, priorite_composant, id_race_composant";
+					$sql = " SELECT id_composant, priorite_composant, commentaire_composant";
 					$sql .= " FROM composants";
-					$sql .= " WHERE id_race_composant = '".addslashes($race)."'";
+					$sql .= " WHERE id_race_composant = '".addslashes($race)."' AND ( commentaire_composant = '".$loc."' OR commentaire_composant = 'Mundidey' )";
         	$result = mysql_query ( $sql, $db_vue_rm );
 	      	if ( mysql_error () ) { echo "alert ('".mysql_error()."');";}
-	      	if ( mysql_num_rows ( $result ) > 0)
+	      	if ( mysql_num_rows ( $result ) > 0 )
 	      	{
-					  if ( $script == "gt" )
-						{
-							echo "nodes.snapshotItem($rang).childNodes[1].setAttribute ( 'class', '' );";
-							echo "nodes.snapshotItem($rang).childNodes[3].setAttribute ( 'class', '' );";
-							echo "nodes.snapshotItem($rang).childNodes[5].setAttribute ( 'class', '' );";
-						}
-						echo "nodes.snapshotItem($rang).setAttribute ( 'class', '' );";
-						echo "nodes.snapshotItem($rang).setAttribute ( 'style', 'background-color:' + colorSearch );";
+					  	if ( $script == "gt" )
+							{
+								echo "nodes.snapshotItem($rang).childNodes[1].setAttribute ( 'class', '' );";
+								echo "nodes.snapshotItem($rang).childNodes[3].setAttribute ( 'class', '' );";
+								echo "nodes.snapshotItem($rang).childNodes[5].setAttribute ( 'class', '' );";
+							}
+							echo "nodes.snapshotItem($rang).setAttribute ( 'class', '' );";
+							echo "nodes.snapshotItem($rang).setAttribute ( 'style', 'background-color:' + colorSearch );";
 					}
 				}
 		}
