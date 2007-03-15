@@ -2,6 +2,7 @@
 session_start();
 include_once ( "../admin_functions_db.php3" );
 
+
 $compoIds = $_REQUEST['composId'];
 $compoNames = $_REQUEST['compo'];
 $begin = $_REQUEST['begin'];
@@ -31,10 +32,11 @@ if ($_SESSION['AuthGuilde'] == 450)
 
 					$race = substr ( $compoNames[$i], $pos + $nbcar, strpos ( $compoNames[$i], "de Qualité" ) - $pos - $nbcar -1);
 					$loc = substr ($compoNames[$i],strpos ( $compoNames[$i], "["), strpos ( $compoNames[$i], "]") - strpos ( $compoNames[$i], "[")+1);
-
+					$loc = htmlentities($loc);
+					
 					$sql = " SELECT id_composant, priorite_composant, commentaire_composant";
 					$sql .= " FROM composants";
-					$sql .= " WHERE id_race_composant = '".addslashes($race)."' AND ( commentaire_composant = '".$loc."' OR commentaire_composant = 'Mundidey' )";
+					$sql .= " WHERE id_race_composant = '".addslashes($race)."' AND ( commentaire_composant like '".$loc."' OR commentaire_composant like 'Mundidey%' )";
         	$result = mysql_query ( $sql, $db_vue_rm );
 	      	if ( mysql_error () ) { echo "alert ('".mysql_error()."');";}
 	      	if ( mysql_num_rows ( $result ) > 0 )
