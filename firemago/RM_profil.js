@@ -409,7 +409,7 @@ function competences(comp)
 	{
 		texte = 'Dégats du piège à feu : <b>' + Math.floor((esq[0]+vue)/2) + '</b> D3<hr/>';
 		texte += 'Dégâts moyens : <b>' + Math.floor((esq[0]+vue)/2)*2 + ' (';
-		texte += '' + resiste(Math.floor((esq[0]+vue)/2))+')</b>';
+		texte += '' + Math.floor((esq[0]+vue)/2)+')</b>';
 	}
 	if(comp.indexOf('Contre-Attaquer') != -1)
 	{
@@ -507,7 +507,7 @@ function sortileges(sort)
 		texte = 'Attaque : <b>Automatique</b><br/>'; 
 		texte += 'Dégâts : <b>' + Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2) + '</b> D3 (effet de zone)<hr/>';
 		texte += 'Moyenne Dégâts : <b>' + Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2)*2 + ' (';
-		texte += resiste(Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2))+')</b>';
+		texte += Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2)+')</b>';
 	}
 	if(sort.indexOf('Faiblesse Passagere') != -1)
 		texte = 'Dégâts : <b>-' + Math.floor((Math.ceil((pvactuels-30)/10)+deg[0]-3)/2+1) + '</b>';
@@ -562,14 +562,14 @@ function sortileges(sort)
 '</b><br/>';
 		texte += 'Dégâts moyens : <b>' + Math.floor(vue/2)*2 + '/';
 		texte += Math.floor(Math.floor(vue/2)*1.5)*2 + ' (';
-		texte += resiste(Math.floor(Math.floor(vue/2))) + '/';
-		texte += resiste(Math.floor(Math.floor(vue/2)*1.5))+')</b>';
+		texte += Math.floor(Math.floor(vue/2)) + '/';
+		texte += Math.floor(Math.floor(vue/2)*1.5)+')</b>';
 	}
 	if(sort.indexOf('Rafale Psychique') != -1)
 	{
 		texte = 'Attaque : <b>Automatique</b><br/>Dégâts : <b>' + deg[0] + '</b> D3<br/>Régénération : <b>-' + deg[0] + '</b><hr/>';
 		texte += 'Dégâts moyens : <b>' + deg[0]*2 + ' (';
-		texte += resiste(deg[0])+')</b>';
+		texte += deg[0]+')</b>';
 	}
 	if(sort.indexOf('Teleportation') != -1)
 	{
@@ -582,8 +582,8 @@ function sortileges(sort)
 Math.floor((Math.floor(deg[0]*2/3))*3.5) + '</b><br/>';
 		texte += 'Dégâts moyens : <b>' + deg[0]*2 + '/';
 		texte += Math.floor(deg[0]*1.5)*2 + ' (';
-		texte += resiste(deg[0]) + '/';
-		texte += resiste(Math.floor(deg[0]*1.5))+')</b>';
+		texte += deg[0] + '/';
+		texte += Math.floor(deg[0]*1.5)+')</b>';
 	}
 	if(sort.indexOf('Vision Accrue') != -1)
 		texte = 'Vue : <b>+' + Math.floor(vue/2) + '</b>';
