@@ -346,7 +346,7 @@ function update_profil($id_troll)
 
           $date=date("Y-m-d H-i-s");
           $tmpfile=fopen ("vues/list_mdp_error.txt","a");
-          fwrite($tmpfile,$date.": Troll n° ".$id."\n");
+          fwrite($tmpfile,$date.": Troll n° ".$id_troll."\n");
           fclose($tmpfile);
 
           $error = "<br><b class=red>Erreur de mot de passe.</b><br>";
@@ -473,15 +473,13 @@ function update_mouches($id_troll)
 
           $date=date("Y-m-d H-i-s");
           $tmpfile=fopen ("vues/list_mdp_error.txt","a");
-          fwrite($tmpfile,$date.": Troll n° ".$id."\n");
+          fwrite($tmpfile,$date.": Troll n° ".$id_troll."\n");
           fclose($tmpfile);
 
           $error = "<br><b class=red>Erreur de mot de passe.</b><br>";
           break;
         } elseif (preg_match("/Erreur (4|5)/",$line)) {
-          $error = "<br><b class=red>Erreur du serveur.</b><br>
-              Il est encore en vrac. Il faudra repasser plus tard
-              quand les DM l'auront remis enroute...<br>";
+          $error = "<br><b class=red>Erreur du serveur.</b><br>";
           break;
         } elseif (strpos($line,"Erreur 1")!==false) {
           $error = "<br><b class=red>Paramètres incorrects</b><br>

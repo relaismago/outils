@@ -521,6 +521,9 @@ if ($TROLL<1) $TROLL=0;
 ###########################################
 function refreshVue($id, $auto=false)
 {
+	if (strlen($id) == 0) 
+		die("refreshVue : Pas d'id de troll");
+
 	global $db_vue_rm, $error, $DEV;
 
 	unset($refresh_by_me);
