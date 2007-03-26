@@ -769,16 +769,12 @@ function updateSeenChampi($sub_sql,$sub_sql_list,$sub_sql_update,$date)
 	$sql = "DELETE FROM champignons WHERE";
 	$sql .= " id_champi = $sub_sql_list";
 	
-	echo "DEBUG BODEGA updateSeenChampi() DELETE $sql <br>";
-
   mysql_query($sql,$db_vue_rm);	
   echo mysql_error(); 
 
 	$sql = "INSERT INTO champignons";
 	$sql .= " (id_champi, nom_champi, x_champi, y_champi, z_champi, date_champi, is_seen_champi)";
 	$sql .= " VALUES $sub_sql";
-
-	echo "DEBUG updateSeenChampi() INSERT $sql <br>";
 
   mysql_query($sql,$db_vue_rm);	
   echo mysql_error(); 
@@ -2014,7 +2010,6 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
 						
 						/* Si le champi existe dans la base */
 						if (mysql_affected_rows() > 0) {
-							echo "<br>NOM CHAMPI=$nom_champi<br>";
 							list($nom_champi) = mysql_fetch_array($result); 
 							/* et que son nom contient le terme champi*/
 							if ((preg_match("/Champignon.*inconnu/",$nom_champi)) ||

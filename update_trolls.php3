@@ -46,7 +46,6 @@ function getGuildeInFile($id)
       mysql_query($sql,$db_vue_rm);
     }
     echo mysql_error();
-    echo "G$Id<br>";
 	}
 	fclose($fichtroll);
 	# On ajoute le troll à l'index
@@ -127,8 +126,6 @@ function getTrollInFile($id)
 			echo mysql_error();
 		}
 
-		#echo "('$Id','$IdGuilde','$nom','$race','$level','$nKills','$nDead','$Mouches')";
-
 		// Si c'est un relaismago, on renseigne la table vtt
 		if ($IdGuilde == ID_GUILDE) {
 			// update du profil public
@@ -153,8 +150,6 @@ function getTrollInFile($id)
 
 				mysql_query($sql,$db_vue_rm);
 				echo mysql_error();
-				echo "Ajout du troll $Id dans la table Vtt : <br>";
-
 			}
 
 			if (mysql_num_rows(mysql_query("SELECT id_troll_option FROM options WHERE id_troll_option=$Id",$db_vue_rm))<=0 ) {
@@ -164,8 +159,6 @@ function getTrollInFile($id)
 
 				mysql_query($sql,$db_vue_rm);
 				echo mysql_error();
-				echo "Ajout du troll $Id dans la table Options : <br>";
-
 			}
 
 			
@@ -180,12 +173,10 @@ function getTrollInFile($id)
 			if ($level >1 ) {// si le niveau du troll est supérieur à 1 
 				// et qu'il n'est pas dans la table mouches
 				if (mysql_num_rows(mysql_query($sql,$db_vue_rm))<=0 ) { 
-					echo "Mouches : aucune. Ajout<br>";
 					$upd_mouche = true;
 					
 				// s'il vient de changer de niveau 
 				} elseif ($level > $last_level) {
-					echo "Mouches : changements de level<br>";
 					$upd_mouche = true;
 				}
 				if ($upd_mouche) {
@@ -193,7 +184,6 @@ function getTrollInFile($id)
 				}
 			}*/
 		}
-		echo "T$Id<br>\n";
 	}
 	fclose($fichtroll);
 
@@ -319,8 +309,6 @@ function update_profil($id_troll)
 
 	list($nb)=mysql_fetch_array($result);
 
-	echo "Nombre classiques $id = $nb<br>\n";
-	
 	if ($nb >= NB_MAX_CLASSIQUES)
 		return ; // nb d'utilisation des scripts de catégorie equipement atteinte
 
@@ -328,7 +316,6 @@ function update_profil($id_troll)
 	$sql =" SELECT pass_troll";
 	$sql .= " FROM trolls WHERE id_troll=$id_troll";
 
-	if ($DEV) echo "DEBUG refreshVue() $sql <br>\n";
 	$result=mysql_query($sql,$db_vue_rm);
 	echo mysql_error();
 
@@ -339,8 +326,6 @@ function update_profil($id_troll)
 	
 	/* On appel le script public des mouches */
 
-//	echo "fopen('http://sp.mountyhall.com/SP_ProfilPublic.php?Numero=$id_troll&Motdepasse=$pass','r')<br>";
-	
 	$fp=fopen("http://sp.mountyhall.com/SP_ProfilPublic.php?Numero=$id_troll&Motdepasse=$pass","r");
 
 	if ($fp == FALSE) {
@@ -382,7 +367,6 @@ function update_profil($id_troll)
     $deb++;
 
     list($numero_troll, $is_pnj_troll, $niveau_troll , $date_inscription_troll , $email_troll , $blason_troll , $intangible_troll , $nb_mouches_troll , $nb_kills_troll, $nb_morts_troll, $num_rang_troll, $nom_rang_troll, $distinction_troll , $equipement2_troll) = split (";",$line);
-		echo $line."<br>";
 
 		$nom_rang_troll = addslashes($nom_rang_troll);
 		$equipement2_troll = addslashes($equipement2_troll);
@@ -416,15 +400,11 @@ function update_profil($id_troll)
   $sql .= " (id_troll_refresh, date_refresh, by_me_refresh, categorie_refresh,script_name_refresh)";
   $sql .= " VALUES ($id_troll, '$date','non','classiques','SP_ProfilPublic')";
 
-  if ($DEV) echo "DEBUG refreshVue() $sql <br>";
   mysql_query($sql,$db_vue_rm);
   echo mysql_error();
 
 	$sql = " UPDATE trolls set ";
 	$sql .= $sql_upd;
-
-	echo "<br>SQL=$sql<br>";
-
 
   mysql_query($sql,$db_vue_rm);
   echo mysql_error();
@@ -456,8 +436,6 @@ function update_mouches($id_troll)
 
 	list($nb)=mysql_fetch_array($result);
 
-	echo "Nombre equipement $id = $nb<br>\n";
-	
 	if ($nb >= NB_MAX_EQUIPEMENT)
 		return ; // nb d'utilisation des scripts de catégorie equipement atteinte
 
@@ -465,7 +443,6 @@ function update_mouches($id_troll)
 	$sql =" SELECT pass_troll";
 	$sql .= " FROM trolls WHERE id_troll=$id_troll";
 
-	if ($DEV) echo "DEBUG refreshVue() $sql <br>\n";
 	$result=mysql_query($sql,$db_vue_rm);
 	echo mysql_error();
 
@@ -476,7 +453,6 @@ function update_mouches($id_troll)
 	
 	/* On appel le script public des mouches */
 
-//	echo "fopen('http://sp.mountyhall.com/SP_Mouche.php?Numero=$id_troll&Motdepasse=$pass','r')<br>";
 	$fp=fopen("http://sp.mountyhall.com/SP_Mouche.php?Numero=$id_troll&Motdepasse=$pass","r");
 
 	if ($fp == FALSE) {
@@ -521,7 +497,6 @@ function update_mouches($id_troll)
     }
     $deb++;
     list($id_mouche, $nom_mouche, $type_mouche, $age_mouche, $presence_mouche) = split (";",$line);
-		echo $line."<br>";
 
 		$nom_mouche = addslashes($nom_mouche);
 		if (trim($line) != "")
@@ -539,7 +514,6 @@ function update_mouches($id_troll)
   $sql .= " (id_troll_refresh, date_refresh, by_me_refresh, categorie_refresh,script_name_refresh)";
   $sql .= " VALUES ($id_troll, '$date','non','equipement','SP_Mouche')";
 
-  if ($DEV) echo "DEBUG refreshVue() $sql <br>";
   mysql_query($sql,$db_vue_rm);
   echo mysql_error();
 
@@ -555,8 +529,6 @@ function update_mouches($id_troll)
   $sql = "INSERT INTO mouches ";
   $sql .= " (id_mouche,id_troll_mouche,nom_mouche,type_mouche,age_mouche,presence_mouche)";
   $sql .= " VALUES $sql_add";
-	
-	echo "<br>SQL=$sql<br>";
 
   mysql_query($sql,$db_vue_rm);
   echo mysql_error();
