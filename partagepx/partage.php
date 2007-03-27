@@ -103,7 +103,8 @@ class groupe{
 			echo '<table class="mh_tdborder" align="center" width="90%"><tr class="mh_tdtitre"><th style="color:#FFFFFF;padding:5px;">Erreur: Un groupe portant ce nom est déjà existant dans cet outil</th></tr></table><br /><br />';
 	}
 	function del_groupe($num){
-		$this->db->query("INSERT into px_log VALUES(NULL,(SELECT \"DEL groupe \" || nom from px_groupes WHERE id={$num}),'".$_SERVER['REMOTE_ADDR']."')");
+		$nom_gr = $this->db->query("SELECT nom from px_groupes WHERE id={$num}","single");
+		$this->db->query("INSERT into px_log VALUES(NULL,'DEL groupe {$nom_gr}','".$_SERVER['REMOTE_ADDR']."')");
 		$this->db->query("DELETE from px_groupes WHERE id={$num}");
 		$this->db->query("DELETE from px_partage WHERE groupe={$num}");
 		$this->load();
