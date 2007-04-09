@@ -26,6 +26,7 @@ function initRefreshAutoError()
   $sql .= " FROM trolls ";
   $sql .= " WHERE guilde_troll=".ID_GUILDE;
   $sql .= " AND lock_refresh_troll = 'oui'";
+  $sql .= " AND is_pnj_troll = 0";
   $sql .= " AND date_last_refresh_himself_troll < '$date_less_10_min'";
 	$sql .= " ORDER BY id_troll LIMIT 1";
 	 
