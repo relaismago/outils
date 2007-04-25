@@ -1,5 +1,6 @@
 var arrTr = document.getElementsByTagName('tr');
-var arrayCompo = "?";
+var arrayCompo = "";
+
 
 //On définit la couleur
 var anchorCss = document.getElementsByTagName ( 'link' )[0]; // ANCHOR
@@ -29,15 +30,22 @@ for (var i=0;i<arrTr.length;i++)
 			var nomCompo = compo.substr (compo.indexOf('un') + 3,compo.length);
 		}
 		arrayCompo += "compo[]=" + escape(nomCompo) + "&loc[]=" + escape(loc_compo)  + "&tr[]=" + i + "&";
+		if ( i%30 == 0 )
+		{
+		   newCompoScript = document.createElement ( 'script' );
+		   newCompoScript.setAttribute ( 'language', 'JavaScript' );
+		   newCompoScript.setAttribute ( 'src',  URLTopJs + "compos_tanieres.php?"  + arrayCompo );
+			 document.body.appendChild ( newCompoScript );
+		   arrayCompo = "";
+		}
 	}
 }
 
-if ( arrayCompo != "?")
+if ( arrayCompo != "")
 {
-	//arrayCompo += "begin=" + begin;
 	newCompoScript = document.createElement ( 'script' );
 	newCompoScript.setAttribute ( 'language', 'JavaScript' );
-	newCompoScript.setAttribute ( 'src',  URLTopJs + "compos_tanieres.php"  + arrayCompo );
+	newCompoScript.setAttribute ( 'src',  URLTopJs + "compos_tanieres.php?"  + arrayCompo );
 	document.body.appendChild ( newCompoScript );
 }
 
