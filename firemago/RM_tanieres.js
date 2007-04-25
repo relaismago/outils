@@ -18,6 +18,8 @@ for (var i=0;i<arrTr.length;i++)
 	if (arrTr[i].childNodes[3] && arrTr[i].childNodes[3].childNodes[0].nodeValue.indexOf ("Composant") != -1 )
 	{
 		var compo = arrTr[i].childNodes[1].childNodes[2].nodeValue;
+		var qual_compo = arrTr[i].childNodes[1].childNodes[3].childNodes[0].nodeValue;
+		var loc_compo = qual_compo.substr ( qual_compo.indexOf ( '[' ) + 1, qual_compo.indexOf ( ']' ) - qual_compo.indexOf ( '[' ) - 1 );
 		if (compo.indexOf('une') != -1)
 		{
 			var nomCompo = compo.substr (compo.indexOf('une') + 4,compo.length);
@@ -26,7 +28,7 @@ for (var i=0;i<arrTr.length;i++)
 		{
 			var nomCompo = compo.substr (compo.indexOf('un') + 3,compo.length);
 		}
-		arrayCompo += "compo[]=" + escape(nomCompo) + "&tr[]=" + i + "&";
+		arrayCompo += "compo[]=" + escape(nomCompo) + "&loc[]=" + escape(loc_compo)  + "&tr[]=" + i + "&";
 	}
 }
 
