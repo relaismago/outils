@@ -11,7 +11,7 @@
               <id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</id>
               <minVersion>0.8</minVersion>
               <maxVersion>2.1</maxVersion>
-              <updateLink>http://outils.relaismago.com/firemago/firemago.xpi</updateLink>
+              <updateLink>http://outilsrm.kathryl.net/firemago/firemago.xpi</updateLink>
             </r:Description>
           </targetApplication>
         </r:Description>
@@ -19,6 +19,6 @@
     </r:Seq>
   </updates>
   <version>0.1</version>
-  <updateLink>http://outils.relaismago.com/firemago/firemago.xpi</updateLink>
+  <updateLink>http://outilsrm.kathryl.net/firemago/firemago.xpi</updateLink>
 </r:Description>
 </r:RDF>
