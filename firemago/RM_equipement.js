@@ -239,7 +239,7 @@ try {
 	var anchorEquip = anchorAllTables[3].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].nodeValue;
 	if (  anchorCss.getAttribute ( 'href' ).indexOf ( 'www.mountyhall.com' ) == -1 && anchorCss.getAttribute ( 'href' ).indexOf ( 'parchemin' ) == -1 && anchorEquip == "MON ÉQUIPEMENT" )
 	{
-		anchorAllTables[5].setAttribute('style','background-color:#b2b2b2;background-image:url(http://outils.relaismago.com/images/profil_background.jpg);background-repeat: no-repeat;background-position: left center;');
+		anchorAllTables[5].setAttribute('style','background-color:#b2b2b2;background-image:url('+URLOutils+'/images/profil_background.jpg);background-repeat: no-repeat;background-position: left center;');
 	}
 } catch ( e ) { error ( e, 'Background Image error' ); }
 
