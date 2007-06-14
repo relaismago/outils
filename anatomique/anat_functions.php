@@ -1,5 +1,4 @@
 <?
-
 function afficherPropositionAnatomique()
 {
 		$lesTrolls = selectDbTrolls($_SESSION[AuthTroll]);
@@ -186,37 +185,37 @@ function parseAnalyseAnatomique($lignes,$source,$date)
 			if ($debug) echo "Id=$id_troll_anat<br>";
 			$control = "1";
 		}
-		if(eregi("[ \t]*Points de Vie : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*Points de Vie :(.*)",$lignes[$i],$resultat)){
 			$pv_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "pv=$pv_anat<br>";
 			$control .= "2";
 		}
-		if(eregi("[ \t]*D.s d'Attaque : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*D.s d'Attaque :(.*)",$lignes[$i],$resultat)){
 			$att_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "att=$att_anat<br>";
 			$control .= "3";
 		}
-		if(eregi("[ \t]*D.s d'Esquive : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*D.s d'Esquive :(.*)",$lignes[$i],$resultat)){
 			$esq_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "esq=$esq_anat<br>";
 			$control .= "4";
 		}
-		if(eregi("[ \t]*D.s de D.gat : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*D.s de D.gat :(.*)",$lignes[$i],$resultat)){
 			$deg_anat   = trim(htmlspecialchars($resultat[1]));
-			if ($debug) echo "esq=$deg_anat<br>";
+			if ($debug) echo "deg=$deg_anat<br>";
 			$control .= "5";
 		}
-		if(eregi("[ \t]*D.s de R.g.n.ration : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*D.s de R.g.n.ration :(.*)",$lignes[$i],$resultat)){
 			$reg_anat   = trim(htmlspecialchars($resultat[1]));
-			if ($debug) echo "esq=$reg_anat<br>";
+			if ($debug) echo "reg=$reg_anat<br>";
 			$control .= "6";
 		}
-		if(eregi("[ \t]*Vue : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*Vue :(.*)",$lignes[$i],$resultat)){
 			$vue_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "vue=$vue_anat<br>";
 			$control .= "7";
 		}
-		if(eregi("[ \t]*Armure : (.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*Armure :(.*)",$lignes[$i],$resultat)){
 			$arm_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "arm=$arm_anat<br>";
 			$control .= "8";
