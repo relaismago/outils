@@ -318,7 +318,7 @@ function affiche_liste_cdms(&$tab_cdm,$display=true)
 		$text .= "  <$td>".$cdm['mmmin_cdm']."</td><$td>".$cdm['mmmax_cdm']."</td>";
 		$text .= "  <$td>".$cdm['rmmin_cdm']."</td><$td>".$cdm['rmmax_cdm']."</td>";
 		$text .= "  <$td>";
-		if ($cdm['nbatt_cdm']!=0) $text.= $cdm['nbatt_cdm'];
+		if ($cdm['nbatt_cdm']!="0") $text.= $cdm['nbatt_cdm'];
 		else $text.= "&nbsp;";
 		$text .= "</td>";
 		$text .= "<$td>".$cdm['vitdep_cdm']."</td>";
