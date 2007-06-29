@@ -23,17 +23,17 @@
 *                                                                             *
 *******************************************************************************/
 
-require_once ("../../inc_connect.php3"); // connexion ï¿½ la base
-require_once ("../DB/inc_initdata.php");     // recup des donnï¿½es statiques
-require_once ("../Libs/functions.php");  // fonction d'affichage du rï¿½sultat du parsing
-require_once ("../Libs/inc_affichage.php");  // fonction d'affichage du rï¿½sultat du parsing
+require_once ("../../inc_connect.php3"); // connexion à la base
+require_once ("../DB/inc_initdata.php");     // recup des données statiques
+require_once ("../Libs/functions.php");  // fonction d'affichage du résultat du parsing
+require_once ("../Libs/inc_affichage.php");  // fonction d'affichage du résultat du parsing
 
 include('../../top.php');
 include('../secure_bestiaire.php');
 global $db_vue_rm, $best_templates, $best_races, $best_ages_nom, $best_ages_id, $best_ages, $best_familles;
 
 
-print("<html><head><title>Rï¿½sultat de l'analyse d'une cdm</title></head></body></html>");
+print("<html><head><title>Résultat de l'analyse d'une cdm</title></head></body></html>");
 
 
 if(isset($_POST['soumettre'])){
@@ -47,17 +47,17 @@ if(isset($_POST['soumettre'])){
 	$max_mag=99999;
   
   while ($lignes[$i]){	
-    if(eregi('[ \t]*Tr.ll.+[nN]ï¿½(.+):(.+)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*Tr.ll.+[nN]°(.+):(.+)',$lignes[$i],$resultat)){
       $pcdm['troll_nom'] = trim($resultat[2]);
       $pcdm['troll_id']  = trim($resultat[1]);
     }
-    if(eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].-.[Nn]ï¿½([0-9]+)\)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
       $pcdm['famille'] = trim($resultat[1]);
       $pcdm['monstre'] = trim($resultat[2]);
       $pcdm['age']     = trim($resultat[3]);
       $pcdm['id_mh']     = trim($resultat[4]);
     }
-    else if(eregi('[ \t]*Le monstre.+:(.+)\((.+).-.[Nn]ï¿½([0-9]+)\)',$lignes[$i],$resultat)){
+    else if(eregi('[ \t]*Le monstre.+:(.+)\((.+).-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
       $pcdm['famille'] = trim($resultat[1]);
       $pcdm['monstre'] = trim($resultat[2]);
       $pcdm['age']     = '';
@@ -67,80 +67,80 @@ if(isset($_POST['soumettre'])){
       $pcdm['nivcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'    : $pcdm['nivmin']=$mot[1]; $pcdm['nivmax']=$mot[3]; break;
-	      case 'infï¿½rieur': $pcdm['nivmin']=0;       $pcdm['nivmax']=$mot[2]; break;
-	      case 'supï¿½rieur': $pcdm['nivmin']=$mot[2]; $pcdm['nivmax']=$max_carac; break;
-		  case 'ï¿½gal': $pcdm['nivmin']=$mot[2]; $pcdm['nivmax']=$mot[2]; break;
+      case 'entre'    : $pcdm['nivmin']=$mot[1]; $pcdm['nivmax']=$mot[3]; break;
+      case 'inférieur': $pcdm['nivmin']=0;       $pcdm['nivmax']=$mot[2]; break;
+      case 'supérieur': $pcdm['nivmin']=$mot[2]; $pcdm['nivmax']=$max_carac; break;
+			case 'égal': $pcdm['nivmin']=$mot[2]; $pcdm['nivmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Points.+:.(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['pdvcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'     :  $pcdm['pdvmin']=$mot[1]; $pcdm['pdvmax']=$mot[3] ;break;
-	      case 'infï¿½rieur' :  $pcdm['pdvmin']=0;       $pcdm['pdvmax']=$mot[2] ;break;
-	      case 'supï¿½rieur' :  $pcdm['pdvmin']=$mot[2]; $pcdm['pdvmax']=$max_pdv; break;
-		  case 'ï¿½gal' :  $pcdm['pdvmin']=$mot[2]; $pcdm['pdvmax']=$mot[2]; break;
+      case 'entre'     :  $pcdm['pdvmin']=$mot[1]; $pcdm['pdvmax']=$mot[3] ;break;
+      case 'inférieur' :  $pcdm['pdvmin']=0;       $pcdm['pdvmax']=$mot[2] ;break;
+      case 'supérieur' :  $pcdm['pdvmin']=$mot[2]; $pcdm['pdvmax']=$max_pdv; break;
+			case 'égal' :  $pcdm['pdvmin']=$mot[2]; $pcdm['pdvmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+attaque.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['attcom'] = trim($resultat[1]);
       $mot         = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'     :  $pcdm['attmin']=$mot[1]; $pcdm['attmax']=$mot[3];break;
-	      case 'infï¿½rieur' :  $pcdm['attmin']=0;       $pcdm['attmax']=$mot[2]; break;
-	      case 'supï¿½rieur' :  $pcdm['attmin']=$mot[2]; $pcdm['attmax']=$max_carac; break;
-		  case 'ï¿½gal' :  $pcdm['attmin']=$mot[2]; $pcdm['attmax']=$mot[2]; break; 
+      case 'entre'     :  $pcdm['attmin']=$mot[1]; $pcdm['attmax']=$mot[3];break;
+      case 'inférieur' :  $pcdm['attmin']=0;       $pcdm['attmax']=$mot[2]; break;
+      case 'supérieur' :  $pcdm['attmin']=$mot[2]; $pcdm['attmax']=$max_carac; break;
+			case 'égal' :  $pcdm['attmin']=$mot[2]; $pcdm['attmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+esquive.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['esqcom'] = trim($resultat[1]);
       $mot  = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'    :  $pcdm['esqmin']=$mot[1]; $pcdm['esqmax']=$mot[3]; break;
-	      case 'infï¿½rieur':  $pcdm['esqmin']=0;       $pcdm['esqmax']=$mot[2]; break;
-	      case 'supï¿½rieur':  $pcdm['esqmin']=$mot[2]; $pcdm['esqmax']=$max_carac; break;
-		  case 'ï¿½gal':  $pcdm['esqmin']=$mot[2]; $pcdm['esqmax']=$mot[2]; break;
+      case 'entre'    :  $pcdm['esqmin']=$mot[1]; $pcdm['esqmax']=$mot[3]; break;
+      case 'inférieur':  $pcdm['esqmin']=0;       $pcdm['esqmax']=$mot[2]; break;
+      case 'supérieur':  $pcdm['esqmin']=$mot[2]; $pcdm['esqmax']=$max_carac; break;
+			case 'égal':  $pcdm['esqmin']=$mot[2]; $pcdm['esqmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+d.g.t.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['degcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'    :  $pcdm['degmin']=$mot[1]; $pcdm['degmax']=$mot[3]; break;
-	      case 'infï¿½rieur':  $pcdm['degmin']=0;       $pcdm['degmax']=$mot[2]; break;
-	      case 'supï¿½rieur':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$max_carac; break;
-		  case 'ï¿½gal':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$mot[2]; break;
+      case 'entre'    :  $pcdm['degmin']=$mot[1]; $pcdm['degmax']=$mot[3]; break;
+      case 'inférieur':  $pcdm['degmin']=0;       $pcdm['degmax']=$mot[2]; break;
+      case 'supérieur':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$max_carac; break;
+			case 'égal':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+R.g.n.ration.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['regcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'    :  $pcdm['regmin']=$mot[1]; $pcdm['regmax']=$mot[3]; break;
-	      case 'infï¿½rieur':  $pcdm['regmin']=0;       $pcdm['regmax']=$mot[2]; break;
-	      case 'supï¿½rieur':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$max_carac; break;
-		  case 'ï¿½gal':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$mot[2]; break;
+      case 'entre'    :  $pcdm['regmin']=$mot[1]; $pcdm['regmax']=$mot[3]; break;
+      case 'inférieur':  $pcdm['regmin']=0;       $pcdm['regmax']=$mot[2]; break;
+      case 'supérieur':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$max_carac; break;
+			case 'égal':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Armure :(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['armcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch(trim($mot[0])){
-	      case 'entre'    :  $pcdm['armmin']=$mot[1]; $pcdm['armmax']=$mot[3]; break;
-	      case 'infï¿½rieur':  $pcdm['armmin']=0;       $pcdm['armmax']=$mot[2]; break;
-	      case 'supï¿½rieur':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$max_carac; break;
-		  case 'ï¿½gal':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$mot[2]; break;
+      case 'entre'    :  $pcdm['armmin']=$mot[1]; $pcdm['armmax']=$mot[3]; break;
+      case 'inférieur':  $pcdm['armmin']=0;       $pcdm['armmax']=$mot[2]; break;
+      case 'supérieur':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$max_carac; break;
+			case 'égal':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Vue :(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['vuecom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'    : $pcdm['vuemin']=$mot[1]; $pcdm['vuemax']=$mot[3]; break;
-	      case 'infï¿½rieur': $pcdm['vuemin']=0;       $pcdm['vuemax']=$mot[2]; break;
-	      case 'supï¿½rieur': $pcdm['vuemin']=$mot[2]; $pcdm['vuemax']=$max_carac; break;
-		  case 'ï¿½gal': $pcdm['vuemin']=$mot[2]; $pcdm['vuemax']=$mot[2]; break;
+      case 'entre'    : $pcdm['vuemin']=$mot[1]; $pcdm['vuemax']=$mot[3]; break;
+      case 'inférieur': $pcdm['vuemin']=0;       $pcdm['vuemax']=$mot[2]; break;
+      case 'supérieur': $pcdm['vuemin']=$mot[2]; $pcdm['vuemax']=$max_carac; break;
+			case 'égal': $pcdm['vuemin']=$mot[2]; $pcdm['vuemax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Capacit.+:(.+) - Aff.+: (.+)',$lignes[$i],$resultat)){
@@ -157,10 +157,10 @@ if(isset($_POST['soumettre'])){
       $pcdm['mmcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){
-	      case 'entre'    : $pcdm['mmmin']=$mot[1]; $pcdm['mmmax']=$mot[3]; break;
-	      case 'infï¿½rieur': $pcdm['mmmin']=0;       $pcdm['mmmax']=$mot[2]; break;
-	      case 'supï¿½rieur': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$max_mag; break;
-		  case 'ï¿½gal': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$mot[2]; break;
+      	case 'entre'    : $pcdm['mmmin']=$mot[1]; $pcdm['mmmax']=$mot[3]; break;
+      	case 'inférieur': $pcdm['mmmin']=0;       $pcdm['mmmax']=$mot[2]; break;
+        case 'supérieur': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$max_mag; break;
+				case 'égal': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*R.sistance.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -168,9 +168,9 @@ if(isset($_POST['soumettre'])){
 			$mot = explode(' ',$resultat[2]);
 			switch (trim($mot[0])){
 				case 'entre'    : $pcdm['rmmin']=$mot[1]; $pcdm['rmmax']=$mot[3]; break;
-				case 'infï¿½rieur': $pcdm['rmmin']=0;       $pcdm['rmmax']=$mot[2]; break;
-				case 'supï¿½rieur': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$max_mag; break;
-				case 'ï¿½gal': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$mot[2]; break;
+				case 'inférieur': $pcdm['rmmin']=0;       $pcdm['rmmax']=$mot[2]; break;
+				case 'supérieur': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$max_mag; break;
+				case 'égal': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$mot[2]; break;
 			}
 		}
 		if(eregi('[ \t]*Nombre.+:(.+)',$lignes[$i],$resultat)){
@@ -190,9 +190,9 @@ if(isset($_POST['soumettre'])){
 			$mot = explode(' ',$resultat[2]);
 			switch (trim($mot[0])){
 				case 'entre'    : $pcdm['dlamin']=$mot[1]; $pcdm['dlamax']=$mot[3]; break;
-				case 'infï¿½rieur': $pcdm['dlamin']=0;       $pcdm['dlamax']=$mot[2]; break;
-				case 'supï¿½rieur': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$max_carac; break;
-				case 'ï¿½gal': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$mot[2]; break;
+				case 'inférieur': $pcdm['dlamin']=0;       $pcdm['dlamax']=$mot[2]; break;
+				case 'supérieur': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$max_carac; break;
+				case 'égal': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$mot[2]; break;
 			}
 		}
 
@@ -200,8 +200,8 @@ if(isset($_POST['soumettre'])){
     $i++;
   }
 
-	/* Si la cdm est directement envoyï¿½e par Firemago
-	   on prend le troll connectï¿½ */
+	/* Si la cdm est directement envoyée par Firemago
+	   on prend le troll connecté */
 	if ($pcdm['troll_id'] == "") {
 		$pcdm['troll_id'] = $_SESSION[AuthTroll];
 		$pcdm['troll_nom'] = $_SESSION[AuthNomTroll]; 
@@ -212,31 +212,31 @@ if(isset($_POST['soumettre'])){
   // Recherche de la race et du template
   //
   
-  // on applique chaque template au nom du monste trouvï¿½ et on vï¿½rifie si une
+  // on applique chaque template au nom du monste trouvé et on vérifie si une
   // race correspond.
   $trouve=false;
-  // prend le libellï¿½ d'un monstre (sans l'ï¿½ge) et en extrait la race et le template
+  // prend le libellé d'un monstre (sans l'âge) et en extrait la race et le template
   $trouve=($desc_template=splitmonstre_racetemplate($pcdm['monstre'],$pcdm['race']));
   if(!$trouve) die("Race inconnue");
   else $trouve=true;
   
-  // rï¿½cupï¿½ration du genre de la race pour calculer l'ï¿½ge
+  // récupération du genre de la race pour calculer l'âge
   $pcdm['genre_race']=$best_races[$pcdm['race']]['genre_race'];
-  // vï¿½rification du nom de la famille
+  // vérification du nom de la famille
   $trouve=$trouve&&array_key_exists($pcdm['famille'],$best_familles);
   if(!$trouve) die("Famille inconnue");
   
-  // vï¿½rification de la correspondance famille/race
+  // vérification de la correspondance famille/race
   $id_famille=$best_familles[$pcdm['famille']]['id_famille'];
   $trouve=$trouve&&($id_famille==$best_races[$pcdm['race']]['id_famille_race']);
-  if(!$trouve) die("la famille ne correspond pas ï¿½ la race");
+  if(!$trouve) die("la famille ne correspond pas à la race");
 
-  // vï¿½rification du nom de l'ï¿½ge
-  // on cherche si l'ï¿½ge indiquï¿½ correspond
+  // vérification du nom de l'âge
+  // on cherche si l'âge indiqué correspond
   $trouve=$trouve&&in_array($pcdm['age'],$best_ages_nom[$id_famille][$pcdm['genre_race']]);
-  if(!$trouve) die("l'ï¿½ge ne correspond pas ï¿½ la famille : ".$pcdm['age']."/".$pcdm['famille']." (".$id_famille.")");
+  if(!$trouve) die("l'âge ne correspond pas à la famille : ".$pcdm['age']."/".$pcdm['famille']." (".$id_famille.")");
 
-  // Tout est ok, on rï¿½cupï¿½re les clefs
+  // Tout est ok, on récupère les clefs
   $pcdm['id_race']    =$best_races[$pcdm['race']]['id_race'];
   $pcdm['id_template']=$desc_template['id_template'];;
   $pcdm['template']   =$desc_template['nom_template'];
@@ -297,6 +297,6 @@ if(isset($_POST['soumettre'])){
   print("</body></html>");
   
 }
-else die("Accï¿½s interdit");
+else die("Accès interdit");
 
 ?>
