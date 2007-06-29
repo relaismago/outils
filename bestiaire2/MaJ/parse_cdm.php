@@ -70,6 +70,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'    : $pcdm['nivmin']=$mot[1]; $pcdm['nivmax']=$mot[3]; break;
       case 'inférieur': $pcdm['nivmin']=0;       $pcdm['nivmax']=$mot[2]; break;
       case 'supérieur': $pcdm['nivmin']=$mot[2]; $pcdm['nivmax']=$max_carac; break;
+			case 'égal': $pcdm['nivmin']=$mot[2]; $pcdm['nivmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Points.+:.(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -79,6 +80,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'     :  $pcdm['pdvmin']=$mot[1]; $pcdm['pdvmax']=$mot[3] ;break;
       case 'inférieur' :  $pcdm['pdvmin']=0;       $pcdm['pdvmax']=$mot[2] ;break;
       case 'supérieur' :  $pcdm['pdvmin']=$mot[2]; $pcdm['pdvmax']=$max_pdv; break;
+			case 'égal' :  $pcdm['pdvmin']=$mot[2]; $pcdm['pdvmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+attaque.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -88,6 +90,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'     :  $pcdm['attmin']=$mot[1]; $pcdm['attmax']=$mot[3];break;
       case 'inférieur' :  $pcdm['attmin']=0;       $pcdm['attmax']=$mot[2]; break;
       case 'supérieur' :  $pcdm['attmin']=$mot[2]; $pcdm['attmax']=$max_carac; break;
+			case 'égal' :  $pcdm['attmin']=$mot[2]; $pcdm['attmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+esquive.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -97,6 +100,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'    :  $pcdm['esqmin']=$mot[1]; $pcdm['esqmax']=$mot[3]; break;
       case 'inférieur':  $pcdm['esqmin']=0;       $pcdm['esqmax']=$mot[2]; break;
       case 'supérieur':  $pcdm['esqmin']=$mot[2]; $pcdm['esqmax']=$max_carac; break;
+			case 'égal':  $pcdm['esqmin']=$mot[2]; $pcdm['esqmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+d.g.t.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -106,6 +110,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'    :  $pcdm['degmin']=$mot[1]; $pcdm['degmax']=$mot[3]; break;
       case 'inférieur':  $pcdm['degmin']=0;       $pcdm['degmax']=$mot[2]; break;
       case 'supérieur':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$max_carac; break;
+			case 'égal':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*D.s.+R.g.n.ration.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -115,6 +120,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'    :  $pcdm['regmin']=$mot[1]; $pcdm['regmax']=$mot[3]; break;
       case 'inférieur':  $pcdm['regmin']=0;       $pcdm['regmax']=$mot[2]; break;
       case 'supérieur':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$max_carac; break;
+			case 'égal':  $pcdm['regmin']=$mot[2]; $pcdm['regmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Armure :(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -124,6 +130,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'    :  $pcdm['armmin']=$mot[1]; $pcdm['armmax']=$mot[3]; break;
       case 'inférieur':  $pcdm['armmin']=0;       $pcdm['armmax']=$mot[2]; break;
       case 'supérieur':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$max_carac; break;
+			case 'égal':  $pcdm['armmin']=$mot[2]; $pcdm['armmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Vue :(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -133,6 +140,7 @@ if(isset($_POST['soumettre'])){
       case 'entre'    : $pcdm['vuemin']=$mot[1]; $pcdm['vuemax']=$mot[3]; break;
       case 'inférieur': $pcdm['vuemin']=0;       $pcdm['vuemax']=$mot[2]; break;
       case 'supérieur': $pcdm['vuemin']=$mot[2]; $pcdm['vuemax']=$max_carac; break;
+			case 'égal': $pcdm['vuemin']=$mot[2]; $pcdm['vuemax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*Capacit.+:(.+) - Aff.+: (.+)',$lignes[$i],$resultat)){
@@ -152,6 +160,7 @@ if(isset($_POST['soumettre'])){
       	case 'entre'    : $pcdm['mmmin']=$mot[1]; $pcdm['mmmax']=$mot[3]; break;
       	case 'inférieur': $pcdm['mmmin']=0;       $pcdm['mmmax']=$mot[2]; break;
         case 'supérieur': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$max_mag; break;
+				case 'égal': $pcdm['mmmin']=$mot[2]; $pcdm['mmmax']=$mot[2]; break;
       }
     }
     if(eregi('[ \t]*R.sistance.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
@@ -161,6 +170,7 @@ if(isset($_POST['soumettre'])){
 				case 'entre'    : $pcdm['rmmin']=$mot[1]; $pcdm['rmmax']=$mot[3]; break;
 				case 'inférieur': $pcdm['rmmin']=0;       $pcdm['rmmax']=$mot[2]; break;
 				case 'supérieur': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$max_mag; break;
+				case 'égal': $pcdm['rmmin']=$mot[2]; $pcdm['rmmax']=$mot[2]; break;
 			}
 		}
 		if(eregi('[ \t]*Nombre.+:(.+)',$lignes[$i],$resultat)){
@@ -182,6 +192,7 @@ if(isset($_POST['soumettre'])){
 				case 'entre'    : $pcdm['dlamin']=$mot[1]; $pcdm['dlamax']=$mot[3]; break;
 				case 'inférieur': $pcdm['dlamin']=0;       $pcdm['dlamax']=$mot[2]; break;
 				case 'supérieur': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$max_carac; break;
+				case 'égal': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$mot[2]; break;
 			}
 		}
 
