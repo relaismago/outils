@@ -514,7 +514,7 @@ function sortileges(sort)
 	if(sort.indexOf('Flash Aveuglant') != -1)
 		texte = 'Vue, Attaque, Esquive : <b>-'+(1+Math.floor(vue/5))+'</b>';
 	if(sort.indexOf('Glue') != -1)
-		texte = 'Portée : <b>'+(1+Math.floor(vue/3))+'</b> cases';
+		texte = 'Portée : <b>'+(1+Math.floor(vuetotale/3))+'</b> cases';
 	if(sort.indexOf('Griffe du Sorcier') != -1)
 	{
 		texte = 'Attaque : <b>' + att[0] + '</b> D6<br/>Dégâts : <b>' + Math.floor(deg[0]/2) + '</b> D3<br/>';
@@ -710,12 +710,12 @@ function cacherInfoBulle() {
 
 function fatigue()
 {
-        var nodes = document.evaluate("descendant::img[contains(@src,'milieu.gif') or contains(@src,'lifebar.gif')]", anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3], null,XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-        if(nodes.snapshotLength>0)
-        {
-            var node = nodes.snapshotItem(0);
-            node.setAttribute('title','1 PV de perdu = + '+Math.floor(250/pvtotal)+' minutes de DLA');
-        }
+    var nodes = document.evaluate("descendant::img[contains(@src,'milieu.gif') or contains(@src,'lifebar.gif')]", anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3], null,XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    if(nodes.snapshotLength>0)
+    {
+       var node = nodes.snapshotItem(0);
+       node.setAttribute('title','1 PV de perdu = + '+Math.floor(250/pvtotal)+' minutes de DLA');
+    }
 			    
 	var td = anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[4].childNodes[3];
 	if(td.childNodes[0].nodeValue.indexOf("Fatigue")!=-1)
@@ -730,10 +730,8 @@ function fatigue()
 	   pa=pa.substr(1,1)*1;
 	   var ut=60*60*dla.substring(0,2)+60*dla.substring(3,5)+1*dla.substring(6,8);
 	   var ct=arrTr[arrTr.length-1].childNodes[1].childNodes[3].nodeValue;
-	   if(ct.indexOf('AM')!=-1)
-	     ct=60*60*ct.substr(ct.indexOf('AM')-9,2)+60*ct.substr(ct.indexOf('AM')-6,2)+1*ct.substr(ct.indexOf('AM')-3,2);
-	   else
-	     ct=60*60*ct.substr(ct.indexOf('PM')-9,2)+60*ct.substr(ct.indexOf('PM')-6,2)+1*ct.substr(ct.indexOf('PM')-3,2);
+	   if(ct.indexOf('GMT')!=-1)
+	     ct=60*60*ct.substr(ct.indexOf('GMT')-9,2)+60*ct.substr(ct.indexOf('GMT')-6,2)+1*ct.substr(ct.indexOf('GMT')-3,2);
 	   while(ct>ut)
 	     ut+=60*60*24;
 	   var nbmin=1*td.childNodes[0].nodeValue.substring(td.childNodes[0].nodeValue.indexOf('=')+2,td.childNodes[0].nodeValue.indexOf("'"));
