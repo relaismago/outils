@@ -68,7 +68,7 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"Analyseur", "Analyseur de troll", "/pratique/analyseur.php");
   $pos = addItemMenu(false,false,$pos,"Calculs", "Calculs diverses", "/pratique/calculs.php");
   $pos = addItemMenu(false,false,$pos,"Changement de mot de passe", "Changer le mot de passe dans les outils", "/change_password.php");
-  $pos = addItemMenu(true,false,$pos,"Chat", "Discussions en direct", "http://www.relaismago.com/guilde/forum/index.php?showtopic=869&st=0");
+  $pos = addItemMenu(true,false,$pos,"Chat", "Discussions en direct", "http://relaismago.forumactif.com/Forum-Prive-des-RM-c1/Les-Outils-f9/Tchat-Yakalike-plugin-Firefox-t1028.htm");
   $pos = addItemMenu(true,false,$pos,"Options", "Mes options", "/options.php");
   $pos = addItemMenu(false,false,$pos,"Pack Graphique", "Le pack graphique Officiel", "/pack_graphique/Pack_graphique.zip");
   $pos = addItemMenu(false,false,$pos,"Statistiques", "La concentration trollienne du Hall", "/statistiques.php");
@@ -95,7 +95,7 @@ function showToolbar()
 
   $pos = addItemMenu(false,true,'horsjeux',"Hors-Jeux","Hors-Jeux");
   $pos = addItemMenu(false,false,$pos,"Bugtrack", "Le Bugtrack des outils Relais&Mago", "/bugs.php");
-  $pos = addItemMenu(false,false,$pos,"Sources", "Les sources des outils Relais&Mago", "/sources.php");
+  $pos = addItemMenu(false,false,$pos,"Sources", "Les sources des outils Relais&Mago", "http://code.google.com/p/relaismago/");
 	
 	if ($_SESSION[admin] == "authenticated") {
 	  $pos = addItemMenu(true,true,'administration',"Administration","Administration");
