@@ -38,9 +38,10 @@ global $x,$y,$vue;
         <tr class='mh_tdpage'><td width='50%'>
 <?
 echo "Des soucis avec le GPS Advanced ? C'est par là -> ";
-echo "<a href='http://www.relaismago.com/guilde/forum/index.php?showtopic=1641' target='_blank'>";
+echo "<a href='http://relaismago.forumactif.com/Forum-Prive-des-RM-c1/Les-Outils-f9/Questions-sur-le-GPS-t1048.htm
+' target='_blank'>";
 echo "topic GPS Advanced</a>";
-echo " ou sur le <a href='http://clx.anet.fr/spip/spikini/?wiki=RelaisMagoVue2dBugs' target='_blank'>WikiBug</a>";
+echo " ou sur le <a href='./bugs.php' target='_blank'>BugTrack</a>";
 
 /*echo " <font size=1>Anciens GPS : <a href='gps.php'>GPS</a> - <a href='gps2.php'>GPSng</a>,";
 echo " le futur : <a href='http://www.google.fr/search?q=GPS+extreme'>GPSxtrem</a></font><br><br>";*/
