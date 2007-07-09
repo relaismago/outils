@@ -117,6 +117,11 @@ function initAbbreviations()
             <td><B>=</B></td>
             <td><B>Botte Secr&egrave;te</B></td>
           </tr>
+          <tr>
+            <td><B>BUM</B></td>
+            <td><B>=</B></td>
+            <td><B>Bulle Magique</B></td>
+          </tr>
         </tbody>
       </table>
       <B><SPAN><br>
