@@ -58,13 +58,12 @@ function fillBox2(value)
 	{
 	   	case "Parchemins" :
 		{
-	   		text = text + "<option value=\"Bulle\" selected=''>Bulle Anti-Magie</option>";
 	   		text = text + "<option value=\"Idees1\">Idées Confuses 1</option>";
 	   		text = text + "<option value=\"Idees2\">Idées Confuses 2</option>";
 	   		text = text + "<option value=\"Idees3\">Idées Confuses 3</option>";
 	   		text = text + "<option value=\"Idees4\">Idées Confuses 4</option>";
 	   		text = text + "<option value=\"Idees5\">Idées Confuses 5</option>";
-	   		text = text + "<option value=\"Invention\">Invention Estraordinaire</option>";
+	   		text = text + "<option value=\"Invention\">Invention Extraordinaire</option>";
 	   		text = text + "<option value=\"Plan1\">Plan Génial 1</option>";
 	   		text = text + "<option value=\"Plan2\">Plan Génial 2</option>";
 	   		text = text + "<option value=\"Plan3\">Plan Génial 3</option>";
