@@ -306,7 +306,10 @@ function SelectCaracMoyMonstre($id_race,$id_template,$id_age)
       $ret['deg']=carac_monstre($monstre['degsom_monstre'],$monstre['degnbr_monstre']);
       $ret['reg']=carac_monstre($monstre['regsom_monstre'],$monstre['regnbr_monstre']);
       $ret['arm']=carac_monstre($monstre['armsom_monstre'],$monstre['armnbr_monstre']);
-      $ret['vue']=carac_monstre($monstre['vuesom_monstre'],$monstre['vuenbr_monstre']);     
+      $ret['vue']=carac_monstre($monstre['vuesom_monstre'],$monstre['vuenbr_monstre']);
+      $ret['mm']=carac_monstre($monstre['mmsom_monstre'],$monstre['mmnbr_monstre']);
+      $ret['rm']=carac_monstre($monstre['rmsom_monstre'],$monstre['rmnbr_monstre']);
+      $ret['dla']=carac_monstre($monstre['dlasom_monstre'],$monstre['dlanbr_monstre']);     
 
     }
     else $ret=false;

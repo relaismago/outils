@@ -350,19 +350,23 @@ function affiche_liste_cdms(&$tab_cdm,$display=true)
 function affiche_cdm_parsed(&$pcdm)
 {
   print("<table border='1' cellpadding='0' cellspacing='1' align='center' class='mh_tdborder'>");
-  //print("<tr><td class='mh_tdtitre'><b>TROLL</b></td><td class='mh_tdpage'>".$pcdm['troll_nom']."</td><td colspan=2 class='mh_tdpage'>".$pcdm['troll_id']."</td></tr>");
+  print("<tr><td class='mh_tdpage' colspan='4' align='center'><b>Résultat de l'analyse</b><br>(cliquez sur \"bestiaire\" ou \"autre cdm\" pour valider)</td></tr>");
   $saisie=($pcdm['troll_nom']=='')||($pcdm['troll_id']=='');
-  if($saisie)  print("<INPUT TYPE=HIDDEN NAME=\"AUTOSOURCE\" VALUE=non></INPUT>");
-  else         print("<INPUT TYPE=HIDDEN NAME=\"AUTOSOURCE\" VALUE=oui></INPUT>");
+  
+  if($saisie)
+    print("<INPUT TYPE=HIDDEN NAME=\"AUTOSOURCE\" VALUE=non></INPUT>");
+  else
+    print("<INPUT TYPE=HIDDEN NAME=\"AUTOSOURCE\" VALUE=oui></INPUT>");
   print("<tr><td class='mh_tdtitre'><b>TROLL</b></td><td class='mh_tdpage'>");
   if(!$saisie){
     print("<input type=hidden name=SOURCE VALUE=\"".$pcdm['troll_nom']."\"></input>".$pcdm['troll_nom']);
     print("</td><td colspan=2 class='mh_tdpage'>");
     print("<input type=hidden name=IDSOURCE VALUE=\"".$pcdm['troll_id']."\"></input>".$pcdm['troll_id']);
   }
-  else{
-		$nom_troll = "Anonyme"; 
-		$id_troll = 0;
+  else
+  {
+	$nom_troll = "Anonyme"; 
+	$id_troll = 0;
     print("<input type=text width=60 name=SOURCE Value=\"$nom_troll\"></input>");
     print("</td><td colspan=2 class='mh_tdpage'>");
     print("<input type=text width=15 name=IDSOURCE VALUE=$id_troll></input>");
@@ -375,19 +379,20 @@ function affiche_cdm_parsed(&$pcdm)
   print("<tr><td class='mh_tdtitre'><b>TEMPLATE</b></td><td class='mh_tdpage'>".$pcdm['template']."</td><td class='mh_tdpage'>".$pcdm['id_template']."</td><td class='mh_tdpage'>".$pcdm['id_mh']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>NIVEAU</b></td><td class='mh_tdpage'>".$pcdm['nivcom']."</td><td class='mh_tdpage'>".$pcdm['nivmin']."</td><td class='mh_tdpage'>".$pcdm['nivmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>PDV   </b></td><td class='mh_tdpage'>".$pcdm['pdvcom']."</td><td class='mh_tdpage'>".$pcdm['pdvmin']."</td><td class='mh_tdpage'>".$pcdm['pdvmax']." </td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Blessure</b></td><td class='mh_tdpage' colspan='4'>".$pcdm['blessure']." %</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>ATT	  </b></td><td class='mh_tdpage'>".$pcdm['attcom']."</td><td class='mh_tdpage'>".$pcdm['attmin']."</td><td class='mh_tdpage'>".$pcdm['attmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>ESQ	  </b></td><td class='mh_tdpage'>".$pcdm['esqcom']."</td><td class='mh_tdpage'>".$pcdm['esqmin']."</td><td class='mh_tdpage'>".$pcdm['esqmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>DEG	  </b></td><td class='mh_tdpage'>".$pcdm['degcom']."</td><td class='mh_tdpage'>".$pcdm['degmin']."</td><td class='mh_tdpage'>".$pcdm['degmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>REG	  </b></td><td class='mh_tdpage'>".$pcdm['regcom']."</td><td class='mh_tdpage'>".$pcdm['regmin']."</td><td class='mh_tdpage'>".$pcdm['regmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>ARM	  </b></td><td class='mh_tdpage'>".$pcdm['armcom']."</td><td class='mh_tdpage'>".$pcdm['armmin']."</td><td class='mh_tdpage'>".$pcdm['armmax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>VUE	  </b></td><td class='mh_tdpage'>".$pcdm['vuecom']."</td><td class='mh_tdpage'>".$pcdm['vuemin']."</td><td class='mh_tdpage'>".$pcdm['vuemax']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>MM    </b></td><td class='mh_tdpage'>".$pcdm['mmcom']."</td><td class='mh_tdpage'>".$pcdm['mmmin']."</td><td class='mh_tdpage'>".$pcdm['mmmax']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>RM    </b></td><td class='mh_tdpage'>".$pcdm['rmcom']."</td><td class='mh_tdpage'>".$pcdm['rmmin']."</td><td class='mh_tdpage'>".$pcdm['rmmax']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>NB Att</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['nbatt']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>Vitesse</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vitdep']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>Voir le caché</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vlc']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>Att distance</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['attdist']."</td></tr>");
-	print("<tr><td class='mh_tdtitre'><b>DLA    </b></td><td class='mh_tdpage'>".$pcdm['dlacom']."</td><td class='mh_tdpage'>".$pcdm['dlamin']."</td><td class='mh_tdpage'>".$pcdm['dlamax']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>MM    </b></td><td class='mh_tdpage'>".$pcdm['mmcom']."</td><td class='mh_tdpage'>".$pcdm['mmmin']."</td><td class='mh_tdpage'>".$pcdm['mmmax']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>RM    </b></td><td class='mh_tdpage'>".$pcdm['rmcom']."</td><td class='mh_tdpage'>".$pcdm['rmmin']."</td><td class='mh_tdpage'>".$pcdm['rmmax']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>NB Att</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['nbatt']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Vitesse</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vitdep']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Voir le caché</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vlc']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Att distance</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['attdist']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>DLA    </b></td><td class='mh_tdpage'>".$pcdm['dlacom']."</td><td class='mh_tdpage'>".$pcdm['dlamin']."</td><td class='mh_tdpage'>".$pcdm['dlamax']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>CAPACITE</b></td><td class='mh_tdpage'>".$pcdm['capspe']."</td><td colspan=2 class='mh_tdpage'>".$pcdm['affecte']."</td></tr>");
   print("</table>");
   print("<br>");
