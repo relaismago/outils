@@ -807,14 +807,29 @@ function gainPX ( nivMonstre )
 function caracMonster ( monster, carac )
 {
  var arrCarac = carac.split(";");
- text = "<table width='100%' border='1' align='center'>";
- text += "<tr class='mh_tdtitre'><td align='center'>Niv</td><td align='center'>PdV</td><td align='center'>Att</td><td align='center'>Esq</td><td align='center'>Deg</td><td align='center'>Reg</td><td align='center'>Arm</td><td align='center'>Vue</td></tr>";
- text += "<tr class='mh_tdpage'><td align='center'>" + arrCarac[0] + "</td><td align='center'>" + arrCarac[1] + "</td><td align='center'>" + arrCarac[2] + "</td><td align='center'>" + arrCarac[3] + "</td><td align='center'>" + arrCarac[4] + "</td><td align='center'>" + arrCarac[5] + "</td><td align='center'>" + arrCarac[6] + "</td><td align='center'>" + arrCarac[7] + "</td></tr>";
- if ( arrCarac[8] )
+ text = "<table width='100%' align='center' class='mh_tdborder'>";
+ text += "<tr><td class='mh_tdtitre' colspan='2' align='center'><b>" + arrCarac[0] + "</b></td></tr>";
+ text += "<tr><td class='mh_tdtitre' width='20%'>Niv</td><td class='mh_tdpage'>" + arrCarac[1] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>PdV</td><td class='mh_tdpage'>" + arrCarac[2] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Blessure</td><td class='mh_tdpage'>" + arrCarac[3] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Att</td><td class='mh_tdpage'>" + arrCarac[4] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Esq</td><td class='mh_tdpage'>" + arrCarac[5] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Deg</td><td class='mh_tdpage'>" + arrCarac[6] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Reg</td><td class='mh_tdpage'>" + arrCarac[7] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Arm</td><td class='mh_tdpage'>" + arrCarac[8] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Vue</td><td class='mh_tdpage'>" + arrCarac[9] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>MM</td><td class='mh_tdpage'>" + arrCarac[10] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>RM</td><td class='mh_tdpage'>" + arrCarac[11] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Nb Att</td><td class='mh_tdpage'>" + arrCarac[12] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Vit Dep</td><td class='mh_tdpage'>" + arrCarac[13] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>VlC</td><td class='mh_tdpage'>" + arrCarac[14] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Att Dist</td><td class='mh_tdpage'>" + arrCarac[15] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>DLA</td><td class='mh_tdpage'>" + arrCarac[16] + "</td></tr>";
+ if ( arrCarac[17] )
  {
- 	text += "<tr class='mh_tdpage'><td colspan='8' align='center'>" + arrCarac[8] + " affecte " + arrCarac[9] + "</td></tr>";
+ 	text += "<tr><td class='mh_tdtitre'>Capacité</td><td class='mh_tdpage'>" + arrCarac[17] + " affecte " + arrCarac[18] + "</td></tr>";
  }
- text += "<tr class='mh_tdpage'><td colspan='8' align='center'>Gain en PX si je le tue : " + gainPX (arrCarac[0]) + "</td></tr>";
+ text += "<tr class='mh_tdpage'><td colspan='2' align='center'>Gain en PX si je le tue : " + gainPX (arrCarac[1]) + "</td></tr>";
  text += "</table>";
  return text;
 }
