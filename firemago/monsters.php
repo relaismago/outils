@@ -22,7 +22,8 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	$caracs_moyennes = SelectCaracMoyMonstre($infos['id_race'],$infos['id_template'],$infos['id_age']);
 	$caracs_spe = SelectCapSpe($infos['id_race'],$infos['id_template'],$infos['id_age']);
 	$tab_cdm_mh = SelectCdM_mh($monsterIds[$i],$infos['id_race'],$infos['id_age']);
-		
+
+	$infos[monstre] = ereg_replace("'","\'",$infos[monstre]);
 		
 	if ($caracs_moyennes[niv]!='?' && $caracs_moyennes[niv]!='') $niv = $caracs_moyennes['niv'];
 	else $niv=$infos[niv];
@@ -51,9 +52,12 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
     newLink.setAttribute ( 'href', 'javascript:EMV($monsterIds[$i] ,750,550)' );
    	anchorCellID.removeChild ( tableMonsters[$rang].childNodes[1].childNodes[0] );
    	anchorCellID.appendChild ( newLink );
-	var newLink = document.createElement ( 'a' );
+	newLink = document.createElement ( 'a' );
 	";
-
+	
+	$txtmonster = $monsterNames[$i];
+	$urlmonster = "URLBestiaire + escape ('$infos[monstre]') + '&Age=' + escape ('$infos[age]') + '&MH=$monsterIds[$i]'";
+	
 	//si l'utilisateur fait parti de la guilde, on met un peu de couleurs
 	if ( $_SESSION['AuthGuilde'] == 450 ) 
 	{
@@ -72,11 +76,11 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
       		$res2 = mysql_fetch_assoc($result2);
       		$id_troll_gowap = $res2[id_troll_gowap];
       		$nom_troll = ereg_replace("'","\'",$res2[nom_troll]);
+      		$txtmonster .= " appartient à $nom_troll";
+      		$urlmonster =  "URLGowap + '$monsterIds[$i]'";
 			echo "
 			anchorRow.setAttribute ( 'class', '' );
 			anchorRow.setAttribute ( 'style', 'background-color:' + colorRM );
-    		newLink.appendChild ( document.createTextNode ( '$monsterNames[$i] appartient à $nom_troll' ) );
-    		newLink.setAttribute ( 'href', URLGowap + '$monsterIds[$i]' );
 			";
     	}
 		else
@@ -126,10 +130,10 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 			}
 		}
 	}// fin colorisation
-	$infos[monstre] = ereg_replace("'","\'",$infos[monstre]);
+	
 	echo"
-   	newLink.appendChild ( document.createTextNode ( '$monsterNames[$i]' ) );
-   	newLink.setAttribute ( 'href',  URLBestiaire + escape ('$infos[monstre]') + '&Age=' + escape ('$infos[age]') + '&MH=$monsterIds[$i]' );
+   	newLink.appendChild ( document.createTextNode ( '$txtmonster' ));
+   	newLink.setAttribute ( 'href', $urlmonster  );
 	";
 		
 	if ($tab_cdm_mh)
