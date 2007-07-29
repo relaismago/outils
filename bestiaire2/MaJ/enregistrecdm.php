@@ -199,8 +199,46 @@ if(mysql_num_rows($query)==0){ // cdm non trouvée
   if(!mysql_query($sql,$db_vue_rm)){
     die("l'insertion de la cdm a échoué<br>$sql<br>");
   }
+  
+  // on insère les nouvelles moyennes des caracs pour ce monstre
+  // pdv
+  recoup_cdm1 ("pdv",999);
+  
+  // l'attaque
+  recoup_cdm1("att",99);
+  
+  // l'esquive
+  recoup_cdm1("esq",99);
+  
+  // les dégâts
+  recoup_cdm1("deg",99);
+  
+  // la regen
+  recoup_cdm1("reg",99);
+  
+  // l'armure
+  recoup_cdm1("arm",99);
+  
+  // la vue
+  recoup_cdm1("vue",99);
+  
+  // la MM
+  recoup_cdm1("mm",99999);
+  
+  // la RM
+  recoup_cdm1("rm",99999);
+  
+  // la DLA
+  recoup_cdm1("dla",99);
+  
+  $sql="UPDATE `best_monstres` SET `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
+  if(!mysql_query($sql,$db_vue_rm)){
+    die("la modification des caractéristiques du monstre a échoué<br>$sql<br>");
+  }
+  
 }
-else{ // une cdm pour cette créature existe déjà
+else
+{ // une cdm pour cette créature existe déjà
   $cdm=mysql_fetch_array($query); // on récupère les données
   
   //
@@ -261,207 +299,66 @@ else{ // une cdm pour cette créature existe déjà
       }
     }
   }
-  $caracchange=false;
+  
   // les pdv
-  if($pcdm['pdvmin']>=$cdm['pdvmin_cdm']){
-    $cdm['pdvmin_cdm']=$pcdm['pdvmin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['pdvmax']<=$cdm['pdvmax_cdm']){
-    $cdm['pdvmax_cdm']=$pcdm['pdvmax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['pdvmin_cdm']==$cdm['pdvmax_cdm']){
-      $monstre['pdvsom_monstre']+=$cdm['pdvmin_cdm'];
-      $monstre['pdvnbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
+  recoup("pdv",999);
+  
   // l'attaque
-  if($pcdm['attmin']>=$cdm['attmin_cdm']){
-    $cdm['attmin_cdm']=$pcdm['attmin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['attmax']<=$cdm['attmax_cdm']){
-    $cdm['attmax_cdm']=$pcdm['attmax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['attmin_cdm']==$cdm['attmax_cdm']){
-      $monstre['attsom_monstre']+=$cdm['attmin_cdm'];
-      $monstre['attnbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
+  recoup("att",99);
+  
   // l'esquive
-  if($pcdm['esqmin']>=$cdm['esqmin_cdm']){
-    $cdm['esqmin_cdm']=$pcdm['esqmin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['esqmax']<=$cdm['esqmax_cdm']){
-    $cdm['esqmax_cdm']=$pcdm['esqmax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['esqmin_cdm']==$cdm['esqmax_cdm']){
-      $monstre['esqsom_monstre']+=$cdm['esqmin_cdm'];
-      $monstre['esqnbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
+  recoup("esq",99);
+  
   // les dégâts
-  if($pcdm['degmin']>=$cdm['degmin_cdm']){
-    $cdm['degmin_cdm']=$pcdm['degmin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['degmax']<=$cdm['degmax_cdm']){
-    $cdm['degmax_cdm']=$pcdm['degmax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['degmin_cdm']==$cdm['degmax_cdm']){
-      $monstre['degsom_monstre']+=$cdm['degmin_cdm'];
-      $monstre['degnbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
+  recoup("deg",99);
+  
   // la regen
-  if($pcdm['regmin']>=$cdm['regmin_cdm']){
-    $cdm['regmin_cdm']=$pcdm['regmin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['regmax']<=$cdm['regmax_cdm']){
-    $cdm['regmax_cdm']=$pcdm['regmax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['regmin_cdm']==$cdm['regmax_cdm']){
-      $monstre['regsom_monstre']+=$cdm['regmin_cdm'];
-      $monstre['regnbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
+  recoup("reg",99);
+  
   // l'armure
-  if($pcdm['armmin']>=$cdm['armmin_cdm']){
-    $cdm['armmin_cdm']=$pcdm['armmin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['armmax']<=$cdm['armmax_cdm']){
-    $cdm['armmax_cdm']=$pcdm['armmax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['armmin_cdm']==$cdm['armmax_cdm']){
-      $monstre['armsom_monstre']+=$cdm['armmin_cdm'];
-      $monstre['armnbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
+  recoup("arm",99);
+  
   // la vue
-  if($pcdm['vuemin']>=$cdm['vuemin_cdm']){
-    $cdm['vuemin_cdm']=$pcdm['vuemin'];
-    $cdmchange=$caracchange=true;
-  }
-  if($pcdm['vuemax']<=$cdm['vuemax_cdm']){
-    $cdm['vuemax_cdm']=$pcdm['vuemax'];
-    $cdmchange=$caracchange=true;
-  }
-  if($caracchange){
-    if($cdm['vuemin_cdm']==$cdm['vuemax_cdm']){
-      $monstre['vuesom_monstre']+=$cdm['vuemin_cdm'];
-      $monstre['vuenbr_monstre']++;
-      $monstrechange=true;
-    }
-  }
-  $carachange=false;
-	// la MM
-	if($pcdm['mmmin']>=$cdm['mmmin_cdm']){
-		$cdm['mmmin_cdm']=$pcdm['mmmin'];
-		$cdmchange=$caracchange=true;
-	}
-	if($pcdm['mmmax']<=$cdm['mmmax_cdm'] ){
-		$cdm['mmmax_cdm']=$pcdm['mmmax'];
-		$cdmchange=$caracchange=true;
-	}
-	if($caracchange){
-		if($cdm['mmmin_cdm']==$cdm['mmmax_cdm']){
-			$monstre['mmsom_monstre']+=$cdm['mmmin_cdm'];
-			$monstre['mmnbr_monstre']++;
-			$monstrechange=true;
-		}
-	}
-	$carachange=false;
+  recoup("vue",99);
+  
+  // la MM
+  recoup("mm",99999);
+  
   // la RM
-	if($pcdm['rmmin']>=$cdm['rmmin_cdm']){
-		$cdm['rmmin_cdm']=$pcdm['rmmin'];
-		$cdmchange=$caracchange=true;
-	}
-	if($pcdm['rmmax']<=$cdm['rmmax_cdm'] ){
-	  $cdm['rmmax_cdm']=$pcdm['rmmax'];
-	  $cdmchange=$caracchange=true;
-	}
-	if($caracchange){
-		if($cdm['rmmin_cdm']==$cdm['rmmax_cdm']){
-			$monstre['rmsom_monstre']+=$cdm['rmmin_cdm'];
-	  	$monstre['rmnbr_monstre']++;
-	  	$monstrechange=true;
-		}
-  }
-	$carachange=false;
+  recoup("rm",99999);
+  
   // la DLA
-	if($pcdm['dlamin']>=$cdm['dlamin_cdm']){
-		$cdm['dlamin_cdm']=$pcdm['dlamin'];
-		$cdmchange=$caracchange=true;
-	}
-	if($pcdm['dlamax']<=$cdm['dlamax_cdm'] ){
-	  $cdm['dlamax_cdm']=$pcdm['dlamax'];
-	  $cdmchange=$caracchange=true;
-	}
-	if($caracchange){
-		if($cdm['dlamin_cdm']==$cdm['dlamax_cdm']){
-			$monstre['dlasom_monstre']+=$cdm['dlamin_cdm'];
-			$monstre['dlanbr_monstre']++;
-			$monstrechange=true;																						    }
-	}
-  $carachange=false;
-	// nombre d'attaque
+  recoup("dla",99);
+  
+  // nombre d'attaque
   if($pcdm['nbatt']!="" && $pcdm['nbatt']!=$cdm['nbatt_cdm']){
-		$cdm['nbatt_cdm']=$pcdm['nbatt'];
-		$cdmchange=true;
-	}
-	$carachange=false;
-	// Vitesse deplacement
-	if($pcdm['vitdep']!="" && $pcdm['vitdep']!=$cdm['vitdep_cdm']){
-		$cdm['vitdep_cdm']=$pcdm['vitdep'];
-		$cdmchange=true;
-	}
+	$cdm['nbatt_cdm']=$pcdm['nbatt'];
+	$cdmchange=true;
+  }
+  
+  // Vitesse deplacement
+  if($pcdm['vitdep']!="" && $pcdm['vitdep']!=$cdm['vitdep_cdm']){
+	$cdm['vitdep_cdm']=$pcdm['vitdep'];
+	$cdmchange=true;
+  }
 	
-	$carachange=false;
-	// Voir le caché
-	if($pcdm['vlc']!="" && $pcdm['vlc']!=$cdm['vlc_cdm']){
-		$cdm['vlc_cdm']=$pcdm['vlc'];
-		$cdmchange=true;
-	}
+  // Voir le caché
+  if($pcdm['vlc']!="" && $pcdm['vlc']!=$cdm['vlc_cdm']){
+	$cdm['vlc_cdm']=$pcdm['vlc'];
+	$cdmchange=true;
+  }
 
-	$carachange=false;
-	// Attaque distante
-	if($pcdm['attdist']!="" && $pcdm['attdist']!=$cdm['attdist_cdm']){
-		$cdm['attdist_cdm']=$pcdm['attdist'];
-		$cdmchange=true;
-	}
+  // Attaque distante
+  if($pcdm['attdist']!="" && $pcdm['attdist']!=$cdm['attdist_cdm']){
+	$cdm['attdist_cdm']=$pcdm['attdist'];
+	$cdmchange=true;
+  }
 
-	if($pcdm['blessure']!=$cdm['blessure_cdm']){
-		$cdm['blessure_cdm']=$pcdm['blessure'];
-		$cdmchange=true;
-	}
-  $carachange=false;
+  if($pcdm['blessure']!=$cdm['blessure_cdm']){
+	$cdm['blessure_cdm']=$pcdm['blessure'];
+	$cdmchange=true;
+  }
+
   $cdm['capspe_cdm']           =$pcdm['capspe'];
   $cdm['affecte_cdm']          =$pcdm['affecte'];
   $cdm['source_cdm']           =$pcdm['troll_nom'];
@@ -542,5 +439,55 @@ print("<html><head><title>CdM</title></head>");
 print("<script language='JavaScript'>$js</script>");
 print("</body></html>");
 
+
+function recoup ($carac,$max)
+{
+// Si les car max de la nouvelle cdm sont inférieures à l'ancienne
+  global $monstrechange,$cdm,$cdmchange,$pcdm,$monstre;
+  $caracchange=false;
+  $carmch = false;	
+  if($pcdm[$carac.'max']<$cdm[$carac.'max_cdm']){
+  	//on met à jour la table des monstres
+  	if ($cdm[$carac.'max_cdm'] != $max){
+  		// on enlève de la somme la précédente cdm
+  		$monstre[$carac.'som_monstre']-=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
+  		$carmch=true;
+  	}
+  	else
+  	{
+  		// on rajoute les nouvelles caracs
+  		$monstre[$carac.'som_monstre']+=$pcdm[$carac.'max']+$pcdm[$carac.'min'];
+  		$monstre[$carac.'nbr_monstre']=$monstre[$carac.'nbr_monstre']+2;
+  	}
+  	// recoupement de la cdm
+    $cdm[$carac.'max_cdm']=$pcdm[$carac.'max'];
+    $cdmchange=$caracchange=$monstrechange=true;
+  }
+  
+  if($pcdm[$carac.'min']>$cdm[$carac.'min_cdm']){
+  	// Si on n'a pas déjà modifié les sommes et si on connait le max de la carac
+  	if (!$caracchange && $cdm['pdvmax_cdm'] != $max)
+  	{
+  		$monstre[$carac.'som_monstre']-=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
+		$carmch=true;
+  		$monstrechange=true;
+  	}
+  	// recoupement de la cdm
+    $cdm[$carac.'min_cdm']=$pcdm[$carac.'min'];
+    $cdmchange=true;
+  }
+  if ($carmch)
+    	$monstre[$carac.'som_monstre']+=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
+}
+
+function recoup_cdm1 ($carac,$max)
+{
+  global $cdm,$monstre;
+  if ($cdm[$carac.'max_cdm'] != $max)
+  {
+  	$monstre[$carac.'som_monstre'] += $cdm[$carac.'max_cdm'] + $cdm[$carac.'min_cdm'];
+	$monstre[$carac.'nbr_monstre'] = $monstre[$carac.'nbr_monstre'] + 2;  	
+  }
+}
   
 ?>
