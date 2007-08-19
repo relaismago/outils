@@ -111,9 +111,9 @@ function getTrollInFile($id)
 		if (mysql_num_rows(mysql_query($sql,$db_vue_rm)) <= 0 ) {
 			$sql = "INSERT INTO trolls ";
 			$sql .= "(id_troll, guilde_troll, nom_troll, race_troll, niveau_troll, ";
-			$sql .= "nbkills_troll, nbdead_troll, nbmouches_troll,is_pnj_troll) VALUES ";
+			$sql .= "nbkills_troll, nbdead_troll, nbmouches_troll,is_pnj_troll,nom_image_troll) VALUES ";
 			$sql .= "('$Id','$IdGuilde','".addslashes($nom)."','$race','$level',";
-			$sql .= "'$nKills','$nDead','$Mouches','non')";
+			$sql .= "'$nKills','$nDead','$Mouches','non','inconnu')";
 
 	  	mysql_query($sql,$db_vue_rm);
 

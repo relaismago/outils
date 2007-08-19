@@ -63,7 +63,7 @@ function view_all()
 		}
 		$j++;
     echo "<img alt=\"[".addslashes($res[nom_troll])."]\"";
-		echo " src='$path/avatars/$res[nom_image_troll]_avatar_bleu.gif' ".afficheInfosTroll($res).">";
+		echo " src='$path/avatars/bleus/$res[nom_image_troll]_avatar_bleu.gif' ".afficheInfosTroll($res).">";
 		
 		/* PNJ ayant perdu les trolls */
 		if ($num_rang_troll == 10 && !$flag_pnj) {
@@ -149,7 +149,7 @@ urchinTracker();
 
 function afficheInfosTroll($res)
 {
-	$img = "http://www.pipeshow.net/RM/".$res[nom_image_troll].".gif";
+	$img = "http://www.pipeshow.net/RM/blasons/".$res[nom_image_troll].".gif";
 //  echo "onMouseOver=\"poplink('";
   $text .= "<center><font color=red>".addslashes($res[nom_troll])." N°$res[id_troll]</font></center><br>";
   $text .= "<font color=white>Niveau : <b>$res[niveau_troll]</b><br>";

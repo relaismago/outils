@@ -71,6 +71,9 @@ function init_avatar($id_avatar)
   $nbTrolls = count($lesTrolls);
   $res = $lesTrolls[1];
 
+if ($res[nom_image_troll] == 'inconnu') {
+	return;
+}
 	if (file_exists(PATH_IMG.$res[nom_image_troll]."_avatar.png")) {
 	  $nom_image_troll = PATH_IMG.$res[nom_image_troll]."_avatar.png";	
 	} else {
