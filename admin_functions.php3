@@ -485,7 +485,7 @@ function afficherFicheTroll($id_troll)
 	/* ------------ troisième colonne  ------------- */
 	/* ------------ Blason RM ------------- */
 	if ($id_guilde == ID_GUILDE) {
-		$img = "http://www.pipeshow.net/RM/".$nom_image_troll.".gif";
+		$img = "http://www.pipeshow.net/RM/blasons/".$nom_image_troll.".gif";
 		echo "<img src='$img'>";
 	} elseif ($nom_image_troll != "") {
 		echo "<img src='$nom_image_troll' width='150' height='231'>";
@@ -621,7 +621,7 @@ function afficherFicheTrollIdentite($nom_troll,$id_troll,$nom_image_troll,$race_
 
 	/* -- affichage de l'avatar si c'est un RelaisMago ---*/
 	if ($id_guilde == ID_GUILDE)  {
-	  $img = "http://www.pipeshow.net/RM/".$nom_image_troll."_avatar.gif";
+	  $img = "http://www.pipeshow.net/RM/avatars/complets/".$nom_image_troll."_avatar.gif";
 		?>
     <tr class='mh_tdpage'><td colspan='2'>
 		<table  border='0' class='mh_tdborder' cellpadding='0' cellspacing='1' align='center'>
@@ -1390,7 +1390,7 @@ function afficherFicheGowapIdentite($id_gowap,$id_troll_gowap,$nom_troll,$x_mons
 	echo "<tr><td align='center' colspan=2>";
 	echo "<img src='images/gowapRM.gif'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	echo "<font color='black'>";
-	$img = "http://www.pipeshow.net/RM/".$nom_image_troll."_avatar.gif";
+	$img = "http://www.pipeshow.net/RM/avatars/complets/".$nom_image_troll."_avatar.gif";
 	echo "<img src='$img' border=5>";
 	echo "</font>";
 	echo "</td></tr>";
@@ -1651,7 +1651,7 @@ function afficherCadreEntete($res)
 		echo "<center>";
 		echo "<table><tr><td>";
 		
-		$img = "http://www.pipeshow.net/RM/".$res[nom_image_troll]."_avatar.gif";
+		$img = "http://www.pipeshow.net/RM/avatars/complets/".$res[nom_image_troll]."_avatar.gif";
 		echo "<font color='black'> <img src='$img' border='5' ></font><br>";
 		
 		echo "</td><td>";
@@ -1784,7 +1784,7 @@ function afficherFicheTaniereIdentite($id_taniere,$nom_lieu,$id_troll_taniere,$n
 	echo "<tr><td colspan='2' align='center'>";
 	echo "<img src='images/taniereRM.gif'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	echo "<font color='black'>";
-	$img = "http://www.pipeshow.net/RM/".$nom_image_troll."_avatar.gif";
+	$img = "http://www.pipeshow.net/RM/avatars/complets/".$nom_image_troll."_avatar.gif";
 	echo "<img src='$img' border=5>";
 	echo "</font>";
 	echo "</td></tr>";
@@ -2001,7 +2001,7 @@ function afficherListeBaronniesCadreBaronnie($baronnie)
 
 		echo "<tr><td valign=bottom align=center>";
 
-		$img = "http://www.pipeshow.net/RM/".$res[nom_image_troll]."_avatar.gif";
+		$img = "http://www.pipeshow.net/RM/avatars/complets/".$res[nom_image_troll]."_avatar.gif";
 		echo "<font color='black'> <img src='$img' border='5' ></font><br>";
 		echo "<a $lien_fiche>".stripslashes($res[nom_troll])." ($res[id_troll])";
 		echo "</td><td valign=bottom>";
@@ -3755,7 +3755,7 @@ function afficherAvatarListe()
 	for($i=1;$i<=$nbTrolls;$i++) {
 		$res = $lesTrolls[$i];
 		
-		$img = "http://www.pipeshow.net/RM/".$res[nom_image_troll]."_avatar.gif";
+		$img = "http://www.pipeshow.net/RM/avatars/complets/".$res[nom_image_troll]."_avatar.gif";
 
 		echo "<tr><td><img src='$img'></td>";
 		echo "<td>".stripslashes($res[nom_troll]). "($res[id_troll])";

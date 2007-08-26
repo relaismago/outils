@@ -23,7 +23,7 @@ function initBlason($no) {
    $text .= " <table width=280 cellspacing=0>";
   $text .= "    <tr class=mh_tdtitre align=center>";
  $text .= "       <td>";
-	$text .= "<img src=http://www.pipeshow.net/RM/$pseudo.gif alt=$pseudo border=0 name=blason>";
+	$text .= "<img src=http://www.pipeshow.net/RM/blasons/$pseudo.gif alt=$pseudo border=0 name=blason>";
  $text .= "       </td>";
   $text .= "    </tr>";
   $text .= "  </table>";
@@ -37,7 +37,7 @@ function initBlason($no) {
 //	$text .= "<tr>";
 //	$text .= "</table></td></tr></table>";
   $text .= "        <h2>$pseudo (n°$no)</h2>";
-	$text .= "				<img src=http://www.pipeshow.net/RM/".$pseudo."_avatar.gif";
+	$text .= "				<img src=http://www.pipeshow.net/RM/avatars/complets/".$pseudo."_avatar.gif";
 	$text .= "						alt=[Avatar de $pseudo] border=0 width=110 height=110>";
 	
 	$text .= "<table>";

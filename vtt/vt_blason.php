@@ -35,7 +35,7 @@ else
 <h1>BLASON</h1>
 <br>
 <?php
-echo "<img src=\"http://www.pipeshow.net/RM/".$pseudo.".gif\" alt=\"[".$pseudo."]\" border=0 name=\"vtblason\">\n";
+echo "<img src=\"http://www.pipeshow.net/RM/blasons/".$pseudo.".gif\" alt=\"[".$pseudo."]\" border=0 name=\"vtblason\">\n";
 ?>
 </center>
 

@@ -44,7 +44,7 @@ while ( $row = mysql_fetch_array($query_result) )
   }
 
   $Pseudo = $row["nom_image_troll"];
-  echo "<td align=center><a href=\"vt_blason.php?blason=".$Pseudo."\" target=\"vtblason\">".$Pseudo."<br><IMG src=\"http://www.pipeshow.net/RM/".$Pseudo."_avatar.gif\" alt=".$Pseudo." border=0 width=110 height=110></a></td>\n";
+  echo "<td align=center><a href=\"vt_blason.php?blason=".$Pseudo."\" target=\"vtblason\">".$Pseudo."<br><IMG src=\"http://www.pipeshow.net/RM/avatars/complets/".$Pseudo."_avatar.gif\" alt=".$Pseudo." border=0 width=110 height=110></a></td>\n";
 
   if (($no_troll%$nbparligne) == 0)
   {
