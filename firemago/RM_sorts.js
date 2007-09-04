@@ -115,7 +115,7 @@ function processAA ( aa )
 	myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le trolliaire' ) );
 
 	try {
-		insertBefore Tab ( myForm, currentDocument.getElementsByName ( 'as_Action' )[0] );
+		insertBeforeTab ( myForm, currentDocument.getElementsByName ( 'as_Action' )[0] );
 	} catch ( e ) { error ( e, 'AA submit error' ); }
 
 	// var espace = currentDocument.createTextNode ( '\t' );
