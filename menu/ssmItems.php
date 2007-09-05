@@ -74,6 +74,7 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"Statistiques", "La concentration trollienne du Hall", "/statistiques.php");
   $pos = addItemMenu(false,false,$pos,"Trombinoscope", "Les tronches des Relais&Mago", "/trombinoscope.php");
   $pos = addItemMenu(true,false,$pos,"VTT", "Le Visiotrollotron", "/vtt/vtt.php");
+  $pos = addItemMenu(true,false,$pos,"Narcissotron", "Suis-je le plus fort ?", "/vtt/stats_perso.php");
 
   $pos = addItemMenu(false,true,'pratique',"Pratique", "Pratique");
   $pos = addItemMenu(false,false,$pos,"Abréviations", "Les Abréviations du Hall", "/pratique/abreges.php");
