@@ -5,12 +5,6 @@ session_start();
 include_once("functions_auth.php");
 include_once("functions_dev.php3");
 
-if ( userIsGuilde()  ) {
-	include_once ("inc_connect.php3");
-	include_once ("admin_functions.php3");
-	include_once ("admin_functions_db.php3");
-}
-
 if ( ($_REQUEST[datas]!="") ) {
 	formulaire_to_file();
 } else {
