@@ -25,8 +25,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 
 	$infos[monstre] = ereg_replace("'","\'",$infos[monstre]);
 		
-	if ($caracs_moyennes[niv]!='?' && $caracs_moyennes[niv]!='') $niv = $caracs_moyennes['niv'];
-	else $niv=$infos[niv];
+	//if ($caracs_moyennes[niv]!='?' && $caracs_moyennes[niv]!='') $niv = $caracs_moyennes['niv'];
+	//else $niv=$infos[niv];
+	$niv = $infos[niv];
 		
 	echo "
 	var anchorRow = tableMonsters[$rang];
