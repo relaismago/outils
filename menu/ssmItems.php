@@ -17,14 +17,14 @@ function addItemMenu($rm_only,$is_parent,$pos,$name,$tip, $link="", $target="")
 
 		if (!$flag){
 	if (!$is_parent) {
-			echo "menu.addSubItem('$pos','$name','$name','$link','$target');";
+			echo "menu.addSubItem('$pos','$name','$tip','$link','$target');";
 			//echo "menu.addSubItem('$pos','$name','$tip','$link','$target');";
 			
 			//echo "ssmItems[$pos]=[\"$name\", \"$link\", \"$target\", \"$colspan\", \"$endrow\"];";
 		//	$pos++;
 	} else {
 		//echo "menu.addItem('$pos', '$name', '$tip',  null, null);";
-		echo "menu.addItem('$pos', '$name', '$name',  null, null);";
+		echo "menu.addItem('$pos', '$name', '$tip',  null, null);";
 	}
 		}
 	return $pos;
@@ -66,7 +66,7 @@ function showToolbar()
   $pos = addItemMenu(false,true,'outils',"Autres outils","Autres outils");
 
   $pos = addItemMenu(false,false,$pos,"Analyseur", "Analyseur de troll", "/pratique/analyseur.php");
-  $pos = addItemMenu(false,false,$pos,"Calculs", "Calculs diverses", "/pratique/calculs.php");
+  $pos = addItemMenu(false,false,$pos,"Calculs", "Calculs divers", "/pratique/calculs.php");
   $pos = addItemMenu(false,false,$pos,"Changement de mot de passe", "Changer le mot de passe dans les outils", "/change_password.php");
   $pos = addItemMenu(true,false,$pos,"Chat", "Discussions en direct", "http://relaismago.forumactif.com/Forum-Prive-des-RM-c1/Les-Outils-f9/Tchat-Yakalike-plugin-Firefox-t1028.htm");
   $pos = addItemMenu(true,false,$pos,"Options", "Mes options", "/options.php");
@@ -90,7 +90,7 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"Miss Mountyhall 2005!", "Miss Mountyhall 2005!", "/miss/miss.php");
   //$pos = addItemMenu(false,false,$pos,"Miss Relais&Mago 2005!", "Miss Relais&Mago 2005!", "/miss/miss.php");
 /*  $pos = addItemMenu(true,false,$pos,"VPG", "La Vengeance pour Grognon", "/histoires/la_vpg.php");*/
-  $pos = addItemMenu(false,false,$pos,"La Liche", "L'assaut de la Liche ", "/histoires/la_liche.php");
+  $pos = addItemMenu(false,false,$pos,"La Liche", "L assaut de la Liche ", "/histoires/la_liche.php");
   $pos = addItemMenu(false,false,$pos,"Retour des Monstres", "Le retour des Monstres ", "/histoires/retour_monstres.php");
   $pos = addItemMenu(false,false,$pos,"Le Complot", "Le Complot ", "/histoires/complot.php");
 
