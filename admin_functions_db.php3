@@ -1402,10 +1402,10 @@ function selectDbRechercheMonstres($id_monstre, $nom_monstre="",
 			$infos_monstre = $tab;
 			$caracs_moyennes = SelectCaracMoyMonstre($tab['id_race'],$tab['id_template'],$tab['id_age']);
 
-			if($caracs_moyennes['niv']!='?' && $caracs_moyennes['niv']!='') 
-				$tab['niv']=$caracs_moyennes['niv']; // niveau calculé		
-			else
-				$tab['niv']=$tab['niv']; // niveau estimÃ©
+			//if($caracs_moyennes['niv']!='?' && $caracs_moyennes['niv']!='') 
+			//	$tab['niv']=$caracs_moyennes['niv']; // niveau calculé		
+			//else
+			//	$tab['niv']=$tab['niv']; // niveau estimÃ©
 
 
 			if ($niveau != "") {

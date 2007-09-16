@@ -1369,10 +1369,10 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 		$infos_monstre = $tab;
 			$caracs_moyennes = SelectCaracMoyMonstre($tab['id_race'],$tab['id_template'],$tab['id_age']);
 
-			if($caracs_moyennes['niv']!='?' && $caracs_moyennes['niv']!='') 
-				$monstre[niveau]=$caracs_moyennes['niv']; // niveau calculé
-			else
-				$monstre[niveau] = $tab['niv']; // niveau estimé / Juste pour info ici
+			//if($caracs_moyennes['niv']!='?' && $caracs_moyennes['niv']!='') 
+			//	$monstre[niveau]=$caracs_moyennes['niv']; // niveau calculé
+			//else
+			//	$monstre[niveau] = $tab['niv']; // niveau estimé / Juste pour info ici
 
 			$tab_cdm = "";	
 			$monstre[connu] = 'non';
