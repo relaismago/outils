@@ -764,7 +764,7 @@ function afficherFicheTrollInformationsStrategiques($is_tk_troll, $is_venge_trol
 		afficher_listbox_select("oui", $is_tk_troll);
 		echo "</select>";
 	} else {
-		echo $is_venge_troll;
+		echo $is_tk_troll;
 	}
 	echo "</td>";
 
