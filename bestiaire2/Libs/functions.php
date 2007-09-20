@@ -264,7 +264,7 @@ function SelectCapSpeMonstre($id_monstre)
 function carac_monstre($caracsom,$caracnbr)
 {
   if($caracnbr==0) $carac='?';
-  else             $carac=round($caracsom/$caracnbr,1);
+  else             $carac=round($caracsom/$caracnbr);
   return $carac;
 }
 

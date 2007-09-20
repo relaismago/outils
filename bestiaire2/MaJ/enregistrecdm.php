@@ -202,34 +202,34 @@ if(mysql_num_rows($query)==0){ // cdm non trouvée
   
   // on insère les nouvelles moyennes des caracs pour ce monstre
   // pdv
-  recoup_cdm1 ("pdv",999);
+  recoup_monstre_insert ("pdv",999);
   
   // l'attaque
-  recoup_cdm1("att",99);
+  recoup_monstre_insert ("att",99);
   
   // l'esquive
-  recoup_cdm1("esq",99);
+  recoup_monstre_insert ("esq",99);
   
   // les dégâts
-  recoup_cdm1("deg",99);
+  recoup_monstre_insert ("deg",99);
   
   // la regen
-  recoup_cdm1("reg",99);
+  recoup_monstre_insert ("reg",99);
   
   // l'armure
-  recoup_cdm1("arm",99);
+  recoup_monstre_insert ("arm",99);
   
   // la vue
-  recoup_cdm1("vue",99);
+  recoup_monstre_insert ("vue",99);
   
   // la MM
-  recoup_cdm1("mm",99999);
+  recoup_monstre_insert ("mm",99999);
   
   // la RM
-  recoup_cdm1("rm",99999);
+  recoup_monstre_insert ("rm",99999);
   
   // la DLA
-  recoup_cdm1("dla",99);
+  recoup_monstre_insert ("dla",99);
   
   $sql="UPDATE `best_monstres` SET `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
   if(!mysql_query($sql,$db_vue_rm)){
@@ -301,34 +301,34 @@ else
   }
   
   // les pdv
-  recoup("pdv",999);
+  recoup_monstre_update ("pdv",999);
   
   // l'attaque
-  recoup("att",99);
+  recoup_monstre_update ("att",99);
   
   // l'esquive
-  recoup("esq",99);
+  recoup_monstre_update ("esq",99);
   
   // les dégâts
-  recoup("deg",99);
+  recoup_monstre_update ("deg",99);
   
   // la regen
-  recoup("reg",99);
+  recoup_monstre_update ("reg",99);
   
   // l'armure
-  recoup("arm",99);
+  recoup_monstre_update ("arm",99);
   
   // la vue
-  recoup("vue",99);
+  recoup_monstre_update ("vue",99);
   
   // la MM
-  recoup("mm",99999);
+  recoup_monstre_update ("mm",99999);
   
   // la RM
-  recoup("rm",99999);
+  recoup_monstre_update ("rm",99999);
   
   // la DLA
-  recoup("dla",99);
+  recoup_monstre_update ("dla",99);
   
   // nombre d'attaque
   if($pcdm['nbatt']!="" && $pcdm['nbatt']!=$cdm['nbatt_cdm']){
@@ -440,15 +440,17 @@ print("<script language='JavaScript'>$js</script>");
 print("</body></html>");
 
 
-function recoup ($carac,$max)
+function recoup_monstre_update ($carac,$max)
 {
 // Si les car max de la nouvelle cdm sont inférieures à l'ancienne
   global $monstrechange,$cdm,$cdmchange,$pcdm,$monstre;
-  $caracchange=false;
+  $caracchange = false;
   $carmch = false;	
-  if($pcdm[$carac.'max']<$cdm[$carac.'max_cdm']){
+  if($pcdm[$carac.'max'] < $cdm[$carac.'max_cdm'])
+  {
   	//on met à jour la table des monstres
-  	if ($cdm[$carac.'max_cdm'] != $max){
+  	if ($cdm[$carac.'max_cdm'] != $max )
+  	{
   		// on enlève de la somme la précédente cdm
   		$monstre[$carac.'som_monstre']-=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
   		$carmch=true;
@@ -464,9 +466,10 @@ function recoup ($carac,$max)
     $cdmchange=$caracchange=$monstrechange=true;
   }
   
-  if($pcdm[$carac.'min']>$cdm[$carac.'min_cdm']){
+  if( $pcdm[$carac.'min'] > $cdm[$carac.'min_cdm'] )
+  {
   	// Si on n'a pas déjà modifié les sommes et si on connait le max de la carac
-  	if (!$caracchange && $cdm['pdvmax_cdm'] != $max)
+  	if ( !$caracchange && $cdm[$carac.'max_cdm'] != $max )
   	{
   		$monstre[$carac.'som_monstre']-=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
 		$carmch=true;
@@ -480,10 +483,10 @@ function recoup ($carac,$max)
     	$monstre[$carac.'som_monstre']+=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
 }
 
-function recoup_cdm1 ($carac,$max)
+function recoup_monstre_insert ($carac,$max)
 {
   global $cdm,$monstre;
-  if ($cdm[$carac.'max_cdm'] != $max)
+  if ($cdm[$carac.'max_cdm'] != $max && $cdm[$carac.'max_cdm'] != 0)
   {
   	$monstre[$carac.'som_monstre'] += $cdm[$carac.'max_cdm'] + $cdm[$carac.'min_cdm'];
 	$monstre[$carac.'nbr_monstre'] = $monstre[$carac.'nbr_monstre'] + 2;  	
