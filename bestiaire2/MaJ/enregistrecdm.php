@@ -486,7 +486,7 @@ function recoup_monstre_update ($carac,$max)
 function recoup_monstre_insert ($carac,$max)
 {
   global $cdm,$monstre;
-  if ($cdm[$carac.'max_cdm'] != $max && $cdm[$carac.'max_cdm'] != 0)
+  if ($cdm[$carac.'max_cdm'] != $max)
   {
   	$monstre[$carac.'som_monstre'] += $cdm[$carac.'max_cdm'] + $cdm[$carac.'min_cdm'];
 	$monstre[$carac.'nbr_monstre'] = $monstre[$carac.'nbr_monstre'] + 2;  	
