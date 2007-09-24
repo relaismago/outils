@@ -136,7 +136,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
    	newLink.appendChild ( document.createTextNode ( '$txtmonster' ));
    	newLink.setAttribute ( 'href', $urlmonster  );
 	";
-		
+	$mm=$rm=$dla="";	
 	if ($tab_cdm_mh)
 	{
 		$last_cdm = count($tab_cdm_mh)-1;
@@ -214,12 +214,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['mmmin_cdm'] != 0)
 			{
-				$mm = "> à ".$tab_cdm_mh[$last_cdm]['mmmin_cdm']." (bestiaire : ".$caracs_moyennes[mm].")";
+				$mm = "> à ".$tab_cdm_mh[$last_cdm]['mmmin_cdm'];
 			}
-			else
-			{
-				$mm = " ? ";	
-			}
+			$mm .= "(moy bestiaire : ".$caracs_moyennes[mm].")";	
 		}
 		if ( $tab_cdm_mh[$last_cdm]['rmmax_cdm'] != 99999 )
 		{
@@ -229,12 +226,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['rmmin_cdm'] != 0)
 			{
-				$rm = "> à ".$tab_cdm_mh[$last_cdm]['rmmin_cdm']." (bestiaire : ".$caracs_moyennes[rm].")";
+				$rm = "> à ".$tab_cdm_mh[$last_cdm]['rmmin_cdm'];
 			}
-			else
-			{
-				$rm = " ? ";	
-			}
+			$rm .= " (moy bestiaire : ".$caracs_moyennes[rm].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['dlamax_cdm'] != 99 )
 		{
@@ -244,12 +238,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['dlamin_cdm'] != 0)
 			{
-				$dla = "> à ".$tab_cdm_mh[$last_cdm]['dlamin_cdm']." (bestiaire : ".$caracs_moyennes[dla].")";
+				$dla = "> à ".$tab_cdm_mh[$last_cdm]['dlamin_cdm'];
 			}
-			else
-			{
-				$dla = " ? ";	
-			}
+			$dla .= " (moy bestiaire : ".$caracs_moyennes[dla].")";	
 		}
 		$nbatt = $tab_cdm_mh[$last_cdm]['nbatt_cdm'];
 		$vitdep = $tab_cdm_mh[$last_cdm]['vitdep_cdm'];
