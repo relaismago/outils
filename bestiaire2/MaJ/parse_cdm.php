@@ -55,6 +55,12 @@ if(isset($_POST['soumettre'])){
       $pcdm['age']     = trim($resultat[3]);
       $pcdm['id_mh']     = trim($resultat[4]);
     }
+    else if (eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].+.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
+      $pcdm['famille'] = trim($resultat[1]);
+      $pcdm['monstre'] = trim($resultat[2]);
+      $pcdm['age']     = trim($resultat[3]);
+      $pcdm['id_mh']     = trim($resultat[4]);
+    }
     else if(eregi('[ \t]*Le monstre.+:(.+)\((.+).-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
       $pcdm['famille'] = trim($resultat[1]);
       $pcdm['monstre'] = trim($resultat[2]);
