@@ -745,6 +745,23 @@ function fatigue()
 	}
 }
 
+function setPiForNextLevel() 
+{
+    var piForNextLevel =  level * ( level * 1 + 3 ) * 5;
+    var nodeLvl = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[0];
+    nodeLvl.nodeValue = nodeLvl.nodeValue.substring(0,nodeLvl.nodeValue.length-1)+" | Niveau "+(level*1+1)+" : "+piForNextLevel+" PI => ";
+	var px_ent=2*level;
+	var nodePx = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[3];
+	nodePx.parentNode.insertBefore(document.createElement("BR"),nodePx);
+	if(px+px_per>=px_ent)
+	   nodePx.parentNode.insertBefore(document.createTextNode("Entrainement possible. Il restera "+(px+px_per-px_ent)+" PX"),nodePx);
+	else
+	   nodePx.parentNode.insertBefore(document.createTextNode("Il manque "+(px_ent-px-px_per)+" PX pour vous entrainer. "),nodePx);
+	nodeLvl.nodeValue+=Math.ceil((piForNextLevel-pi_tot)/px_ent)+" entrainement";
+	if(Math.ceil((piForNextLevel-pi_tot)/px_ent)>1)
+	   nodeLvl.nodeValue+="s";
+	 nodeLvl.nodeValue+=")";
+}
 
 // ********************************************************
 // MAIN CODE
@@ -844,15 +861,17 @@ var numTroll = anchorMainTr[0].childNodes[3].childNodes[1].getAttribute('href');
 numTroll = numTroll.slice ( numTroll.indexOf ( '(' ) + 1, numTroll.indexOf ( ',' ) );
 
 // Next Level
+var pi_tot = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[0].nodeValue;
+pi_tot = parseInt(pi_tot.substring(pi_tot.indexOf('(')+1,pi_tot.indexOf(' PI')));
+var px = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[2].nodeValue;
+px = parseInt(px.substring(px.indexOf(':')+1,px.indexOf('\n',10)));
+var px_per = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[2].nodeValue;
+px_per = px_per.substring(px_per.indexOf('\n',10),5000);
+px_per = parseInt(px_per.substring(px_per.indexOf(':')+1,5000));
 var anchorCellLevel = anchorMainTr[3].childNodes[3].firstChild;
 var levelDesc = anchorCellLevel.nodeValue;
 var level = levelDesc.substring( levelDesc.indexOf ( ":" ) + 2, levelDesc.indexOf ( "(" ) - 8 );
-var nextLevel = level * 1 + 1;
-var PINextLevel = level * ( level * 1 + 3 ) * 5;
-try 
-{
-	anchorCellLevel.nodeValue = levelDesc.substring ( 0, levelDesc.length - 1 ) + " | Niveau " + ( level * 1 + 1 ) + " : " + ( level * ( level * 1 + 3 ) * 5 ) + " PI)";
-} catch ( e ) { error ( e, 'Next level info error' ); }
+setPiForNextLevel();
 
 // Regen
 var anchorCellRegen = anchorMainTr[8].childNodes[1].firstChild;
