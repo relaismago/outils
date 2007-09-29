@@ -376,6 +376,7 @@ else
       die("la modification des caractéristiques du monstre a échoué<br>$sql<br>");
     }
   }
+  /*
   if($niv_temp_change){ // le modificateur de niveau du template a été ajusté, il faut l'enregistrer
     $sql="UPDATE `best_templates` SET `modif_niveau_template`=\"".$best_templates[$cdm['id_template_cdm']]['modif_niveau_template']."\" WHERE `id_template`=".$cdm['id_template_cdm']." LIMIT 1";
     if(!mysql_query($sql,$db_vue_rm)){
@@ -388,6 +389,7 @@ else
       die("la modification du niveau de base de la race a échoué<br>$sql<br>");
     }
   }
+  */
 }
 
 //
@@ -440,57 +442,4 @@ print("<script language='JavaScript'>$js</script>");
 print("</body></html>");
 
 
-function recoup_monstre_update ($carac,$max)
-{
-// Si les car max de la nouvelle cdm sont inférieures à l'ancienne
-  global $monstrechange,$cdm,$cdmchange,$pcdm,$monstre;
-  $caracchange = false;
-  $carmch = false;	
-  if($pcdm[$carac.'max'] < $cdm[$carac.'max_cdm'])
-  {
-  	//on met à jour la table des monstres
-  	if ($cdm[$carac.'max_cdm'] != $max )
-  	{
-  		// on enlève de la somme la précédente cdm
-  		$monstre[$carac.'som_monstre']-=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
-  		$carmch=true;
-  	}
-  	else
-  	{
-  		// on rajoute les nouvelles caracs
-  		$monstre[$carac.'som_monstre']+=$pcdm[$carac.'max']+$pcdm[$carac.'min'];
-  		$monstre[$carac.'nbr_monstre']=$monstre[$carac.'nbr_monstre']+2;
-  	}
-  	// recoupement de la cdm
-    $cdm[$carac.'max_cdm']=$pcdm[$carac.'max'];
-    $cdmchange=$caracchange=$monstrechange=true;
-  }
-  
-  if( $pcdm[$carac.'min'] > $cdm[$carac.'min_cdm'] )
-  {
-  	// Si on n'a pas déjà modifié les sommes et si on connait le max de la carac
-  	if ( !$caracchange && $cdm[$carac.'max_cdm'] != $max )
-  	{
-  		$monstre[$carac.'som_monstre']-=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
-		$carmch=true;
-  		$monstrechange=true;
-  	}
-  	// recoupement de la cdm
-    $cdm[$carac.'min_cdm']=$pcdm[$carac.'min'];
-    $cdmchange=true;
-  }
-  if ($carmch)
-    	$monstre[$carac.'som_monstre']+=$cdm[$carac.'min_cdm']+$cdm[$carac.'max_cdm'];
-}
-
-function recoup_monstre_insert ($carac,$max)
-{
-  global $cdm,$monstre;
-  if ($cdm[$carac.'max_cdm'] != $max)
-  {
-  	$monstre[$carac.'som_monstre'] += $cdm[$carac.'max_cdm'] + $cdm[$carac.'min_cdm'];
-	$monstre[$carac.'nbr_monstre'] = $monstre[$carac.'nbr_monstre'] + 2;  	
-  }
-}
-  
 ?>
