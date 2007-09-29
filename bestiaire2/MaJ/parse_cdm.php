@@ -49,24 +49,23 @@ if(isset($_POST['soumettre'])){
       $pcdm['troll_nom'] = trim($resultat[2]);
       $pcdm['troll_id']  = trim($resultat[1]);
     }
+    /*
     if(eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
       $pcdm['famille'] = trim($resultat[1]);
       $pcdm['monstre'] = trim($resultat[2]);
       $pcdm['age']     = trim($resultat[3]);
       $pcdm['id_mh']     = trim($resultat[4]);
     }
-    else if (eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].+.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
+    */
+    if (preg_match("/Le Monstre Cibl[^ ]* fait partie des : ([^\(]*) \(([^\[]*) \[([^\]]*)\] (.*)- N°([0-9]*)\)/", $lignes[$i], $resultat)) 
+    {
       $pcdm['famille'] = trim($resultat[1]);
       $pcdm['monstre'] = trim($resultat[2]);
       $pcdm['age']     = trim($resultat[3]);
-      $pcdm['id_mh']     = trim($resultat[4]);
+      $pcdm['id_mh']     = trim($resultat[5]);
+      print_r ($pcdm);
     }
-    else if(eregi('[ \t]*Le monstre.+:(.+)\((.+).-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
-      $pcdm['famille'] = trim($resultat[1]);
-      $pcdm['monstre'] = trim($resultat[2]);
-      $pcdm['age']     = '';
-      $pcdm['id_mh']     = trim($resultat[3]);
-    }
+	
     if(eregi('[ \t]*Niveau.:.(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['nivcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
