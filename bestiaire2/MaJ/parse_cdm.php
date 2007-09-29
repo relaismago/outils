@@ -63,7 +63,6 @@ if(isset($_POST['soumettre'])){
       $pcdm['monstre'] = trim($resultat[2]);
       $pcdm['age']     = trim($resultat[3]);
       $pcdm['id_mh']     = trim($resultat[5]);
-      print_r ($pcdm);
     }
 	
     if(eregi('[ \t]*Niveau.:.(.+)\((.+)\)',$lignes[$i],$resultat)){
