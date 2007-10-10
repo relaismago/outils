@@ -850,15 +850,23 @@ for ( var i = 2; i < tableTrolls.length; i++ )
 		var anchorCellGuildDesc = tableTrolls[i].childNodes[5]; // ANCHOR
 		var anchorTrollID = anchorCellTrollID.childNodes[0]; // ANCHOR
 		var anchorTrollDesc = anchorCellTrollDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
-		var anchorGuildDesc = anchorCellGuildDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
+		if (anchorCellGuildDesc.getElementsByTagName ( 'a' ).length > 0)
+		{
+			var anchorGuildDesc = anchorCellGuildDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
+			var styleGuild = new String ( anchorGuildDesc.getAttribute ( 'class' ) );
+			var guildJS = new String ( anchorGuildDesc.getAttribute ( 'href' ) );
+			var guildID = guildJS.substring ( 15, guildJS.indexOf ( ',' ) ); // ANCHOR
+		}
+		else
+		{
+			var guildID = '1';
+		}
+
 		
 		// grab styles used for troll and guild
 		var styleTroll = new String ( anchorTrollDesc.getAttribute ( 'class' ) );
-		var styleGuild = new String ( anchorGuildDesc.getAttribute ( 'class' ) );
 		var trollID = new String ( anchorTrollID.nodeValue );
 		var trollName = new String ( flattenNode ( anchorTrollDesc ) );
-		var guildJS = new String ( anchorGuildDesc.getAttribute ( 'href' ) );
-		var guildID = guildJS.substring ( 15, guildJS.indexOf ( ',' ) ); // ANCHOR
 
 		// populate troll and guild list for status coloring
 		if ( guildID != '1' ) { arrayGuild += "guildsid[]=" + guildID + ";" + i + "&"; }
