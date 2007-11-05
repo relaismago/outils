@@ -74,13 +74,10 @@ if ( titleHTML.indexOf ( '[MountyHall] CdM' ) != -1 ||  titleHTML.indexOf ( '[Mo
 	processCdM ();
 }
 
-if ( titleHTML.indexOf ( 'Résultat d\'utilisation d\'un Sortilège' ) != -1 ) 
+if ( titleHTML.indexOf ( 'Sort AA' ) != -1 ) 
 {
   message = flattenNode ( table );
-	if ( message.indexOf ( 'a les caractéristiques suivantes' ) != -1 ) 
-	{
-		processAA ( message );
-	}
+  processAA ( message );
 }
 
 if ( titleHTML.indexOf ( '[MountyHall] Insulte' ) != -1 ) 
