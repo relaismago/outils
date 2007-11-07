@@ -114,12 +114,11 @@ function processAA ( aa )
 	myForm.appendChild ( newHidden ( 'id_troll', 'newdb' ) );
 	myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le trolliaire' ) );
 
-	try {
-		insertBeforeTab ( myForm, currentDocument.getElementsByName ( 'as_Action' )[0] );
+	try 
+	{
+		var espace = currentDocument.createTextNode ( '\t' );
+		currentDocument.getElementsByName ( 'as_Action' )[0].parentNode.insertBefore ( espace, currentDocument.getElementsByName ( 'as_Action' )[0] );
+		currentDocument.getElementsByName ( 'as_Action' )[0].parentNode.insertBefore ( myForm, espace);
 	} catch ( e ) { error ( e, 'AA submit error' ); }
-
-	// var espace = currentDocument.createTextNode ( '\t' );
-	// currentDocument.getElementsByName ( 'as_Action' )[0].parentNode.insertBefore ( espace, currentDocument.getElementsByName ( 'as_Action' )[0] );
-	// currentDocument.getElementsByName ( 'as_Action' )[0].parentNode.insertBefore ( myForm, espace);
 }
 
