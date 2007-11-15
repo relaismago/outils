@@ -45,18 +45,11 @@ if(isset($_POST['soumettre'])){
   
   
   while ($lignes[$i]){	
-    if(eregi('[ \t]*Tr.ll.+[nN]°(.+):(.+)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*Tr.ll.+[nN]°(.+):(.+)',$lignes[$i],$resultat))
+    {
       $pcdm['troll_nom'] = trim($resultat[2]);
       $pcdm['troll_id']  = trim($resultat[1]);
     }
-    /*
-    if(eregi('[ \t]*Le monstre.+:(.+)\((.+)\[(.*)\].-.[Nn]°([0-9]+)\)',$lignes[$i],$resultat)){
-      $pcdm['famille'] = trim($resultat[1]);
-      $pcdm['monstre'] = trim($resultat[2]);
-      $pcdm['age']     = trim($resultat[3]);
-      $pcdm['id_mh']     = trim($resultat[4]);
-    }
-    */
     if (preg_match("/Le Monstre Cibl[^ ]* fait partie des : ([^\(]*) \(([^\[]*) \[([^\]]*)\] (.*)- N°([0-9]*)\)/", $lignes[$i], $resultat)) 
     {
       $pcdm['famille'] = trim($resultat[1]);
@@ -203,6 +196,18 @@ if(isset($_POST['soumettre'])){
 			case 'égal': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$mot[2]; break;
 		}
 	}
+  	if(eregi('^DLA.+:(.+)',$lignes[$i],$resultat)){
+		$pcdm['etat_dla'] = trim($resultat[1]);
+	}
+  	if(eregi('^Chargement.+:(.+)',$lignes[$i],$resultat)){
+		$pcdm['charge'] = trim($resultat[1]);
+	}
+  	if(eregi('^Bonus Malus.+:(.+)',$lignes[$i],$resultat)){
+		$pcdm['BM'] = trim($resultat[1]);
+	}
+ 	if(eregi('^Port.e.+:(.+)',$lignes[$i],$resultat)){
+		$pcdm['portee'] = trim($resultat[1]);
+	}
     
 	$i++;
   }
@@ -291,10 +296,14 @@ if(isset($_POST['soumettre'])){
   print("<INPUT TYPE=HIDDEN NAME=\"VITDEP\" VALUE=\"".$pcdm['vitdep']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"VLC\" VALUE=\"".$pcdm['vlc']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"ATTDIST\" VALUE=\"".$pcdm['attdist']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"ETAT_DLA\" VALUE=\"".$pcdm['etat_dla']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"DLAMIN\" VALUE=\"".$pcdm['dlamin']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"DLAMAX\" VALUE=\"".$pcdm['dlamax']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"CHARGE\" VALUE=\"".$pcdm['charge']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"BM\" VALUE=\"".$pcdm['BM']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"CAPSPE\" VALUE=\"".$pcdm['capspe']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"AFFECTE\" VALUE=\"".$pcdm['affecte']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"PORTEE\" VALUE=\"".$pcdm['portee']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"DATE\" VALUE=\"".$pcdm['date']."\"></INPUT>");
 //   print("<INPUT TYPE=HIDDEN NAME=\"SOURCE\" VALUE=\"".$pcdm['troll_nom']."\"></INPUT>");
   print("<INPUT TYPE=submit NAME=\"SUITE\" VALUE=\"Bestiaire\" class='mh_form_submit'></input>");

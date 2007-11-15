@@ -392,8 +392,12 @@ function affiche_cdm_parsed(&$pcdm)
   print("<tr><td class='mh_tdtitre'><b>Vitesse</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vitdep']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>Voir le caché</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vlc']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>Att distance</b></td><td class='mh_tdpage' colspan='3'>".$pcdm['attdist']."</td></tr>");
-  print("<tr><td class='mh_tdtitre'><b>DLA    </b></td><td class='mh_tdpage'>".$pcdm['dlacom']."</td><td class='mh_tdpage'>".$pcdm['dlamin']."</td><td class='mh_tdpage'>".$pcdm['dlamax']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>DLA  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['etat_dla']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Durée DLA  </b></td><td class='mh_tdpage'>".$pcdm['dlacom']."</td><td class='mh_tdpage'>".$pcdm['dlamin']."</td><td class='mh_tdpage'>".$pcdm['dlamax']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Chargement  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['charge']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Bonus Malus  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['BM']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>CAPACITE</b></td><td class='mh_tdpage'>".$pcdm['capspe']."</td><td colspan=2 class='mh_tdpage'>".$pcdm['affecte']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Port&eacute;e  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['portee']."</td></tr>");
   print("</table>");
   print("<br>");
   print("</body></html>");
