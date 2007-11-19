@@ -186,6 +186,9 @@ if(isset($_POST['soumettre'])){
 	if(eregi('[ \t]*Attaque . dist.+:(.+)',$lignes[$i],$resultat)){
 		$pcdm['attdist'] = trim($resultat[1]);
 	}
+  	if(eregi('[ \t]*DLA.+:(.+)', $lignes[$i], $resultat) && !$pcdm['etat_dla']){
+		$pcdm['etat_dla'] = trim($resultat[1]);
+	}
 	if(eregi('[ \t]*Dur.e DLA :(.+)\((.+)\)',$lignes[$i],$resultat)){
 	  	$pcdm['dlacom'] = trim($resultat[1]);
 		$mot = explode(' ',$resultat[2]);
@@ -196,16 +199,13 @@ if(isset($_POST['soumettre'])){
 			case 'égal': $pcdm['dlamin']=$mot[2]; $pcdm['dlamax']=$mot[2]; break;
 		}
 	}
-  	if(eregi('^DLA.+:(.+)',$lignes[$i],$resultat)){
-		$pcdm['etat_dla'] = trim($resultat[1]);
-	}
-  	if(eregi('^Chargement.+:(.+)',$lignes[$i],$resultat)){
+  	if(eregi('[ \t]*Chargement.+:(.+)',$lignes[$i],$resultat)){
 		$pcdm['charge'] = trim($resultat[1]);
 	}
-  	if(eregi('^Bonus Malus.+:(.+)',$lignes[$i],$resultat)){
+  	if(eregi('[ \t]*Bonus Malus.+:(.+)',$lignes[$i],$resultat)){
 		$pcdm['BM'] = trim($resultat[1]);
 	}
- 	if(eregi('^Port.e.+:(.+)',$lignes[$i],$resultat)){
+ 	if(eregi('[ \t]*Port.e.+:(.+)',$lignes[$i],$resultat)){
 		$pcdm['portee'] = trim($resultat[1]);
 	}
     
