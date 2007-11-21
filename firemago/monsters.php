@@ -262,10 +262,10 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		$mm = $caracs_moyennes[mm];
 		$rm = $caracs_moyennes[rm];
 		$dla = $caracs_moyennes[dla];
-		$nbatt = "?";
-		$vitdep = "?";
-		$vlc = "?";
-		$attdist = "?";
+		$nbatt = $caracs_moyennes[nbatt];
+		$vitdep = $caracs_moyennes[vitdep];
+		$vlc = $caracs_moyennes[vlc];
+		$attdist = $caracs_moyennes[attdist];
 		//$caracs_spe[4].";".$caracs_spe[5];
 	}
 	$caracTot = $titre.";".$niv.";".$pdv.";".$ble.";".$att.";".$esq.";".$deg.";";

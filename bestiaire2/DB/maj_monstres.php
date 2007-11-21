@@ -3,7 +3,7 @@ require_once ("../../inc_connect.php3");
 
 echo date("G:i:s");
 
-$sql="SELECT id_monstre FROM `best_monstres`;";
+$sql="SELECT id_monstre,nbatt_monstre,vitdep_monstre,vlc_monstre,attdist_monstre FROM `best_monstres`;";
 if($query=mysql_query($sql,$db_vue_rm))
 {
   while($ret=mysql_fetch_array($query))
@@ -32,6 +32,10 @@ if($query=mysql_query($sql,$db_vue_rm))
     	$monstre['rmnbr_monstre'] = 0;
     	$monstre['dlasom_monstre'] = 0;
     	$monstre['dlanbr_monstre'] = 0;
+    	$monstre['nbatt_monstre']="";
+    	$monstre['vitdep_monstre']="";
+    	$monstre['vlc_monstre']="";
+    	$monstre['attdist_monstre']="";
     	while($cdm=mysql_fetch_array($queryb))
     	{
     		recoup_cdm1("pdv",999);
@@ -44,6 +48,26 @@ if($query=mysql_query($sql,$db_vue_rm))
     		recoup_cdm1("mm",99999);
     		recoup_cdm1("rm",99999);
     		recoup_cdm1("dla",99);
+    		
+    		if ($cdm['vitdep_cdm'] !="" && $monstre['vitdep_monstre'] != $cdm['vitdep_cdm'])
+    		{
+    			$monstre['vitdep_monstre'] = $cdm['vitdep_cdm'];
+    		}
+    		
+    		if ($cdm['nbatt_cdm'] !="" && $monstre['nbatt_monstre'] != $cdm['nbatt_cdm'])
+    		{
+    			$monstre['nbatt_monstre'] = $cdm['nbatt_cdm'];
+    		}
+    		
+    		if ($cdm['vlc_cdm'] !="" && $monstre['vlc_monstre'] != $cdm['vlc_cdm'])
+    		{
+    			$monstre['vlc_monstre'] = $cdm['vlc_cdm'];
+    		}
+    		
+    		if ($cdm['attdist_cdm'] !="" && $monstre['attdist_monstre'] != $cdm['attdist_cdm'])
+    		{
+    			$monstre['attdist_monstre'] = $cdm['attdist_cdm'];
+    		}
     		/*if ( $retb['pdvmax_cdm'] != 999 )
     		{
     			$sompv += $retb['pdvmin_cdm'] + $retb['pdvmax_cdm'];
@@ -71,8 +95,12 @@ if($query=mysql_query($sql,$db_vue_rm))
     	$sqlupdate .= ", rmnbr_monstre = ".$monstre['rmnbr_monstre'];
     	$sqlupdate .= ", dlasom_monstre = ".$monstre['dlasom_monstre'];
     	$sqlupdate .= ", dlanbr_monstre = ".$monstre['dlanbr_monstre'];
+    	$sqlupdate .= ", nbatt_monstre = '".$monstre['nbatt_monstre']."'";
+    	$sqlupdate .= ", vitdep_monstre = '".$monstre['vitdep_monstre']."'";
+    	$sqlupdate .= ", vlc_monstre = '".$monstre['vlc_monstre']."'";
+    	$sqlupdate .= ", attdist_monstre = '".$monstre['attdist_monstre']."'";
     	$sqlupdate .= " where id_monstre=".$ret[0].";";
-    	//echo $sqlupdate."<br>";
+    	echo $sqlupdate."<br>";
     	mysql_query($sqlupdate,$db_vue_rm);
     }
     else
