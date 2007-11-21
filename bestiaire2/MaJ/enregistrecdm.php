@@ -206,11 +206,11 @@ if(mysql_num_rows($query)==0)
   $cdm['etatdla_cdm']       = $pcdm['etatdla'];
   $cdm['dlamin_cdm']        = $pcdm['dlamin'];
   $cdm['dlamax_cdm']        = $pcdm['dlamax'];
-  $cdm['charge_cdm']       = $pcdm['charge'];
-  $cdm['bm_cdm']       = $pcdm['bm'];
+  $cdm['charge_cdm']        = $pcdm['charge'];
+  $cdm['bm_cdm']            = $pcdm['bm'];
   $cdm['capspe_cdm']        = $pcdm['capspe'];
   $cdm['affecte_cdm']     	= $pcdm['affecte'];
-  $cdm['portee_cdm']       = $pcdm['portee'];
+  $cdm['portee_cdm']        = $pcdm['portee'];
   $cdm['source_cdm']      	= $pcdm['troll_nom'];
   
   // on insère cette nouvelle cdm
@@ -251,7 +251,13 @@ if(mysql_num_rows($query)==0)
   // la DLA
   recoup_monstre_insert ("dla",99);
   
-  $sql="UPDATE `best_monstres` SET `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
+  if ($cdm['nbatt_cdm'] != "" ) $monstre['nbatt_monstre']=$cdm['nbatt_cdm'];
+  if ($cdm['vitdep_cdm'] != "" ) $monstre['vitdep_monstre']=$cdm['vitdep_cdm'];
+  if ($cdm['vlc_cdm'] != "" ) $monstre['vlc_monstre']=$cdm['vlc_cdm'];
+  if ($cdm['attdist_cdm'] != "" ) $monstre['attdist_monstre']=$cdm['attdist_cdm'];
+  
+  $sql="UPDATE `best_monstres` SET `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `nbatt_monstre`=\"".$monstre['nbatt_monstre']."\", `vitdep_monstre`=\"".$monstre['vitdep_monstre']."\", `vlc_monstre`=\"".$monstre['vlc_monstre']."\", `attdist_monstre`=\"".$monstre['attdist_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
+
   if(!mysql_query($sql,$db_vue_rm)){
     die("la modification des caractéristiques du monstre a échoué<br>$sql<br>");
   }
@@ -354,24 +360,44 @@ else
   if($pcdm['nbatt']!="" && $pcdm['nbatt']!=$cdm['nbatt_cdm']){
 	$cdm['nbatt_cdm']=$pcdm['nbatt'];
 	$cdmchange=true;
+	if ($monstre['nbatt_monstre'] != $cdm['nbatt_cdm'])
+	{
+		$monstre['nbatt_monstre'] = $cdm['nbatt_cdm'];
+		$monstrechange = true;
+	}
   }
   
   // Vitesse deplacement
   if($pcdm['vitdep']!="" && $pcdm['vitdep']!=$cdm['vitdep_cdm']){
 	$cdm['vitdep_cdm']=$pcdm['vitdep'];
 	$cdmchange=true;
+    if ($monstre['vitdep_monstre'] != $cdm['vitdep_cdm'])
+	{
+		$monstre['vitdep_monstre'] = $cdm['vitdep_cdm'];
+		$monstrechange = true;
+	}
   }
 	
   // Voir le caché
   if($pcdm['vlc']!="" && $pcdm['vlc']!=$cdm['vlc_cdm']){
 	$cdm['vlc_cdm']=$pcdm['vlc'];
 	$cdmchange=true;
+  	if ($monstre['vlc_monstre'] != $cdm['vlc_cdm'])
+	{
+		$monstre['vlc_monstre'] = $cdm['vlc_cdm'];
+		$monstrechange = true;
+	}
   }
 
   // Attaque distante
   if($pcdm['attdist']!="" && $pcdm['attdist']!=$cdm['attdist_cdm']){
 	$cdm['attdist_cdm']=$pcdm['attdist'];
 	$cdmchange=true;
+  	if ($monstre['attdist_monstre'] != $cdm['attdist_cdm'])
+	{
+		$monstre['attdist_monstre'] = $cdm['attdist_cdm'];
+		$monstrechange = true;
+	}
   }
 
   if($pcdm['blessure']!=$cdm['blessure_cdm']){
@@ -408,7 +434,8 @@ else
     }
   }
   if($monstrechange){ // certaines caracs du monstres ont été ajustées, il faut les modifier dans la base
-    $sql="UPDATE `best_monstres` SET `nivsom_monstre`=\"".$monstre['nivsom_monstre']."\", `nivnbr_monstre`=\"".$monstre['nivnbr_monstre']."\", `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
+    $sql="UPDATE `best_monstres` SET `nivsom_monstre`=\"".$monstre['nivsom_monstre']."\", `nivnbr_monstre`=\"".$monstre['nivnbr_monstre']."\", `pdvsom_monstre`=\"".$monstre['pdvsom_monstre']."\", `pdvnbr_monstre`=\"".$monstre['pdvnbr_monstre']."\", `attsom_monstre`=\"".$monstre['attsom_monstre']."\", `attnbr_monstre`=\"".$monstre['attnbr_monstre']."\", `esqsom_monstre`=\"".$monstre['esqsom_monstre']."\", `esqnbr_monstre`=\"".$monstre['esqnbr_monstre']."\", `degsom_monstre`=\"".$monstre['degsom_monstre']."\", `degnbr_monstre`=\"".$monstre['degnbr_monstre']."\", `regsom_monstre`=\"".$monstre['regsom_monstre']."\", `regnbr_monstre`=\"".$monstre['regnbr_monstre']."\", `armsom_monstre`=\"".$monstre['armsom_monstre']."\", `armnbr_monstre`=\"".$monstre['armnbr_monstre']."\", `vuesom_monstre`=\"".$monstre['vuesom_monstre']."\", `vuenbr_monstre`=\"".$monstre['vuenbr_monstre']."\",`mmsom_monstre`=\"".$monstre['mmsom_monstre']."\", `mmnbr_monstre`=\"".$monstre['mmnbr_monstre']."\", `rmsom_monstre`=\"".$monstre['rmsom_monstre']."\", `rmnbr_monstre`=\"".$monstre['rmnbr_monstre']."\", `dlasom_monstre`=\"".$monstre['dlasom_monstre']."\", `dlanbr_monstre`=\"".$monstre['dlanbr_monstre']."\", `nbatt_monstre`=\"".$monstre['nbatt_monstre']."\", `vitdep_monstre`=\"".$monstre['vitdep_monstre']."\", `vlc_monstre`=\"".$monstre['vlc_monstre']."\", `attdist_monstre`=\"".$monstre['attdist_monstre']."\", `date_monstre`=NOW(  )  WHERE `id_monstre`=".$monstre['id_monstre']." LIMIT 1 ";
+
     if(!mysql_query($sql,$db_vue_rm)){
       die("la modification des caractéristiques du monstre a échoué<br>$sql<br>");
     }
@@ -468,15 +495,10 @@ $monstre['race']   =$cdm['race']   =$pcdm['race'];
 $monstre['famille']=$cdm['famille']=$pcdm['famille'];
 $monstre['age']    =$cdm['age']    =$pcdm['age'];
 
-
 if($suite=="Bestiaire")
-  $js="document.location.href='../bestiaire.php?Race=".urlencode($cdm['race'])."&Template=".$cdm['id_template_cdm']."&IDAge=".$cdm['id_age_cdm']."&MH=".$cdm['id_mh']."';";
+  header ("Location: ../bestiaire.php?Race=".urlencode($cdm['race'])."&Template=".$cdm['id_template_cdm']."&IDAge=".$cdm['id_age_cdm']."&MH=".$cdm['id_mh']);
 else
-  $js="document.location.href='../cdm_parser.php';";
-
-print("<html><head><title>CdM</title></head>");
-print("<script language='JavaScript'>$js</script>");
-print("</body></html>");
+  header ("Location: ../cdm_parser.php");
 
 
 ?>
