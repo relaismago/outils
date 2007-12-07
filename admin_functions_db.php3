@@ -501,6 +501,7 @@ function selectDbTrolls($id="",$sort="", $id_baronnie="",$id_distinction="")
 			$lesTrolls[$i]['historique_troll']=stripslashes($trolls['historique_troll']); 
 
 			$i++;
+			//echo $i."<br>";
 			if ($i > 400)
 				die("<font color=red>Erreur Nbr Troll > 400 ! 
 						Copié/collé ce que vous voyez et postez dans le topic vue2d</font>");

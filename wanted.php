@@ -217,7 +217,7 @@ function view_all()
           <table width='100%' cellspacing='0'>
             <tr class='mh_tdtitre' align="center">
               <td>
-                Bien que peu nombreux, ils existent : les trolls fous qui ont fait du tort à nos membres...
+                Bien que peu nombreux ( <?echo $nbTrolls;?> ), ils existent : les trolls fous qui ont fait du tort à nos membres...
 								Ils sont responsables d'au moins un vol de trésor, une agression "sauvage" voire de l'assassinat de l'un de nos membres.
 								Un impact de balle sera ajouté à leur fiche pour chaque vengeance obtenue...
 								Si vous laissez votre curseur de souris sur leur fiche (et/ou si vous cliquez dessus), vous aurez accès à plus d'informations...
@@ -254,8 +254,6 @@ function view_all()
 			</td>
 			</tr>
 		</table>
-		<br><br><br><br><br><br><br><br><br><br><br>
-
 
 		<?	
 include('foot.php');
