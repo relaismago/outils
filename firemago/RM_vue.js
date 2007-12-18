@@ -827,7 +827,12 @@ function caracMonster ( monster, carac )
  text += "<tr><td class='mh_tdtitre'>DLA</td><td class='mh_tdpage'>" + arrCarac[16] + "</td></tr>";
  if ( arrCarac[17] )
  {
- 	text += "<tr><td class='mh_tdtitre'>Capacité</td><td class='mh_tdpage'>" + arrCarac[17] + " affecte " + arrCarac[18] + "</td></tr>";
+ 	text += "<tr><td class='mh_tdtitre'>Capacité</td><td class='mh_tdpage'>" + arrCarac[17] + " affecte " + arrCarac[18];
+ 	if ( arrCarac[19] != 0)
+ 	{
+ 		text += "<br> Portee : " + arrCarac[19];
+ 	}
+ 	text += "</tr></td>";
  }
  text += "<tr class='mh_tdpage'><td colspan='2' align='center'>Gain en PX si je le tue : " + gainPX (arrCarac[1]) + "</td></tr>";
  text += "</table>";

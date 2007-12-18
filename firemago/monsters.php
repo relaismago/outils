@@ -270,7 +270,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	}
 	$caracTot = $titre.";".$niv.";".$pdv.";".$ble.";".$att.";".$esq.";".$deg.";";
 	$caracTot .= $reg.";".$arm.";".$vue.";".$mm.";".$rm.";".$nbatt.";".$vitdep.";".$vlc.";".$attdist.";";
-	$caracTot .= $dla.";".$caracs_spe[4].";".$caracs_spe[5];
+	$caracTot .= $dla.";".$caracs_spe[4].";".$caracs_spe[5].";".$caracs_spe[10];
 	$monsterNames[$i] = ereg_replace("\'","&#39;",$monsterNames[$i] );
 	echo "
 	newLink.setAttribute ( 'target', '\"_blank\"' );
