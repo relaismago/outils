@@ -424,6 +424,7 @@ function creerBulle() {
 
         var newTr = document.createElement( 'tr' );
         newTr.setAttribute( 'class', 'mh_tdtitre' );
+        //newTr.setAttribute( 'onclick', 'clickPop=false;cacherInfoBulle();' );
         newTr.appendChild( newTd );
 
         var newTable = document.createElement( 'table' );
@@ -433,6 +434,7 @@ function creerBulle() {
         newTable.setAttribute( 'border', '0' );
         newTable.setAttribute( 'cellpadding', '5' );
         newTable.setAttribute( 'cellspacing', '1' );
+        newTable.setAttribute( 'onclick', 'cacherInfoBulle();' );
         newTable.setAttribute( 'style', 'position:absolute;visibility:hidden;z-index:800;height:auto;' );
         newTable.appendChild( newTr );
 
@@ -516,7 +518,7 @@ function infoBulle( nom, evt, fonction, paramfct ) {
 }
 
 function cacherInfoBulle() {
-        if( bulleStyle )
+        //if( bulleStyle && clickPop != true)
           bulleStyle.visibility="hidden";
 }
 
@@ -732,8 +734,8 @@ myB.appendChild ( document.createTextNode( 'Niveau') );
 myTd = newTD();
 myTd.setAttribute( 'width', '25' );
 myTd.appendChild(myB);
-//tableMonsters[1].insertBefore( myTd, tableMonsters[1].childNodes[] );
-tableMonsters[1].appendChild( myTd );
+tableMonsters[1].insertBefore( myTd, tableMonsters[1].childNodes[2] );
+//tableMonsters[1].appendChild( myTd );
 tableMonsters[0].childNodes[0].setAttribute ('colspan','7');
 
 
@@ -824,13 +826,19 @@ function caracMonster ( monster, carac )
  text += "<tr><td class='mh_tdtitre'>Vit Dep</td><td class='mh_tdpage'>" + arrCarac[13] + "</td></tr>";
  text += "<tr><td class='mh_tdtitre'>VlC</td><td class='mh_tdpage'>" + arrCarac[14] + "</td></tr>";
  text += "<tr><td class='mh_tdtitre'>Att Dist</td><td class='mh_tdpage'>" + arrCarac[15] + "</td></tr>";
- text += "<tr><td class='mh_tdtitre'>DLA</td><td class='mh_tdpage'>" + arrCarac[16] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Durée DLA</td><td class='mh_tdpage'>" + arrCarac[16] + "</td></tr>";
+ if ( arrCarac[20] != "")
+ 	text += "<tr><td class='mh_tdtitre'>DLA</td><td class='mh_tdpage'>" + arrCarac[20] + "</td></tr>";
+ if ( arrCarac[21] != "")
+ 	text += "<tr><td class='mh_tdtitre'>Chargement</td><td class='mh_tdpage'>" + arrCarac[21] + "</td></tr>";
+ if ( arrCarac[22] != "")
+ 	text += "<tr><td class='mh_tdtitre'>B M</td><td class='mh_tdpage'>" + arrCarac[22] + "</td></tr>";
  if ( arrCarac[17] )
  {
  	text += "<tr><td class='mh_tdtitre'>Capacité</td><td class='mh_tdpage'>" + arrCarac[17] + " affecte " + arrCarac[18];
  	if ( arrCarac[19] != 0)
  	{
- 		text += "<br> Portee : " + arrCarac[19];
+ 		text += "<br> Port&eacute;e : " + arrCarac[19];
  	}
  	text += "</tr></td>";
  }

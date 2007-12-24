@@ -38,12 +38,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	var monsterStyle = new String ( anchorDesc.getAttribute ( 'class' ) );
 	";
 		
-	echo "
-	var newTd = document.createElement ( 'td' );
-	newTd.setAttribute ( 'align', 'center');
-	newTd.appendChild( document.createTextNode ( '$niv' ));
-	anchorRow.appendChild (newTd );
-	";
+	
 	  
 	//Link of the ID
 	echo "
@@ -246,6 +241,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		$vitdep = $tab_cdm_mh[$last_cdm]['vitdep_cdm'];
 		$vlc = $tab_cdm_mh[$last_cdm]['vlc_cdm'];
 		$attdist = $tab_cdm_mh[$last_cdm]['attdist_cdm'];
+		$etatdla = $tab_cdm_mh[$last_cdm]['etatdla_cdm'];
+		$charge = $tab_cdm_mh[$last_cdm]['charge_cdm'];
+		$bm = $tab_cdm_mh[$last_cdm]['bm_cdm'];
 		
 	}
 	else //pas de cdm pour ce monstre, on calcule la moyenne
@@ -266,19 +264,32 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		$vitdep = $caracs_moyennes[vitdep];
 		$vlc = $caracs_moyennes[vlc];
 		$attdist = $caracs_moyennes[attdist];
-		//$caracs_spe[4].";".$caracs_spe[5];
+		$etatdla = "";
+		$charge = "";
+		$bm = "";
 	}
 	$caracTot = $titre.";".$niv.";".$pdv.";".$ble.";".$att.";".$esq.";".$deg.";";
 	$caracTot .= $reg.";".$arm.";".$vue.";".$mm.";".$rm.";".$nbatt.";".$vitdep.";".$vlc.";".$attdist.";";
-	$caracTot .= $dla.";".$caracs_spe[4].";".$caracs_spe[5].";".$caracs_spe[10];
+	$caracTot .= $dla.";".$caracs_spe[4].";".$caracs_spe[5].";".$caracs_spe[10].";".$etatdla.";".$charge.";".$bm;
 	$monsterNames[$i] = ereg_replace("\'","&#39;",$monsterNames[$i] );
 	echo "
 	newLink.setAttribute ( 'target', '\"_blank\"' );
     newLink.setAttribute ( 'class', monsterStyle );
 	newLink.setAttribute ( 'onmouseover', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
-	newLink.setAttribute ( 'onmouseout', 'cacherInfoBulle();');
+	//newLink.setAttribute ( 'onmouseout', 'cacherInfoBulle();');
     anchorCellDesc.removeChild ( anchorCellDesc.getElementsByTagName ( 'a' )[0] );
     anchorCellDesc.appendChild ( newLink );
+	";
+	
+	echo "
+	var newTd = document.createElement ( 'td' );
+	newTd.setAttribute ( 'align', 'center');
+	newTd.appendChild( document.createTextNode ( '$niv' ));
+	//newTd.setAttribute ( 'onmouseover', 'clickPop = true;infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
+	//newTd.setAttribute ( 'onclick', 'clickPop = true;');
+	newTd.setAttribute ( 'onmouseover', 'cacherInfoBulle();');
+	//anchorRow.appendChild (newTd );
+	anchorRow.insertBefore ( newTd, anchorCellDesc );
 	";
 }// boucle for
 	
