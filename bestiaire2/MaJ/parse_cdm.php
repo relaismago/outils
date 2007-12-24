@@ -189,7 +189,7 @@ if(isset($_POST['soumettre'])){
   	if(eregi('[ \t]*DLA.+:(.+)', $lignes[$i], $resultat) && !$pcdm['etat_dla']){
 		$pcdm['etat_dla'] = trim($resultat[1]);
 	}
-	if(eregi('[ \t]*Dur.e DLA :(.+)\((.+)\)',$lignes[$i],$resultat)){
+	if(eregi('[ \t]*Dur.e tour :(.+)\((.+)\)',$lignes[$i],$resultat)){
 	  	$pcdm['dlacom'] = trim($resultat[1]);
 		$mot = explode(' ',$resultat[2]);
 		switch (trim($mot[0])){
