@@ -518,7 +518,7 @@ function infoBulle( nom, evt, fonction, paramfct ) {
 }
 
 function cacherInfoBulle() {
-        //if( bulleStyle && clickPop != true)
+        if( bulleStyle )
           bulleStyle.visibility="hidden";
 }
 
