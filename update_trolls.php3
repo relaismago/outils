@@ -241,7 +241,7 @@ function getFilePublicTrolls()
 {
   echo "Récupération du fichier des trolls<br>";
 
-  $fp=fopen("ftp://ftp.mountyhall.com/Public_Trolls.txt","r");
+  $fp=fopen("http://www.mountyhall.com/ftp/Public_Trolls.txt","r");
   if ($fp == FALSE) {
     update_traitement("TROLLS", "KO : erreur lors de l''appel du fichier public sur le serveur FTP");
     die ("Erreur lors de l'appel du fichier public sur le serveur FTP. Procédure de refresh stoppée");
@@ -266,7 +266,7 @@ function getFilePublicTrolls()
 function getFilePublicGuildes()
 {
   echo "recuperation du fichier des guildes<br>";
-  $fp = fopen("ftp://ftp.mountyhall.com/Public_Guildes.txt","r");
+  $fp = fopen("http://www.mountyhall.com/ftp/Public_Guildes.txt","r");
   if ($fp == FALSE) {
     update_traitement("GUILDES", "KO : erreur lors de l''appel du fichier du public");
     die ("Erreur lors de l'appel du fichier public sur le serveur FTP. Procédure de refresh stoppée");
