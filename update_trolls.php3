@@ -274,7 +274,7 @@ function getFilePublicGuildes()
 
   $v2 = fopen("vues/Public_Guildes.txt","w");
   if ($v2 == FALSE) {
-    update_traitement("TROLLS", "KO : erreur lors de l''ecriture du fichier FTP");
+    update_traitement("GUILDES", "KO : erreur lors de l''ecriture du fichier FTP");
     die ("Erreur lors de l'écriture du fichier Public_Guildes. Procédure de refresh stoppée");
   }
 
