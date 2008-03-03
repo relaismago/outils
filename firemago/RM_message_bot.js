@@ -74,7 +74,7 @@ if ( titleHTML.indexOf ( '[MountyHall] CdM' ) != -1 ||  titleHTML.indexOf ( '[Mo
 	processCdM ();
 }
 
-if ( titleHTML.indexOf ( 'Sort AA' ) != -1 ) 
+if ( titleHTML.indexOf ( 'Analyse Anatomique' ) != -1 ) 
 {
   message = flattenNode ( table );
   processAA ( message );
