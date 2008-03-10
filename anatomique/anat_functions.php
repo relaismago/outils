@@ -190,9 +190,14 @@ function parseAnalyseAnatomique($lignes,$source,$date)
 			if ($debug) echo "Id2=$id_troll_anat<br>";
 			$control = "1";
 		}
-		if(ereg("N° (.+)$",$lignes[$i],$resultat)){
+		if(eregi("[ \t]\((.*)\) a les carac*",$lignes[$i],$resultat)){
 			$id_troll_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "Id3=$id_troll_anat<br>";
+			$control = "1";
+		}
+		if(ereg("N° (.+)$",$lignes[$i],$resultat)){
+			$id_troll_anat   = trim(htmlspecialchars($resultat[1]));
+			if ($debug) echo "Id4=$id_troll_anat<br>";
 			if(strpos($control,"1")===false) $control = "1";
 		}
 		if(eregi("[ \t]*Points de Vie :(.*)",$lignes[$i],$resultat)){
@@ -215,7 +220,7 @@ function parseAnalyseAnatomique($lignes,$source,$date)
 			if ($debug) echo "deg=$deg_anat<br>";
 			$control .= "5";
 		}
-		if(eregi("[ \t]*D.s de R.g.n. :(.*)",$lignes[$i],$resultat)){
+		if(eregi("[ \t]*D.s de R.g.n.* :(.*)",$lignes[$i],$resultat)){
 			$reg_anat   = trim(htmlspecialchars($resultat[1]));
 			if ($debug) echo "reg=$reg_anat<br>";
 			$control .= "6";
