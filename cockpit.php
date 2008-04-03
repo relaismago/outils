@@ -145,6 +145,10 @@ function vue_criteres()
 	if ($anim == "") {
 		$anim = $options["vue_animations_option"];
 	}
+	
+	if ($trolls_disparus == "") {
+		$trolls_disparus = $options["vue_fantomes_option"];
+	}
 
 	echo " Animations ";
   echo "<select name='anim' onChange='get_map();'>";

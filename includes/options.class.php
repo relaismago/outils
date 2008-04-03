@@ -81,14 +81,20 @@ class options {
 	function set_vue_display_trollometer_option($vue_display_trollometer_option) {
 		$this->vue_display_trollometer_option = $vue_display_trollometer_option;
 	}
+	function get_vue_fantomes_option() {
+		return $this->vue_fantomes_option;
+	}
 
+	function set_vue_fantomes_option($vue_fantomes_option) {
+		$this->vue_fantomes_option = $vue_fantomes_option;
+	}
 
   function read_db()
   {
     global $db_vue_rm;
 
     $sql = "SELECT id_troll_option, date_option, display_mouches_option, display_noms_mouches_option, refresh_dla_option,";
-    $sql .= " vue_taille_option, vue_zoom_option, vue_max_pa_option, vue_animations_option,vue_display_trollometer_option";
+    $sql .= " vue_taille_option, vue_zoom_option, vue_max_pa_option, vue_animations_option,vue_display_trollometer_option, vue_fantomes_option";
     $sql .= " FROM options";
 
     $sql .= " WHERE id_troll_option = ".$this->id_troll;
@@ -106,6 +112,7 @@ class options {
 		$this->vue_max_pa_option= $row['vue_max_pa_option'];
 		$this->vue_animations_option= $row['vue_animations_option'];
 		$this->vue_display_trollometer_option= $row['vue_display_trollometer_option'];
+		$this->vue_fantomes_option= $row['vue_fantomes_option'];
 	}
 
 	function write_db() {
@@ -121,6 +128,7 @@ class options {
 		$sql .= ", vue_max_pa_option= '".$this->vue_max_pa_option."'";
 		$sql .= ", vue_animations_option= '".$this->vue_animations_option."'";
 		$sql .= ", vue_display_trollometer_option= '".$this->vue_display_trollometer_option."'";
+		$sql .= ", vue_fantomes_option= '".$this->vue_fantomes_option."'";
     
 		$sql .= " WHERE ";
 		$sql .= " id_troll_option = ".$this->id_troll;
@@ -149,6 +157,7 @@ class options {
 		$tab["vue_max_pa_option"] = $this->vue_max_pa_option;
 		$tab["vue_animations_option"] = $this->vue_animations_option;
 		$tab["vue_display_trollometer_option"] = $this->vue_display_trollometer_option;
+		$tab["vue_fantomes_option"] = $this->vue_fantomes_option;
 		return $tab;
 	}
 }

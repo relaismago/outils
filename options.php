@@ -44,6 +44,7 @@ function affiche_liste_options()
 	$vue_max_pa_option = $options->get_vue_max_pa_option();
 	$vue_animations_option = $options->get_vue_animations_option();
 	$vue_display_trollometer_option= $options->get_vue_display_trollometer_option();
+	$vue_fantomes_option= $options->get_vue_fantomes_option();
 	
 	?>
 	<form action='options.php' method='POST'>
@@ -71,6 +72,8 @@ function affiche_liste_options()
 			affiche_option('vue_animations_option', $vue_animations_option, "Activer les animations dans la vue 2d","Les animations ralentissent l'affichage des grandes vues");
 
 			affiche_option('vue_display_trollometer_option', $vue_display_trollometer_option, "Afficher le trollometer en m&ecirc;me temps que la vue 2d","Si vous ne regardez pas tout le temps le trollometer, merci de mettre non ici :-)");
+			
+			affiche_option('vue_fantomes_option', $vue_fantomes_option, "Afficher les fantômes", "");
 			?>
 	
 			<tr class='mh_tdpage' align="center">
@@ -122,6 +125,7 @@ function update_options($upd)
   $options->set_vue_animations_option($_REQUEST[vue_animations_option]);
   $options->set_vue_max_pa_option($_REQUEST[vue_max_pa_option]);
   $options->set_vue_display_trollometer_option($_REQUEST[vue_display_trollometer_option]);
+  $options->set_vue_fantomes_option($_REQUEST[vue_fantomes_option]);
 	$message = $options->write_db();
 /*  $id_troll_option = $_SESSION[AuthTroll];
   $display_mouches_option = $_REQUEST[display_mouches_option];
