@@ -73,7 +73,7 @@ function affiche_liste_options()
 
 			affiche_option('vue_display_trollometer_option', $vue_display_trollometer_option, "Afficher le trollometer en m&ecirc;me temps que la vue 2d","Si vous ne regardez pas tout le temps le trollometer, merci de mettre non ici :-)");
 			
-			affiche_option('vue_fantomes_option', $vue_fantomes_option, "Afficher les fantômes", "");
+			affiche_option('vue_fantomes_option', $vue_fantomes_option, "Afficher les trolls disparus", "");
 			?>
 	
 			<tr class='mh_tdpage' align="center">
