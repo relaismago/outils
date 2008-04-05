@@ -161,9 +161,7 @@ function afficheInfosTroll($res)
 function affiche_ancien_blasons()
 {
 	affiche_ancien("Will");
-	affiche_ancien("Zarik");
 	affiche_ancien("Rodalgen");
-	affiche_ancien("Vengeance");
 	affiche_ancien("Tinette");
 	echo "<br>";
 	affiche_ancien("Sirlor");
