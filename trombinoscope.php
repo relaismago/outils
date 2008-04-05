@@ -167,7 +167,6 @@ function affiche_ancien_blasons()
 	affiche_ancien("Tinette");
 	echo "<br>";
 	affiche_ancien("Sirlor");
-	affiche_ancien("Jyha");
 	affiche_ancien("Bouritou");
 
 	echo "<br>";
