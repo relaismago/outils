@@ -824,8 +824,7 @@ myTd3.setAttribute ( 'align', 'left' );
 
 // VTT
 myTd1.appendChild ( myForm = newForm ( 'formVTT', URLVtt ) );
-var onSubmit = "window.open('', 'popupVtt', 'width=" + ( screen.width - 150 ) + ", height=" + ( screen.height - 250 ) +
-	", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes'); this.target='popupVtt'";
+var onSubmit = "window.open('', 'popupVtt'); this.target='popupVtt'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
 myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
@@ -833,8 +832,7 @@ myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le VTT' ) );
 
 // GGC
 myTd2.appendChild ( myForm = newForm ( 'formGGC', URLGgc ) );
-var onSubmit = "window.open('', 'popupGgc', 'width=" + ( screen.width - 150 ) + ", height=" + ( screen.height - 250) +
-	", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes'); this.target='popupGgc'";
+var onSubmit = "window.open('', 'popupGgc'); this.target='popupGgc'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
 myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
@@ -844,8 +842,7 @@ myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC' ) );
 //Partages
 var URLPartages = URLOutils + 'partagepx/partage.php';
 myTd3.appendChild ( myForm = newForm ( 'formPartages', URLPartages + '?modif=1&troll=' + trim ( trollNomId ) +'' ) );
-var onSubmit = "window.open('', 'popupPartages', 'width=" + ( screen.width - 150 ) + ", height=" + ( screen.height - 128) +
-	", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes'); this.target='popupPartages'";
+var onSubmit = "window.open('', 'popupPartages'); this.target='popupPartages'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );
 
