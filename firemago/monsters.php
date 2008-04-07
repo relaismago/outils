@@ -237,10 +237,10 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 			}
 			$dla .= " (moy bestiaire : ".$caracs_moyennes[dla].")";	
 		}
-		$nbatt = $tab_cdm_mh[$last_cdm]['nbatt_cdm'];
-		$vitdep = $tab_cdm_mh[$last_cdm]['vitdep_cdm'];
-		$vlc = $tab_cdm_mh[$last_cdm]['vlc_cdm'];
-		$attdist = $tab_cdm_mh[$last_cdm]['attdist_cdm'];
+		$nbatt = $tab_cdm_mh[$last_cdm]['nbatt_cdm']." (bestiaire : ".$caracs_moyennes[nbatt].")";
+		$vitdep = $tab_cdm_mh[$last_cdm]['vitdep_cdm']." (bestiaire : ".$caracs_moyennes[vitdep].")";
+		$vlc = $tab_cdm_mh[$last_cdm]['vlc_cdm']." (bestiaire : ".$caracs_moyennes[vlc].")";
+		$attdist = $tab_cdm_mh[$last_cdm]['attdist_cdm']." (bestiaire : ".$caracs_moyennes[attdist].")";
 		$etatdla = $tab_cdm_mh[$last_cdm]['etatdla_cdm'];
 		$charge = $tab_cdm_mh[$last_cdm]['charge_cdm'];
 		$bm = $tab_cdm_mh[$last_cdm]['bm_cdm'];
