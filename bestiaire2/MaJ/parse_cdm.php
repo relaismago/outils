@@ -63,9 +63,6 @@ if(isset($_POST['soumettre'])){
       $pcdm['monstre'] = trim($resultat[3]);
       $pcdm['age']     = trim($resultat[4]);
       $pcdm['id_mh']   = trim($resultat[5]);
-	  echo "monstre : ".$pcdm['monstre']."<br>";
-	  echo "age : ".$pcdm['age']."<br>";
-	  echo "id : ".$pcdm['id_mh']."<br>";
     } 
     
     if (preg_match("/Le Monstre cibl[^ ]* fait partie des : ([^\(]*)/", $lignes[$i], $resultat)) 
