@@ -58,6 +58,21 @@ if(isset($_POST['soumettre'])){
       $pcdm['id_mh']     = trim($resultat[5]);
     }
 	
+    if (preg_match("/([^\(]*)CONNAISSANCE DES MONSTRES sur ([a-z]*) ([^\(]*) \[([^\]]*)\] \(([0-9]*)\)/", $lignes[$i], $resultat)) 
+    {
+      $pcdm['monstre'] = trim($resultat[3]);
+      $pcdm['age']     = trim($resultat[4]);
+      $pcdm['id_mh']   = trim($resultat[5]);
+	  echo "monstre : ".$pcdm['monstre']."<br>";
+	  echo "age : ".$pcdm['age']."<br>";
+	  echo "id : ".$pcdm['id_mh']."<br>";
+    } 
+    
+    if (preg_match("/Le Monstre cibl[^ ]* fait partie des : ([^\(]*)/", $lignes[$i], $resultat)) 
+    {
+      $pcdm['famille'] = trim($resultat[1]);
+    } 
+    
     if(eregi('[ \t]*Niveau.:.(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['nivcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
@@ -114,7 +129,7 @@ if(isset($_POST['soumettre'])){
 		case 'égal':  $pcdm['degmin']=$mot[2]; $pcdm['degmax']=$mot[2]; break;
       }
     }
-    if(eregi('[ \t]*D.s.+R.g.n.ration.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
+    if(eregi('[ \t]*D.s.+R.g.n.+:(.+)\((.+)\)',$lignes[$i],$resultat)){
       $pcdm['regcom'] = trim($resultat[1]);
       $mot = explode(' ',$resultat[2]);
       switch (trim($mot[0])){

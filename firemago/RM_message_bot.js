@@ -69,7 +69,7 @@ if ( !currentDocument || !( "body" in currentDocument ) )
 var table = currentDocument.getElementsByTagName ( 'table' ) [0];
 var titleHTML = table.getElementsByTagName ( 'tr' ) [0].getElementsByTagName ( 'td' ) [0].getElementsByTagName ( 'font' ) [0].innerHTML;
 
-if ( titleHTML.indexOf ( '[MountyHall] CdM' ) != -1 ||  titleHTML.indexOf ( '[MountyHall] Compétence CdM' ) != -1) 
+if ( titleHTML.indexOf ( '[MountyHall] CdM' ) != -1 ||  titleHTML.indexOf ( 'Connaissance des Monstres' ) != -1) 
 {
 	processCdM ();
 }
