@@ -273,7 +273,7 @@ function fillRow()
 					write( "<b>Armure : +12 | RM : +60-120 | Esquive : -6 ou -10</b>", "Très Lourd", "120", "<b>?</b>");
 				break;
 				case "ArmurePlates" :
-					write( "<b>Armure : +10 | RM : +50-150 | Esquive : -5 ou -8</b>", "Très Lourd", "100", "<b>?</b>");
+					write( "<b>Armure : +10 | RM : +50-100 | Esquive : -5 ou -8</b>", "Très Lourd", "100", "<b>?</b>");
 				break;
 				case "CuirasseEcailles" :
 					write( "<b>Armure : +6 | RM : +30-70 | Esquive : -3</b>", "Lourd", "60", "<b>?</b>");
