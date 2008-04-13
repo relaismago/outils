@@ -95,6 +95,7 @@ function fillBox2()
    			text = text + "<option value=\"ArmurePlates\">Armure de Plates</option>";
    			text = text + "<option value=\"Culotte\">Culotte en Cuir</option>";
    			text = text + "<option value=\"CuirasseEcailles\">Cuirasse d'Ecailles</option>";
+   			text = text + "<option value=\"CuirasseOssements\">Cuirasse d'Ossements</option>";
    			text = text + "<option value=\"CotteMailles\">Cotte de Mailles</option>";
    			text = text + "<option value=\"Fourrures\">Fourrures</option>";
    			text = text + "<option value=\"HaubertEcailles\">Haubert d'Ecailles</option>";
@@ -125,6 +126,7 @@ function fillBox2()
 	   		text = text + "<option value=\"Cagoule\">Cagoule</option>";
    			text = text + "<option value=\"CasqueCornesAncien\">Casque à Cornes Ancien</option>";
    			text = text + "<option value=\"CasqueCornesNouveau\">Casque à Cornes Nouveau</option>";
+   			text = text + "<option value=\"CasquePointes\">Casque à Pointes</option>";
    			text = text + "<option value=\"CasqueCuir\">Casque en Cuir</option>";
    			text = text + "<option value=\"CasqueMetal\">Casque en Métal</option>";
    			text = text + "<option value=\"Heaume\">Heaume</option>";
@@ -269,6 +271,9 @@ function fillRow()
 				case "CuirasseEcailles" :
 					write( "<b>Armure : +6 | RM : +30-70 | Esquive : -3</b>", "Lourd", "60", "<b>?</b>");
 				break;
+				case "CuirasseOssements" :
+					write( "<b>Armure : +5 | MM : +15-30 | RM : +15-30 | Esquive : -3</b>", "Lourd", "68", "<b>?</b>");
+				break;
 				case "CotteMailles" :
 					write( "<b>Armure : +7 | RM : +30-70 | Esquive : -3 ou -4</b>", "Très Lourd", "70", "<b>?</b>");
 				break;
@@ -355,6 +360,9 @@ function fillRow()
 				break;
 				case "CasqueCornesNouveau" :
 					write( "<b>Armure : +3 | Esquive : -1 | Dégâts : +1 | Vue : -1 | RM : +5-10</b>", "Léger", "10", "<b>?</b>");
+				break;
+				case "CasquePointes" :
+					write( "<b>Armure : +3 | Attaque : +1 | Dégâts : +1 | Vue : -1</b>", "Léger", "13", "<b>?</b>");
 				break;
 				case "CasqueCuir" :
 					write( "<b>Armure : +1 | RM : +5-10</b>", "Très Léger", "5", "<b>?</b>");
