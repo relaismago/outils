@@ -60,6 +60,7 @@ function fillBox2()
 	   		text = text + "<option value=\"Baton\">Bâton Lesté (2 mains)</option>";
 	   		text = text + "<option value=\"Boulet\">Boulet et Chaîne</option>";
 	   		text = text + "<option value=\"ChaineCloute\">Chaîne Cloutée</option>";
+	   		text = text + "<option value=\"CoutelasObsidienne\">Coutelas d'Obsidienne</option>";
 	   		text = text + "<option value=\"Crochet\">Crochet</option>";
 	   		text = text + "<option value=\"Dague\">Dague</option>";
 	   		text = text + "<option value=\"EpeeCourte\">Epée Courte</option>";
@@ -93,9 +94,10 @@ function fillBox2()
 	   		text = text + "<option value=\"ArmurePeaux\">Armure de Peaux</option>";
 	   		text = text + "<option value=\"ArmurePierre\">Armure de Pierre</option>";
    			text = text + "<option value=\"ArmurePlates\">Armure de Plates</option>";
-   			text = text + "<option value=\"Culotte\">Culotte en Cuir</option>";
+   			text = text + "<option value=\"CuirBouilli\">Cuir Bouilli</option>";
    			text = text + "<option value=\"CuirasseEcailles\">Cuirasse d'Ecailles</option>";
    			text = text + "<option value=\"CuirasseOssements\">Cuirasse d'Ossements</option>";
+   			text = text + "<option value=\"Culotte\">Culotte en Cuir</option>";
    			text = text + "<option value=\"CotteMailles\">Cotte de Mailles</option>";
    			text = text + "<option value=\"Fourrures\">Fourrures</option>";
    			text = text + "<option value=\"HaubertEcailles\">Haubert d'Ecailles</option>";
@@ -137,11 +139,13 @@ function fillBox2()
    			text = text + "<option value=\"PoissonAvril\">Poisson d'Avril</option>";
   		break;
 	   	case "Talismans" :
+	   	    text = text + "<option value=\"CollierPointes\">Collier à Pointes</option>";
    			text = text + "<option value=\"CollierDents\">Collier de Dents</option>";
    			text = text + "<option value=\"CollierPierre\">Collier de Pierre</option>";
 	   		text = text + "<option value=\"GorgeronCuir\">Gorgeron en Cuir</option>";
 	   		text = text + "<option value=\"GorgeronMetal\">Gorgeron en Métal</option>";
    			text = text + "<option value=\"TalismanPierre\">Talisman de Pierre</option>";
+   			text = text + "<option value=\"TalismanObsidienne\">Talisman d'Obsidienne</option>";
    			text = text + "<option value=\"TorquePierre\">Torque en Pierre</option>";
   		break;
 	}
@@ -201,7 +205,7 @@ function fillRow()
 					write( "<b>Attaque : -1 | Dégâts : +3</b>", "Léger", "15", "<b>?</b>");
 				break;
 				case "GrosseRacine" :
-					write( "<b>Attaque : -1 | Dégâts : +3</b>", "Moyen", "20", "<b>?</b>");
+					write( "<b>Attaque : -1 | Dégâts : +3 | RM : +5-10</b>", "Moyen", "20", "<b>?</b>");
 				break;
 				case "Hache" :
 					write( "<b>Attaque : -4 | Dégâts : +6</b>", "Moyen", "40", "<b>?</b>");
@@ -210,7 +214,7 @@ function fillRow()
 					write( "<b>Attaque : -4 | Dégâts : +6</b>", "Moyen", "25", "<b>?</b>");
 				break;
 				case "HachePierre" :
-					write( "<b>Attaque : -10 | Dégâts : +14</b>", "Très Lourd", "75", "<b>?</b>");
+					write( "<b>Attaque : -10 | Dégâts : +14 | RM : +5-10 %</b>", "Très Lourd", "75", "<b>?</b>");
 				break;
 				case "Hallebarde" :
 					write( "<b>Attaque : -10 | Dégâts : +12</b>", "Lourd", "60", "<b>?</b>");
@@ -243,10 +247,13 @@ function fillRow()
 					write( "<b>Attaque: -20 | Esquive: -15 | Dégâts: +28 | Vue: -4</b>", "Très Lourd", "125", "<b>?</b>");
 				break;
 				case "HacheObsidienne" :
-					write( "<b>Attaque: -8 | Dégâts: +16 | Régénération: -4 | -[54%;90%]RM | -[16%;21%]MM</b>", "Très Lourd", "75", "<b>?</b>");
+					write( "<b>Attaque: -8 | Dégâts: +16 | Régénération: -4 | -[45%;90%]RM | -[15%;30%]MM</b>", "Très Lourd", "75", "<b>?</b>");
 				break;
 				case "LameObsidienne" :
-					write( "<b>Attaque: +2 | Dégâts: +6 | Régénération: -3 | -[33%;60%]RM | -[11%;20%]MM</b>", "Moyen", "20", "<b>?</b>");
+					write( "<b>Attaque: +2 | Dégâts: +6 | Régénération: -3 | -[30%;60%]RM | -[10%;20%]MM</b>", "Moyen", "20", "<b>?</b>");
+				break;
+				case "CoutelasObsidienne" :
+					write( "<b>Attaque: +2 | Dégâts: +2 | Régénération: -2 | -[5%;10%]RM | -[15%;30%]MM</b>", "Très Léger", "5", "<b>?</b>");
 				break;
 			}
 		break;
@@ -260,13 +267,13 @@ function fillRow()
 					write( "<b>Armure : +2 | RM : +10-20</b>", "Léger ou Moyen", "10 ou 20", "450");
 				break;
 				case "ArmurePeaux" :
-					write( "<b>Armure : +4 | RM : +20-40 | Esquive : -2</b>", "Lourd", "40", "1000");
+					write( "<b>Armure : +4 | RM : +30-60 | Esquive : -2</b>", "Lourd", "40", "1000");
 				break;
 				case "ArmurePierre" :
 					write( "<b>Armure : +12 | RM : +60-120 | Esquive : -6 ou -10</b>", "Très Lourd", "120", "<b>?</b>");
 				break;
 				case "ArmurePlates" :
-					write( "<b>Armure : +10 | RM : +50-100 | Esquive : -5 ou -8</b>", "Très Lourd", "100", "<b>?</b>");
+					write( "<b>Armure : +10 | RM : +50-150 | Esquive : -5 ou -8</b>", "Très Lourd", "100", "<b>?</b>");
 				break;
 				case "CuirasseEcailles" :
 					write( "<b>Armure : +6 | RM : +30-70 | Esquive : -3</b>", "Lourd", "60", "<b>?</b>");
@@ -297,12 +304,15 @@ function fillRow()
 				break;
 				case "PagneCuir" :
 					write( "<b>Esquive : +2 | Armure : -1</b>", "Très Léger", "5", "?");
+				break;
+				case "CuirBouilli" :
+					write( "<b>Esquive : -1 | Armure : +3</b>", "Léger", "18", "?");
 				break;			
 				case "PagneMaille" :
 					write( "<b>Esquive : +2 | Armure : +1</b>", "Très Léger", "8", "?");
 				break;			
 				case "ArmureAnneaux" :
-					write( "<b>Esquive : -8 | Armure : +8 | RM : +100-?</b>", "?", "80", "?");
+					write( "<b>Esquive : -8 | Armure : +8 | RM : +90-180</b>", "?", "80", "?");
 				break;							
 			}
 		break;
@@ -397,6 +407,9 @@ function fillRow()
 		case "Talismans" :
 			switch(version)
 			{
+				case "CollierPointes" :
+					write( "<b>Esquive -1 | Dégâts : +1 | | Armure : +1</b>", "Très Léger", "3", "<b>?</b>");
+				break;
 				case "CollierDents" :
 					write( "<b>Dégâts : +1 | DLA : +5mn</b>", "Très Léger", "1", "<b>?</b>");
 				break;
@@ -411,6 +424,9 @@ function fillRow()
 				break;
 				case "TalismanPierre" :
 					write( "<b>Régénération : -1 | MM : +10-20 | RM : +10-20</b>", "Très Léger", "3", "<b>?</b>");
+				break;
+				case "TalismanObsidienne" :
+					write( "<b>Attaque : +1 | Dégâts : +2 | Régénération : -4 | MM : +20-40 | RM : +20-40</b>", "Très Léger", "3", "<b>?</b>");
 				break;
 				case "TorquePierre" :
 					write( "<b>Régénération : -2 | MM : +20-40 | RM : +20-40</b>", "Très Léger", "3", "<b>?</b>");
