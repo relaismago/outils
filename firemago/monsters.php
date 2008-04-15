@@ -36,6 +36,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
     var anchorID = anchorCellID.childNodes[0]; // ANCHOR
     var anchorDesc = anchorCellDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
 	var monsterStyle = new String ( anchorDesc.getAttribute ( 'class' ) );
+	var colortd='';
 	";
 		
 	
@@ -75,6 +76,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
       		$txtmonster .= " appartient à $nom_troll";
       		$urlmonster =  "URLGowap + '$monsterIds[$i]'";
 			echo "
+			colortd=colorRM;
 			anchorRow.setAttribute ( 'class', '' );
 			anchorRow.setAttribute ( 'style', 'background-color:' + colorRM );
 			";
@@ -97,6 +99,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 				if ($recherche == 'haute' || $recherche == 'superhaute')
 				{
 					echo "
+					colortd=colorUrg;
       				anchorRow.setAttribute ( 'class', '' );
       				anchorRow.setAttribute ( 'style', 'background-color:' + colorUrg );
 					";
@@ -104,6 +107,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
  				if ($recherche == 'basse' || $recherche == 'tresbasse' || $recherche == 'moyenne')
         		{
           			echo "
+          			colortd=colorSearch;
           			anchorRow.setAttribute ( 'class', '' );
           			anchorRow.setAttribute ( 'style', 'background-color:' + colorSearch );
           			";
@@ -118,6 +122,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
         			if (count($tab_cdm) ==  0)
 					{
 						echo "
+						colortd=colorCdm;
           				anchorRow.setAttribute ( 'class', '' );
           				anchorRow.setAttribute ( 'style', 'background-color:' + colorCdm );
           				";
@@ -127,10 +132,6 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 	}// fin colorisation
 	
-	echo"
-   	newLink.appendChild ( document.createTextNode ( '$txtmonster' ));
-   	newLink.setAttribute ( 'href', $urlmonster  );
-	";
 	$mm=$rm=$dla="";	
 	if ($tab_cdm_mh)
 	{
@@ -272,11 +273,18 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	$caracTot .= $reg.";".$arm.";".$vue.";".$mm.";".$rm.";".$nbatt.";".$vitdep.";".$vlc.";".$attdist.";";
 	$caracTot .= $dla.";".$caracs_spe[4].";".$caracs_spe[5].";".$caracs_spe[10].";".$etatdla.";".$charge.";".$bm;
 	$monsterNames[$i] = ereg_replace("\'","&#39;",$monsterNames[$i] );
+	
+	echo"
+   	newLink.appendChild ( document.createTextNode ( '$txtmonster' ));
+   	newLink.setAttribute ( 'href', $urlmonster  );
+	";
 	echo "
 	newLink.setAttribute ( 'target', '\"_blank\"' );
     newLink.setAttribute ( 'class', monsterStyle );
-	newLink.setAttribute ( 'onmouseover', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
+    //newLink.setAttribute ( 'onclick', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
+	//newLink.setAttribute ( 'onmouseover', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
 	//newLink.setAttribute ( 'onmouseout', 'cacherInfoBulle();');
+	//newLink.setAttribute ( 'onclick', 'this.onmouseout=function () {};');
     anchorCellDesc.removeChild ( anchorCellDesc.getElementsByTagName ( 'a' )[0] );
     anchorCellDesc.appendChild ( newLink );
 	";
@@ -285,9 +293,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	var newTd = document.createElement ( 'td' );
 	newTd.setAttribute ( 'align', 'center');
 	newTd.appendChild( document.createTextNode ( '$niv' ));
-	//newTd.setAttribute ( 'onmouseover', 'clickPop = true;infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
-	//newTd.setAttribute ( 'onclick', 'clickPop = true;');
-	newTd.setAttribute ( 'onmouseover', 'cacherInfoBulle();');
+	newTd.setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.style.background = \'white\';');
+	newTd.setAttribute ( 'onclick', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
+	newTd.setAttribute ( 'onmouseout', 'this.style.background=\'' + colortd + '\'');
 	//anchorRow.appendChild (newTd );
 	anchorRow.insertBefore ( newTd, anchorCellDesc );
 	";

@@ -523,7 +523,6 @@ function cacherInfoBulle() {
 }
 
 
-
 // ********************************************************
 // Adding 2Dview's button
 // ********************************************************
@@ -562,7 +561,8 @@ function checkViewForm ( form )
 	else
 	{
 		form.action = URLVue2D;
-		window.open ( '', 'popupVue', 'width=" + (screen.width-150) + ", height=" + (screen.height-250) + ", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes' );
+		//window.open ( '', 'popupVue', 'width=" + (screen.width-150) + ", height=" + (screen.height-250) + ", toolbar=no, status=no, location=no, resizable=yes, scrollbars=yes' );
+		window.open ( '', 'popupVue' );
 		form.target = 'popupVue';
 		//form.target = 'iframe_vue';
 		form.submit ();
@@ -847,7 +847,24 @@ function caracMonster ( monster, carac )
  return text;
 }
 
-
+function caracTroll ( troll, carac )
+{
+ var arrCarac = carac.split(";");
+ text = "<table width='100%' align='center' class='mh_tdborder'>";
+ text += "<tr><td class='mh_tdtitre' colspan='2' align='center'><b>" + arrCarac[0] + "</b></td></tr>";
+ text += "<tr><td class='mh_tdtitre' width='20%'>DLA</td><td class='mh_tdpage'>" + arrCarac[1] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>PdV</td><td class='mh_tdpage'>" + arrCarac[2] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Att</td><td class='mh_tdpage'>" + arrCarac[3] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Esq</td><td class='mh_tdpage'>" + arrCarac[4] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Deg</td><td class='mh_tdpage'>" + arrCarac[5] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Reg</td><td class='mh_tdpage'>" + arrCarac[6] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Arm</td><td class='mh_tdpage'>" + arrCarac[7] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>Vue</td><td class='mh_tdpage'>" + arrCarac[8] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>MM</td><td class='mh_tdpage'>" + arrCarac[9] + "</td></tr>";
+ text += "<tr><td class='mh_tdtitre'>RM</td><td class='mh_tdpage'>" + arrCarac[10] + "</td></tr>";
+ text += "</table>";
+ return text;
+}
 
 // ********************************************************
 // Troll and guild compendium links

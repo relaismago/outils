@@ -1784,10 +1784,8 @@ function selectDbVtt($id_troll, $Competence="")
 {
 	global $db_vue_rm;
 
-	$sql ="SELECT *, -DLAH*60-DLAM as TDLA, VUE+VUEB as TVUE, REG*2+REGB as TREG,";
-	$sql .= " ATT*3.5+ATTB as TATT, ESQ*3.5+ESQB as TESQ, DEG*2+DEGB as TDEG,";
-	$sql .= " ARM+ARMB as TARM, RM+RMB as TRM, MM+MMB as TMM,";
-	$sql .= " (TO_DAYS(NOW()) - TO_DAYS(DateMaj)) as Peremption,";
+	$sql ="SELECT *,";
+	$sql .= " HOUR(TIMEDIFF(NOW(),DateMaj)) as Peremption,";
 	$sql .= " UNIX_TIMESTAMP(DateMaj) as date_maj, race_troll, niveau_troll";
 	$sql .= " FROM vtt,trolls";
 	$sql .= " WHERE No = $id_troll";
@@ -2130,4 +2128,116 @@ function isDbAdministration()
 	}
 }
 
+
+##########################
+# Met à jour le VTT en fonction du n°
+# appel du script sp_caract de mh
+##############################
+function updateVTT ($id="")
+{
+	global $db_vue_rm;
+	
+	$sql = "SELECT pass_troll ";
+	$sql .= "FROM trolls ";
+	$sql .= "WHERE id_troll=$id";
+	if (!$result=mysql_query($sql,$db_vue_rm))
+	{
+	  echo mysql_error()." $sql";
+	  return false;
+	} 
+	else 
+	{
+		$res = mysql_fetch_assoc($result);
+		$pass = $res['pass_troll'];
+	}
+	$filename= "http://sp.mountyhall.com/SP_Caract.php?Numero=$id&Motdepasse=$pass";
+	//$filename = "vues/SP_Caract.php";
+	$fp = fopen ($filename,"r");
+	if ($fp)
+	{
+		$i=0;
+		while (($line = fgets($fp, 1024)))
+		{
+			if ( eregi("^Erreur",$line) )
+			{
+				echo "$id erreur appel script<br>";
+				return false;
+			}
+			else
+			{
+				$liste=split (";",$line);
+				if ( $i == 0 || $i == 1 )
+				{
+					$attb += $liste[1];
+					$esqb += $liste[2];
+					$degb += $liste[3];
+					$regb += $liste[4];
+					$vueb += $liste[7];
+					$rmb += $liste[8];
+					$mmb += $liste[9];
+					$armb += $liste[10];
+					$dla += $liste[11];
+					$dla += $liste[12];
+				}
+				if ( $i == 2 )
+				{
+					$att = $liste[1];
+					$esq = $liste[2];
+					$deg = $liste[3];
+					$reg = $liste[4];
+					$pvmax = $liste[5];
+					$pvact = $liste[6];
+					$vue = $liste[7];
+					$rm = $liste[8];
+					$mm = $liste[9];
+					$arm = $liste[10];
+					$dlar = $liste[11];
+					$dla += $liste[11];
+					$dla += $liste[12];
+				}
+			}
+  			$i++;
+		}
+		$dla += 250 / $pvmax * ($pvmax - $pvact);
+		if ($dla < $dlar) $dla = $dlar;
+		$dlah = floor($dla/60); 
+		$dlam = floor($dla - (60*$dlah));
+		$update = "UPDATE vtt SET ";
+		$update .= "ATT = $att, ";
+		$update .= "ATTB = $attb, ";
+		$update .= "ESQ = $esq, ";
+		$update .= "ESQB = $esqb, ";
+		$update .= "DEG = $deg, ";
+		$update .= "DEGB = $degb, ";
+		$update .= "REG = $reg, ";
+		$update .= "REGB = $regb, ";
+		$update .= "PVs = $pvmax, ";
+		$update .= "PV_ACTUELS = $pvact, ";
+		$update .= "VUEB = $vueb, ";
+		$update .= "VUE = $vue, ";
+		$update .= "RMB = $rmb, ";
+		$update .= "RM = $rm, ";
+		$update .= "MMB = $mmb, ";
+		$update .= "MM = $mm, ";
+		$update .= "DLAH = $dlah, ";
+		$update .= "DLAM = $dlam, ";
+		$update .= "DateMaj = NOW() ";
+		$update .= "WHERE No = $id ";
+		
+		if (!$result=mysql_query($update,$db_vue_rm)) 
+		{
+	    	echo mysql_error(). " $update i=$i";
+	    	return false;
+		}
+	    echo $id." a jour<br>";
+	    fclose ($fp);
+		return true;
+	}
+	else
+	{
+		echo "pb ouverture fichier";
+		return false;
+	}
+
+}
 ?>
