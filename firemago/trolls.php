@@ -64,10 +64,10 @@ if ($_SESSION['AuthGuilde'] == 450)
 			$caracTot.=$vtt[VUE]."+".$vtt[VUEB].";";
 			$caracTot.=$vtt[RM]."+".$vtt[RMB].";";
 			$caracTot.=$vtt[MM]."+".$vtt[MMB].";";
-			echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'background', '' ); \n";
+			/*echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'background', '' ); \n";
       		echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'background', '' ); \n";
 			echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorRM ); \n";
-			echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorRM ); \n";
+			echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorRM ); \n";*/
 			echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.className = \'mh_tdtitre\';');";
 			echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'onclick', 'infoBulle (\'$nom_troll\',event,\'caracTroll\',\'$caracTot\');');";
 			echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'onmouseout', 'this.className = \'mh_tdpage\'');";
