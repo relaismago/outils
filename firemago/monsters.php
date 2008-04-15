@@ -281,8 +281,6 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	echo "
 	newLink.setAttribute ( 'target', '\"_blank\"' );
     newLink.setAttribute ( 'class', monsterStyle );
-    //newLink.setAttribute ( 'onclick', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
-	//newLink.setAttribute ( 'onmouseover', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
 	//newLink.setAttribute ( 'onmouseout', 'cacherInfoBulle();');
 	//newLink.setAttribute ( 'onclick', 'this.onmouseout=function () {};');
     anchorCellDesc.removeChild ( anchorCellDesc.getElementsByTagName ( 'a' )[0] );
@@ -296,7 +294,6 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	newTd.setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.style.background = \'white\';');
 	newTd.setAttribute ( 'onclick', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
 	newTd.setAttribute ( 'onmouseout', 'this.style.background=\'' + colortd + '\'');
-	//anchorRow.appendChild (newTd );
 	anchorRow.insertBefore ( newTd, anchorCellDesc );
 	";
 }// boucle for
