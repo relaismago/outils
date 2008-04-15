@@ -55,7 +55,7 @@ if ($_SESSION['AuthGuilde'] == 450)
 		if ( $id_guilde_troll == ID_GUILDE )
 		{
 			$vtt = selectDbVtt($trollsid[$i]);
-			$caracTot="carac ils y a : ".$vtt[Peremption]." h;".$vtt[DLAH]."h".$vtt[DLAM].";".$vtt[PV_ACTUELS]."/".$vtt[PVs].";";
+			$caracTot="carac il y a : ".$vtt[Peremption]." h;".$vtt[DLAH]."h".$vtt[DLAM].";".$vtt[PV_ACTUELS]."/".$vtt[PVs].";";
 			$caracTot.=$vtt[ATT]."+".$vtt[ATTB].";";
 			$caracTot.=$vtt[ESQ]."+".$vtt[ESQB].";";
 			$caracTot.=$vtt[DEG]."+".$vtt[DEGB].";";
