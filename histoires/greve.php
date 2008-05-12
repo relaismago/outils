@@ -34,6 +34,19 @@ function init()
 	hist_greve_Minhothort_1();
 	hist_greve_Leroidelaclasse_5();
 	hist_greve_HeSrkim_7();
+	hist_greve_Peaceandtroll_1();
+	hist_greve_Uthal_1();
+	hist_greve_Kapootroll_2();
+	hist_greve_trollichon_3();
+	hist_greve_Minos_1();
+	hist_greve_Pafdantagueule_1();
+	hist_greve_Grabuge_1();
+	hist_greve_Fuleng_1();
+	hist_greve_Korskarn_2();
+	hist_greve_Leroidelaclasse_6();
+	hist_greve_Lobo_2();
+	hist_greve_Heskrim_8();
+	hist_greve_trollichon_4();
 	
 	echo "<br><br>";
 	echo "<br><br>";
@@ -430,7 +443,7 @@ function hist_greve_HeSrkim_7()
   la poursuite de notre petite entreprise qui hélas, connaît à ce jour 
   la crise.</p>
   <p align="justify">DIANTRE !!!!!! 
-  QUE LIS-JE ???????...&nbsp;"Si on plus rien à attendre de la guilde, 
+  QUE LIS-JE ???????...&nbsp;"Si on n'a plus rien à attendre de la guilde, 
   autant faire notre business tranquillement dans notre coin !"</p>
 
   <p align="justify">Mais diantre 
@@ -440,7 +453,7 @@ function hist_greve_HeSrkim_7()
   aux règles essentielles de la guilde qui se veulent prôner partage 
   et travail d'équipe ?</p>
   <p align="justify">Comment osent-ils 
-  ? Comment en sont ils arrivés là ?<i> </i></p>
+  ? Comment en sont ils arrivés là ?</p>
   <p align="justify">en tout cas, 
   je ne saurais en porter la responsabilité comme Maitre Scribe aussi, 
   peut être est il temps pour moi de réfléchir plus précisément à 
@@ -448,6 +461,325 @@ function hist_greve_HeSrkim_7()
   le Goblin prochain sera décisif...
 <?
 	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Peaceandtroll_1()
+{
+	tutorial_haut_bulle_droit();
+	?>Bon, y'a encore les intellos 
+  qui savent plus péter... qu'est ce qui se r'passe...? 
+  <p align="justify">Pourquoi qu'ils 
+  gueulent ? Ils veulent quoi encore ? ...</p>
+  <p align="justify">Des parchos 
+  en peau de gobelin ? C'est pas solide ça... Bon bin si on veut éviter 
+  de devoir les bouffer, va falloir que j'prenne un d'mes jeunes pour 
+  qu'il gratte... ça lui fra les dents, c'est pâs grav'...</p>
+  <p align="justify">&nbsp;<br>
+  <b>kkwet </b>restera grand quoiqu'il arrive...
+    <?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Peaceandtroll_avatar_bleu.gif", "Peace&Troll (31202)");
+}
+
+function hist_greve_Uthal_1()
+{
+	
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Uthal_avatar_bleu.gif", "Uthal (83917)");
+	?>
+	<i>Fourbu, poussiéreux, nauséeux 
+  d'avoir parcouru tant de chemin, </i>
+  <b><i>Uthal</i></b><i> parvint enfin en vue de la Biblyohtek.&nbsp; 
+  Les aspirations du quatrième tenancier de la guilde étaient d'ordre 
+  culturel et esthétique. Péniblement, il se traîna vers la Grande 
+  Tanière, pour y déposer les composants qu'il avait glanés et quelques 
+  artefacts destinés à la maléfacterie voisine. 
+  Interdit et sonné devant la porte barrée, </i>
+  <b><i>Uthal</i></b><i> examina la façade de la Bibly, remarquant seulement 
+  les calicots clinquants et les banderoles bariolées.</i>
+  <p align="justify"><i>&nbsp;<br>
+
+  </i>Aïeuh, mais qui a fermé la porte ?</p>
+  <p align="justify">Grève ? Mrgneuh 
+  ? Non aux cadences infernales... Mmh... Plus de Parchemins <s><strike>
+  en string</strike></s> Vierges et de Trollettes <s><strike>Vierges</strike></s> 
+  en string... Je devine de qui est celui-là. Eh bien, que de percutants 
+  slogans&nbsp;! </p>
+  <p align="justify">Joignons-nous 
+  à eux, j'ai moi aussi des revendications pour le Mag'Hasin !!
+<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Kapootroll_2()
+{
+	tutorial_haut_bulle_droit();
+	?>Tudieu, le jeune <b>Uthal</b> 
+  est des nôtres ! Voilà une bonne nouvelle&nbsp;! Bienvenue à toi dans nos 
+  rangs !! Nous sommes donc les tenanciers au complet désormais... 
+  <p align="justify">Pour fêter 
+  ça, je vous propose de lever notre verre et faire couler le calvok 
+  jusqu'à en finir les fûts&nbsp;! Toi mon petit bonhomme, va falloir te 
+  former au calvok, t'es tenancier nom d'une cerise fermentée !!</p>
+  <p align="justify"><br>
+  Autrement, j'ai peut-être une autre idée pour sceller cette belle 
+  union : chacun pourrait avaler sa clef de tenancier en signe de profonde 
+  protestation !!! </p>
+  <p align="justify">... et on 
+  pourra comparer qui a la digestion la plus rapide et la plus efficace.... 
+  ça me permettra d'avancer mon sujet d'études : "l'ordinarus trollus: 
+  troll ou faux-monstre", génial non ?!</p>
+
+  <p align="justify"><br>
+  <i>Messire </i><b><i>Hé Skrim</i></b><i> avait beau demander à ses 
+  mouches si elles avaient déjà vu pareil discours, aucun souvenir ne 
+  venait pour éclairer sa lanterne... et <b>Kkwet</b> seul sait à quel point 
+  ils avaient des souvenirs plus ou moins brumeux.</i> <i>A l'écoute 
+  de ces souvenirs, Tous les cinq s'engagèrent à ressasser avec nostalgie 
+  les épisodes les plus marquants qu'ils avaient vécus à l'intérieur 
+  de ces murs habituellement si chaleureux...</i>
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Kapootroll_avatar_bleu.gif", "KapooTroll (13236)");
+}
+
+function hist_greve_trollichon_3()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Trollichon_avatar_bleu.gif", "Troll'ichon (42637)");
+	?>Nous nous sommes exprimés 
+  : attendons des réponses à nos demandes...
+  <p>J'en vois déjà qui vont 
+  dire : "attendons de voir ce que dit le Conseil&nbsp;!!"</p>
+  <p align="justify">Mais le problème 
+  ne vient pas d'en Haut nom de <b>Kkwet</b>, mais de tout le monde ! 
+  C'est à tous de se bouger nom d'une crotte sèche de gowap : aux endormis, 
+  aux profiteurs, aux abonnés absents, aux revendeurs de petites semelles, 
+  aux...!!!!</p>
+  <p align="justify"><br>
+  <i>Ne finissant pas sa phrase, </i>
+
+  <b><i>Trollich</i></b><i> s'était levé pour aller prendre l'air...</i>
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Minos_1()
+{
+	tutorial_haut_bulle_droit();
+	?>
+	<i>Des 
+  clameurs se faisaient entendre&nbsp; à l'extérieur...</i>&nbsp;<br>
+  </h1>
+  <p><b>Minos</b> vouloir boire 
+  calvok&nbsp;!</p>
+  <p><b>Minos</b> rapporter ingrédients 
+  du marché&nbsp;!!</p>
+
+  <p><b>Minos</b> attendre la fin 
+  de la grève car d'accord avec les Tenanciers&nbsp;!!!
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Minos_avatar_bleu.gif", "Minos (27951)");
+}
+
+function hist_greve_Pafdantagueule_1()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Paf_avatar_bleu.gif", "Paf Dantagueule (15959)");
+	?>Mmmmh... Grève ?!! quoi 
+  être ça ? nouveau monstre ? nouvelle guilde ennemie ? <b>Paf</b> pas 
+  aimé son de mot Grève&nbsp;!<i>&nbsp;<br>
+  &nbsp;<br>
+   Il cala bien sa hache dans ses deux mains calleuses et puissantes, 
+  prêt à défendre la Guilde contre ce nouveau maux ou mot... il ne 
+  sait pas trop bien... sur qui ou quoi frapper... mais que ne ferait-il 
+  pas pour la Guilde...&nbsp;!?</i>
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Grabuge_1()
+{
+	tutorial_haut_bulle_droit();
+	?>
+  Qu'est-ce qui se passe 
+  ici, spèces de plak amorphes&nbsp;!? 
+  <p align="justify">Il faut arrêter 
+  la mokette, au moins sous sa forme gazeuse en tout cas, si vous n'êtes 
+  plus capables de pousser une porte... Vous avez fait quoi des petits 
+  bidules qui étaient coincés entre vos 2 oreilles à la naissance ?&nbsp;<br>
+  </p>
+  <p align="justify">Comment ça 
+  fermée&nbsp;!? Cette porte, elle me fait aussi peur qu'un tank miniature 
+  en carton-pâte coincé dans une boîte à jouets entre une poupée 
+  barbie avec rasage intégrale, aisselles comprises, et le terrible capitaine 
+  crochet version manchot&nbsp;!</p>
+  <p align="justify">Hop hop hop, 
+  n'essaie même pas p'tit dudu, tu ressembles juste à un tank dont 
+  le canon a été scié et les obus plein de rouille&nbsp;! En fait, tu frapperais 
+  comme un gob' asthmatique, on ne verrait pas de différence. Laisse-moi 
+  faire, tout le hall sait que c'est moi qui ait le plus gros outil&nbsp;!&nbsp;<br>
+
+  &nbsp;<br></p>
+  <h1 align="justify"><i>Malgré 
+  toute la puissance de </i><b><i>Mister Flamby</i></b><i>, rien n'y 
+  fit, la porte ne bougea pas d'un pouce...</i>
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Grabuge_avatar_bleu.gif", "grabuge (6415)");
+}
+
+function hist_greve_Fuleng_1()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Fuleng_avatar_bleu.gif", "Fuleng (10611)");
+	?>
+	<i>L'impatience gagnait 
+  les rangs des trolls de plus en plus nombreux devant la porte de la 
+  bibliotek. Les grévistes pouvaient parfois percevoir d'étranges 
+  remarques&nbsp;:</i>&nbsp;<br>
+  <p>Arf, si au moins <b>Trollich&nbsp;</b>avait 
+  ramené ses gowaps... on aurait pu passer le temps, et du bon...</font>
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Korskarn_2()
+{
+	tutorial_haut_bulle_droit();
+	?>
+  <b>Messire Hé! Skrim!!!, </b>
+  s'il vous plait, laissez moi entrer !!
+  <p align="justify">Vous m'avez 
+  ouvert les yeux&nbsp;! Je veux vous aider, je veux apporter pleins de Parchemins 
+  Vierges à notre vénérable Guilde et vous soulager de cette rude tâche. 
+  J'ai franchi le pas&nbsp;: je me suis lancé dans la tâche ingrate du grattage 
+  !! Mais j'ai besoin de votre aide : je vous en prie procurez-moi un 
+  parchemin et quelques compos pour que je puisse démarrer mon apprentissage 
+  !!
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Korskarn_avatar_bleu.gif", "kor-skarn (69322)");
+}
+
+function hist_greve_Leroidelaclasse_6()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Leroidelaclasse_avatar_bleu.gif", "Leroidelaclasse (36452)");
+	?>
+	<i>Inspiré mais toujours 
+  dans l'attente d'un geste d'en-Haut, Leroidelaclasse fredonnait 
+  la suite de sa chansonnette... </i>&nbsp;<br>
+  <p align="center">Un jour viendra 
+  notre Guilde se réveillera&nbsp;<br>
+  Solidarité et cohésion elle retrouvera.&nbsp;<br>
+  Et tous ensemble nous fêterons&nbsp;<br>
+  Le retour des sortilèges à profusion.&nbsp;<br></p>
+  <p align="center">Je rêve ...&nbsp;<br>
+
+  Je rêve d'une Guilde ou les dirigeants montreraient l'exemple,&nbsp;<br>
+  Je rêve d'une Guilde ou Lobo prendrait en charge les groupes de jeunes&nbsp;<br>
+  Je rêve d'une Guilde ou Grabuge gratterait des parchos&nbsp;<br>
+  Je rêve d'une Guilde ou il y aurait un Scribe au conseil&nbsp;<br>
+  Je rêve d'une Guilde ou tous les groupes chasseraient du prio à la 
+  demande
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Lobo_2()
+{
+	tutorial_haut_bulle_droit();
+	?>
+  <i>Ces paroles firent réagir 
+  le brave Lobo. Il attrapa d'une main puissante le frêle tomawak. 
+  Celui ci surprit, lâcha un pet foireux. Lobo, en plus des postillons, 
+  balançait de petites rafales maîtrisées qui éjectaient l'une après 
+  l'autre les pièces d'équipement du tom dont les pieds ne touchaient 
+  plus par terre.</i>&nbsp;<br>
+  <p align="justify">Dis donc le 
+  jeunot, ils sont bien beaux tes rêves, mais tu ferais bien de te bouger 
+  l'oignon plutôt que rêvasser ! </p>
+  <p align="justify">Tu crois qu'on 
+  t'a attendu pour faire des choses dans cette guilde ? Tu crois que tout 
+  ça s'est construit en un Mundidey ? TU CROIS QUE J'AI BESOIN QU'UN 
+  AVORTON ME DICTE MA CONDUITE ??</p>
+  <p align="justify">Les dirigeants 
+  ? Quels dirigeants ? Y en a qu'un et c'est moi ! Les membres du Conseil 
+  sont des CONSEILLERS ! Depuis le début je fais la morale à tout ceux 
+  de la Guilde. Si tout le monde jouait le jeu, nos Tanières regorgeraient 
+  de compos prios ! Je suis fatigué de répéter constamment les mêmes 
+  choses, fatigués de voir passer des trolls qui viennent se goinfrer 
+  aux mamelles de la guilde avant de se barrer sans un merci. </p>
+  <p align="justify">L'exemple 
+  ? Je l'ai montré depuis le début. J'ai toujours montré l'exemple 
+  en allant même me fritter contre des TéKas alors que j'exècre ça 
+  au point de l'avoir graver de mon sang dans les dogmes de la Guilde,...
+  tout ça pour défendre notre honneur. Et toi, misérable moucheron, 
+  tu oses m'interpeller ? Me pointer du doigt&nbsp;!&nbsp;<br></p>
+  <p align="justify">Tu rêves 
+  ? hein ? Eh bien réveille-toi ! Et cesse d'avoir le regard constamment 
+  tourné vers les mêmes en espérant qu'ils t'apportent la solution 
+  sur un plateau. Chacun peut et doit se prendre en charge.</p>
+
+  <p align="justify">C'est pas 
+  le Conseil qui est fautif de la situation actuelle, mais VOUS TOUS ! 
+  Vous qui vivez bien heureux, au chaud dans une guilde ou postuler sans 
+  contre-partie est si facile ! A vous de vous prendre en main et de participer 
+  à la bonne marche de la Guilde. Ramassez les compos, ramasser les GG, 
+  ramassez les trésors et remplissez-en les Tanière jusqu'au ras ! Voilà 
+  ce que demande la Guilde ! <b>Grognon</b>, certainement le meilleur scribe 
+  du Hall, a abandonné, tant ses efforts de copies n'étaient pas récompensés 
+  à leur juste valeur. C'est tellement simple de postuler... Non, ça 
+  ne sont pas aux vieux trolls de se remuer, mais aux jeunes de perpétuer 
+  ce que les fondateurs ont mis en place ! J'ai donné à la Guilde plus 
+  que tu ne pourras jamais donné <b>Leroidelaclasse</b> ! Et on dirait que seul <b>
+  Kkwet</b> s'en souvient&nbsp;! Tu te trompes de cible, jeune troll.&nbsp;<br>
+  </p>
+  <p align="justify">Et vous les 
+  tenanciers, si je vous ai donnés ma confiance, c'est pas pour de la 
+  gnognotte ! Vous êtes les boss ici ! Si un type vient réclamer un 
+  truc et qu'il est clair qu'il ne fout pas grand chose en retour, vous 
+  avez le droit de l'envoyer bouler ! C'est comme les copies de sorts, 
+  le tirage au sort c'est votre salade ! Z'avez tous les pouvoirs les 
+  gars !</p>
+  <p>&nbsp;<br>
+  <i>Lobo jeta un dernier regard au Tom, un regard plus de tristesse que 
+  de colère, et sorti de la caverne, les épaules basses, écrasées 
+  sous une lassitude croissante. Le cancer des trolls... mais il remettait 
+  l'espoir de la guilde sur les épaules de ses tenanciers.</i>
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Lobo_avatar_bleu.gif", "Lobo (10866)");
+}
+
+function hist_greve_Heskrim_8()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Heskrim_avatar_bleu.gif", "Hé ! Skrim !!!! (26038)");
+	?>
+	Ça c'est un Chef qui est 
+  capable de déléguer... Messieurs, il nous incombe donc de fixer ces 
+  directives, et j'aimerais que nous nous attelions immédiatement à 
+  cette tâche dont l'issue, n'en doutons pas, va susciter du mécontentement 
+  chez les écornifleurs...
+  <p><i>&nbsp;<br>
+  Devant le regard vide de ses compagnons d'infortune, </i>
+  <b><i>Hé Skrim</i></b><i> remplaça 
+  cette avalanche de mots compliqués par des mots plus trollesques...&nbsp;<br>
+  </i>
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_trollichon_4()
+{
+	tutorial_haut_bulle_droit();
+	?>
+  nomdediou, on est les chefs, on décide alors !!
+  <p align="justify">et bah c'est 
+  parti : on va te prendre des décisions, on va accorder nos violons, 
+  brailler à ceux qui voudront l'entendre que l'écriteau des GTs a bougé... 
+  et il n'y aura pas à péter de travers quand ça sera décidé !!</p>
+  <p align="justify">Mmmh, mince, 
+  va falloir réfléchir maintenant, et surtout écrire...</p>
+  <p align="justify"><br>
+  <i>Devant la tâche qui l'attendait, </i>
+  <b><i>trollichon</i></b><i> prit une belle chope bien pleine pour se 
+  donner du courage et commença à gratter avec une vieille plume de 
+  phoenix au plus profond de son oreille gauche pour y trouver l'encre 
+  nécessaire à son parchemin</i>
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Trollichon_avatar_bleu.gif", "Troll'ichon (42637)");
 }
 
 ?>
