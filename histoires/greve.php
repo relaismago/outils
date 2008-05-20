@@ -47,6 +47,15 @@ function init()
 	hist_greve_Lobo_2();
 	hist_greve_Heskrim_8();
 	hist_greve_trollichon_4();
+	hist_greve_Leroidelaclasse_7();
+	hist_greve_Uthal_2();
+	hist_greve_trollichon_5();
+	hist_greve_Heskrim_9();
+	hist_greve_trollichon_6();
+	hist_greve_Fuleng_2();
+	hist_greve_Minhothort_2();
+	hist_greve_Lobo_3();
+	hist_greve_Kkwet_1();
 	
 	echo "<br><br>";
 	echo "<br><br>";
@@ -780,6 +789,270 @@ function hist_greve_trollichon_4()
   nécessaire à son parchemin</i>
 	<?
 	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Trollichon_avatar_bleu.gif", "Troll'ichon (42637)");
+}
+
+function hist_greve_Leroidelaclasse_7()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Leroidelaclasse_avatar_bleu.gif", "Leroidelaclasse (36452)");
+	?>
+	<i>Leroi se releva tant bien 
+  que mal mais les idées claires et clama haut et fort :</i>
+  <p align="justify"><br>
+  Enfin une réaction, il était temps ! Comme quoi avec un peu de provocation 
+  on peut faire trembler des montagnes&nbsp;: t'as raison <b>Lobo</b>, ceux 
+  qui veulent des sorts n'ont qu'à se bouger et nous apporter les ingrédients. 
+  C'est simple comme bonjour finalement ! Je me place donc à la disposition 
+  de tout R&amp;M m'apportant les ingrédients d'un sort en ma possession 
+  à recopier et je m'exécuterai, en attendant, je range mes doux rêves 
+  d'une Guilde solidaire dans un coin de ma tête et je m'en retourne 
+  chasser du Phoenix pour l'année prochaine...</p>
+  <p align="justify">Bon courage 
+  mes amis, et rendez-vous pour le Gob !
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Uthal_2()
+{
+	tutorial_haut_bulle_droit();
+	?><i>C'est alors que, du côté 
+  des toilettes de la Bibly, une puissante déflagration retentit, bientôt 
+  suivie d'un bruit infâme et caractéristique de siphon. </i>
+  <b><i>Uthal</i></b><i>, un rien plus pâle qu'à l'accoutumée, réapparut 
+  quelques minutes plus tard, brandissant une clé rutilante...</i>
+  <p align="justify"><br>
+  Ça y'est, j'ai récupéré la clé du Mag'Hasin. L'est pas toute propre, 
+  mais au moins, on va pouvoir ré-ouvrir quand la décision tombera. 
+  Weeeeeh, pour fêter ça, z'auriez pas des chopes format junior dans 
+  cet endroit ? Je vais prendre mon temps de la boire, parce que là, 
+  j'suis encore un peu faiblard. </p>
+  <p align="justify">J'ai bien 
+  de menues idées&nbsp;: il y a moyen d'avoir une liste de composants en forte 
+  pénurie ? Nous voulons bien chasser du prioritaire, mais je n'ai pas 
+  encore trouvé les valves où sont affichées ces listes spécifiques, 
+  ça pourrait servir pour orienter plus précisément les séances de 
+  chasse&nbsp;!?
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Uthal_avatar_bleu.gif", "Uthal (83917)");
+}
+
+function hist_greve_trollichon_5()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Trollichon_avatar_bleu.gif", "Troll'ichon (42637)");
+	?><i>Les tenanciers n'avaient 
+  plus vu </i><b><i>troll'ichon</i></b><i> depuis 2 jours : il s'était 
+  enfermé dans la cave, prétextant un besoin d'inspiration et de calme. 
+  Ils étaient en train de discuter tranquillement sur les possibles améliorations 
+  des tenances quand soudain la porte de la cave s'ouvrit à la volée 
+  !! </i><b><i>Troll'ichon</i></b><i>, les traits un peu tirés et l'haleine 
+  vinassée, s'extasia.</i>
+  <p><br>
+  ça y est les gars, j'ai rassemblé toutes nos demandes, toutes les 
+  propositions des membres de la guilde et toutes les décisions prises 
+  par les conseillers... et je vous ai pondu un brouillon !! Je vous montre&nbsp;: 
+  voilà le brouillon un peu gribouillé par endroits, mais lisible.</p>
+  <p align="justify">Dîtes-moi 
+  chers compagnons tenanciers si vous y voyez des modifications à faire 
+  et on aura plus qu'à afficher cette belle pancarte à l'entrée de 
+  nos 3 GTs quand on les réouvrira !!
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_HeSkrim_9()
+{
+	tutorial_haut_bulle_droit();
+	?>Messeigneurs, puissiez vous 
+  bien vouloir me céder ce parchemin que je puisse le relire ? 
+  <p align="justify">Diantre de 
+  saperlipopette Messire <b>troll'ichon</b>, vous m'épatâtes quant à 
+  votre verbe et votre esprit de synthèse. je dois dire que je trouve 
+  que bien des choses sont regroupées dans vos écrits mais si je m'en 
+  réfère à ce qui me concerne, je dirais, plus directement, j'avoue 
+  être totalement séduit...&nbsp;<br></p>
+  <p align="justify"><i>Le tenancier 
+  ressortit très vite, la mine réjouie, un petit panonceau à la main 
+  qu'il s'empressa de mettre à la place du précédemment cité. </i>
+  <b><i>Hé ! Skrim !!!! </i></b><i>avait retrouvé toute sa splendeur. 
+  Toute la beauté trollesque illuminait son magnifique minois, les poils 
+  de son torse délicatement velu retrouvèrent leur éclat.</i>
+<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Heskrim_avatar_bleu.gif", "Hé ! Skrim !!!! (26038)");
+}
+
+function hist_greve_trollichon_6()
+{
+	tutorial_haut_bulle_gauche("../images/avatars/Trollichon_avatar.png", "Troll'ichon (42637)");
+	?><i>Trollich</i></b><i> 
+  reprit son brouillon, y ajouta les petites modifications proposées 
+  par son collègue du magh' à la suite des règles qui existaient déjà 
+  auparavant et ajouta à vive voix :&nbsp;<br>
+  </i>
+  <p align="justify">Il est donc 
+  décidé de reprendre nos activités, chouette alors !! Merci à vous 
+  3 chers compagnons, et que la bonne humeur et la solidarité reprennent 
+  le pas au sein de toute la guilde !!</p>
+  <p align="justify">Je vais de 
+  ce pas clouter ce joli panneau devant la taverne et faire péter deux 
+  ou trois fûts de calvok pour l'occasion !! &nbsp;<br></p>
+  <p>"REGLE DES GRANDES TAVERNES 
+  Relais &amp; Mago"&nbsp;<br></p>
+
+  <p align="center"><b>--&gt; pour 
+  vos demandes de réservation...</b></p>
+  <p><br>
+  <b>Article 1 : les réservations de la quincaillerie ordinaire des Grandes 
+  Tanières </b>:&nbsp;<br>
+  a-Les réservations se font sur ce topic correspondant à chaque tanière, 
+  dans le rayon MATOS du forum.&nbsp;<br>
+  b-Il faut indiquer le n° du troll qui prendra le matos choisi&nbsp;<br>
+
+  </p>
+  <p align="center"><b>--&gt; par 
+  ailleurs : "l'esprit de solidarité"...</b></p>
+  <p><br>
+  <b>Article 1 : Comment toujours avoir des compos de montres prios en 
+  GT !?</b>&nbsp;<br>
+  a-Ce n'est pas les monstres chassés qui posent problème donc les groupes 
+  de chasse n'ont pas à changer leurs habitudes. Certains groupes de 
+  chasse doivent néanmoins relancer "leur esprit de guilde" 
+  et reverser en GT le fruit de leurs chasses. &nbsp;<br>
+  b-Les scribes doivent prévoir 3 MDD avant leurs copies leurs besoins 
+  et faire un appel à la chasse à un/des monstre(s) précis. appel qui 
+  doit être écouté par tous.&nbsp;<br>
+
+  c-Remplacer un compo prio nécessaire à un enchantement par un autre 
+  de même valeur ou plusieurs compos prios de valeur plus faibles, procédure 
+  jugée par le scribe en chef qui est le plus apte à estimer les compos. 
+  Ce système remplacer le tarif en GGs aujourd'hui en vigueur.&nbsp;<br>
+  d-Un commerçant oeuvrant pour la guilde, au courant des besoins en 
+  compos futurs des scribes, échange nos compos de gros monstres en surplus 
+  contre des compos de petits monstres. &nbsp;<br>
+  e- Il est fortement conseillé de déposer les composants à la bibliotek&nbsp;<br>
+  &nbsp;<br>
+  <b>Article 2 : Comment favoriser l'intégration des trollinets !?</b>&nbsp;<br>
+  L'encadrement des plus jeunes se fait déjà par un grand nombre de 
+  groupes, que cela soit pour intégrer les jeunes qui en font la demande 
+  sur le forum ou que cela soit pour optimiser les kills.&nbsp;<br>
+
+  &nbsp;<br>
+  <b>Article 3 : Comment toujours avoir des PVs en GT !? </b>
+  &nbsp;<br>
+  a-Chaque groupe "devrait" avoir un gratteur, pour lequel des 
+  compos non prios et des GGs devraient être consacrés, à protéger 
+  par tous y compris par les scribes lors de contre-attaques organisées 
+  par la guilde&nbsp;<br>
+  b-Un commerçant oeuvrant pour la guilde, au courant des besoins en 
+  PVs futurs des scribes, échange en cas d'extrême nécessité des sorts 
+  recherchés que nos scribes ont copié dans ce but contre un grand nombre 
+  de PVs.&nbsp;<br>
+  c-Le matériel templaté non-réservé et non-attribué peut éventuellement 
+  servir à certains échanges, contre des PVs ou des Sortilèges.&nbsp;<br>
+  &nbsp;<br>
+
+  <b>Article 4 : comment favoriser le RP !?</b>&nbsp;<br>
+  Le RP est une voie d'épanouissement dans MH comme d'autres. Il faut 
+  donc tolérer tous les modes de jeux, à charge à chacun de lancer 
+  une dynamique.&nbsp;<br>
+  &nbsp;<br>
+  <b>Article 5 - comment favoriser les bons comportements lors des attributions 
+  des sorts ?</b>&nbsp;<br>
+  Les scribes sont indépendants. A eux de débattre entre eux. Seules 
+  des idées déjà connues ressortent : favoriser les trolls ayant participé 
+  au rassemblement des packs de copies. Favoriser les trolls n'ayant eu 
+  aucun sort. (peut-être de manière plus forte qu'auparavant).&nbsp;<br>
+  &nbsp;<br>
+  <b>Article 6 - comment éviter les sangsues dans la guilde !? </b>
+
+  &nbsp;<br>
+  ... sans pour autant en exclure les trolls silencieux de la guilde.&nbsp;<br>
+  a- lobo vérifie (et exclut) selon ses disponibilités si un troll R&amp;M 
+  joue dans le respect des règles de la guilde et ne fait pas que prendre 
+  du bon matos et compos en GT. &nbsp;<br>
+  b- les jolis objets de quincaillerie templatés sont attribués par 
+  le chef des Tenanciers qui vérifie l'implication et l'honnêteté des 
+  postulants&nbsp;<br>
+  c- les dépôts de matos privé sont "tolérés" mais pour 
+  un temps limité de deux mois à condition de le préciser, après quoi 
+  ils sont libérés à tous les membres de la guilde ! &nbsp;<br>
+  &nbsp;<br>
+
+  <b>Article 7 - comment lutter efficacement contre les 
+  empêcheurs (=TKs) de Compo(s)ter en paix !?</b>&nbsp;<br>
+  a-encourager les groupes à tous chasser dans le cadran Sud Ouest. &nbsp;<br>
+  b-à expérimenter : cette proximité des groupes permet une réaction 
+  immédiate et forte de tous, scribes compris, au 1er appel du général 
+  en chef.&nbsp;<br>
+  c-En parallèle, organiser des périodes de riposte pré-définies pour 
+  mettre en oeuvre plusieurs fois par an (3 ou 4 fois par an, à des dates 
+  prévues en avance, changeant chaque année) des attaques ciblées de 
+  guildes ennemies qui nous ont attaqués, en parallèle à une histoire 
+  cylcique RP à lancer...&nbsp;<br>
+  &nbsp;<br>
+  <b>Article 8 - comment éviter le déficit des GTs !?</b>&nbsp;<br>
+
+  a- le système actuel nous permet de limiter les pertes en GGs de la 
+  bibliotek et de la taverne, mais pas du maghazin&nbsp;<br>
+  b- la réussite (ou la survie) des GTs ne dépend qu'en grande partie 
+  des dons des membres de la guilde : merci à vous tous, c'est à poursuivre 
+  !&nbsp;<br>
+  c- les retraits de compos d'enchantement ne sont plus tarifés, mais 
+  les objets brillants templatés et les sorts le sont toujours !&nbsp;<br>
+  &nbsp;<br>
+  <i>réglementation officielle des GTs relais &amp; Mago&nbsp;<br>
+  ne cherchez pas les papiers, tout est arbitrairement dans la tête des 
+  tenanciers</i><br>&nbsp;<br></p>
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Fuleng_2()
+{
+	tutorial_haut_bulle_droit();
+	?><i>Les trolls, regroupés 
+  devant la porte de la Bibliotèk, gouttèrent à grosses sueurs en voyant 
+  les longues lignes à lire de ce nouveau texte... Ils se résolurent 
+  à le lire. </i><b><i>Fuleng</i></b><i> prit alors la parole&nbsp;:</i><br>
+  <p align="justify">Gloire à 
+  vous autres les penseurs d'avoir pensé. Je ne jugerais pas le contenu 
+  du parchemin car ce n'est point le débat. Je l'accepte et j'applaudis 
+  sa réalisation ! Je serai toujours fier d'être un R&amp;M&nbsp;!
+<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Fuleng_avatar_bleu.gif", "Fuleng (10611)");
+}
+
+function hist_greve_Minhothort_2()
+{
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Minhothort_avatar_bleu.gif", "Minh O'Thort (58454)");
+	?>Bravo les gars .... une grève 
+  qui aboutit&nbsp;! Que <b>Kkwet</b> fasse que le hall soit meilleur...
+	<?
+	tutorial_haut_bas_gauche();
+}
+
+function hist_greve_Lobo_3()
+{
+	tutorial_haut_bulle_droit();
+	?><i>Lobo</i></b><i> écrasa 
+  une larme devant ce beau parchemin.</i>&nbsp;<br>
+  &nbsp;<br>
+  Y sont bien mes p'tits...
+	<?
+	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Lobo_avatar_bleu.gif", "Lobo (10866)");
+}
+
+function hist_greve_Kkwet_1()
+{
+	tutorial_haut_bulle_gauche("../images/avatars/Glupglup_avatar.png", "Glupglup (51166)");
+	?><b>Epilogue&nbsp;: </b>&nbsp;<br>
+</p>
+<p><i>Cette grève n'aura pas 
+été vaine, puisqu'au si célèbre mundidey du Goblin, le monde de 
+la scribiture des Relais &amp; Mago n'a jamais été aussi florissant 
+avec 8 copies réussies (TP, invisibilité, AdD, VT, AE, télékinésie, 
+etc...)</i>
+	<?
+	tutorial_haut_bas_gauche();
 }
 
 ?>
