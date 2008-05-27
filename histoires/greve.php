@@ -882,7 +882,7 @@ function hist_greve_HeSkrim_9()
 
 function hist_greve_trollichon_6()
 {
-	tutorial_haut_bulle_gauche("../images/avatars/Trollichon_avatar.png", "Troll'ichon (42637)");
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Trollichon_avatar_bleu.gif", "Troll'ichon (42637)");
 	?><i>Trollich</i></b><i> 
   reprit son brouillon, y ajouta les petites modifications proposées 
   par son collègue du magh' à la suite des règles qui existaient déjà 
@@ -1043,7 +1043,7 @@ function hist_greve_Lobo_3()
 
 function hist_greve_Kkwet_1()
 {
-	tutorial_haut_bulle_gauche("../images/avatars/Glupglup_avatar.png", "Glupglup (51166)");
+	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Kkwet_avatar_bleu.gif", "Kkwet (dieu)");
 	?><b>Epilogue&nbsp;: </b>&nbsp;<br>
 </p>
 <p><i>Cette grève n'aura pas 
