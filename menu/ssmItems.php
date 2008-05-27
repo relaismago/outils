@@ -93,6 +93,7 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"La Liche", "L assaut de la Liche ", "/histoires/la_liche.php");
   $pos = addItemMenu(false,false,$pos,"Retour des Monstres", "Le retour des Monstres ", "/histoires/retour_monstres.php");
   $pos = addItemMenu(false,false,$pos,"Le Complot", "Le Complot ", "/histoires/complot.php");
+  $pos = addItemMenu(false,false,$pos,"La Grève", "La Grève ", "/histoires/greve.php");
 
   $pos = addItemMenu(false,true,'horsjeux',"Hors-Jeux","Hors-Jeux");
   $pos = addItemMenu(false,false,$pos,"Bugtrack", "Le Bugtrack des outils Relais&Mago", "/bugs.php");
