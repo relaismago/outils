@@ -296,6 +296,9 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	newTd.setAttribute ( 'onmouseout', 'this.style.background=\'' + colortd + '\'');
 	anchorRow.insertBefore ( newTd, anchorCellDesc );
 	";
+	
+	echo "if ( uncookifyButton ( document.getElementsByName ( 'delgowap' )[0] ) ) 	{ toggleGowap (); }";
+	
 }// boucle for
 	
 echo "} catch ( e ) { error ( e, 'Monsters Colouring error' ); } \n";

@@ -269,10 +269,17 @@ function toggleListElements ( list, checkFunction, checkParam, hide )
 	var param = ( new String  ( checkParam ) ).toLowerCase ();
 	for ( var i = 2; i < list.length; i++ )
 	{
-		if ( list[i].className == 'mh_tdpage' && checkFunction ( list[i], param ) )
+		if ( list[i].childNodes[0].firstChild.nodeValue < 2 && checkParam == 'Gowap')
 		{
-			if ( hide ) { list[i].style.display='none'; }
-			else { list[i].style.display=''; }
+		
+		}
+		else
+		{
+			if ( (list[i].className == 'mh_tdpage' || list[i].className == '') && checkFunction ( list[i], param ) )
+			{
+				if ( hide ) { list[i].style.display='none'; }
+				else { list[i].style.display=''; }
+			}
 		}
 	}
 }
@@ -290,7 +297,7 @@ function filterListElements ( list, checkFunction, checkParam )
 	var param = ( new String  ( checkParam ) ).toLowerCase ();
 	for ( var i = 2; i < list.length; i++ )
 	{
-		if ( list[i].className == 'mh_tdpage' && checkFunction ( list[i], param ) ) 
+		if ( (list[i].className == 'mh_tdpage' || list[i].className == '') && checkFunction ( list[i], param ) ) 
 		{
 			list[i].style.display='';
 		}
@@ -313,7 +320,10 @@ function checkTreasureName ( node, eltName )
 
 function checkMonsterName ( node, eltName )
 {
-	return node.childNodes[2].childNodes[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
+	if (node.childNodes[2].childNodes[0].firstChild)
+		return node.childNodes[2].childNodes[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
+	else
+		return node.childNodes[3].childNodes[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
 }
 
 function checkTrollName ( node, eltName )
@@ -354,6 +364,27 @@ function toggleBidouille ()
 {
 	var on = cookifyButton ( document.getElementsByName ( 'delbid' )[0] );
 	toggleListElements ( tableTreasures, checkTreasureName, "Bidouille", on );
+}
+
+function toggleTableau( num ) {
+        var aucun;
+        if (num==itmon) ttab=tmon;
+        else if (num==ittro) ttab=ttro;
+        else if (num==ittre) ttab=ttre;
+        else if (num==itcha) ttab=tcha;
+        else if (num==itlie) ttab=tlie;
+        else if (num==itinf) ttab=tinf;
+        else if (num==itbid) ttab=tbid;
+        else ttab=totaltab[num];
+        
+	if(cursorOnLink) return;
+    if ( !ttab.childNodes[1].getAttribute( 'style' ) || ttab.childNodes[1].getAttribute( 'style' ) == '' ) {
+            ttab.childNodes[1].setAttribute( 'style', 'display:none;');
+            aucun = 'true';
+    } else {
+            ttab.childNodes[1].setAttribute( 'style', '');
+            aucun = 'false';
+    }
 }
 
 function filterMonsters ()
@@ -621,6 +652,9 @@ try {
 	anchorTitle.appendChild ( document.createTextNode (" ] ") );
 	anchorTitle.appendChild ( newText ( 'filterMonsters', '', 12, 20 ) );
 	anchorTitle.appendChild ( newButton ( 'filterMonstersBtn', 'Filtrer', 'filterMonsters()' ) );
+	/*anchorTitle.appendChild ( document.createTextNode ( 'Plier' ) );
+	anchorTitle.appendChild ( newCheckbox ( 'deltabmonster', 'toggleTableau(5)' ) );*/
+	
 } catch ( e ) { error ( e, 'monsterFilters' ); }
 
 // Add trolls filter buttons
@@ -655,8 +689,26 @@ try {
 	if ( uncookifyButton ( document.getElementsByName ( 'delcomp' )[0] ) ) 	{ toggleComp (); }
 	if ( uncookifyButton ( document.getElementsByName ( 'delbid' )[0] ) ) 		{ toggleBidouille (); }
 	if ( uncookifyButton ( document.getElementsByName ( 'delint' )[0] ) ) 		{ toggleIntangible (); }
-	if ( uncookifyButton ( document.getElementsByName ( 'delgowap' )[0] ) ) 	{ toggleGowap (); }
+	//if ( uncookifyButton ( document.getElementsByName ( 'delgowap' )[0] ) ) 	{ toggleGowap (); } //mis dans monsters.php
 } catch ( e ) { error ( e, 'restoreFilters' ); }
+
+
+function creerThead( num ) {
+    var noeud = totaltab[num].childNodes[0].firstChild;
+    noeud.setAttribute( 'onclick', 'toggleTableau('+num+');' );
+    var newThead = document.createElement( 'thead' );
+    newThead.appendChild( noeud );
+	var links=noeud.getElementsByTagName('a');
+	for(var i=1;i<links.length;i++)
+	{
+		links[i].setAttribute('onmouseover','cursorOnLink=true;');
+        links[i].setAttribute('onmouseout','cursorOnLink=false;');
+	}
+    totaltab[num].insertBefore( newThead , totaltab[num].childNodes[0]);
+    if (num!=itbid) totaltab[num].childNodes[0].childNodes[0].childNodes[0].setAttribute( 'colspan', 9 );
+    totaltab[num].childNodes[0].childNodes[0].childNodes[0].setAttribute('onmouseover', "this.style.cursor='pointer';this.className='mh_tdpage';");
+    totaltab[num].childNodes[0].childNodes[0].childNodes[0].setAttribute('onmouseout', "this.className='mh_tdtitre';");
+}
 
 // Defining colors for troll & guild status
 var anchorCss = document.getElementsByTagName ( 'link' )[0]; // ANCHOR
@@ -869,6 +921,7 @@ function caracTroll ( troll, carac )
 // ********************************************************
 // Troll and guild compendium links
 // ********************************************************
+
 var arrayTroll = "";
 var arrayGuild = "";
 begin = 2;
@@ -964,15 +1017,15 @@ if ( arrayTroll != "" )
 		newTrollScript.setAttribute ( 'src',  URLTrollInfos  + arrayTroll );
 		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newTrollScript );
 	} catch ( e ) { error ( e, 'Trolls Colouring error' ); }
-}
-try
-{
-	var newGuildeScript = document.createElement ( 'script' );
-	newGuildeScript.setAttribute ( 'language', 'JavaScript' );
-	newGuildeScript.setAttribute ( 'src',  URLGuildeInfos + arrayGuild );
-	( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newGuildeScript );
-} catch ( e ) { error ( e, 'Guild Colouring error' ); }
 
+	try
+	{
+		var newGuildeScript = document.createElement ( 'script' );
+		newGuildeScript.setAttribute ( 'language', 'JavaScript' );
+		newGuildeScript.setAttribute ( 'src',  URLGuildeInfos + arrayGuild );
+		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newGuildeScript );
+	} catch ( e ) { error ( e, 'Guild Colouring error' ); }
+}
 // ********************************************************
 // Places colours
 // ********************************************************
@@ -980,46 +1033,80 @@ var arrayPlace = "";
 begin = 2;
 for ( var i = 2; i < tablePlaces.length; i++ )
 {
-	try {
-
-    var anchorCellPlaceID = tablePlaces[i].childNodes[1].childNodes[0]; // ANCHOR
+	try
+	{
+    	var anchorCellPlaceID = tablePlaces[i].childNodes[1].childNodes[0]; // ANCHOR
 		var placeID = anchorCellPlaceID.nodeValue;
-		arrayPlace += "placesId[]=" + placeID + "&";
-
+		arrayPlace += "placesId[]=" + trim(placeID) + "&";
+		if ( i%30 == 0 )
+		{
+			arrayPlace += "begin=" + begin;
+			var newPlaceScript = document.createElement ( 'script' );
+			newPlaceScript.setAttribute ( 'language', 'JavaScript' );
+			newPlaceScript.setAttribute ( 'src',  URLPlaceInfos  + arrayPlace );
+			( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
+			arrayPlace = "";
+			begin = i + 1;
+		}
 	} catch ( e ) { error ( e, 'Places Colouring error' ); }
 	
 }
-
+if ( arrayPlace != "" )
+{
+	try 
+	{
+	  	arrayPlace += "begin=" + begin;
+		var newPlaceScript = document.createElement ( 'script' );
+		newPlaceScript.setAttribute ( 'language', 'JavaScript' );
+		newPlaceScript.setAttribute ( 'src',  URLPlaceInfos  + arrayPlace );
+		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
+	}catch ( e ) { error ( e, 'Places Colouring error' ); }
+}
+/*
 try {
 	var newPlaceScript = document.createElement ( 'script' );
 	newPlaceScript.setAttribute ( 'language', 'JavaScript' );
 	newPlaceScript.setAttribute ( 'src',  URLPlaceInfos  + arrayPlace );
 	( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
 }catch ( e ) { error ( e, 'Places Colouring error' ); }
+*/
+
+// ********************************************************
+// Initialisation des filtres
+// ********************************************************
+var cursorOnLink=false;
+var itbid=-1;
+for (i=0; i<totaltab.length; i++) {
+	var ttab="";	
+	try {ttab=totaltab[i].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].nodeValue;} catch (e) {}			
+	if (ttab=="MA VUE") {var itinf=i+1; }			
+	if (ttab=="MONSTRES ERRANTS") {var itmon=i-1;}	
+	if (ttab=="TROLLS") {var ittro=i-1;}			
+	if (ttab=="TRÉSORS"){var ittre=i-1;}			
+	if (ttab=="CHAMPIGNONS") {var itcha=i-1;}		
+	if (ttab=="LIEUX PARTICULIERS") {var itlie=i-1;}
+	try {ttab=totaltab[i].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].nodeValue;} catch (e) {}			
+	if (ttab=="B I D I V I E W") {itbid=i;}			
+}
+
+if (itbid>0) var tbid = totaltab[itbid];		
+var tinf = totaltab[itinf];		//var tinf = totaltab[3];
+var tmon = totaltab[itmon];		//var tmon = totaltab[4];
+var ttro = totaltab[ittro];		//var ttro = totaltab[6];
+var ttre = totaltab[ittre];		//var ttre = totaltab[8];
+var tcha = totaltab[itcha];		//var tcha = totaltab[10];
+var tlie = totaltab[itlie];		//var tlie = totaltab[12];
+
+
+/*if (itbid>0) creerThead( itbid ); 
+creerThead( itmon );
+creerThead( ittro );
+creerThead( ittre );
+creerThead( itcha );
+creerThead( itlie );
+*/
 
 
 displayErrors ( totaltab[4] );
 displayDebug ( totaltab[4] );
 
-
-
-//checkViewForm('formName');
-
-/*
-// ********************************************************
-// Niveau des monstres
-// ********************************************************
-
-if(toto!='')
-{
-   var newScript1 = document.createElement('script');
-   newScript1.setAttribute('language',"JavaScript");
-   newScript1.setAttribute('src','http://resel.enst-bretagne.fr/club/mountyhall/script/monstres.php?'+toto);
-   (xy[xy.length-1].parentNode).appendChild(newScript1);
-}
-
-// http://www.xxx.com/monstres.php?nom[]=diablotin&num_dans_liste[]=1&nom[]=gowap&num_dans_liste[]=2&...
-// EXEMPLE DE RESULTAT :
-// x[2].childNodes[2].childNodes[0].firstChild.nodeValue=x[2].childNodes[2].childNodes[0].firstChild.nodeValue+' (N: 11-12)';
-
-*/
