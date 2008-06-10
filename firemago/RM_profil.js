@@ -330,132 +330,157 @@ function porte(param)
 // ********************************************************
 
 // competences
-function competences(comp)
+function competences(comp, niv)
 {
 	var texte = '';
 	var moyenne = '';
-	var degmoy = deg[0] * 2 + deg[1];
-	var attmoy = att[0] * 3.5 + att[1];
-	if(comp.indexOf('Attaque Precise') != -1){
-		texte = 'Attaque : <b>' + Math.floor(att[0]*1.5) + '</b> D6 ';
-		if(att[1] >= 0)
-			texte += '+' + att[1];
+	if((comp.indexOf('Attaque Precise') != -1) && (niv>=0)){
+	 	var attlim = Math.min(Math.floor(att*1.5), Math.floor(att+3*niv));
+	 	texte = 'Attaque : <b>' + attlim + '</b> D6 ';
+		if(attbonus >= 0)
+			texte += '+' + attbonus;
 		else
-			texte += att[1];
-		texte += '<br/>Dégâts : <b>' + deg[0] + '</b> D3 ';
-		if(deg[1] >= 0)
+			texte += attbonus;
+		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
+		if(degbonus >= 0)
 			texte += '+';
-		texte += deg[1];
+		texte += degbonus;
 		texte += '<hr/>';
 		texte += 'Attaque moyenne : <b>' + 
-			(Math.floor(Math.floor(att[0]*1.5)*7/2)+att[1]) + '</b><br/>';
+			(Math.floor(attlim*7/2)+attbonus) + '</b><br/>';
 		texte += 'Dégâts moyens : <b>' + degmoy + '/' + 
-			(degmoy+Math.floor(deg[0]/2)*2)+'</b>';
+			(degmoy+Math.floor(deg/2)*2)+'</b>';
+	}
+	if((comp.indexOf('Attaque Precise') != -1) && (niv<0)){
+	 	texte += '';
+	 	for (var i=-niv+1; i>0; i--) { 
+		 	var attlim = Math.min(Math.floor(att*1.5), Math.floor(att+3*i));
+		 	texte += 'Niveau <b>'+i+'</b> => Attaque : <b>' + attlim + '</b> D6 ';
+			if(attbonus >= 0)
+				texte += '+' + attbonus;
+			else
+				texte += attbonus;
+			texte += ' (moyenne=<b>' + (Math.floor(attlim*7/2)+attbonus) + '</b>)<br/>';
+		}
 	}
 	if(comp.indexOf('Botte Secrete') != -1){
-		texte = 'Attaque : <b>' + Math.floor(att[0]/2) + '</b> D6 ';
-		if(att[1] >=0)
-			texte += '+' + Math.floor(att[1]/2);
+		texte = 'Attaque : <b>' + Math.floor(att/2) + '</b> D6 ';
+		if(attbonus >=0)
+			texte += '+' + Math.floor(attbonus/2);
 		else
-			texte += Math.floor(att[1]/2);
-		texte += '<br/>Dégâts : <b>' + Math.floor(att[0]/2) + '</b> D3 ';
-		if(deg[1] >=0)
+			texte += Math.floor(attbonus/2);
+		texte += '<br/>Dégâts : <b>' + Math.floor(att/2) + '</b> D3 ';
+		if(degbonus >=0)
 			texte += '+';
-		texte += Math.floor(deg[1]/2);
+		texte += Math.floor(degbonus/2);
 		texte += '<hr/>';
 		texte += 'Attaque moyenne : <b>' + 
-			((Math.floor(att[0]/2)*7/2)+Math.floor(att[1]/2)) + '</b><br/>';
+			((Math.floor(att/2)*7/2)+Math.floor(attbonus/2)) + '</b><br/>';
 		texte += 'Dégâts moyens : <b>' + 
-			(Math.floor(att[0]/2)*2+Math.floor(deg[1]/2)) + '/' + 
-			(Math.floor(Math.floor(att[0]/2)*1.5)*2+Math.floor(deg[1]/2))+'</b>';
+			(Math.floor(att/2)*2+Math.floor(degbonus/2)) + '/' + 
+			(Math.floor(Math.floor(att/2)*1.5)*2+Math.floor(degbonus/2))+'</b>';
 	}
-	if(comp.indexOf('Charger') != -1)
-	{
-		texte = 'Attaque : <b>' + att[0] + '</b> D6 ';
-		if(att[1] >=0)
-			texte += '+' + att[1];
-		else
-			texte += att[1];
-		texte += '<br/>Dégâts : <b>' + deg[0] + '</b> D3 ';
-		if(deg[1] >=0)
-			texte += '+';
-		texte += deg[1];
-		var aux = Math.ceil(pvactuels/10)+regen[0];
-		var portee = 0;
-		if(aux<=4)
-			portee = 1;
-		else if(aux<=9)
-			portee = 2;
-		else if(aux<=15)
-			portee = 3;
-		else if(aux<=22)
-			portee = 4;
-		else if(aux<=30)
-			portee = 5;
-		else if(aux<=39)
-			portee = 6;
-		portee=porte(aux);
-		portee=Math.min(portee,vuetotale);
-		texte += '<br/>Portée : <b>' + portee + '</b> case';
-		if(portee>1)
-			texte += 's';
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + attmoy + '</b><br/>';
-		texte += 'Dégâts moyens : <b>' + degmoy + '/' + (degmoy+Math.floor(deg[0]/2)*2)+'</b>';
+	if(comp.indexOf('Charger') != -1){
+		if(vuetotale<=0)
+			texte = '<b>Impossible de charger</b>';
+		else 
+		{
+			texte = 'Attaque : <b>' + att + '</b> D6 ';
+			if(attbonus >=0)
+				texte += '+' + attbonus;
+			else
+				texte += attbonus;
+			texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
+			if(degbonus >=0)
+				texte += '+';
+			texte += degbonus;
+			var aux = Math.ceil(pvactuels/10)+reg;
+			var portee = 0;
+			if(aux<=4)
+				portee = 1;
+			else if(aux<=9)
+				portee = 2;
+			else if(aux<=15)
+				portee = 3;
+			else if(aux<=22)
+				portee = 4;
+			else if(aux<=30)
+				portee = 5;
+			else if(aux<=39)
+				portee = 6;
+			portee=porte(aux);
+			portee=Math.min(portee,vuetotale);
+			texte += '<br/>Portée : <b>' + portee + '</b> case';
+			if(portee>1)
+				texte += 's';
+			texte += '<hr/>';
+			texte += 'Attaque moyenne : <b>' + attmoy + '</b><br/>';
+			texte += 'Dégâts moyens : <b>' + degmoy + '/' + 
+				(degmoy+Math.floor(deg/2)*2)+'</b>';
+		}
 	}
 	if(comp.indexOf('Connaissance des Monstres') != -1)
-		texte = 'Portée horizontale : <b>' + vuetotale + '</b> cases<br/> Portée verticale : <b>' + Math.ceil(vuetotale/2) + '</b> cases';
-	if(comp.indexOf('Construire un Piege') != -1)
-	{
-		texte = 'Dégats du piège à feu : <b>' + Math.floor((esq[0]+vue)/2) + '</b> D3<hr/>';
-		texte += 'Dégâts moyens : <b>' + Math.floor((esq[0]+vue)/2)*2 + ' (';
-		texte += '' + Math.floor((esq[0]+vue)/2)+')</b>';
+		texte = 'Portée horizontale : <b>' + Math.max(vuetotale,0) + '</b> cases<br/> Portée verticale : <b>' + Math.max(Math.ceil(vuetotale/2),0) + '</b> cases';
+	if(comp.indexOf('Construire un Piege') != -1){
+		texte = 'Dégats du piège à feu : <b>' + Math.floor((esq+vue)/2) + '</b> D3<hr/>';
+		texte += 'Dégâts moyens : <b>' + Math.floor((esq+vue)/2)*2 + ' (';
+		texte += '' + resiste(Math.floor((esq+vue)/2))+')</b>';
 	}
-	if(comp.indexOf('Contre-Attaquer') != -1)
-	{
-		texte = 'Attaque : <b>' + Math.floor(att[0]/2) + '</b> D6';
-		if(att[1] >=0)
-			texte += '+' + Math.floor(att[1]/2);
+	if(comp.indexOf('Contre-Attaquer') != -1){
+		texte = 'Attaque : <b>' + Math.floor(att/2) + '</b> D6';
+		if(attbonus >=0)
+			texte += '+' + Math.floor(attbonus/2);
 		else
-			texte += Math.floor(att[1]/2);
-		texte += '<br/>Dégâts : <b>' + deg[0] + '</b> D3 ';
-		if(deg[1] >= 0)
+			texte += Math.floor(attbonus/2);
+		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
+		if(degbonus >= 0)
 			texte += '+';
-		texte += deg[1];
+		texte += degbonus;
 		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + (Math.floor(att[0]/2)*3.5+Math.floor(att[1]/2));
-		texte += '</b><br/>Dégâts moyens : <b>' + (degmoy) +'/' + (degmoy+Math.floor(deg[0]/2)*2)+'</b>';
+		texte += 'Attaque moyenne : <b>' + (Math.floor(att/2)*3.5+Math.floor(attbonus/2));
+		texte += '</b><br/>Dégâts moyens : <b>' + (degmoy) +'/' + (degmoy+Math.floor(deg/2)*2)+'</b>';
 		
 	}
-	if(comp.indexOf('Coup de Butoir') != -1)
-	{
-		texte = 'Attaque : <b>' + att[0] + '</b> D6 ';
-		if(att[1] >= 0)
-			texte += '+' + att[1];
+	if((comp.indexOf('Coup de Butoir') != -1)&& (niv>0)){
+	 	var deglim = Math.min(Math.floor(deg*1.5), Math.floor(deg+3*niv));
+		texte = 'Attaque : <b>' + att + '</b> D6 ';
+		if(attbonus >= 0)
+			texte += '+' + attbonus;
 		else
-			texte += att[1];
-		texte += '<br/>Dégâts : <b>' + Math.floor(deg[0]*1.5) + '</b> D3 ';
-		if(deg[1] >=0)
+			texte += attbonus;
+		texte += '<br/>Dégâts : <b>' + deglim + '</b> D3 ';
+		if(degbonus >=0)
 			texte += '+';
-		texte += deg[1];
+		texte += degbonus;
 		texte += '<hr/>';
 		texte += 'Attaque moyenne : <b>' + attmoy;
-		texte += '</b><br/>Dégâts moyens : <b>' + (degmoy+Math.floor(deg[0]/2)*2) + '/' + (deg[0]*2*2+deg[1])+'</b>';
+		texte += '</b><br/>Dégâts moyens : <b>' + (deglim*2+degbonus) + '/' + (deglim*2+deg+degbonus)+'</b>';
+//		texte += '</b><br/>Dégâts moyens : <b>' + (degmoy+Math.floor(deg/2)*2) + '/' + (deg*2*2+degbonus)+'</b>';
 	}
-	if(comp.indexOf('Frenesie') != -1)
-	{
-		texte = 'Attaque : <b>' + att[0] + '</b> D6 ';
-		if(att[1] >=0)
-			texte += '+' + att[1];
+	if((comp.indexOf('Coup de Butoir') != -1) && (niv<0)){
+	 	texte += '';
+	 	for (var i=-niv+1; i>0; i--) { 
+		 	var deglim = Math.min(Math.floor(deg*1.5), Math.floor(deg+3*i));
+		 	texte += 'Niveau <b>'+i+'</b> => Dégâts : <b>' + deglim + '</b> D3 ';
+			if(degbonus >=0)
+				texte += '+';
+			texte += degbonus;
+			texte += ' (moyenne=<b>' + (deglim*2+degbonus) + '|' + (deglim*2+deg+degbonus)+'</b>)<br/>';
+	 	}
+	}
+	if(comp.indexOf('Frenesie') != -1){
+		texte = 'Attaque : <b>' + att + '</b> D6 ';
+		if(attbonus >=0)
+			texte += '+' + attbonus;
 		else
-			texte += att[1];
-		texte += '<br/>Dégâts : <b>' + deg[0] + '</b> D3 ';
-		if(deg[1] >=0)
+			texte += attbonus;
+		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
+		if(degbonus >=0)
 			texte += '+';
-		texte += deg[1];
+		texte += degbonus;
 		texte += '<hr/>';
 		texte += 'Attaque moyenne : <b>' + attmoy;
-		texte += '</b><br/>Dégâts moyens : <b>' + degmoy + '/' + (degmoy+Math.floor(deg[0]/2)*2)+'</b>';
+		texte += '</b><br/>Dégâts moyens : <b>' + degmoy + '/' + (degmoy+Math.floor(deg/2)*2)+'</b>';
 	}
 	if(comp.indexOf('Lancer de Potions') != -1)
 	{
@@ -463,77 +488,125 @@ function competences(comp)
 	}
         if(comp.indexOf('Parer') != -1)
         {
-                texte = 'Parade : <b>' +Math.floor(att[0]/2) + '</b> D6 ';
-		if(att[1] >=0)
-                        texte += '+' + Math.floor(att[1]/2);
+                texte = 'Parade : <b>' +Math.floor(att/2) + '</b> D6 ';
+		if(attbonus >=0)
+                        texte += '+' + Math.floor(attbonus/2);
                 else
-                        texte += Math.floor(att[1]/2);
+                        texte += Math.floor(attbonus/2);
 		texte +='<hr/>';
-		texte += 'Parade moyenne : <b>' + (Math.floor(att[0]/2)*3.5+Math.floor(att[1]/2))+'</b>';
+		texte += 'Parade moyenne : <b>' + (Math.floor(att/2)*3.5+Math.floor(attbonus/2))+'</b>';
         }
-	if ( comp.indexOf ( 'Pistage' ) != -1 )
-		texte = 'Portée horizontale : <b>' + vuetotale*2 + '</b> cases<br/>Portée verticale : <b>' + Math.ceil(vuetotale/2)*2 + '</b> cases';
-	if ( comp.indexOf ( 'Identification des Champignons' ) != -1 )
-		texte = 'Portée horizontale : <b>' + Math.floor(vuetotale/2) + '</b> cases<br/>Portée verticale : <b>' + Math.floor(Math.ceil(vuetotale/2)/2) + '</b> cases';
+	if(comp.indexOf('Pistage') != -1)
+		texte = 'Portée horizontale : <b>' + Math.max(0,vuetotale*2) + '</b> cases<br/>Portée verticale : <b>' + Math.max(0,Math.ceil(vuetotale/2)*2) + '</b> cases';
 	if(comp.indexOf('Regeneration Accrue') != -1){
 		texte = 'Régénération : <b>' + Math.floor(pvtotal/20) + '</b> D3<hr/>';
 		texte += 'Régénération moyenne : <b>' + Math.floor(pvtotal/20)*2+'</b>';
 	}
-	
+	if(comp.indexOf('Insultes') != -1){
+		texte = 'Portée : <b>1</b> case (horizontale)';
+	}
+	if(comp.indexOf('Deplacement Eclair') != -1){
+		texte = 'Permet d\'économiser <b>1</b> PA par rapport au déplacement classique';
+	}
+	if(comp.indexOf('Identification des Champignons') != -1)
+		texte = 'Portée : <b>' +  Math.max(0,(Math.floor(vuetotale/2)))+ '</b> cases';
+	if(comp.indexOf('Balluchonnage') != -1)
+		texte = 'Un beau noeud évite souvent de mauvaises surprises...	';
+	if(comp.indexOf('Acceleration du Metabolisme') != -1)
+		texte = 'Fatigue du kastar : <b>1</b>PV = <b>'+fatigueDuKastar+'</b> minutes.';
+	if(comp.indexOf('Ecriture Magique') != -1)
+		texte = 'Réaliser la copie d\'un sortilège après en avoir découvert la formule nécessite de réunir les composants de cette formule, d\'obtenir un parchemin vierge sur lequel écrire (par le biais de la compétence Grattage), et de récupérer un champignon adéquat pour confectionner l\'encre.';
+	if(comp.indexOf('Hurlement Effrayant') != -1)
+		texte = 'Le troll choisit une cible qui fuira si tout se passe bien.';
+	if(comp.indexOf('Grattage') != -1)
+		texte = 'Permet de confectionner un Parchemin Vierge à partir de composants et de Gigots de Gob\' .';
+	if(comp.indexOf('Miner') != -1)
+		texte = 'Portée horizontale : <b>' + Math.max(0,vuetotale*2) + '</b> cases <i><font size =-2>(non-officiel)</font></i><br/>Portée verticale : <b>' + Math.max(0,Math.ceil(vuetotale/2)*2) + '</b> cases <i><font size =-2>(non-officiel)</font></i>';
+	if(comp.indexOf('Camouflage') != -1) {
+		texte =  'Pour conserver son camouflage, <br>il faut réussir un jet sous:<hr/>';
+		texte += 'Déplacement: <b>75%</b> du niveau du sortilège<br> ';
+		texte += 'Attaque: <b>perte automatique</b><br>';
+		texte += 'Projectile Magique: <b>25%</b> du niveau du sortilège';
+	}
+	if(comp.indexOf('Tailler') != -1)
+		texte = 'Permet d\'augmenter sensiblement la valeur marchande de certain minerai. Mais cette opération délicate n\'est pas sans risques...';
+	if(comp.indexOf('Shamaner') != -1)
+		texte = 'Permet de contrecarrer certains effets des pouvoirs spéciaux des monstres en utilisant des champignons (de 1 à 3).';
+	if(comp.indexOf('Planter un champignon') != -1)
+		texte = 'Planter un Champignon est une compétence qui vous permet de créer des colonies d\'un type et d\'un goût de champignon à partir de quelques exemplaires préalablement enterrés.';
+	if(comp.indexOf('Parer') != -1) {
+		texte = 'Jet de Parade : <b>'+Math.floor(att/2)+ '</b>D6';
+		if(attbonus >=0)
+			texte += '+<b>' + Math.floor(attbonus/2);
+		else
+			texte += Math.floor(attbonus/2);
+		texte += '</b><hr/>';
+		texte += 'Jet de Parade moyen : <b>' + (Math.floor(att/2)*3.5+Math.floor(attbonus/2))+'</b>';
+	}
+	if(comp.indexOf('Necromancie') != -1)
+		texte = 'La Nécromancie permet à partir des composants d\'un monstre de faire "revivre" ce monstre.';
+	if(comp.indexOf('Melange magique') != -1)
+		texte = 'Cette Compétence permet d\'utiliser deux Potions pour en réaliser une nouvelle qui aura comme effet la somme des effets des potions initiales.';
+	if(comp.indexOf('Dressage') != -1)
+		texte = 'Le dressage permet d\'apprivoiser un gowap redevenu sauvage ou un gnu sauvage.';
+	if(comp.indexOf('Bidouille') != -1)
+		texte = 'Bidouiller un trésor permet de compléter le nom d\'un objet de votre inventaire avec le texte de son choix.';
+	if(comp.indexOf('Retraite') != -1)
+		texte = 'Vous jugez la situation avec sagesse et estimez qu\'il serait préférable de préparer un repli stratégique pour déconcerter l\'ennemi et lui foutre une bonne branlée ... plus tard. AHAHA ! Quelle intelligence démoniaque..';
+	if(comp.indexOf('Marquage') != -1)
+		texte = 'Marquage permet de rajouter un sobriquet à un monstre. Il faut bien choisir le nom à ajouter car celui-ci sera définitif. Il faut se trouver dans la même caverne que le monstre pour le marquer..';
 	return texte;
 }
 
 // Sorts
 function sortileges(sort)
 {
-	var texte = '';
-	var totalMM = MM[0]+MM[1];
+		var texte = '';
 	if(sort.indexOf('Analyse Anatomique') != -1)
-		texte = 'Portée horizontale : <b>' + Math.floor(vuetotale/2) + '</b> cases<br/>Portée verticale : <b>' + Math.floor(Math.ceil(vuetotale/2)/2) + '</b> cases';
+		texte = 'Portée horizontale : <b>' + Math.max(0,Math.floor(vuetotale/2)) + '</b> cases<br/>Portée verticale : <b>' + Math.max(0,Math.floor(Math.ceil(vuetotale/2)/2)) + '</b> cases';
 	if(sort.indexOf('Armure Etheree') != -1)
-		texte = 'Armure : <b>+'+regen[0]+'</b>';
+		texte = 'Armure : <b>+'+reg+'</b> <i><font size =-2>(2 tours)</font></i>';
 	if(sort.indexOf('Augmentation') != -1 && sort.indexOf('Attaque')!=-1)
-		texte = 'Attaque : <b>+'+(1+Math.floor((att[0]-3)/2))+'</b>';
+		texte = 'Attaque : <b>+'+(1+Math.floor((att-3)/2))+'</b> <i><font size =-2>(2 tours)</font></i>';
 	if(sort.indexOf('Augmentation') != -1 && sort.indexOf('Esquive')!=-1)
-		texte = 'Esquive : +<b>'+(1+Math.floor((esq[0]-3)/2))+'</b>';
+		texte = 'Esquive : +<b>'+(1+Math.floor((esq-3)/2))+'</b> <i><font size =-2>(2 tours)</font></i>';
 	if(sort.indexOf('Augmentation des Degats') != -1)
-		texte = 'Dégâts : +<b>'+(1+Math.floor((deg[0]-3)/2))+'</b>';
+		texte = 'Dégâts : +<b>'+(1+Math.floor((deg-3)/2))+'</b> <i><font size =-2>(2 tours)</font></i>';
 	if(sort.indexOf('Bulle Anti-Magie') != -1)
-		texte = 'RM : <b>+' + Math.floor(RM[0]) + '</b><br/>MM : <b>-' + Math.floor(MM[0]) + '</b>';
+		texte = 'RM : <b>+' + Math.floor(rm) + '</b> <i><font size =-2>(2 tours)</font></i><br/>MM : <b>-' + Math.floor(mm) + '</b> <i><font size =-2>(4 tours)</font></i>';
 	if(sort.indexOf('Bulle Magique') != -1)
-		texte = 'MM : <b>+' + Math.floor(MM[0]) + '</b><br/>RM : <b>-' + Math.floor(RM[0]) + '</b>';
-	if(sort.indexOf('Explosion') != -1)
-	{
+		texte = 'MM : <b>+' + Math.floor(mm) + '</b> <i><font size =-2>(2 tours)</font></i><br/>RM : <b>-' + Math.floor(rm) + '</b> <i><font size =-2>(4 tours)</font></i>';
+	if(sort.indexOf('Explosion') != -1){
 		texte = 'Attaque : <b>Automatique</b><br/>'; 
-		texte += 'Dégâts : <b>' + Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2) + '</b> D3 (effet de zone)<hr/>';
-		texte += 'Moyenne Dégâts : <b>' + Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2)*2 + ' (';
-		texte += Math.floor(1+(deg[0]+Math.floor(pvtotal/10))/2)+')</b>';
+		texte += 'Dégâts : <b>' + Math.floor((deg+Math.floor(pvtotal/10))/2+1) + '</b> D3<hr/>';
+		texte += 'Moyenne Dégâts : <b>' + Math.floor((deg+Math.floor(pvtotal/10))/2+1)*2 + ' (';
+		texte += resiste(Math.floor((deg+Math.floor(pvtotal/10))/2+1))+')</b>';
 	}
 	if(sort.indexOf('Faiblesse Passagere') != -1)
-		texte = 'Dégâts : <b>-' + Math.floor((Math.ceil((pvactuels-30)/10)+deg[0]-3)/2+1) + '</b>';
+		texte = 'Dégâts : <b>-' + Math.floor((Math.floor((pvactuels-30)/10)+deg-3)/2+1) + '</b> <i><font size =-2>(2 tours)</font></i>';
 	if(sort.indexOf('Flash Aveuglant') != -1)
-		texte = 'Vue, Attaque, Esquive : <b>-'+(1+Math.floor(vue/5))+'</b>';
+		texte = 'Vue, Attaque, Esquive : <b>-'+(1+Math.floor(vue/5))+'</b> <i><font size =-2>(2 tours)</font></i>';
 	if(sort.indexOf('Glue') != -1)
-		texte = 'Portée : <b>'+(1+Math.floor(vuetotale/3))+'</b> cases';
-	if(sort.indexOf('Griffe du Sorcier') != -1)
-	{
-		texte = 'Attaque : <b>' + att[0] + '</b> D6<br/>Dégâts : <b>' + Math.floor(deg[0]/2) + '</b> D3<br/>';
+		texte = 'Portée : <b>'+(1+Math.floor(vuetotale/3))+'</b> cases <i><font size =-2>(2 tours)</font></i>';
+	if(sort.indexOf('Griffe du Sorcier') != -1){
+		texte = 'Attaque : <b>' + att + '</b> D6<br/>Dégâts : <b>' + Math.floor(deg/2) + '</b> D3<br/>';
 		texte += 'Durée : <b>'+(1+Math.floor(vue/5))+'</b> tours<br/>Poison : <b>'+(1+Math.floor(pvtotal/30))+'</b> D3<hr/>';
-		texte += 'Attaque moyenne : <b>'+Math.floor(att[0]*3.5)+'</b><br/>';
-		texte += 'Dégats moyens : <b>'+(Math.floor(deg[0]/2)*2)+'/'+Math.floor(Math.floor(deg[0]/2)*1.5)*2;
-		texte += ' ('+resiste(Math.floor(deg[0]/2))+'/'+resiste(Math.floor(Math.floor(deg[0]/2)*1.5))+')</b></br>';
-		texte += 'Poison : <b>'+(1+Math.floor(pvtotal/30))*2+'</b>';
+		texte += 'Attaque moyenne : <b>'+Math.floor(att*3.5)+'</b><br/>';
+		texte += 'Dégats moyens : <b>'+(Math.floor(deg/2)*2)+'/'+Math.floor(Math.floor(deg/2)*1.5)*2;
+		texte += ' ('+resiste(Math.floor(deg/2))+'/'+resiste(Math.floor(Math.floor(deg/2)*1.5))+')</b></br>';
+		texte += 'Poison : <b>'+(1+Math.floor(pvtotal/30))*2+'</b> <i><font size =-2>('+(1+Math.floor(vue/5))+' tours)</font></i>';
 	}
-	if(sort.indexOf('Hypnotisme') != -1)
-	{
-		texte = 'Esquive : <b>-' + Math.floor(esq[0]*1.5) + '</b> Dés ';
-		texte += '(<b>-' + Math.floor(esq[0]/3) + '</b> Dés )';
+	if(sort.indexOf('Hypnotisme') != -1){
+		texte = 'Esquive : <b>-' + Math.floor(esq*1.5) + '</b> Dés ';
+		texte += '(<b>-' + Math.floor(esq/3) + '</b> Dés)</br>';
+		texte += 'Durée : Jusqu\'à la <b>fin de la DLA</b> en cours';
 	}
-	if(sort.indexOf('Projectile Magique') != -1)
-	{
+	if(sort.indexOf('Projectile Magique') != -1){
 		texte = 'Attaque : <b>' + vue + '</b> D6<br/>dég : <b>' + Math.floor(vue/2) + '</b> D3<br/>';
 		var portee = 0;
-		if(vuetotale<=4)
+		if(vuetotale<=0)
+			portee=0;
+		else if(vuetotale<=4)
 			portee = 1;
 		else if(vuetotale<=9)
 			portee = 2;
@@ -558,47 +631,76 @@ function sortileges(sort)
 		if(portee>1)
 			texte += 's';
 		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + Math.floor(vue*3.5) + 
-'</b><br/>';
+		texte += 'Attaque moyenne : <b>' + Math.floor(vue*3.5) + '</b><br/>';
 		texte += 'Dégâts moyens : <b>' + Math.floor(vue/2)*2 + '/';
 		texte += Math.floor(Math.floor(vue/2)*1.5)*2 + ' (';
-		texte += Math.floor(Math.floor(vue/2)) + '/';
-		texte += Math.floor(Math.floor(vue/2)*1.5)+')</b>';
+		texte += resiste(Math.floor(Math.floor(vue/2))) + '/';
+		texte += resiste(Math.floor(Math.floor(vue/2)*1.5))+')</b>';
 	}
-	if(sort.indexOf('Rafale Psychique') != -1)
-	{
-		texte = 'Attaque : <b>Automatique</b><br/>Dégâts : <b>' + deg[0] + '</b> D3<br/>Régénération : <b>-' + deg[0] + '</b><hr/>';
-		texte += 'Dégâts moyens : <b>' + deg[0]*2 + ' (';
-		texte += deg[0]+')</b>';
+	if(sort.indexOf('Rafale Psychique') != -1){
+		texte = 'Attaque : <b>Automatique</b><br/>Dégâts : <b>' + deg + '</b> D3<br/>Régénération : <b>-' + deg + '</b><hr/>';
+		texte += 'Dégâts moyens : <b>' + deg*2 + ' (';
+		texte += resiste(deg)+')</b>';
 	}
-	if(sort.indexOf('Teleportation') != -1)
-	{
-		texte = 'Portée horizontale  : <b>'+Math.floor(20+vue+porte(totalMM/5))+'</b> cases<br/>Portée verticale : <b>'+Math.floor(3+porte(totalMM/5)/3)+'</b> cases';
+	if(sort.indexOf('Teleportation') != -1){
+		var pmh=Math.floor(20+vue+porte(totalMM/5));
+		var pmv=Math.floor(3+porte(totalMM/5)/3);
+		texte = 'Portée horizontale  : <b>'+pmh+'</b> cases<br/>Portée verticale : <b>'+pmv+'</b> cases<br/>';
+		texte += 'Durée : de <b>2</b> à <b>7</b> jours';
+		texte+= '<hr/>';
+		texte+='X compris entre '+(x-pmh)+' et '+(x+pmh)+'<br/>';
+		texte+='Y compris entre '+(y-pmh)+' et '+(y+pmh)+'<br/>';
+		texte+='N compris entre '+(n-pmv)+' et '+Math.min(-1,(n+pmv))+'<br/>';
 	}
-	if(sort.indexOf('Vampirisme') != -1)
-	{
-		texte = 'Attaque : <b>' + Math.floor(deg[0]*2/3) + '</b> D6<br/>Dégâts : <b>' + deg[0] + '</b> D3<hr/>';
-		texte += 'Attaque moyenne : <b>' + 
-Math.floor((Math.floor(deg[0]*2/3))*3.5) + '</b><br/>';
-		texte += 'Dégâts moyens : <b>' + deg[0]*2 + '/';
-		texte += Math.floor(deg[0]*1.5)*2 + ' (';
-		texte += deg[0] + '/';
-		texte += Math.floor(deg[0]*1.5)+')</b>';
+	if(sort.indexOf('Vampirisme') != -1){
+		texte = 'Attaque : <b>' + Math.floor(deg*2/3) + '</b> D6<br/>Dégâts : <b>' + deg + '</b> D3<hr/>';
+		texte += 'Attaque moyenne : <b>' + Math.floor((Math.floor(deg*2/3))*3.5) + '</b><br/>';
+		texte += 'Dégâts moyens : <b>' + deg*2 + '/';
+		texte += Math.floor(deg*1.5)*2 + ' (';
+		texte += resiste(deg) + '/';
+		texte += resiste(Math.floor(deg*1.5))+')</b>';
 	}
 	if(sort.indexOf('Vision Accrue') != -1)
 		texte = 'Vue : <b>+' + Math.floor(vue/2) + '</b>';
 	if(sort.indexOf('Voir le Cache') != -1)
-		texte = 'Portée horizontale : <b>'+Math.floor(vuetotale/2)+'</b> cases<br/>Portée verticale : <b>'+Math.floor(vuetotale/4)+'</b> cases';
+		texte = 'Portée horizontale : <b>'+Math.max(0,Math.floor(vuetotale/2))+'</b> cases<br/>Portée verticale : <b>'+Math.max(0,Math.floor(vuetotale/4))+'</b> cases';
 	if(sort.indexOf('Vue Troublee') != -1)
 		texte = 'Vue : <b>-'+Math.floor(vue/3)+'</b>';
-	if(sort.indexOf('Telekinesie') != -1)
-	{
-		texte = 'Trésor ciblables (portée horizontale) : <hr> une plume à <b>'+Math.floor(vuetotale/2 + 2)+'</b> cases<br/>';
-		texte += 'léger à <b>'+Math.floor(vuetotale/2 + 1)+'</b> cases<br/>';
-		texte += 'moyen à <b>'+Math.floor(vuetotale/2)+'</b> cases<br/>';
-		texte += 'lourd à <b>'+Math.floor(vuetotale/2 - 1)+'</b> cases<br/>';
-		texte += 'trés lourd à <b>'+Math.floor(vuetotale/2 - 2)+'</b> cases<br/>';
+	if(sort.indexOf('Sacrifice') != -1) {
+		texte += 'Perte : Sacrifice + 1D3 + 1D3 par tranche 5PV.<hr/>';
+		texte += '<i><u>Exemple</i></u>:<BR>';
+		texte += 'soin de <b>4</b>PV, perte de  <b>5</b> à <b>7</b>PV<BR>';
+		texte += 'soin de <b>9</b>PV, perte de <b>11</b> à <b>15</b>PV<BR>';
+		texte += 'soin de <b>14</b>PV, perte de <b>17</b> à <b>23</b>PV<BR>';
+		texte += 'soin de <b>19</b>PV, perte de <b>23</b> à <b>31</b>PV<BR>';
+		texte += 'soin de <b>24</b>PV, perte de <b>29</b> à <b>39</b>PV<BR>';
+		texte += 'soin de <b>29</b>PV, perte de <b>35</b> à <b>47</b>PV';
 	}
+	if(sort.indexOf('Identification des tresors') != -1)
+		texte = 'Permet de connaitre les caractéristiques et effets précis d\'un trésor.';
+	if(sort.indexOf('Invisibilite') != -1)
+		texte = 'Un troll invisible est indétectable même quand on se trouve sur sa zone. Toute action physique ou sortilège d\'attaque fait disparaître l\'invisibilité.';
+	if(sort.indexOf('Vision lointaine') != -1)
+		texte = 'En ciblant une zone située n\'importe où dans le Monde Souterrain, votre Trõll peut voir comme s\'il s\'y trouvait.';
+	if(sort.indexOf('Telekinesie') != -1) {
+		texte = 'Portée (horizontale uniquement) :<hr/>';
+		var  vt= Math.floor(vuetotale/2) + 2; if (vt<0) vt=0;
+		texte += '<b>'+vt+'</b>: Les trésors d\'une Plum \' et Très Léger<br>';
+		var  vt= Math.floor(vuetotale/2) + 1; if (vt<0) vt=0;
+		texte += '<b>'+vt+'</b>: Les trésors Léger<br>';
+		var  vt= Math.floor(vuetotale/2); if (vt<0) vt=0;
+		texte += '<b>'+vt+'</b>: Les trésors Moyen<br>';
+		var  vt= Math.floor(vuetotale/2)-1; if (vt<0) vt=0;
+		texte += '<b>'+vt+'</b>: Les trésors Lourd<br>';
+		var  vt= Math.floor(vuetotale/2)-2; if (vt<0) vt=0;
+		texte += '<b>'+vt+'</b>: Les trésors Très Lourd et d\'une Ton\'';		
+	}
+	if(sort.indexOf('Projection') != -1) {
+		texte = 'Si le jet de résistance de la victime est raté:<br>';
+		texte +='la victime est <b>déplacée</b> et perd <b>1D6</b> en Esquive<hr/>';
+		texte += 'Si le jet de résistance de la victime est réussi:<br>';
+		texte +='la victime ne <b>bouge pas</b> mais perd <b>1D6</b> en Esquive.';
+    }
 	return texte;
 }
 
@@ -639,33 +741,55 @@ function creerBulle() {
 
 function creerInfoBulles( liste ,fonction ) {
         var i = 0;
+		var pourcen=0;
         while ( true ) {
                 if ( liste.childNodes[i] == null ) {
                         break;
                 }
                 if ( liste.childNodes[i].childNodes[3] != null ) {
-                        creerInfoBulle( liste.childNodes[i].childNodes[3].childNodes[1] , fonction );
-                }
-                if ( liste.childNodes[i].childNodes[9] != null ) {
-                        creerInfoBulle( liste.childNodes[i].childNodes[9].childNodes[1] , fonction );
+//                      creerInfoBulle( liste.childNodes[i].childNodes[3].childNodes[1] , fonction );
+                        creerInfoBulle( liste.childNodes[i] , fonction );
+                        var str=liste.childNodes[i].childNodes[5].childNodes[1].childNodes[0].nodeValue;
+                        str=str.substring(str.indexOf(':')+1,str.indexOf('%'));
+                        pourcen+=str*1;
+			for(var j=4;j<liste.childNodes[i].childNodes[5].childNodes.length;j+=2)
+			{
+				str=liste.childNodes[i].childNodes[5].childNodes[j].nodeValue;
+	                        str=str.substring(str.indexOf(':')+1,str.indexOf('%'));
+        	                pourcen+=str*1;
+			}
                 }
                 i += 2;
         }
+	return  pourcen;
 }
 
 function creerInfoBulle( noeud , fonction ) {
-        var nom = trim( str_woa( noeud.firstChild.nodeValue ) );
-        noeud.setAttribute( 'onmouseover', "infoBulle('"+nom+"',event,'"+fonction+"');" );
-        noeud.setAttribute( 'onmouseout', "cacherInfoBulle();" );
+        var nom = trim( str_woa( noeud.childNodes[3].childNodes[1].firstChild.nodeValue ) );
+        var niv="0";
+        if (fonction=='competences') {
+		    niv=trim( str_woa( noeud.childNodes[5].childNodes[1].firstChild.nodeValue ) );
+		    niv=niv.replace(/\n/gi, "");
+	        niv = trim(niv.slice( niv.indexOf('niveau')+7, niv.indexOf(':')-1));	    
+			if (niv>0) {
+		        noeud.childNodes[5].setAttribute( 'onmouseover', "infoBulle('"+nom+"','"+-niv+"',event,'"+fonction+"');" );
+	    	    noeud.childNodes[5].setAttribute( 'onmouseout', "cacherInfoBulle();" );
+	    	}
+
+		}
+        noeud.childNodes[3].childNodes[1].setAttribute( 'onmouseover', "infoBulle('"+nom+"','"+niv+"',event,'"+fonction+"');" );
+        noeud.childNodes[3].childNodes[1].setAttribute( 'onmouseout', "cacherInfoBulle();" );
 }
 
-function infoBulle( nom, evt, fonction ) {
-        var str;
+function infoBulle( nom, niv, evt, fonction ) {
+       var str;
         var val = nom.replace( /[ ]/g, '');
         val = nom.replace( /\W/g, '');
         val = val.toLowerCase();
+		var nivtexte = '';
+		if (niv>1) nivtexte = '<br>(niveau '+niv+')';
 
-        eval ( "str = "+fonction+"('"+nom+"');" );
+        eval ( "str = "+fonction+"('"+nom+"', '"+niv+"');" );
 	if(str=="")
 		return;
         var xfenetre, yfenetre, xpage, ypage, element = null;
@@ -683,7 +807,7 @@ function infoBulle( nom, evt, fonction ) {
 
         if( element ) {
                 bulleStyle = element.style;
-                element.childNodes[0].childNodes[0].innerHTML = '<b>'+nom+'</b>';
+                element.childNodes[0].childNodes[0].innerHTML = '<TABLE><TR><TD><TD><TD valign=center> <b>'+nom+'</b><i>'+nivtexte+'</i></TD></TR></TABLE>';
                 element.childNodes[1].childNodes[0].innerHTML = str;
         }
 
@@ -735,6 +859,7 @@ function fatigue()
 	   while(ct>ut)
 	     ut+=60*60*24;
 	   var nbmin=1*td.childNodes[0].nodeValue.substring(td.childNodes[0].nodeValue.indexOf('=')+2,td.childNodes[0].nodeValue.indexOf("'"));
+	   fatigueDuKastar=nbmin;
 	   if(pa<2)
 	     ntd.appendChild(document.createTextNode("Vous n'avez pas assez de PA pour accélérer"));
 	   else if(pvactuels>(Math.ceil(Math.floor((ut-ct)/60)/nbmin)))
@@ -770,6 +895,12 @@ function setPiForNextLevel()
 var anchorAllTables = document.getElementsByTagName ( 'table' ); // ANCHOR
 var anchorMainTr = anchorAllTables[3].getElementsByTagName ( 'tr' ); // ANCHOR
 var arrTr = document.getElementsByTagName('tr');
+
+// position
+var a=arrTr[6].childNodes[3].firstChild.nodeValue.split("|");
+var x=a[0].substring(4,a[0].length-1)*1;
+var y=a[1].substring(5,a[1].length-1)*1;
+var n=a[2].substring(5,a[2].length-1)*1;
 
 try 
 { 
@@ -873,18 +1004,30 @@ setPiForNextLevel();
 // Regen
 var anchorCellRegen = anchorMainTr[8].childNodes[1].firstChild;
 var regen = fightAverage ( anchorCellRegen );
+var regbonus = regen[1];
+var reg = regen[0];
+var regmoy = reg*2+regbonus;
 
 // Attaque
 var anchorCellAtt = anchorMainTr[9].childNodes[3].childNodes[0];
 var att = fightAverage ( anchorCellAtt );
+var attbonus = att[1];
+att = att[0];
+var attmoy=3.5*att+attbonus;
 
 // Esquive
 var anchorCellEsq = anchorMainTr[9].childNodes[3].childNodes[2];
 var esq = fightAverage ( anchorCellEsq );
+var esqbonus = esq[1]
+esq = esq[0];
+var esqmoy=3.5*esq+esqbonus;
 
 // Dégats
 var anchorCellDeg = anchorMainTr[9].childNodes[3].childNodes[4];
 var deg = fightAverage ( anchorCellDeg );
+var degbonus = deg[1];
+deg = deg[0];
+var degmoy = deg*2+degbonus;
 
 // Esquive after attak subie
 var anchorCellAttEsq = anchorMainTr[9].childNodes[3].childNodes[7].childNodes[0];
@@ -898,10 +1041,14 @@ if ( nbAttak != 0 )
 // RM
 var anchorCellRM = anchorMainTr[13].childNodes[3].childNodes[0];
 var RM = totalMagik ( anchorCellRM );
+var totalRM = RM[0] + RM[1];
+var rm = RM[0];
 
 // MM
 var anchorCellMM = anchorMainTr[13].childNodes[3].childNodes[2];
 var MM = totalMagik ( anchorCellMM );
+var totalMM = MM[0] + MM[1];
+var mm = MM[0];
 
 // PV
 var anchorPvTotal = anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[2].childNodes[1].childNodes[0].nodeValue;
@@ -944,6 +1091,7 @@ try
 catch ( e ) { error ( e, 'Next DLA error' ); }
 
 // fatigue
+var fatigueDuKastar=0;
 fatigue();
 
 
@@ -961,6 +1109,9 @@ var listeSort = anchorAllTables[7].childNodes[1].childNodes[2].childNodes[3].chi
 creerBulle();
 creerInfoBulles( listeComp , "competences" );
 creerInfoBulles( listeSort , "sortileges" );
+//anchorAllTables[7].childNodes[1].childNodes[0].childNodes[1].childNodes[0].childNodes[0].nodeValue+=' (Total : '+creerInfoBulles( listeComp , "competences" )+'%)';
+//anchorAllTables[7].childNodes[1].childNodes[0].childNodes[3].childNodes[0].childNodes[0].nodeValue+=' (Total : '+creerInfoBulles( listeSort , "sortileges" )+'%)';
+
 
 // *********************************************
 // Update cookies
