@@ -38,9 +38,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	var monsterStyle = new String ( anchorDesc.getAttribute ( 'class' ) );
 	var colortd='';
 	";
-		
-	
-	  
+			  
 	//Link of the ID
 	echo "
 	var newLink = document.createElement ( 'a' );
@@ -131,7 +129,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 			}
 		}
 	}// fin colorisation
-	
+	echo "var bless=false;";
 	$mm=$rm=$dla="";	
 	if ($tab_cdm_mh)
 	{
@@ -147,12 +145,18 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 			else 
 			{
 				$ble = "0%";
-			} 
+			}
+			echo "var myTablePVm = createBarrePV(0,".$tab_cdm_mh[$last_cdm]['pdvmax_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmax_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmax_cdm'].",'$ble');
+				  bless =true;
+			";
 		}
 		else
 		{
 			$pdv = "> à ".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']." (bestiaire : ".$caracs_moyennes[pdv].")";
 			$ble = $tab_cdm_mh[$last_cdm]['blessure_cdm']."%";
+			echo "var myTablePVm = createBarrePV(0,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm'].",'$ble');
+				  bless =true;
+			";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['attmax_cdm'] != 99 )
 		{
@@ -285,10 +289,17 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	//newLink.setAttribute ( 'onclick', 'this.onmouseout=function () {};');
     anchorCellDesc.removeChild ( anchorCellDesc.getElementsByTagName ( 'a' )[0] );
     anchorCellDesc.appendChild ( newLink );
+    newTd = document.createElement ( 'td' );
+	newTd.setAttribute ( 'align', 'center');
+    if (bless == true)
+    {
+    	newTd.appendChild (myTablePVm );
+    }
+    anchorRow.insertBefore ( newTd, tableMonsters[$rang].childNodes[3] );
 	";
 	
 	echo "
-	var newTd = document.createElement ( 'td' );
+	newTd = document.createElement ( 'td' );
 	newTd.setAttribute ( 'align', 'center');
 	newTd.appendChild( document.createTextNode ( '$niv' ));
 	newTd.setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.style.background = \'white\';');

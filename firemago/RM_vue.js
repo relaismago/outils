@@ -553,6 +553,41 @@ function cacherInfoBulle() {
           bulleStyle.visibility="hidden";
 }
 
+function createBarrePV(color, pvr, pv, comment) { //color: 0=red, 1=gris
+        var size=Math.floor((50*pvr)/pv); if ((size<50) && (size>48)) size=48;   // pour rendre plus joli
+		var myTable=document.createElement('table');
+		myTable.setAttribute('width','50');
+		myTable.setAttribute('border','0');
+		myTable.setAttribute('cellspacing','1');
+		myTable.setAttribute('cellpadding','0');
+		myTable.setAttribute('bgcolor','#000000'); 
+		var myTr=document.createElement('tr');
+		myTable.appendChild(myTr);
+		var myTd=document.createElement('td');
+		if (color==0) myTd.setAttribute('bgcolor','#FF0000'); else if (color==1) myTd.setAttribute('bgcolor','#AAAAAA'); else myTd.setAttribute('bgcolor','#FFFFFF');
+		myTd.setAttribute('border','0');
+		myTd.setAttribute('cellspacing','0');
+		myTd.setAttribute('cellpadding','0');
+		myTd.setAttribute('height','10');
+		myTd.setAttribute('width',size);
+		myTr.appendChild(myTd);
+		if (size<50) {
+			var myTd2=document.createElement('td');
+			myTd2.setAttribute('border','0');
+			myTd2.setAttribute('cellspacing','0');
+			myTd2.setAttribute('cellpadding','0');
+			if (color==-3) myTd2.setAttribute('bgcolor','#00FF00'); else myTd2.setAttribute('bgcolor','#FFFFFF');
+			myTd2.setAttribute('height','10');
+			myTd2.setAttribute('width',50-size);
+			myTr.appendChild(myTd2);
+		}
+		if (comment=='') 
+			myTable.setAttribute('title',pvr+'/'+pv+'PV ');
+		else 
+			myTable.setAttribute('title',comment);
+		return myTable;
+}
+
 
 // ********************************************************
 // Adding 2Dview's button
@@ -787,8 +822,15 @@ myTd = newTD();
 myTd.setAttribute( 'width', '25' );
 myTd.appendChild(myB);
 tableMonsters[1].insertBefore( myTd, tableMonsters[1].childNodes[2] );
+myB = document.createElement( 'b' );
+myB.appendChild ( document.createTextNode( 'PV') );
+myTd = newTD();
+myTd.setAttribute( 'width', '25' );
+myTd.setAttribute( 'align', 'center' );
+myTd.appendChild(myB);
+tableMonsters[1].insertBefore( myTd, tableMonsters[1].childNodes[4] );
 //tableMonsters[1].appendChild( myTd );
-tableMonsters[0].childNodes[0].setAttribute ('colspan','7');
+tableMonsters[0].childNodes[0].setAttribute ('colspan','8');
 
 
 arrayMonster = "";
