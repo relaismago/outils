@@ -212,8 +212,14 @@ class recherche
 		$t = split("=",$s[0]);
 		if (is_numeric($s[0]))
 			$id_troll = $s[0];
-		else if ($t[0] == "diplo") {
+		else if ($t[0] == "diplo")
+		{
 			$statut_troll = $t[1];
+			if ($statut_troll=="wanted")
+			{
+				$statut_troll='';
+				$is_wanted_troll="oui";
+			}
 		} else if ($t[0] == "diploguilde") {
 			$statut_guilde = $t[1];		
 		} else

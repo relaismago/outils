@@ -3122,12 +3122,11 @@ function afficherRechercheTrollsResultat($id_troll, $nom_troll, $race_troll, $no
 		afficherLien("troll","mh_evenements",$res[id_troll]);
 		echo "</td>";
 		echo "</tr>";
-		if ($i > 99) {
- 		 	echo "<h2><b>Il n'y a que les 100 premiers r&eacute;sultats d'affich&eacute;s, affinez votre recherche si vous voulez...</b></h2>";
+		if ($i > 299) {
+ 		 	echo "<tr><td colspan='10'><h2><b>Il n'y a que les 300 premiers r&eacute;sultats d'affich&eacute;s, affinez votre recherche si vous voulez...</b></h2></td></tr>";
 			break;
 		}
 	}
-
 	echo "</table>";
 	echo "</td></tr></table><br>";
 }
