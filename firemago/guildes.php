@@ -23,29 +23,29 @@ if ($_SESSION['AuthGuilde'] == 450)
 
 		if ($guildsid[$i] == 450 )
 		{
-				echo "tableTrolls[$rang].childNodes[5].setAttribute( 'background', '' ); \n";
-				echo "tableTrolls[$rang].childNodes[5].setAttribute( 'bgcolor', colorRM ); \n";
+				echo "tableTrolls[$rang].childNodes[6].setAttribute( 'background', '' ); \n";
+				echo "tableTrolls[$rang].childNodes[6].setAttribute( 'bgcolor', colorRM ); \n";
 		}
 		else
 		{
 			if ( $statut_guilde != "neutre" && $statut_guilde != "" )
 			{
-				echo "tableTrolls[$rang].childNodes[5].setAttribute( 'background', '' ); \n";
+				echo "tableTrolls[$rang].childNodes[6].setAttribute( 'background', '' ); \n";
 				if ( $statut_guilde == "tk" )
 				{
-					echo "tableTrolls[$rang].childNodes[5].setAttribute( 'bgcolor', colorTK ); \n";
+					echo "tableTrolls[$rang].childNodes[6].setAttribute( 'bgcolor', colorTK ); \n";
 				}
 				if ( $statut_guilde == "ennemie")
 				{
-  				echo "tableTrolls[$rang].childNodes[5].setAttribute( 'bgcolor', colorEnemy ); \n";
+  				echo "tableTrolls[$rang].childNodes[6].setAttribute( 'bgcolor', colorEnemy ); \n";
 				}
 				if ( $statut_guilde == "amie" )
 				{
-  				echo "tableTrolls[$rang].childNodes[5].setAttribute( 'bgcolor', colorFriend ); \n";
+  				echo "tableTrolls[$rang].childNodes[6].setAttribute( 'bgcolor', colorFriend ); \n";
 				}
 				if ( $statut_guilde == "alliee" )
 				{
-  				echo "tableTrolls[$rang].childNodes[5].setAttribute( 'bgcolor', colorAlly );\n";
+  				echo "tableTrolls[$rang].childNodes[6].setAttribute( 'bgcolor', colorAlly );\n";
 				}
 			}
 		}

@@ -27,30 +27,35 @@ if ($_SESSION['AuthGuilde'] == 450)
 		//echo "alert('$id_guilde_troll');";
 		
 
-		if ($statut_troll != "neutre" && $statut_troll != "" )
+		if (($statut_troll != "neutre" && $statut_troll != "") || $is_tk_troll == "oui" || $is_wanted_troll == "oui")
 		{
 			echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'background', '' ); \n";
-    		echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'background', '' ); \n";
+			echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'background', '' ); \n";
+    		echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'background', '' ); \n";
 			if ( $is_tk_troll == "oui" || $statut_troll == "tk" )
 			{
 				echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorTK ); \n";
 				echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorTK ); \n";
+				echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'bgcolor', colorTK ); \n";
 			}
 			if ( $is_wanted_troll == "oui" || $statut_troll == "ennemie")
 			{
   				echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorEnemy ); \n";
 				echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorEnemy ); \n";
+				echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'bgcolor', colorEnemy ); \n";
 			}
 			if ( $statut_troll == "amie" )
 			{
   				echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorFriend ); \n";
 				echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorFriend ); \n";
+				echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'bgcolor', colorFriend ); \n";
 			}
 			if ( $statut_troll == "alliee" )
 			{
   				echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorAlly ); \n";
 				echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorAlly ); \n";
-			}	
+				echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'bgcolor', colorAlly ); \n";
+			}
 		}
 		if ( $id_guilde_troll == ID_GUILDE )
 		{
@@ -68,12 +73,13 @@ if ($_SESSION['AuthGuilde'] == 450)
       		echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'background', '' ); \n";
 			echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorRM ); \n";
 			echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorRM ); \n";*/
-			echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.className = \'mh_tdtitre\';');";
-			echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'onclick', 'infoBulle (\'$nom_troll\',event,\'caracTroll\',\'$caracTot\');');";
-			echo "tableTrolls[$rang].childNodes[3].setAttribute ( 'onmouseout', 'this.className = \'mh_tdpage\'');";
+			echo "tableTrolls[$rang].childNodes[4].setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.className = \'mh_tdtitre\';');";
+			echo "tableTrolls[$rang].childNodes[4].setAttribute ( 'onclick', 'infoBulle (\'$nom_troll\',event,\'caracTroll\',\'$caracTot\');');";
+			echo "tableTrolls[$rang].childNodes[4].setAttribute ( 'onmouseout', 'this.className = \'mh_tdpage\'');";
 		}
 		
 	}
+echo "if ( uncookifyButton ( document.getElementsByName ( 'delint' )[0] ) ) 	{ toggleIntangible (); }";
 echo "} catch ( e ) { error ( e, 'Troll Colouring error' ); } \n";
 }
 

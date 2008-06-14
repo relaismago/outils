@@ -269,7 +269,7 @@ function toggleListElements ( list, checkFunction, checkParam, hide )
 	var param = ( new String  ( checkParam ) ).toLowerCase ();
 	for ( var i = 2; i < list.length; i++ )
 	{
-		if ( list[i].childNodes[0].firstChild.nodeValue < 2 && checkParam == 'Gowap')
+		if ( list[i].childNodes[0].firstChild.nodeValue < 2 && (checkParam == 'Gowap' || checkParam == 'mh_trolls_0'))
 		{
 		
 		}
@@ -328,12 +328,12 @@ function checkMonsterName ( node, eltName )
 
 function checkTrollName ( node, eltName )
 {
-	return node.childNodes[2].getElementsByTagName ( 'a' )[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
+	return node.childNodes[3].getElementsByTagName ( 'a' )[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
 }
 
 function checkTrollClass ( node, eltName )
 {
-	return node.childNodes[2].getElementsByTagName ( 'a' )[0].className == eltName;  // ANCHOR
+	return node.childNodes[3].getElementsByTagName ( 'a' )[0].className == eltName;  // ANCHOR
 }
 
 function toggleGG ()
@@ -553,6 +553,8 @@ function cacherInfoBulle() {
           bulleStyle.visibility="hidden";
 }
 
+/*********************************************************************************************************/
+
 function createBarrePV(color, pvr, pv, comment) { //color: 0=red, 1=gris
         var size=Math.floor((50*pvr)/pv); if ((size<50) && (size>48)) size=48;   // pour rendre plus joli
 		var myTable=document.createElement('table');
@@ -639,7 +641,6 @@ function checkViewForm ( form )
 
 // Build the form with the button
 var myForm = newForm ( 'select_troll', '' );
-// myForm.setAttribute ( 'accept-charset', 'iso-8859-1, iso-8859-15' );
 myForm.setAttribute ( 'onsubmit', 'return checkViewForm(this)' );
 myForm.appendChild ( myInput = newHidden ( 'datas', getVueScript () ) );
 myForm.appendChild ( document.createElement ( 'b' ).appendChild ( document.createTextNode ( 'N° du troll : ' ) ) );
@@ -723,7 +724,7 @@ try {
 	if ( uncookifyButton ( document.getElementsByName ( 'delgg' )[0] ) ) 		{ toggleGG (); }
 	if ( uncookifyButton ( document.getElementsByName ( 'delcomp' )[0] ) ) 	{ toggleComp (); }
 	if ( uncookifyButton ( document.getElementsByName ( 'delbid' )[0] ) ) 		{ toggleBidouille (); }
-	if ( uncookifyButton ( document.getElementsByName ( 'delint' )[0] ) ) 		{ toggleIntangible (); }
+	//if ( uncookifyButton ( document.getElementsByName ( 'delint' )[0] ) ) 		{ toggleIntangible (); } mis dans trolls.php
 	//if ( uncookifyButton ( document.getElementsByName ( 'delgowap' )[0] ) ) 	{ toggleGowap (); } //mis dans monsters.php
 } catch ( e ) { error ( e, 'restoreFilters' ); }
 
@@ -745,7 +746,59 @@ function creerThead( num ) {
     totaltab[num].childNodes[0].childNodes[0].childNodes[0].setAttribute('onmouseout', "this.className='mh_tdtitre';");
 }
 
+// ***********************************************
+// Messages PX
+// ***********************************************
+function createMsgPXBouton() 
+{
+  var myForm=newForm( 'sendMP', '../Messagerie/MH_Messagerie.php?&dest=');
+  var myTA=document.createElement('input');
+  myTA.setAttribute('type','submit');
+  myTA.setAttribute('value','Envoyer un Message Privé');
+  myTA.setAttribute('class','mh_form_submit');
+  myTA.setAttribute('onMouseOver','this.style.cursor="pointer";');
+  myTA.setAttribute('onClick','sendMessagePrive(3)');
+  myForm.appendChild(myTA);
+
+  myForm.appendChild(document.createTextNode(" "));
+
+  var myTA=document.createElement('input');
+  myTA.setAttribute('type','submit');
+  myTA.setAttribute('value','Partage PX');
+  myTA.setAttribute('class','mh_form_submit');
+  myTA.setAttribute('onMouseOver','this.style.cursor="pointer";');
+  myTA.setAttribute('onClick','sendMessagePrive(8)');
+  myForm.appendChild(myTA);
+  return myForm;
+}  
+
+function sendMessagePrive(cat) 
+{
+  var MP="../Messagerie/MH_Messagerie.php?cat="+cat+"&dest=";
+  for ( var i = 1; i < tableTrolls.length;i++)
+  {
+		if ( tableTrolls[i].childNodes[2].firstChild.checked ) 
+		{
+			if (cat==8) MP += '%2C'+tableTrolls[i].childNodes[2].firstChild.value; 
+			else MP += '+'+tableTrolls[i].childNodes[2].firstChild.value+'%2C'; 
+		}
+  }  
+  if (cat==8) MP=MP.replace("=%2C", "=");	
+  document.sendMP.action=MP;
+} 
+
+//Le bouton pour Message/Distrib PX
+function putMsgPXBouton(arrtable) 
+{
+  arrtable.parentNode.insertBefore(createMsgPXBouton(),arrtable);      
+}
+
+putMsgPXBouton (totaltab[7]);
+
+// ***********************************************
 // Defining colors for troll & guild status
+// ***********************************************
+
 var anchorCss = document.getElementsByTagName ( 'link' )[0]; // ANCHOR
 if ( anchorCss.getAttribute ( 'href' ).indexOf ( 'www.mountyhall.com' ) != -1 || anchorCss.getAttribute ( 'href' ).indexOf ( 'parchemin' ) != -1)
 {
@@ -779,6 +832,10 @@ creerBulle();
 creerInfoBulle ( tableMonsters[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorMonsters" );
 creerInfoBulle ( tableTrolls[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorTrolls" );
 creerInfoBulle ( tablePlaces[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorPlaces" );
+
+// ***********************************************
+// LEGENDES
+// ***********************************************
 
 function colorMonsters()
 {
@@ -941,6 +998,10 @@ function caracMonster ( monster, carac )
  return text;
 }
 
+// ********************************************************
+// Troll and guild compendium links
+// ********************************************************
+
 function caracTroll ( troll, carac )
 {
  var arrCarac = carac.split(";");
@@ -960,9 +1021,15 @@ function caracTroll ( troll, carac )
  return text;
 }
 
-// ********************************************************
-// Troll and guild compendium links
-// ********************************************************
+var newB = document.createElement( 'b' );
+newB.appendChild( document.createTextNode( 'MP/PX' ) );
+newTd = document.createElement( 'td' );
+newTd.setAttribute( 'width', '5' );
+newTd.setAttribute( 'align', 'center' );
+newTd.appendChild( newB );
+tableTrolls[1].insertBefore( newTd, tableTrolls[1].childNodes[2] );
+//tableTrolls[1].parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].setAttribute('colspan','11');
+tableTrolls[0].childNodes[0].setAttribute ('colspan','11');
 
 var arrayTroll = "";
 var arrayGuild = "";
@@ -970,6 +1037,11 @@ begin = 2;
 for ( var i = 2; i < tableTrolls.length; i++ )
 {
 	try {
+		var newTd = document.createElement( 'td' );		// Pour la box MP
+     	newTd.setAttribute( 'width', '5' );
+	 	newTd.setAttribute( 'align', 'center' );
+	 	
+		
 		var anchorCellTrollID = tableTrolls[i].childNodes[1]; // ANCHOR
 		var anchorCellTrollDesc = tableTrolls[i].childNodes[2]; // ANCHOR
 		var anchorCellGuildDesc = tableTrolls[i].childNodes[5]; // ANCHOR
@@ -986,12 +1058,19 @@ for ( var i = 2; i < tableTrolls.length; i++ )
 		{
 			var guildID = '1';
 		}
-
 		
 		// grab styles used for troll and guild
 		var styleTroll = new String ( anchorTrollDesc.getAttribute ( 'class' ) );
 		var trollID = new String ( anchorTrollID.nodeValue );
 		var trollName = new String ( flattenNode ( anchorTrollDesc ) );
+		
+		// MP check box
+		tableTrolls[i].insertBefore(newTd,anchorCellTrollDesc);
+	 	var cb=document.createElement('INPUT');
+	 	cb.setAttribute('type','checkbox');
+	 	cb.setAttribute('name','mp_'+trollID);
+	 	cb.setAttribute('value',trollID);
+  	 	tableTrolls[i].childNodes[2].appendChild(cb);
 
 		// populate troll and guild list for status coloring
 		if ( guildID != '1' ) { arrayGuild += "guildsid[]=" + guildID + ";" + i + "&"; }
@@ -1044,7 +1123,6 @@ for ( var i = 2; i < tableTrolls.length; i++ )
 
 			begin = i + 1;
 		}
-
 		
 	} catch ( e ) { error ( e, 'Troll and Guild Compendium error (' + i + ')' ); }
 }
@@ -1104,14 +1182,6 @@ if ( arrayPlace != "" )
 		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
 	}catch ( e ) { error ( e, 'Places Colouring error' ); }
 }
-/*
-try {
-	var newPlaceScript = document.createElement ( 'script' );
-	newPlaceScript.setAttribute ( 'language', 'JavaScript' );
-	newPlaceScript.setAttribute ( 'src',  URLPlaceInfos  + arrayPlace );
-	( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
-}catch ( e ) { error ( e, 'Places Colouring error' ); }
-*/
 
 // ********************************************************
 // Initialisation des filtres
