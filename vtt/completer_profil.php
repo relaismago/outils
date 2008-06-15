@@ -79,6 +79,9 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		if(eregi('[ \t]*Exp.+Niveau.+:[ \t]*(.+)\(.+PI\).+',$lignes[$i],$resultat)):
 			$troll_niveau	= trim($resultat[1]);
 		endif;
+		if(eregi('[ \t]*Actuels\.+:[ \t]*(.+)',$lignes[$i],$resultat)):
+			$troll_pvact		= trim($resultat[1]);
+		endif;
 		if(eregi('[ \t]*Maximum\.+:[ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_pv		= trim($resultat[1]);
 		endif;
@@ -157,7 +160,7 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> RACE	(race/niveau)	</b></td><td width='50%'>".exporter(troll_race)."</td><td width='17%'>Mis à jour automatiquement toutes les nuits.</td></tr>\n";
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> DLA	(base/réél)	</b></td><td width='50%'>".$troll_dla_base_hh."H".$troll_dla_base_mm."</td><td width='17%'>".exporter(troll_dla_reel_hh)."H".exporter(troll_dla_reel_mm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> VUE	(base/bm)	</b></td><td width='50%'>".exporter(troll_vue_base)."</td><td width='17%'>".exporter(troll_vue_bm)."</td></tr>\n";	
-		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> PV			</b></td><td width='50%'>".exporter(troll_pv)."</td><td width='17%'>&nbsp;</td></tr>\n";
+		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> PV			</b></td><td width='50%'>".exporter(troll_pvact)."/".exporter(troll_pv)."</td><td width='17%'>&nbsp;</td></tr>\n";
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> REG	(base/bm)	</b></td><td width='50%'>".exporter(troll_reg_base)."</td><td width='17%'>".exporter(troll_reg_bm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> ATT	(base/bm)	</b></td><td width='50%'>".exporter(troll_att_base)."</td><td width='17%'>".exporter(troll_att_bm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> ESQ	(base/bm)	</b></td><td width='50%'>".exporter(troll_esq_base)."</td><td width='17%'>".exporter(troll_esq_bm)."</td></tr>\n";

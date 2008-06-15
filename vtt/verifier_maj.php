@@ -28,6 +28,7 @@ else
 									'VUE' => 'troll_vue_base',
 									'VUEB' => 'troll_vue_bm',
 									'Niveau' => 'troll_niveau',
+									'PV_ACTUELS' => 'troll_pvact',
 									'PVs' => 'troll_pv',
 									'REG' => 'troll_reg_base',
 									'REGB' => 'troll_reg_bm',
