@@ -914,13 +914,13 @@ for ( var i = 2; i < tableMonsters.length; i++ )
 		
 		if ( i%10 == 0 )
 		{
-			arrayMonster += "begin=" + begin;
+		  arrayMonster += "begin=" + begin;
 		  newMonsterScript = document.createElement ( 'script' );
 		  newMonsterScript.setAttribute ( 'language', 'JavaScript' );
 		  newMonsterScript.setAttribute ( 'src',  URLMonsterInfos  + arrayMonster );
 		  ( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newMonsterScript );
-			arrayMonster = "";
-			begin = i + 1;
+		  arrayMonster = "";
+		  begin = i + 1;
 		}
 	} catch ( e ) { error ( e, 'Monster Compendium error (' + i + ')' ); }
 }
