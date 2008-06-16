@@ -385,7 +385,7 @@ function SelectCdM_mh($MH,$Race,$IDAge)
   $tab_cdm=array();
   $sql="SELECT * FROM `best_cdms` WHERE `id_mh`=$MH";
   // et on rajoute l'âge si on l'a
-  if($IDAge!="-1") $sql.=" AND `id_age_cdm`=$IDAge";
+  if($IDAge!="-1" && $IDAge != "") $sql.=" AND `id_age_cdm`=$IDAge";
   if($query=mysql_query($sql,$db_vue_rm)){
     while($ret=mysql_fetch_array($query)){ // pour toutes les cdms correspondantes
       $ret['nom_race']=$Race; // on rajoute le nom de la race (seul id_race est présent)
@@ -396,10 +396,10 @@ function SelectCdM_mh($MH,$Race,$IDAge)
 	$ret['monstre']=$ret2[0];        // on complète la cdm avec le nom du monstre
 	$tab_cdm[]=$ret;                 // on la rajoute dans la liste des cdms
       }
-      else die("Erreur lors de la requête d'un monstre :".mysql_error());
+      else die("Erreur lors de la requête d'un monstre : $sql ".mysql_error());
     }
   }
-  else die("Erreur lors de la requête des cdms :".mysql_error());
+  else die("Erreur lors de la requête des cdms : $sql ".mysql_error());
   return $tab_cdm;
 }
 

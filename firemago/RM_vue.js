@@ -912,7 +912,7 @@ for ( var i = 2; i < tableMonsters.length; i++ )
 		
 		// Adding script for coloring monster's wanted or without cdm
 		
-		if ( i%30 == 0 )
+		if ( i%10 == 0 )
 		{
 			arrayMonster += "begin=" + begin;
 		  newMonsterScript = document.createElement ( 'script' );
