@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 2.6.3-pl1
--- http://www.phpmyadmin.net
--- 
--- Serveur: localhost
--- Généré le : Dimanche 21 Août 2005 à 16:57
--- Version du serveur: 4.1.13
--- Version de PHP: 4.3.11
 -- 
 -- Base de données: `outilsrm`
 -- 
@@ -69,7 +61,7 @@ CREATE TABLE `baronnies` (
   `z_trone_baronnie` int(5) default NULL,
   `type_baronnie` enum('baronnie','garde') NOT NULL default 'baronnie',
   PRIMARY KEY  (`id_baronnie`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -85,7 +77,7 @@ CREATE TABLE `best_ages` (
   `ordre_age` tinyint(3) NOT NULL default '0',
   PRIMARY KEY  (`id_age`),
   KEY `Famille` (`id_famille_age`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Différents ages pour chaque famille' AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Diff�rents ages pour chaque famille';
 
 -- --------------------------------------------------------
 
@@ -104,7 +96,7 @@ CREATE TABLE `best_capspe` (
   `MMnbr_capspe` int(11) NOT NULL default '0',
   `degatssom_capspe` int(11) NOT NULL default '0',
   `degatsnbr_capspe` int(11) NOT NULL default '0',
-  `portee_capspe` tinyint(3) NOT NULL default '0',
+  `portee_capspe` varchar(50) default '0',
   `duree_capspe` enum('?','0','1','2','3','4','5','6','7','8','9') NOT NULL default '?',
   `sepatt_capspe` enum('?','Oui','Non') NOT NULL default '?',
   `zone_capspe` enum('?','Oui','Non') NOT NULL default '?',
@@ -153,6 +145,7 @@ CREATE TABLE `best_cdms` (
   `nivmax_cdm` smallint(3) NOT NULL default '0',
   `pdvmin_cdm` smallint(3) NOT NULL default '0',
   `pdvmax_cdm` smallint(3) NOT NULL default '0',
+  `blessure_cdm` smallint(3) NOT NULL default '0',
   `attmin_cdm` smallint(3) NOT NULL default '0',
   `attmax_cdm` smallint(3) NOT NULL default '0',
   `esqmin_cdm` smallint(3) NOT NULL default '0',
@@ -165,8 +158,22 @@ CREATE TABLE `best_cdms` (
   `armmax_cdm` smallint(3) NOT NULL default '0',
   `vuemin_cdm` smallint(3) NOT NULL default '0',
   `vuemax_cdm` smallint(3) NOT NULL default '0',
+  `mmmin_cdm` int(6) NOT NULL default '0',
+  `mmmax_cdm` int(6) NOT NULL default '99999',
+  `rmmin_cdm` int(6) NOT NULL default '0',
+  `rmmax_cdm` int(6) NOT NULL default '99999',
+  `nbatt_cdm` varchar(20) NOT NULL default '0',
+  `vitdep_cdm` varchar(20) NOT NULL default '',
+  `vlc_cdm` varchar(5) NOT NULL default '',
+  `attdist_cdm` varchar(5) NOT NULL default '',
+  `etatdla_cdm` varchar(20) default NULL,
+  `dlamin_cdm` tinyint(3) NOT NULL default '0',
+  `dlamax_cdm` tinyint(3) NOT NULL default '99',
+  `charge_cdm` varchar(250) default NULL,
+  `bm_cdm` varchar(250) default NULL,
   `capspe_cdm` varchar(64) NOT NULL default '',
   `affecte_cdm` varchar(128) NOT NULL default '',
+  `portee_cdm` varchar(100) default NULL,
   `date_cdm` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `source_cdm` varchar(30) NOT NULL default 'Relais & Mago',
   PRIMARY KEY  (`id_cdm`),
@@ -175,7 +182,7 @@ CREATE TABLE `best_cdms` (
   KEY `Template` (`id_template_cdm`),
   KEY `Age` (`id_age_cdm`),
   KEY `id_mh` (`id_mh`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=2062 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -187,7 +194,7 @@ CREATE TABLE `best_familles` (
   `id_famille` int(11) NOT NULL auto_increment,
   `nom_famille` varchar(60) NOT NULL default '',
   PRIMARY KEY  (`id_famille`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -200,7 +207,7 @@ CREATE TABLE `best_monstres` (
   `id_race_monstre` int(11) NOT NULL default '0',
   `id_template_monstre` int(11) NOT NULL default '0',
   `id_age_monstre` int(11) NOT NULL default '0',
-  `nom_monstre` varchar(60) NOT NULL default '',
+  `nom_monstre` varchar(70) NOT NULL default '',
   `nivsom_monstre` int(11) NOT NULL default '0',
   `nivnbr_monstre` int(11) NOT NULL default '0',
   `pdvsom_monstre` int(11) NOT NULL default '0',
@@ -217,13 +224,23 @@ CREATE TABLE `best_monstres` (
   `armnbr_monstre` int(11) NOT NULL default '0',
   `vuesom_monstre` int(11) NOT NULL default '0',
   `vuenbr_monstre` int(11) NOT NULL default '0',
+  `mmsom_monstre` int(11) NOT NULL default '0',
+  `mmnbr_monstre` int(11) NOT NULL default '0',
+  `rmsom_monstre` int(11) NOT NULL default '0',
+  `rmnbr_monstre` int(11) NOT NULL default '0',
+  `dlasom_monstre` int(11) NOT NULL default '0',
+  `dlanbr_monstre` int(11) NOT NULL default '0',
+  `nbatt_monstre` varchar(20) default NULL,
+  `vitdep_monstre` varchar(20) default NULL,
+  `vlc_monstre` varchar(5) default NULL,
+  `attdist_monstre` varchar(5) default NULL,
   `date_monstre` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id_monstre`),
   UNIQUE KEY `Nom` (`nom_monstre`),
   KEY `Race` (`id_race_monstre`),
   KEY `Template` (`id_template_monstre`),
   KEY `Age` (`id_age_monstre`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1178 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -238,7 +255,7 @@ CREATE TABLE `best_niv_race_template` (
   `niv_template_niv` tinyint(3) NOT NULL default '0',
   KEY `id_race_niv` (`id_race_niv`),
   KEY `id_template_niv` (`id_template_niv`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='incohérences de niveau entre race et template';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='incoh�rences de niveau entre race et template';
 
 -- --------------------------------------------------------
 
@@ -255,10 +272,11 @@ CREATE TABLE `best_races` (
   `nivsom_race` bigint(20) NOT NULL default '0',
   `nivnbr_race` int(11) NOT NULL default '0',
   `niv_base` tinyint(3) NOT NULL default '0',
+  `commentaire` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`id_race`),
   UNIQUE KEY `Race` (`nom_race`),
   KEY `Famille` (`id_famille_race`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=146 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -286,7 +304,7 @@ CREATE TABLE `best_sources` (
   `nbr_cdms_source` int(11) NOT NULL default '1',
   KEY `id_troll_source` (`id_troll_source`),
   KEY `id_mh_source` (`id_mh_source`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='liste des trolls ayant entré une cdm';
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='liste des trolls ayant entr� une cdm';
 
 -- --------------------------------------------------------
 
@@ -303,7 +321,7 @@ CREATE TABLE `best_templates` (
   `regexp_fem_template` varchar(30) NOT NULL default '',
   `modif_niveau_template` tinyint(3) NOT NULL default '0',
   PRIMARY KEY  (`id_template`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 PACK_KEYS=0 AUTO_INCREMENT=48 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 PACK_KEYS=0;
 
 -- --------------------------------------------------------
 
@@ -335,7 +353,7 @@ CREATE TABLE `bugs` (
   `etat_bug` enum('ouvert','en-cours','clos') NOT NULL default 'ouvert',
   `outil_touche_bug` enum('bestiaire','bugs','gps','ggc','recherchator','rg','stats','vue2d','vtt','autre') NOT NULL default 'bestiaire',
   PRIMARY KEY  (`id_bug`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=184 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -365,10 +383,11 @@ CREATE TABLE `composants` (
   `nom_composant` varchar(100) default NULL,
   `id_race_composant` varchar(60) NOT NULL default '0',
   `date_fin_composant` datetime NOT NULL default '0000-00-00 00:00:00',
-  `commentaire_composant` blob NOT NULL,
+  `commentaire_composant` varchar(20) NOT NULL,
   `priorite_composant` enum('aucune','tresbasse','basse','moyenne','haute','superhaute') NOT NULL default 'moyenne',
+  `loc_composant` varchar(20) default NULL,
   PRIMARY KEY  (`id_composant`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -382,7 +401,7 @@ CREATE TABLE `distinctions` (
   `nom_image_distinction` varchar(255) NOT NULL default '',
   `nom_image_titre_distinction` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`id_distinction`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -546,7 +565,7 @@ CREATE TABLE `gtanieres` (
   `is_commerce_gtaniere` enum('oui','non') NOT NULL default 'non',
   `date_gtaniere` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id_gtaniere`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -587,6 +606,39 @@ CREATE TABLE `lieux` (
 -- --------------------------------------------------------
 
 -- 
+-- Structure de la table `loteries`
+-- 
+
+CREATE TABLE `loteries` (
+  `id_loterie` int(11) NOT NULL auto_increment,
+  `date_creation_loterie` datetime NOT NULL default '0000-00-00 00:00:00',
+  `etat_loterie` enum('ouvert','en_cours','clos') NOT NULL default 'ouvert',
+  `gain_loterie` longtext NOT NULL,
+  `valeur_participe_loterie` int(11) NOT NULL default '0',
+  `valeur_type_loterie` varchar(255) NOT NULL default '',
+  `id_gagnant_loterie` int(11) default '0',
+  PRIMARY KEY  (`id_loterie`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `loteries_participants`
+-- 
+
+CREATE TABLE `loteries_participants` (
+  `id_loteriep` int(11) NOT NULL auto_increment,
+  `id_troll_loteriep` int(11) NOT NULL default '0',
+  `id_loterie_loteriep` int(11) NOT NULL default '0',
+  `date_loteriep` date NOT NULL default '0000-00-00',
+  `date_remise_loteriep` date default NULL,
+  `ip_loteriep` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`id_loteriep`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
 -- Structure de la table `miss`
 -- 
 
@@ -611,7 +663,7 @@ CREATE TABLE `miss` (
 
 CREATE TABLE `monstres` (
   `id_monstre` int(11) NOT NULL default '0',
-  `nom_monstre` varchar(50) NOT NULL default '',
+  `nom_monstre` varchar(70) NOT NULL default '',
   `age_monstre` varchar(50) default NULL,
   `x_monstre` int(11) NOT NULL default '0',
   `y_monstre` int(11) NOT NULL default '0',
@@ -662,7 +714,56 @@ CREATE TABLE `options` (
   `display_mouches_option` enum('oui','non') NOT NULL default 'non',
   `display_noms_mouches_option` enum('oui','non') NOT NULL default 'non',
   `refresh_dla_option` enum('oui','non') NOT NULL default 'non',
+  `vue_zoom_option` double NOT NULL default '1',
+  `vue_taille_option` int(11) NOT NULL default '3',
+  `vue_max_pa_option` int(11) NOT NULL default '10',
+  `vue_animations_option` enum('oui','non') NOT NULL default 'oui',
+  `vue_display_trollometer_option` enum('oui','non') NOT NULL default 'non',
+  `vue_fantomes_option` enum('oui','non') default 'oui',
   PRIMARY KEY  (`id_troll_option`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `px_groupes`
+-- 
+
+CREATE TABLE `px_groupes` (
+  `id` int(11) NOT NULL auto_increment,
+  `nom` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `groupes_id` (`id`),
+  UNIQUE KEY `groupes_nom` (`nom`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `px_log`
+-- 
+
+CREATE TABLE `px_log` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `act` mediumtext,
+  `ip` mediumtext,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `px_partage`
+-- 
+
+CREATE TABLE `px_partage` (
+  `num` int(11) default NULL,
+  `nom` varchar(255) default NULL,
+  `groupe` mediumint(9) default NULL,
+  `last` tinyint(1) default NULL,
+  UNIQUE KEY `num` (`num`),
+  KEY `partage_num` (`num`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -735,9 +836,12 @@ CREATE TABLE `stock_tresors` (
   `en_vente_prix` smallint(6) default NULL,
   `en_vente_troll` int(10) unsigned default NULL,
   `en_vente_troll_nom` varchar(30) default NULL,
+  `nom` varchar(80) NOT NULL default '',
+  `template` varchar(80) default NULL,
   `description` varchar(150) NOT NULL default '',
+  `poids` decimal(10,0) NOT NULL default '0',
   PRIMARY KEY  (`id_tresor`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1785690 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -769,7 +873,7 @@ CREATE TABLE `tk_griefs` (
   `description` text,
   `grief_id` int(8) NOT NULL auto_increment,
   PRIMARY KEY  (`grief_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=258 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -784,7 +888,22 @@ CREATE TABLE `tk_vengeances` (
   `vengeance_id` int(8) NOT NULL auto_increment,
   `description` text,
   PRIMARY KEY  (`vengeance_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `traitements`
+-- 
+
+CREATE TABLE `traitements` (
+  `id_traitement` int(11) NOT NULL auto_increment,
+  `code_traitement` varchar(100) NOT NULL default '',
+  `date_traitement` datetime NOT NULL default '0000-00-00 00:00:00',
+  `etat_traitement` varchar(100) NOT NULL default '',
+  PRIMARY KEY  (`id_traitement`),
+  UNIQUE KEY `code_traitement` (`code_traitement`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Tables des traitements';
 
 -- --------------------------------------------------------
 
@@ -800,25 +919,6 @@ CREATE TABLE `tresors` (
   `z_tresor` int(11) NOT NULL default '0',
   `date_tresor` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id_tresor`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
--- 
--- Structure de la table `troll_equipement`
--- 
-
-CREATE TABLE `troll_equipement` (
-  `id_troll_equip` int(11) NOT NULL default '0',
-  `num_equip` int(11) NOT NULL default '0',
-  `nom_equip` varchar(50) NOT NULL default '',
-  `type_equip` varchar(50) NOT NULL default '',
-  `utilisation_equip` char(2) NOT NULL default '',
-  `template_equip` varchar(50) NOT NULL default '',
-  `effet_equip` varchar(50) NOT NULL default '',
-  `identifie_equip` char(1) NOT NULL default '',
-  `poids_equip` varchar(50) NOT NULL default '',
-  PRIMARY KEY  (`num_equip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -878,6 +978,40 @@ CREATE TABLE `trolls` (
 -- --------------------------------------------------------
 
 -- 
+-- Structure de la table `troll_equipement`
+-- 
+
+CREATE TABLE `troll_equipement` (
+  `id_troll_equip` int(11) NOT NULL default '0',
+  `num_equip` int(11) NOT NULL default '0',
+  `nom_equip` varchar(50) NOT NULL default '',
+  `type_equip` varchar(50) NOT NULL default '',
+  `utilisation_equip` char(2) NOT NULL default '',
+  `template_equip` varchar(50) NOT NULL default '',
+  `effet_equip` varchar(50) NOT NULL default '',
+  `identifie_equip` char(1) NOT NULL default '',
+  `poids_equip` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`num_equip`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Structure de la table `variables`
+-- 
+
+CREATE TABLE `variables` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nom` varchar(20) NOT NULL default '',
+  `valeur_num` int(10) unsigned default NULL,
+  `valeur_txt` varchar(20) default NULL,
+  `valeur_date` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
 -- Structure de la table `votes`
 -- 
 
@@ -891,7 +1025,7 @@ CREATE TABLE `votes` (
   `date_vote` datetime NOT NULL default '0000-00-00 00:00:00',
   `ip_vote` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`id_vote`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1398 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -905,25 +1039,26 @@ CREATE TABLE `vtt` (
   `DateTrash` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `DateMaj` timestamp NOT NULL default '2004-03-31 00:00:00',
   `Race` enum('Kastar','Skrim','Durakuir','Tomawak') default NULL,
-  `VUE` tinyint(3) unsigned default NULL,
+  `VUE` tinyint(4) default NULL,
   `VUEB` tinyint(4) default NULL,
   `Niveau` tinyint(3) unsigned default NULL,
   `PVs` smallint(5) unsigned default NULL,
-  `REG` tinyint(3) unsigned default NULL,
+  `PV_ACTUELS` smallint(5) default NULL,
+  `REG` tinyint(4) default NULL,
   `REGB` tinyint(4) default NULL,
-  `ATT` tinyint(3) unsigned default NULL,
+  `ATT` tinyint(4) default NULL,
   `ATTB` smallint(6) default NULL,
-  `ESQ` tinyint(3) unsigned default NULL,
+  `ESQ` tinyint(4) default NULL,
   `ESQB` smallint(6) default NULL,
-  `DEG` tinyint(3) unsigned default NULL,
+  `DEG` tinyint(4) default NULL,
   `DEGB` smallint(6) default NULL,
-  `ARM` tinyint(3) unsigned default NULL,
+  `ARM` tinyint(4) default NULL,
   `ARMB` smallint(6) default NULL,
   `KILLs` smallint(5) unsigned default NULL,
   `DEADs` smallint(5) unsigned default NULL,
-  `RM` smallint(5) unsigned default NULL,
+  `RM` smallint(6) default NULL,
   `RMB` smallint(6) default NULL,
-  `MM` smallint(5) unsigned default NULL,
+  `MM` smallint(6) default NULL,
   `MMB` smallint(6) default NULL,
   `NomTroll` varchar(30) default NULL,
   `Joueur` varchar(50) default NULL,
@@ -935,7 +1070,7 @@ CREATE TABLE `vtt` (
   `Divers` tinytext,
   `DLAH` tinyint(3) unsigned default NULL,
   `DLAM` tinyint(3) unsigned default NULL,
-  `Comps` tinytext,
+  `Comps` text,
   `Sorts` tinytext,
   `NbSorts` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`No`)
@@ -955,4 +1090,4 @@ CREATE TABLE `wanted` (
   `start_date_wanted` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id_wanted`),
   UNIQUE KEY `id_troll_wanted` (`id_troll_wanted`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
