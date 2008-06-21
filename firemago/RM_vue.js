@@ -320,10 +320,10 @@ function checkTreasureName ( node, eltName )
 
 function checkMonsterName ( node, eltName )
 {
-	if (node.childNodes[2].childNodes[0].firstChild)
-		return node.childNodes[2].childNodes[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
-	else
+	if (node.childNodes[3].childNodes[0].firstChild)
 		return node.childNodes[3].childNodes[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
+	else
+		return node.childNodes[4].childNodes[0].firstChild.nodeValue.toLowerCase ().indexOf ( eltName ) != -1;  // ANCHOR
 }
 
 function checkTrollName ( node, eltName )
@@ -896,6 +896,7 @@ begin = 2;
 for ( var i = 2; i < tableMonsters.length; i++ )
 {
 	try {
+		var anchorRow = tableMonsters[i];
 		var anchorCellID = tableMonsters[i].childNodes[1]; // ANCHOR
 		var anchorCellDesc = tableMonsters[i].childNodes[2]; // ANCHOR
 		var anchorID = anchorCellID.childNodes[0]; // ANCHOR
@@ -909,7 +910,13 @@ for ( var i = 2; i < tableMonsters.length; i++ )
 
 		arrayMonster += "monsterIds[]=" + monsterId + "&monsterNames[]=" + escape ( monsterDesc ) + "&monsterAges[]=" + escape ( monsterAge.replace ( /'/, " " ) ) + "&";
 		
+		newTdNiv = document.createElement ( 'td' );
+		newTdNiv.setAttribute ( 'align', 'center');
+		anchorRow.insertBefore ( newTdNiv, anchorCellDesc );
 		
+		newTdPv = document.createElement ( 'td' );
+		newTdPv.setAttribute ( 'align', 'center');
+		anchorRow.insertBefore ( newTdPv, tableMonsters[i].childNodes[4] );
 		// Adding script for coloring monster's wanted or without cdm
 		
 		if ( i%10 == 0 )
@@ -1186,7 +1193,7 @@ if ( arrayPlace != "" )
 // ********************************************************
 // Initialisation des filtres
 // ********************************************************
-var cursorOnLink=false;
+/*var cursorOnLink=false;
 var itbid=-1;
 for (i=0; i<totaltab.length; i++) {
 	var ttab="";	
@@ -1208,7 +1215,7 @@ var ttro = totaltab[ittro];		//var ttro = totaltab[6];
 var ttre = totaltab[ittre];		//var ttre = totaltab[8];
 var tcha = totaltab[itcha];		//var tcha = totaltab[10];
 var tlie = totaltab[itlie];		//var tlie = totaltab[12];
-
+*/
 
 /*if (itbid>0) creerThead( itbid ); 
 creerThead( itmon );

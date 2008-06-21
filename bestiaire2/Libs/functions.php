@@ -383,7 +383,7 @@ function SelectCdM_mh($MH,$Race,$IDAge)
 {
   global $db_vue_rm;
   $tab_cdm=array();
-  $sql="SELECT * FROM `best_cdms` WHERE `id_mh`=$MH";
+  $sql="SELECT *,TO_DAYS(NOW()) - TO_DAYS(date_cdm) nbj_cdm FROM `best_cdms` WHERE `id_mh`=$MH";
   // et on rajoute l'âge si on l'a
   if($IDAge!="-1" && $IDAge != "") $sql.=" AND `id_age_cdm`=$IDAge";
   if($query=mysql_query($sql,$db_vue_rm)){

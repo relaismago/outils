@@ -4,19 +4,24 @@ include_once ( "../admin_functions_db.php3" );
 include_once ( "../bestiaire2/Libs/functions.php" );
 include_once ( "../bestiaire2/DB/inc_initdata.php" );
 
+
+
 echo "try { \n";
-	
+
 $monsterIds = $_REQUEST['monsterIds'];
 $monsterNames = $_REQUEST['monsterNames'];
 $monsterAges = $_REQUEST['monsterAges'];
 $begin = $_REQUEST['begin'];
 
 $nbMonsters = count ( $monsterIds );
-	
+
+
 for ( $i = 0; $i < $nbMonsters; $i++ )
 {
 	$rang = $i + $begin;
    
+	//echo "alert('$nbMonsters : $i');";
+	
     $name=ereg_replace('[\\]',"",$monsterNames[$i]);
 	$infos = getInfoFromMonstre($name);
 	$caracs_moyennes = SelectCaracMoyMonstre($infos['id_race'],$infos['id_template'],$infos['id_age']);
@@ -28,24 +33,28 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	//if ($caracs_moyennes[niv]!='?' && $caracs_moyennes[niv]!='') $niv = $caracs_moyennes['niv'];
 	//else $niv=$infos[niv];
 	$niv = $infos[niv];
-		
+	
+	//echo "alert('$rang');";
+	
 	echo "
-	var anchorRow = tableMonsters[$rang];
-	var anchorCellID = tableMonsters[$rang].childNodes[1]; // ANCHOR
-    var anchorCellDesc = tableMonsters[$rang].childNodes[2]; // ANCHOR
-    var anchorID = anchorCellID.childNodes[0]; // ANCHOR
-    var anchorDesc = anchorCellDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
-	var monsterStyle = new String ( anchorDesc.getAttribute ( 'class' ) );
+	anchorRow = tableMonsters[$rang];
+	anchorCellID = tableMonsters[$rang].childNodes[1]; // ANCHOR
+	anchorCellNiv = tableMonsters[$rang].childNodes[2]; // ANCHOR
+    anchorCellDesc = tableMonsters[$rang].childNodes[3]; // ANCHOR
+    anchorCellPV = tableMonsters[$rang].childNodes[4]; // ANCHOR
+    anchorID = anchorCellID.childNodes[0]; // ANCHOR
+    anchorDesc = anchorCellDesc.getElementsByTagName ( 'a' )[0]; // ANCHOR
+	monsterStyle = new String ( anchorDesc.getAttribute ( 'class' ) );
 	var colortd='';
 	";
-			  
+	
 	//Link of the ID
 	echo "
 	var newLink = document.createElement ( 'a' );
     newLink.appendChild ( document.createTextNode ( '$monsterIds[$i]' ) );
     newLink.setAttribute ( 'class', monsterStyle );
     newLink.setAttribute ( 'href', 'javascript:EMV($monsterIds[$i] ,750,550)' );
-   	anchorCellID.removeChild ( tableMonsters[$rang].childNodes[1].childNodes[0] );
+   	anchorCellID.removeChild ( anchorCellID.childNodes[0] );
    	anchorCellID.appendChild ( newLink );
 	newLink = document.createElement ( 'a' );
 	";
@@ -135,6 +144,10 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	{
 		$last_cdm = count($tab_cdm_mh)-1;
 		$titre = "cdm recoupées du monstre au ".$tab_cdm_mh[$last_cdm]['date_cdm'];
+		if ($tab_cdm_mh[$last_cdm]['nbj_cdm'] > 5)
+			$colPV = 1 ;
+		else
+			$colPV = 0 ;
 		if ( $tab_cdm_mh[$last_cdm]['pdvmax_cdm'] != 999 )
 		{
 			$pdv = "entre ". $tab_cdm_mh[$last_cdm]['pdvmin_cdm'] ." et ". $tab_cdm_mh[$last_cdm]['pdvmax_cdm'] ." --> <b>".($tab_cdm_mh[$last_cdm]['pdvmin_cdm']+$tab_cdm_mh[$last_cdm]['pdvmax_cdm'])/2 . " </b>PV";
@@ -146,7 +159,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 			{
 				$ble = "0%";
 			}
-			echo "var myTablePVm = createBarrePV(0,".$tab_cdm_mh[$last_cdm]['pdvmax_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmax_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmax_cdm'].",'$ble');
+			echo "var myTablePVm = createBarrePV($colPV,".$tab_cdm_mh[$last_cdm]['pdvmax_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmax_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmax_cdm'].",'$ble');
 				  bless =true;
 			";
 		}
@@ -154,7 +167,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			$pdv = "> à ".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']." (bestiaire : ".$caracs_moyennes[pdv].")";
 			$ble = $tab_cdm_mh[$last_cdm]['blessure_cdm']."%";
-			echo "var myTablePVm = createBarrePV(0,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm'].",'$ble');
+			echo "var myTablePVm = createBarrePV($colPV,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm'].",'$ble');
 				  bless =true;
 			";
 		}
@@ -289,29 +302,25 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	//newLink.setAttribute ( 'onclick', 'this.onmouseout=function () {};');
     anchorCellDesc.removeChild ( anchorCellDesc.getElementsByTagName ( 'a' )[0] );
     anchorCellDesc.appendChild ( newLink );
-    newTd = document.createElement ( 'td' );
-	newTd.setAttribute ( 'align', 'center');
     if (bless == true)
     {
-    	newTd.appendChild (myTablePVm );
+    	anchorCellPV.appendChild (myTablePVm );
     }
-    anchorRow.insertBefore ( newTd, tableMonsters[$rang].childNodes[3] );
 	";
 	
 	echo "
-	newTd = document.createElement ( 'td' );
-	newTd.setAttribute ( 'align', 'center');
-	newTd.appendChild( document.createTextNode ( '$niv' ));
-	newTd.setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.style.background = \'white\';');
-	newTd.setAttribute ( 'onclick', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
-	newTd.setAttribute ( 'onmouseout', 'this.style.background=\'' + colortd + '\'');
-	anchorRow.insertBefore ( newTd, anchorCellDesc );
+	anchorCellNiv.appendChild( document.createTextNode ( '$niv' ));
+	anchorCellNiv.setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.style.background = \'white\';');
+	anchorCellNiv.setAttribute ( 'onclick', 'infoBulle (\'$monsterNames[$i]\',event,\'caracMonster\',\'$caracTot\');');
+	anchorCellNiv.setAttribute ( 'onmouseout', 'this.style.background=\'' + colortd + '\'');
 	";
 	
-	echo "if ( uncookifyButton ( document.getElementsByName ( 'delgowap' )[0] ) ) 	{ toggleGowap (); }";
-	
 }// boucle for
-	
-echo "} catch ( e ) { error ( e, 'Monsters Colouring error' ); } \n";
+
+echo "if ( uncookifyButton ( document.getElementsByName ( 'delgowap' )[0] ) ) 	{ toggleGowap (); }";
+
+echo "} catch ( e ) { 
+error ( e, 'Monsters Colouring error' );
+} \n";
 
 ?>
