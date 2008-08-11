@@ -72,7 +72,7 @@ else
 }
 
 //echo "<br><a href=\"login.php?login=1&id=".$id."\" target=\"_parent\">Se déconnecter</a>";
+
+include_once('../foot.php');
 ?>
 
-</BODY>
-</HTML>

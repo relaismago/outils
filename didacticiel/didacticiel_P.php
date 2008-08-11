@@ -12,7 +12,7 @@
 
 <table height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0">
   <tr>
-    <td vAlign="center" align="middle">
+    <td vAlign="middle" align="center">
     <div align="center">
       <br>
       <table borderColor="#fbba2c" cellSpacing="0" cellPadding="10" width="90%" bgColor="#30385c" border="3">
@@ -120,7 +120,6 @@
                     <p align="justify">
                     <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
                     - sélectionne le menu &quot;contour&quot;:</font><a href="http://img172.imageshack.us/my.php?image=contour1ae.jpg" target="_blank"><img src="http://img172.imageshack.us/img172/4905/contour1ae.th.jpg" border="0" alt="Free Image Hosting at www.ImageShack.us" align="right" style="border: 1px dotted #FBBA2C" width="152" height="108" /></a></p>
-                    <p align="center"></a></p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>
@@ -142,7 +141,8 @@
                     sur ce menu</font></p>
                     <p>
                     <a href="http://img336.imageshack.us/my.php?image=lueurexterne9tv.jpg" target="_blank">
-                    <img src="http://img336.imageshack.us/img336/8703/lueurexterne9tv.th.jpg" border="0" alt="Free Image Hosting at www.ImageShack.us" align="right" style="border: 1px dotted #FBBA2C" width="152" height="108" /></a></a></p>
+                    <img src="http://img336.imageshack.us/img336/8703/lueurexterne9tv.th.jpg" border="0" alt="Free Image Hosting at www.ImageShack.us" align="right" style="border: 1px dotted #FBBA2C" width="152" height="108" /></a>
+                    </p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>

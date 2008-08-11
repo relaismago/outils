@@ -1,6 +1,6 @@
 <?php
-include_once('../top.php')
-include('secure.php');
+include_once('../top.php');
+include_once('secure.php');
 
 $query_result = my_mysql_query("SELECT *, nom_troll from vtt, trolls Where No='".$id."' and id_troll=No");
 $row = mysql_fetch_array($query_result);
@@ -93,7 +93,6 @@ echo "</form>\n";
 echo "</center>\n";
 
 //echo "<br><a href=\"login.php?login=1&id=".$id."\" target=\"_parent\">Se déconnecter</a>";
+include_once('../top.php');
 ?>
 
-</BODY>
-</HTML>

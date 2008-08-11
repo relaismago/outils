@@ -41,7 +41,5 @@ echo "</td></tr>";
 
 echo "</table>";
 
+include_once('../foot.php');
 ?>
-
-</BODY>
-</HTML>

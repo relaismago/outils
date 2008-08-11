@@ -443,7 +443,7 @@ function hist_greve_Leroidelaclasse_5()
 function hist_greve_HeSrkim_7()
 {
 	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Heskrim_avatar_bleu.gif", "Hé ! Skrim !!!! (26038)");
-	?><i>Hé ! 
+	?><b><i>Hé ! 
   Skrim !!!!</i></b><i> acquiesça en dodelinant du chef, les paroles 
   de Messire </i><b><i>leroi</i></b><i> et rajouta d'un ton ferme et déterminé, 
   interceptant par la même occasion une nouvelle chauve-souris :</i>
@@ -575,7 +575,6 @@ function hist_greve_Minos_1()
 	?>
 	<i>Des 
   clameurs se faisaient entendre&nbsp; à l'extérieur...</i>&nbsp;<br>
-  </h1>
   <p><b>Minos</b> vouloir boire 
   calvok&nbsp;!</p>
   <p><b>Minos</b> rapporter ingrédients 
@@ -640,8 +639,8 @@ function hist_greve_Fuleng_1()
   les rangs des trolls de plus en plus nombreux devant la porte de la 
   bibliotek. Les grévistes pouvaient parfois percevoir d'étranges 
   remarques&nbsp;:</i>&nbsp;<br>
-  <p>Arf, si au moins <b>Trollich&nbsp;</b>avait 
-  ramené ses gowaps... on aurait pu passer le temps, et du bon...</font>
+  Arf, si au moins <b>Trollich&nbsp;</b>avait 
+  ramené ses gowaps... on aurait pu passer le temps, et du bon...
 	<?
 	tutorial_haut_bas_gauche();
 }
@@ -658,7 +657,7 @@ function hist_greve_Korskarn_2()
   J'ai franchi le pas&nbsp;: je me suis lancé dans la tâche ingrate du grattage 
   !! Mais j'ai besoin de votre aide : je vous en prie procurez-moi un 
   parchemin et quelques compos pour que je puisse démarrer mon apprentissage 
-  !!
+  !!</p>
 	<?
 	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Korskarn_avatar_bleu.gif", "kor-skarn (69322)");
 }
@@ -682,7 +681,7 @@ function hist_greve_Leroidelaclasse_6()
   Je rêve d'une Guilde ou Grabuge gratterait des parchos&nbsp;<br>
   Je rêve d'une Guilde ou il y aurait un Scribe au conseil&nbsp;<br>
   Je rêve d'une Guilde ou tous les groupes chasseraient du prio à la 
-  demande
+  demande</p>
 	<?
 	tutorial_haut_bas_gauche();
 }
@@ -883,7 +882,7 @@ function hist_greve_HeSkrim_9()
 function hist_greve_trollichon_6()
 {
 	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Trollichon_avatar_bleu.gif", "Troll'ichon (42637)");
-	?><i>Trollich</i></b><i> 
+	?><b><i>Trollich</i></b><i>
   reprit son brouillon, y ajouta les petites modifications proposées 
   par son collègue du magh' à la suite des règles qui existaient déjà 
   auparavant et ajouta à vive voix :&nbsp;<br>
@@ -1016,7 +1015,7 @@ function hist_greve_Fuleng_2()
   <p align="justify">Gloire à 
   vous autres les penseurs d'avoir pensé. Je ne jugerais pas le contenu 
   du parchemin car ce n'est point le débat. Je l'accepte et j'applaudis 
-  sa réalisation ! Je serai toujours fier d'être un R&amp;M&nbsp;!
+  sa réalisation ! Je serai toujours fier d'être un R&amp;M&nbsp;!</p>
 <?
 	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Fuleng_avatar_bleu.gif", "Fuleng (10611)");
 }
@@ -1033,7 +1032,7 @@ function hist_greve_Minhothort_2()
 function hist_greve_Lobo_3()
 {
 	tutorial_haut_bulle_droit();
-	?><i>Lobo</i></b><i> écrasa 
+	?><b><i>Lobo</i></b><i> écrasa 
   une larme devant ce beau parchemin.</i>&nbsp;<br>
   &nbsp;<br>
   Y sont bien mes p'tits...
@@ -1045,8 +1044,7 @@ function hist_greve_Kkwet_1()
 {
 	tutorial_haut_bulle_gauche("http://www.pipeshow.net/RM/avatars/Kkwet_avatar_bleu.gif", "Kkwet (dieu)");
 	?><b>Epilogue&nbsp;: </b>&nbsp;<br>
-</p>
-<p><i>Cette grève n'aura pas 
+<i>Cette grève n'aura pas 
 été vaine, puisqu'au si célèbre mundidey du Goblin, le monde de 
 la scribiture des Relais &amp; Mago n'a jamais été aussi florissant 
 avec 8 copies réussies (TP, invisibilité, AdD, VT, AE, télékinésie, 
