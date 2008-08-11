@@ -498,7 +498,7 @@ include_once("functions_dev.php3");
 include_once("admin_functions_db.php3");
 include_once("functions_image.php3");
 
-require_once("bestiaire2/DB/inc_connect_best.php");
+//require_once("bestiaire2/DB/inc_connect_best.php");
 require_once("bestiaire2/DB/inc_initdata.php");
 require_once("bestiaire2/Libs/functions.php");
 
