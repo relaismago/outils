@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$ziMHM3"
-                   NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-                   NS1:minVersion="0.8"
-                   NS1:maxVersion="3.0.*"
-                   NS1:updateLink="http://outilsrm.kathryl.net/firemago/firemago.xpi" />
+  <RDF:Description RDF:about="urn:mozilla:extension:{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
+                   NS1:version="0.1"
+                   NS1:updateLink="http://outilsrm.cat-the-psion.net/firemago/firemago.xpi"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAI3s4VAepBcoL/PesLBmpOG6bcnfqflDbkpDixfKeTsbEZ8EcPyPS1e29bCvSIbNJYuOlOxc95c8UuNEHKhuCmjTc5wuEqIzL9lIXk4fKLY0zpIpSr40FBZDlxs2skMJxdOKxPbAen7dH91eZP4KvY7rN2tUBgUScxqYjy20HSpY">
+    <NS1:updates RDF:resource="rdf:#$viMHM3"/>
+  </RDF:Description>
   <RDF:Description RDF:about="rdf:#$wiMHM3"
                    NS1:version="2.1">
     <NS1:targetApplication RDF:resource="rdf:#$ziMHM3"/>
   </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
-                   NS1:version="0.1"
-                   NS1:updateLink="http://outilsrm.kathryl.net/firemago/firemago.xpi"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAI019HtV/1xlO5PGuHkI2emc/HNU143b+bYa8go1gd07krrgjjFnHNjzlvQ6e00zPVY7DL7gYMawhGWMZgEwry0u+fs383bVADhacOuNlQaH6ZC4nfWULPY+W0pJbub75U3WMNmsV1a37n+1JdrxOjvom1nZX/3W38xLEu9yt/9N">
-    <NS1:updates RDF:resource="rdf:#$viMHM3"/>
-  </RDF:Description>
   <RDF:Seq RDF:about="rdf:#$viMHM3">
     <RDF:li RDF:resource="rdf:#$wiMHM3"/>
   </RDF:Seq>
+  <RDF:Description RDF:about="rdf:#$ziMHM3"
+                   NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   NS1:minVersion="0.8"
+                   NS1:maxVersion="3.0.*"
+                   NS1:updateLink="http://outilsrm.cat-the-psion.net/firemago/firemago.xpi" />
 </RDF:RDF>
