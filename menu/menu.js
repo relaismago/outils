@@ -40,10 +40,10 @@ function Menu()
 	HTMLstr = "";
 	HTMLstr += "<!-- MENU PANE DECLARATION BEGINS -->\n";
 	HTMLstr += "\n";
-	if (ie||ns6) HTMLstr += "<div id='MainTable' style='position:absolute;top:0;left:0;'>\n";
+	if (ie||ns6) HTMLstr += "<div id='MainTable' style='position:absolute;top:0;left:0;width:100%'>\n";
 //	if (n)  HTMLstr += "<layer name='MainTable'>\n";
 	HTMLstr += "<table class='mh_tdborder' width='100%' bgcolor='"+this.bgColor+"' border='"+this.mainPaneBorder+"'>\n";
-	HTMLstr += "<tr class='mh_tdtitre' >";
+	HTMLstr += "<tr class='mh_tdtitre'>";
 	if (n) HTMLstr += "<td>&nbsp;";
 	HTMLstr += "<!-- MAIN MENU STARTS -->\n";
 	HTMLstr += "<!-- MAIN_MENU -->\n";
