@@ -32,8 +32,8 @@ function getGuildeInFile($id)
     #$liste=split (";",$line);
     list($Id, $nom, $size) = split (";",$line);
     #$Id=$liste[0];
-    $nom = htmlentities($nom);
-		$sql = "SELECT id_guilde FROM guildes WHERE id_guilde=$Id";	
+    //$nom = htmlentities($nom);
+	$sql = "SELECT id_guilde FROM guildes WHERE id_guilde=$Id";	
 
     $result=mysql_query($sql,$db_vue_rm);
     echo mysql_error();
