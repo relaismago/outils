@@ -921,20 +921,35 @@ try
 // Adding login IFRAME
 // ********************************************************
 
+function deconn()
+{
+	var newdeConnScript = document.createElement ( 'script' );
+  	newdeConnScript.setAttribute ( 'language', 'JavaScript' );
+  	newdeConnScript.setAttribute ( 'src',  URLLoginRM + '?logout=true' );
+  	document.body.appendChild ( newdeConnScript );
+}
+
+function connect()
+{
+	var newConnectScript = document.createElement ( 'script' );
+  	newConnectScript.setAttribute ( 'language', 'JavaScript' );
+  	newConnectScript.setAttribute ( 'src',  URLLoginRM +'?login=true&numTroll='+document.getElementById('numTroll').value +'&password='+document.getElementById('password').value + '&autologin='+document.getElementById('autologin').value );
+  	document.body.appendChild ( newConnectScript );
+}
+
 var myTr = newTR();
 var myTd = document.createElement ( 'td' );
 myTd.setAttribute ( 'colspan', '3' );
-var myIFrame = document.createElement ( 'iframe' );
 
-var anchorCss = document.getElementsByTagName ( 'link' )[0];
-URLLoginRM = URLLoginRM + "?URLStylesheet=" + anchorCss.getAttribute('href');
+var myDiv = document.createElement ( 'div' );
+myDiv.setAttribute ( 'id', 'conn' );
+var newConnScript = document.createElement ( 'script' );
+newConnScript.setAttribute ( 'language', 'JavaScript' );
+newConnScript.setAttribute ( 'src',  URLLoginRM );
 
-myIFrame.setAttribute ( 'src', URLLoginRM );
-myIFrame.setAttribute ( 'width', '100%' );
-myIFrame.setAttribute ( 'height', '50' );
-myIFrame.setAttribute ( 'frameborder', '0' );
-myIFrame.setAttribute ( 'scrolling', 'no' );
-myTd.appendChild ( myIFrame );
+document.body.appendChild ( newConnScript );
+
+myTd.appendChild ( myDiv );
 myTr.appendChild ( myTd );
 try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth R&M error' ); }
 

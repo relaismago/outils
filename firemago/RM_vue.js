@@ -553,7 +553,9 @@ function cacherInfoBulle() {
           bulleStyle.visibility="hidden";
 }
 
-/*********************************************************************************************************/
+// *****************************************************
+// Barre des PV (monstres et trolls)
+// *****************************************************
 
 function createBarrePV(color, pvr, pv, comment) { //color: 0=red, 1=gris
         var size=Math.floor((50*pvr)/pv); if ((size<50) && (size>48)) size=48;   // pour rendre plus joli
@@ -654,24 +656,79 @@ try { insertBeforeCR ( myForm, document.getElementsByTagName( 'a' )[4] ); } catc
 // Adding login IFRAME
 // ********************************************************
 
-var myTable = newTable ( 'RMauth' );
-myTable.appendChild ( myTR = newTR () );
-myTR.appendChild ( myTD = newTD () );
+function deconn()
+{
+	var newdeConnScript = document.createElement ( 'script' );
+  	newdeConnScript.setAttribute ( 'language', 'JavaScript' );
+  	newdeConnScript.setAttribute ( 'src',  URLLoginRM + '?logout=true' );
+  	( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newdeConnScript );
+}
 
-var anchorCss = document.getElementsByTagName ( 'link' )[0];
-URLLoginRM = URLLoginRM + "?URLStylesheet=" + anchorCss.getAttribute('href');
+function connect()
+{
+	var newConnectScript = document.createElement ( 'script' );
+  	newConnectScript.setAttribute ( 'language', 'JavaScript' );
+  	newConnectScript.setAttribute ( 'src',  URLLoginRM +'?login=true&numTroll='+document.getElementById('numTroll').value +'&password='+document.getElementById('password').value + '&autologin='+document.getElementById('autologin').value );
+  	( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newConnectScript );
+}
 
-var myIFrame = document.createElement ( 'iframe' );
-myIFrame.setAttribute ( 'name', 'iframe_vue' );
-myIFrame.setAttribute ( 'src', URLLoginRM );
-myIFrame.setAttribute ( 'width', '100%' );
-myIFrame.setAttribute ( 'height', '50' );
-myIFrame.setAttribute ( 'frameborder', '0' );
-myIFrame.setAttribute ( 'scrolling', 'no' );
-myTD.appendChild ( myIFrame );
+myTR = newTR ();
+myTD = newTD ();
+myTD.setAttribute ('colspan','2');
+myTR.appendChild ( myTD );
 
-try { insertBeforeCR ( myTable, totaltab[4] ); } catch ( e ) { error ( e, 'auth RM' ); } // ANCHOR
+var myDiv = document.createElement ( 'div' );
+myDiv.setAttribute ( 'id', 'conn' );
+var newConnScript = document.createElement ( 'script' );
+newConnScript.setAttribute ( 'language', 'JavaScript' );
+newConnScript.setAttribute ( 'src',  URLLoginRM );
+( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newConnScript );
 
+myTD.appendChild ( myDiv );
+
+try { totaltab[3].childNodes[1].appendChild(myTR); } catch ( e ) { error ( e, 'auth RM' ); } // ANCHOR
+
+// ********************************************************
+// Adding danger (Mythics and TK)
+// ********************************************************
+
+var totalLi = document.getElementsByTagName ( 'li' );
+var pos = totalLi[0].childNodes[2].childNodes[0].nodeValue;
+var posX=pos.substring(pos.indexOf('=')+2,pos.indexOf(','));
+pos=pos.substr(pos.indexOf(',')+1);
+var posY=pos.substring(pos.indexOf('=')+2,pos.indexOf(','));
+var posN=pos.substr(pos.lastIndexOf('=')+2);
+
+myDiv = document.createElement ( 'div' );
+myDiv.setAttribute ( 'id', 'frmdanger' );
+var html = "<form><table ><tr><td>Les menaces sur <input type='text' size='2' maxlength='2' class='TextboxV2' value='30' id='txtDist'/> cases</td>";
+html += "<td><input type='button' value='Afficher' onclick='affDanger();' class='mh_form_submit'/></td>";
+html += "<td><input type='button' value='Cacher' onclick='hideDanger();' class='mh_form_submit'/></td>";
+html += "</tr></table><div id='danger'></div></form>";
+
+myDiv.innerHTML = html;
+
+try { insertBeforeCR ( myDiv, totaltab[4] ); } catch ( e ) { error ( e, 'danger RM' ); } // ANCHOR
+
+function affDanger ()
+{
+	var distMax = document.getElementById('txtDist').value;
+	
+	if (!isNaN(distMax) && distMax>0)
+	{
+		var newDangScript = document.createElement ( 'script' );
+		newDangScript.setAttribute ( 'language', 'JavaScript' );
+		newDangScript.setAttribute ( 'src',  URLTopJs + 'menaces.php?x=' + posX + '&y=' + posY + '&n=' + posN + '&distmax=' + distMax );
+		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newDangScript );
+	}
+	else
+		alert ("La distance doit être un nombre supérieur à 0 !");
+}
+
+function hideDanger ()
+{
+	document.getElementById('danger').innerHTML='';
+}
 
 // ********************************************************
 // Adding filter inputs
@@ -1035,8 +1092,14 @@ newTd.setAttribute( 'width', '5' );
 newTd.setAttribute( 'align', 'center' );
 newTd.appendChild( newB );
 tableTrolls[1].insertBefore( newTd, tableTrolls[1].childNodes[2] );
-//tableTrolls[1].parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].setAttribute('colspan','11');
-tableTrolls[0].childNodes[0].setAttribute ('colspan','11');
+myB = document.createElement( 'b' );
+myB.appendChild ( document.createTextNode( 'PV') );
+myTd = newTD();
+myTd.setAttribute( 'width', '25' );
+myTd.setAttribute( 'align', 'center' );
+myTd.appendChild(myB);
+tableTrolls[1].insertBefore( myTd, tableTrolls[1].childNodes[7] );
+tableTrolls[0].childNodes[0].setAttribute ('colspan','12');
 
 var arrayTroll = "";
 var arrayGuild = "";
@@ -1112,6 +1175,12 @@ for ( var i = 2; i < tableTrolls.length; i++ )
 			anchorCellGuildDesc.insertBefore ( newLink, anchorGuildDesc );
 			anchorCellGuildDesc.insertBefore ( document.createTextNode ( '] - ' ), anchorGuildDesc );
 		}
+		
+		// Pour la barre de PV
+		newTdPv = document.createElement ( 'td' );
+		newTdPv.setAttribute ( 'align', 'center');
+		tableTrolls[i].insertBefore ( newTdPv, tableTrolls[i].childNodes[7] );
+		
 		if ( i%30 == 0 )
 		{
 			// Adding script for coloring tk's and wanted

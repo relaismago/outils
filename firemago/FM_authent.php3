@@ -7,57 +7,46 @@ include_once ( "../inc_connect.php3" );
 include_once ( "inc_FM_authent.php3" );
 
 // Affiche la boite d'authentification
+
 function displayFormLogin ( $msg )
 {
 	$numTrollValue = $_COOKIE["cookie_id_troll"];
 	// si on arrive sur la page de l'exterieur, on prend le cookie
 	// si on boucle, on prend le controle, qui represente la valeur voulue par l'utilisateur
 	if ( isset ( $_REQUEST['numTroll'] ) ) { $autologinValue = $_REQUEST['autologin']; } else { $autologinValue = $_COOKIE["autologin"]; }
-	$URLStylesheet = $_GET['URLStylesheet'];
-?>
-
-	<html> <head> <link rel="stylesheet" href="<?= $URLStylesheet ?>" type="text/css"> </head> <body>
-	<form name='select_troll' method='POST' action='FM_authent.php3?URLStylesheet=<?= $URLStylesheet ?>'>
-	<table class="mh_tdborder" width='100%'>
+	
+	$html="
+	<table class='mh_tdborder' width='100%'>
 	<tr class='mh_tdtitre'>
-		<td colspan='6'><span class="Style1"> <?= $msg ?> </span> </td>
+		<td colspan='6'><span class='Style1'>".$msg."</span> </td>
 	</tr>
 	<tr class='mh_tdtitre'>
 		<td>
-			numéro de troll : <input type='text' name='numTroll' size=6 value='<?= $numTrollValue ?>' class="TextboxV2">
-			&nbsp; &nbsp; &nbsp; &nbsp;
-			mot de passe : <input type='password' name='password' size=16 class="TextboxV2">
-			&nbsp; &nbsp; &nbsp; &nbsp;
-			auto-login : <input type='checkbox' name='autologin' class="TextboxV2" value="true" <?= $autologinValue ? "checked" : "" ?>>
+			numéro de troll : <input type='text' id='numTroll' size='6' value='". $numTrollValue."' class='TextboxV2'/>
+			
+			mot de passe : <input type='password' id='password' size='16' class='TextboxV2'/>
+			
+			auto-login : <input type='checkbox' id='autologin' class='TextboxV2' value='true'".($autologinValue ? " checked='true'" : "")."/>
 		</td>
-		<td width='*' align='right'> <input type=submit name='login' value='connexion' class="mh_form_submit"> </td>
+		<td width='*' align='right'> <input type='button' onclick='connect();' name='login' value='connexion' class='mh_form_submit'/> </td>
 	</tr>
 	</table>
-	</form>
-	</body> </html>
-<?
+	";
+	echo "document.getElementById('conn').innerHTML=$html;";
 }
 
 function displayFormLogout ()
 {
-	$URLStylesheet = $_GET['URLStylesheet'];
-	?>
-	
-	<html> <head> <link rel="stylesheet" href="<?= $URLStylesheet ?>" type="text/css"> </head> <body>
-	<form name='select_troll' method='POST' action='FM_authent.php3?URLStylesheet=<?= $URLStylesheet ?>'>
-	<table class="mh_tdborder" width='100%'>
+	global $db_vue_rm;
+	$html="
+	<table width='98%'>
 	<tr class='mh_tdpage'>
-		<td align='left' class="mh_tdtitre"> Vous êtes connecté aux outils R&amp;M </td>
-	</tr>
-	<tr class='mh_tdpage'>
-		<td align='right' class="mh_tdtitre"> <input type=submit name='logout' value='déconnexion' class="mh_form_submit"> </td>
+		<td align='left' class='mh_tdtitre'> Vous êtes connecté aux outils R&amp;M </td>
+		<td align='right' class='mh_tdtitre'> <input type='button' onClick='deconn();' name='logout' value='déconnexion' class='mh_form_submit'></input> </td>
 	</tr>
 	</table>
-	</form>
-	</body> </html>
-	
-	<?
-	exit;
+	";
+	echo "document.getElementById('conn').innerHTML=$html;";
 }
 
 // ----------------------------------------

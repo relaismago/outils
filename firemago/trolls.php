@@ -60,7 +60,9 @@ if ($_SESSION['AuthGuilde'] == 450)
 		if ( $id_guilde_troll == ID_GUILDE )
 		{
 			$vtt = selectDbVtt($trollsid[$i]);
-			$caracTot="carac il y a : ".$vtt[Peremption]." h;".$vtt[DLAH]."h".$vtt[DLAM].";".$vtt[PV_ACTUELS]."/".$vtt[PVs].";";
+			$caracTot="carac il y a : ".$vtt[Peremption]." h;";
+			$caracTot.=$vtt[DLAH]."h".$vtt[DLAM].";";
+			$caracTot.=$vtt[PV_ACTUELS]."/".$vtt[PVs].";";
 			$caracTot.=$vtt[ATT]."+".$vtt[ATTB].";";
 			$caracTot.=$vtt[ESQ]."+".$vtt[ESQB].";";
 			$caracTot.=$vtt[DEG]."+".$vtt[DEGB].";";
@@ -69,10 +71,18 @@ if ($_SESSION['AuthGuilde'] == 450)
 			$caracTot.=$vtt[VUE]."+".$vtt[VUEB].";";
 			$caracTot.=$vtt[RM]."+".$vtt[RMB].";";
 			$caracTot.=$vtt[MM]."+".$vtt[MMB].";";
-			/*echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'background', '' ); \n";
-      		echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'background', '' ); \n";
-			echo "tableTrolls[$rang].childNodes[1].setAttribute ( 'bgcolor', colorRM ); \n";
-			echo "tableTrolls[$rang].childNodes[2].setAttribute ( 'bgcolor', colorRM ); \n";*/
+			
+			if ($vtt[Peremption]/24 > 5)
+				$colPV = 1 ;
+			else
+				$colPV = 0 ;
+
+			if ($vtt[PV_ACTUELS]!="")
+			{
+				echo "var myTablePVm = createBarrePV($colPV,$vtt[PV_ACTUELS],$vtt[PVs],'$vtt[PV_ACTUELS]/$vtt[PVs]');";
+				echo "tableTrolls[$rang].childNodes[7].appendChild (myTablePVm );";
+			}
+			
 			echo "tableTrolls[$rang].childNodes[4].setAttribute ( 'onmouseover', 'this.style.cursor = \'pointer\';this.className = \'mh_tdtitre\';');";
 			echo "tableTrolls[$rang].childNodes[4].setAttribute ( 'onclick', 'infoBulle (\'$nom_troll\',event,\'caracTroll\',\'$caracTot\');');";
 			echo "tableTrolls[$rang].childNodes[4].setAttribute ( 'onmouseout', 'this.className = \'mh_tdpage\'');";
