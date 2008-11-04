@@ -146,11 +146,11 @@ function initAuth()
 	  session_unset();
 	  session_destroy();
 		
-		setcookie ( 'autologin', false );
+	  setcookie ( 'autologin', false );
 		
-		echo "<script language='JavaScript'>";
-		echo "document.location.href='/index.php'";
-		echo "</script>";
+	  echo "<script language='JavaScript'>";
+	  echo "document.location.href='/index.php'";
+	  echo "</script>";
 	}
 
 	# Si la personne est déjà authentifiée
@@ -192,6 +192,7 @@ function initAuth()
 		// S'il n'existe pas dans la base de données
 		} else {
 			/* Premier connection du troll sur les outils */
+			setcookie ( 'autologin', false );
 			echo "<script language='JavaScript'>";
 			echo "document.location.href='/change_password.php'";
 			echo "</script>";
@@ -209,11 +210,11 @@ function initAuth()
 		
 			$_SESSION['Status']="authentified";
 			setcookie ("cookie_id_troll", $_SESSION['AuthTroll'],time()+31536000); // on garde le cookie 1 an
-			
+
 			enregistre_connection( $_SESSION['AuthTroll'] );
 			redirectAuth();
 		} else {
-  		setcookie ( 'autologin', false );
+  			setcookie ( 'autologin', false );
 			session_unset();
 			session_destroy();
 			die( "<h2>Soit vous n'êtes pas un Relais&Mago
