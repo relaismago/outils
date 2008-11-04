@@ -99,8 +99,9 @@ class loterie_participant {
 		$this->date_loteriep = $row["date_loteriep"];
 		$this->date_remise_loteriep = $row["date_remise_loteriep"];
 		$this->ip_loteriep = $row["ip_loteriep"];
-
-		echo mysql_error(); 
+		
+		if (mysql_error())
+			echo mysql_error()." ".$sql; 
 	}
 
 	function write_db() {
