@@ -24,8 +24,8 @@ $bdd=$GLOBALS['base_vue'];
 // CSS
 $css="/ggc/css/MH_Style_Play.css";
 
-// répatoire des avatars
-$rep_avatar = "http://www.pipeshow.net/RM/";
+// répertoire des avatars
+$rep_avatar = "http://www.pipeshow.net/RM/avatars/complets/";
 
 
 ?>
