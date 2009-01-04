@@ -452,7 +452,7 @@ function initRefresh()
 	
 		} elseif ($troll[erreur] == "param&egrave;tres") {
 			echo "Y'a un truc louche. Votre login / mot de passe est foireux. ";
-			echo "Envoyez un MP &agrave; Bod&eacute;ga pour les lui donner, et debugguer...";
+			echo "Envoyez un MP &agrave; glupglup pour les lui donner, et debugguer...";
 	
 		} elseif ($troll[erreur] == "Serveur") {
 			echo "Le serveur MH est encore cass&eacute;. Repassez plus tard...";
@@ -1723,7 +1723,8 @@ function vue2d_afficher_trollometer($info)
 	<br>
 	<table class='mh_tdborder' width='100%' align='center'>
 		<tr class='mh_tdpage'>
-			<td colspan='2'><? vue2d_afficher_trollometer_baronnies($info['t_baronnies'],$info['max_pa']); ?></td>
+			<!-- <td colspan='2'><? //vue2d_afficher_trollometer_baronnies($info['t_baronnies'],$info['max_pa']); ?></td>-->
+			<td colspan='2'><? vue2d_afficher_trollometer_mythiques($info['t_mythiques'],$info['max_pa'],$info['x_position'],$info['y_position'],$info['z_position']); ?></td>
 		</tr>
 		<tr class='mh_tdpage' valign='top'>
 			<td width='50%'><? vue2d_afficher_trollometer_monstres($info['t_monstres'],$info['max_pa'],$info['x_position'],$info['y_position'],$info['z_position']); ?></td>
@@ -1736,6 +1737,48 @@ function vue2d_afficher_trollometer($info)
 	</table>
 	<?
 }
+
+function vue2d_afficher_trollometer_mythiques($mythiques,$max_pa,$ax,$ay,$az)
+{
+
+	if (  !userIsGuilde()  )
+		return;
+	if (!$mythiques)
+		return;
+
+	$titre = "<tr class='mh_tdtitre'><td>Distance : $i Pa</td></tr>";
+	  foreach ($mythiques as $mythiques2)
+	    foreach ($mythiques2 as $mythiques3)
+	      foreach ($mythiques3 as $mythique) 
+	      {
+	      		$titre = "<tr class='mh_tdtitre'><td>Distance : $mythique[distance_pa] Pa</td></tr>";
+				$text = "<tr class='mh_tdpage'>";
+				$text .= "<td nowrap>";
+				$text .= afficher_position($mythique['x'],$mythique['y'],$mythique['z']);
+				$text .= "</td>";
+				$text .= "<td>$mythique[id]</td>";
+				$text .= "<td>";
+				$text .= htmlentities(stripslashes($mythique['nom']));
+				$text .= "</td>";
+
+				$text .= "</tr>";
+				if ($titre != "") {
+					$text = $titre . $text;
+					$titre = "";
+				}
+				$retour .= $text;
+		  }
+
+		if ( $retour != "" ) {
+			?>
+			<center><h3> Les Myhtiques </h3></center>
+			<table class='mh_tdtitre' width='90%' align='center'>
+			<? echo $retour ?>
+			</table>
+			<?
+		}
+}
+
 
 function vue2d_afficher_trollometer_baronnies($baronnies,$max_pa)
 {

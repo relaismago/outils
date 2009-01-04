@@ -118,7 +118,7 @@ UpdateIt();
 
 </td>
 
-<? if ( userIsGuilde() ) { 
+<? if ( userIsGuilde() || userIsGroupSpec() ) { 
 	echo "<td align='left' width='40%' valign='top'>";
 	afficherAccesRapide();
 	$recherche = new recherche();
@@ -131,7 +131,7 @@ UpdateIt();
 
 <? 
 unset($_SESSION['options']);
-if ( userIsGuilde() ) { 
+if ( userIsGuilde() || userIsGroupSpec() ) { 
 	if (!isset($_SESSION['options'])) {
 		$options = new options($_SESSION['AuthTroll']);
 		$_SESSION["options"] = $options->get_options_tab();

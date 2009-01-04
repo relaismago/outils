@@ -49,6 +49,10 @@ function selectDbGpsTrolls($x_min,$x_max,$y_min,$y_max,$type)
 	} elseif (is_numeric($type)) {
 		$sql .= " AND t.guilde_troll=$type";
 	}
+	
+	if (!userIsGroupSpec){
+		$sql .= " AND t.maj_groupe_spec_troll<>'oui'";
+	}
 
 	$sql .= " ORDER by t.nom_troll";
 

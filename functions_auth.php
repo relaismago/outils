@@ -14,7 +14,7 @@ include_once ("functions_engine.php");
 
 function afficherFormAuth()
 {
-	if ( userIsGuilde() )
+	if ( userIsGuilde() || userIsGroupSpec() )
 		afficheLogout();
 	else
 		afficheAuthentifie();
@@ -142,6 +142,7 @@ function initAuth()
 	  $_SESSION['AuthNomTroll']="";
 	  $_SESSION['AuthGuilde']="";
 	  $_SESSION['Auth']="";
+	  $_SESSION['AuthGroupSpec']="";
 
 	  session_unset();
 	  session_destroy();
@@ -165,12 +166,12 @@ function initAuth()
 		$md5pass="---"; // Initialisation, mais çà sert pas à grand chose ici
 	
 		// On regarde si le troll existe dans la base de données
-		$sql = "SELECT pass_troll, guilde_troll, nom_troll, nom_rang_troll";
+		$sql = "SELECT pass_troll, guilde_troll, nom_troll, nom_rang_troll, groupe_spec_troll";
 		$sql .= " FROM trolls WHERE id_troll=$CHTROLL";
 	  $result=mysql_query($sql, $db_vue_rm);
 	  echo mysql_error();
 	
-	  list($md5pass,$AuthGuilde,$AuthNomTroll,$nom_rang_troll)=mysql_fetch_array($result);
+	  list($md5pass,$AuthGuilde,$AuthNomTroll,$nom_rang_troll,$groupe_spec_troll)=mysql_fetch_array($result);
 		// S'il existe 
 
 		if (preg_match("/essai/", $nom_rang_troll)) {
@@ -184,6 +185,7 @@ function initAuth()
 				//$_SESSION[AuthTroll]=$_SESSION[AuthTroll]; // pour indiquer ici toutes les valeurs possibles de session
 				$_SESSION['AuthGuilde'] = $AuthGuilde;
 				$_SESSION['AuthNomTroll'] = $AuthNomTroll;
+				$_SESSION['AuthGroupSpec'] = $groupe_spec_troll;
 				//$_SESSION[Auth]=$_SESSION[Auth];
 			} else {
 				setcookie ( 'autologin', false );
@@ -200,7 +202,7 @@ function initAuth()
 			echo "<a href='/change_password.php?act=premiere'> Là j'tai dis !! </a>";
 		}
 
-		if ( userIsGuilde() ) {
+		if ( userIsGuilde() || userIsGroupSpec() ) {
 			// Controle de l'administrateur
 			// Remplis la variable de session
 			if ( isDbAdministration() )
@@ -222,7 +224,7 @@ function initAuth()
 			<br> soit c'est votre première connexion (réessayez)<br>
 			<br><br>Conclusion : 
 			<br>Vous n'avez pas accès à ces pages<br>
-			Contactez Bodéga (49145) pour résoudre le problème.<br><br>
+			Contactez GlupGlup (51166) pour résoudre le problème.<br><br>
 			");
 		}
 	}
@@ -278,4 +280,9 @@ function userIsGuilde ()
 	else return ( $_SESSION['AuthGuilde'] == ID_GUILDE );
 }
 
+function userIsGroupSpec ()
+{
+	if (!isset($_SESSION['AuthGroupSpec'])) return false; 
+	else return ( $_SESSION['AuthGroupSpec'] == 'oui' );
+}
 ?>

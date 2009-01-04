@@ -180,7 +180,7 @@ while ( $line = fgets($fichvue, 1024) ) {
 }
 
 // si l'on est authentifié, donc un RM, on met à jour la bdd
-if ( userIsGuilde() ) {
+if ( userIsGuilde() || userIsGroupSpec() ) {
 	// Parse du fichier et mise à jour de la base de données
 	parseFile2($_REQUEST[id_troll],false,$Xmoi,$Ymoi,$Zmoi,$nCasesVue);
 

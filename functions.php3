@@ -799,18 +799,29 @@ function updateSeenChampi($sub_sql,$sub_sql_list,$sub_sql_update,$date)
 # dans la table objets, ainsi que sa vue
 # dans la table trolls
 #######################################
-function updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue=-1, $malade='-')
+function updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue=-1, $malade='-', $auto)
 {
   global $db_vue_ok, $db_vue_rm, $DEV;
 
 	if ($DEV) echo "DEBUG updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue, $malade) entré<br>";
-
+	$grpspec = 'non';
+	if ( userIsGroupSpec() || $auto ){
+		$sql = "select groupe_spec_troll from trolls WHERE id_troll =$id";
+		$query=mysql_query($sql,$db_vue_rm);
+		echo mysql_error();
+		$res = mysql_fetch_array($query);
+		if ($res[0] == 'oui') {
+			$grpspec = 'oui';
+		}
+	}
+	
 	$sql = "UPDATE trolls SET ";
 	if ($nCasesVue != -1)
 		$sql .= " vue_troll=$nCasesVue,";
 		
 	$sql .= " x_troll=$x, y_troll=$y, z_troll=$z, is_seen_troll='oui',";
 	$sql .= " date_troll='$date',";
+	$sql .= " maj_groupe_spec_troll='$grpspec',";
 	$sql .= " malade_troll='$malade' WHERE id_troll =$id";
 		
 	if ($DEV) echo "DEBUG updateSeenTroll() $sql <br>";
@@ -1217,7 +1228,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	}
 
 	if ($cZ=='') {
-		$sql = "SELECT x_troll, y_troll, z_troll";
+		$sql = "SELECT x_troll, y_troll, z_troll, maj_groupe_spec_troll";
 		$sql .= " FROM trolls";
 		$sql .= " WHERE id_troll=$id_troll";
 
@@ -1226,8 +1237,13 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 		echo mysql_error();
 
 		if ($res!='')
-			list($X,$Y,$Z)=mysql_fetch_array($res);
+			list($X,$Y,$Z,$grpspec)=mysql_fetch_array($res);
 		if ($DEV) echo "DEBUG parseZone() Le troll à la position $X,$Y,$Z<br>\n";
+		if ($grpspec=='oui' && !userIsGroupSpec()){
+			$X=0;
+			$Y=0;
+			$Z=0;
+		}
 	} else { 
 		$X=$cX;
 		$Y=$cY;
@@ -1316,6 +1332,9 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 		$sql .= " OR (is_seen_troll = 'non' AND date_troll >'$date_less_5days'))";
 	} else {
 		$sql .= " AND is_seen_troll = 'oui'";
+	}
+	if (!userIsGroupSpec()){
+		$sql .= " AND maj_groupe_spec_troll <> 'oui'";
 	}
 
 	if ($DEV) echo "DEBUG parseZone() TROLLS $sql <br>";
@@ -1449,8 +1468,35 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 								 
 		$streums[$mX+100][$mY+100][]=$objet;
 	}
-	 
+  
+  # Mythiques
+  	
+  	$sql = "SELECT x_monstre, y_monstre, z_monstre, ";
+	$sql .= " id_monstre, nom_monstre";
+	$sql .= " FROM monstres, best_races";
+	$sql .= " WHERE nom_monstre like CONCAT('%',nom_race,'%')";
+	$sql .= " AND commentaire like 'Mythique'";
+	$sql .= " AND is_seen_monstre = 'oui'";
+	
+	if ($DEV) echo "DEBUG parseZone() MYTHIQUES $sql <br>";
+	$res=mysql_query($sql, $db_vue_rm);
+	echo mysql_error();
+	
+	while (list($oX, $oY, $oZ, $oId, $oNom )=mysql_fetch_array($res))
+	{
 
+		$distance_pa = calcPA($X,$Y,$Z,$oX,$oY,$oZ);
+
+		$objet=array(id => $oId, 
+								 nom=>$oNom, 
+								 z => $oZ, 
+							 	 x => $oX,
+								 y => $oY,
+								 distance_pa => $distance_pa);
+								 
+		$mythiques[$oX+100][$oY+100][]=$objet;
+	}
+	
   # CAME
 	$sql = "SELECT x_tresor, y_tresor, z_tresor, ";
 	$sql .= " id_tresor, nom_tresor";
@@ -1618,7 +1664,8 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
     $champi[$cX+100][$cY+100][]=array(id => $cId, nom => $cNom, z => $cZ);
 	}
 
-  # BARONNIES 
+  # BARONNIES
+  /*
 	$sql = "SELECT x_deb_baronnie, y_deb_baronnie, z_deb_baronnie,";
 	$sql .= " x_fin_baronnie, y_fin_baronnie, z_fin_baronnie,";
 	$sql .= " x_trone_baronnie, y_trone_baronnie, z_trone_baronnie,";
@@ -1660,15 +1707,16 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 								 
     $baronnies[$x_trone_baronnie+100][$y_trone_baronnie+100][]=$objet;
 	}
-
+    */
 	/* On retourne la position et le numéro */
 	$tab[t_quadrillage] = $quadrillage;
 	$tab[t_trolls] = $trolls;
 	$tab[t_monstres] = $streums;
+	$tab[t_mythiques] = $mythiques;
 	$tab[t_lieux] = $lieux;
 	$tab[t_tresors] = $came;
 	$tab[t_champignons] = $champi;
-	$tab[t_baronnies] = $baronnies;
+	//$tab[t_baronnies] = $baronnies;
 	$tab[max_pa] = $taille_distance_pa;
 	$tab[taille_vue] = $nCasesVue;
 	$tab[x_position] = $X;
@@ -1813,7 +1861,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
 	$view = fopen("vues/$maj_troll_id","r");
 	
 	if (!file_exists("vues/$maj_troll_id"))
-		die ("Erreur : PAS DE FICHIER state=$state. Veuillez signaler cette erreur à Bodéga. $_SESSION[state] Merci <br>");
+		die ("Erreur : PAS DE FICHIER state=$state. Veuillez signaler cette erreur à glupglup. $_SESSION[state] Merci <br>");
 
 
   while ( $line = fgets($view, 1024) ) {
@@ -1908,7 +1956,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
 			# TROLLS
 				case 20: 
 					list($tId, $tX, $tY, $tZ, $malade) = split (";",$line);
-					updateSeenTroll($tId,$tX,$tY,$tZ,$date,-1,$malade);
+					updateSeenTroll($tId,$tX,$tY,$tZ,$date,-1,$malade,$auto);
 					break;
 
 			 # STREUMS 
@@ -2039,7 +2087,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
 
 				case 70: # POSITION
 					list($nCasesVue, $X, $Y, $Z) = split (";",$line);
-					updateSeenTroll($maj_troll_id,$X,$Y,$Z,$date, $nCasesVue);
+					updateSeenTroll($maj_troll_id,$X,$Y,$Z,$date, $nCasesVue,'-',$auto);
 
 					$miniX=$X-$nCasesVue;
 					$maxiX=$X+$nCasesVue;

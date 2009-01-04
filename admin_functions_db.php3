@@ -352,7 +352,7 @@ function selectDbTrolls($id="",$sort="", $id_baronnie="",$id_distinction="")
 	$sql .= " nom_image_titre_distinction,equipement_troll,date_last_refresh_manual_troll, date_last_visit_troll, is_pnj_troll, ";
 	$sql .= " date_inscription_troll,	email_troll ,	blason_troll ,	intangible_troll ,	nb_mouches_troll ,	nb_kills_troll ,";
 	$sql .= "	nb_morts_troll,	num_rang_troll,	nom_rang_troll,	distinction_troll,	equipement2_troll, ";
-	$sql .= "	id_diplomate_troll, historique_troll ";
+	$sql .= "	id_diplomate_troll, historique_troll, maj_groupe_spec_troll ";
 	$sql .= " FROM trolls, guildes, distinctions";
 
 	if ($id_baronnie != "")
@@ -497,7 +497,8 @@ function selectDbTrolls($id="",$sort="", $id_baronnie="",$id_distinction="")
 			$lesTrolls[$i]['nom_rang_troll']=$trolls['nom_rang_troll']; 
 			$lesTrolls[$i]['distinction_troll']=$trolls['distinction_troll']; 
 			$lesTrolls[$i]['equipement2_troll']=$trolls['equipement2_troll']; 
-			$lesTrolls[$i]['id_diplomate_troll']=$trolls['id_diplomate_troll']; 
+			$lesTrolls[$i]['id_diplomate_troll']=$trolls['id_diplomate_troll'];
+			$lesTrolls[$i]['maj_groupe_spec_troll']=$trolls['maj_groupe_spec_troll'];
 			$lesTrolls[$i]['historique_troll']=stripslashes($trolls['historique_troll']); 
 
 			$i++;
@@ -597,7 +598,7 @@ function editDbEquipement()
 	  echo mysql_error();
 		echo "<br>chaine sql = $sql<br>";
 		echo "Erreur dans la mise à jour de l'équipement du troll. Copiez / Collez ce que vous voyez et postez";
-		echo " cela dans le forum outils. Merci (ou contactez Bodéga 49145).";
+		echo " cela dans le forum outils. Merci (ou contactez glupglup 51166).";
 	} else {
 		echo "<h1>L'équipement du Troll $nom_troll ($id_troll) est modifié</h1>";
 		echo "<a href='$page?troll=liste'>Retour à la liste</a> ";
@@ -1245,7 +1246,7 @@ function selectDbRechercheTrolls($id_troll, $nom_troll, $race_troll, $nom_guilde
 	$sql = "SELECT id_troll, nom_troll, nom_guilde, id_guilde, statut_guilde, ";
 	$sql .= " is_wanted_troll, is_tk_troll, is_venge_troll, is_admin_troll, ";
 	$sql .= " x_troll, y_troll, z_troll, date_troll, statut_troll, race_troll,";
-	$sql .= " nom_image_troll, is_seen_troll, niveau_troll";
+	$sql .= " nom_image_troll, is_seen_troll, niveau_troll, maj_groupe_spec_troll";
 	$sql .= " FROM trolls, guildes";
 
 	$sql .= " WHERE id_guilde = guilde_troll";
@@ -1338,6 +1339,7 @@ function selectDbRechercheTrolls($id_troll, $nom_troll, $race_troll, $nom_guilde
 			$lesTrolls[$i]['is_venge_troll']=$troll['is_venge_troll'];
 			$lesTrolls[$i]['is_seen_troll']=$troll['is_seen_troll'];
 			$lesTrolls[$i]['niveau_troll']=$troll['niveau_troll'];
+			$lesTrolls[$i]['maj_groupe_spec_troll']=$troll['maj_groupe_spec_troll'];
 			$i++;
 		} 
 	}

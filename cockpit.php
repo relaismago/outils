@@ -3,7 +3,8 @@ require_once('top.php');
 require_once('functions_engine.php');
 require_once('functions_help.php');
   
-require_once('secure.php');
+if (!userIsGuilde() && !userIsGroupSpec())
+  die("<h1><font color=black><b>Vous n'avez pas accès à cette page !</b></font></h1>");
 
 require_once('includes/ggc_groupe.class.php');
 

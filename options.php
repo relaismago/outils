@@ -6,7 +6,9 @@ include_once ("functions_auth.php");
 include_once ("options_functions_db.php");
 
 include_once ("top.php");
-include_once ("secure.php");
+
+if (!userIsGuilde() && !userIsGroupSpec())
+  die("<h1><font color=black><b>Vous n'avez pas accès à cette page !</b></font></h1>");
 
 init();
 

@@ -459,7 +459,7 @@ function afficherAccesRapide()
   $nbTanieres = count($lesGt);
 
 	$html_gt = "";
-	if ($nbTanieres > 0) {
+	if ($nbTanieres > 0 && userIsGuilde()) {
 		$text = "<b>Les Grandes Tanières Relais&Mago</b><br><br>";
 
 		for($i=1;$i<=$nbTanieres;$i++) {

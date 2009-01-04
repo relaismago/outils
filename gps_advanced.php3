@@ -639,7 +639,7 @@ function formulaire_listbox_guildes_ennenmies($guilde_to_select)
 	echo "<select name='guilde_ennemie'>";
 	echo "<option value='-1'>Aucune</option>";
 	if ($guilde_to_select == -2 ) $selected="selected";
-	echo "<option value='-2' $selected>Toutes</option>";
+	echo "<option value='-2' $selected>Toutes ($nbGuildes)</option>";
 
 	for($i=1;$i<=$nbGuildes;$i++) {
 		$res = $lesGuildes[$i];
@@ -652,13 +652,13 @@ function formulaire_listbox_guildes_ennenmies($guilde_to_select)
 			$nom = $res[2];
 		}
 		echo "<option $selected value='$res[1]'>".stripslashes($nom)."</option>";
-		$list_guildes .= "$res[2]<br>";
+		$list_guildes .= stripslashes($res[2])."<br>";
 	}
 	echo "</select>";
 
 	// Le nom des guildes ennmies est parfois trop long, on affiche donc une popup 
 	// avec la liste des guildes et les noms complets
-	affiche_popup("Liste des guildes ennemies","Red",$list_guildes);
+	//affiche_popup("Liste des guildes ennemies","Red",$list_guildes);
 }
 
 #########################
@@ -1203,6 +1203,11 @@ function affiche_viseur_sur($page,$x_min,$x_max,$y_min,$y_max,$viseur_id_troll)
 		echo "<table class='list'>";
 		for($i=1;$i<=$nbTrolls;$i++) {
 			$res = $lesTrolls[$i];
+			if (!userIsGroupSpec() && $res[maj_groupe_spec_troll] =='oui' ){
+				$res[x_troll]=0;
+				$res[y_troll]=0;
+				$res[z_troll]=0;
+			}
 			echo "<tr class=\"item-impair\" onmouseover=\"this.className='item-mouseover'\"";
 			echo "onmouseout=\"this.className='item-impair'\"> <td coslpan='2'>";
 			echo "<td nowrap>$res[nom_troll]";
@@ -1265,8 +1270,14 @@ function init_x_y($x,$y,$viseur_id_troll)
 	
 		for($i=1;$i<=$nbTrolls;$i++) {
 			$res = $lesTrolls[$i];
-			$x = $res[x_troll];
-			$y = $res[y_troll];
+			if (!userIsGroupSpec() && $res[maj_groupe_spec_troll] =='oui' ){
+				$x=0;
+				$y=0;
+			}
+			else{
+				$x = $res[x_troll];
+				$y = $res[y_troll];
+			}
 		}
 	}
 	$ret['x']=$x;

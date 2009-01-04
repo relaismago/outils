@@ -18,7 +18,7 @@ if ($auto != "") {
 	}
 }
 
-if ( ( userIsGuilde() ) || ($auto) ) {
+if ( userIsGuilde() || ($auto) || userIsGroupSpec() ) {
 
 	$state = $_REQUEST['state'];
 	$maj_troll_id=$_REQUEST['maj_troll_id'];

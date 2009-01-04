@@ -417,6 +417,7 @@ function afficherFicheTroll($id_troll)
 	$nb_kills = $res['nb_kills_troll'];
 	$distinction = $res['distinction_troll'];
 	$is_pnj = $res['is_pnj_troll'];
+	$majgrpspec = $res['maj_groupe_spec_troll'];
 	
 	if ($race_troll == "Durakuir")
 		$image_race = "durak";
@@ -466,7 +467,7 @@ function afficherFicheTroll($id_troll)
 															$is_admin_troll,$nom_guilde,$id_guilde, $statut_guilde,$groupe_rm_troll,
 															$id_distinction, $nom_rang, $num_rang, $nom_image_distinction,
 															$nom_image_titre_distinction, $niveau_troll,
-															$distinction, $nb_mouches,$nb_morts,$nb_kills, $id_pnj_troll
+															$distinction, $nb_mouches,$nb_morts,$nb_kills, $id_pnj_troll, $majgrpspec
 															);
 
 	echo "</td><td valign='top'>";
@@ -605,7 +606,7 @@ function afficherFicheTrollIdentite($nom_troll,$id_troll,$nom_image_troll,$race_
 																		$is_admin_troll,$nom_guilde, $id_guilde, $statut_guilde, $groupe_rm_troll,
 																		$id_distinction, $nom_rang,$num_rang, $nom_image_distinction,
 																		$nom_image_titre_distinction, $niveau_troll,
-																		$distinction, $nb_mouches,$nb_morts,$nb_kills,$is_pnj_troll)
+																		$distinction, $nb_mouches,$nb_morts,$nb_kills,$is_pnj_troll,$majgrpspec)
 {
 
 ?><br>
@@ -645,7 +646,14 @@ function afficherFicheTrollIdentite($nom_troll,$id_troll,$nom_image_troll,$race_
 	if ($is_pnj_troll == 1)
 		echo "<b>Troll PNJ</b>";
 	echo "</td></tr>";
-
+	
+	if ($majgrpspec == 'oui' && !userIsGroupSpec())
+	{
+		$x_troll = 0;
+		$y_troll = 0;
+		$z_troll =0;
+	}
+	
 	echo "<tr class='mh_tdpage'><td>Position</td><td>";
 	echo "$x_troll | $y_troll | $z_troll"; 
 	echo "&nbsp;<font size=1>";
@@ -3078,7 +3086,7 @@ function afficherRechercheTrollsResultat($id_troll, $nom_troll, $race_troll, $no
 				<td>Diplo Guilde</td>
 				<td colspan=3>Position</td>
 				<td>Date de Mise &agrave; jour </td>
-				<td>Acc&earave;s </td>
+				<td>Acc&eagrave;s </td>
 				</tr>
 <?
 
@@ -3088,6 +3096,13 @@ function afficherRechercheTrollsResultat($id_troll, $nom_troll, $race_troll, $no
 	while (list ($key, $res) = each ($lesTrolls)) {
 
 		$i++;
+		if ($res[maj_groupe_spec_troll] == 'oui' && !userIsGroupSpec())
+		{
+			$res[distance_pa]='?';
+			$res[x_troll] = '?';
+			$res[y_troll] = '?';
+			$res[z_troll] ='?';
+		}
 		echo "<tr class='mh_tdpage'>";
 		
 		if ( is_numeric($x_troll) && is_numeric($y_troll) && is_numeric($z_troll) )

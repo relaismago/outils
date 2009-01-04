@@ -9,7 +9,7 @@ function addItemMenu($rm_only,$is_parent,$pos,$name,$tip, $link="", $target="")
 	$flag = true;
 	
 	if ($rm_only){
-		if ( userIsGuilde() )
+		if ( userIsGuilde() || userIsGroupSpec() )
 			$flag=false;
 	} else {
 		$flag = false;
@@ -42,7 +42,7 @@ function showToolbar()
 	$pos = addItemMenu(false,true,'jouer',"Jouer","Jouer");
   $pos = addItemMenu(true,false,$pos,"Forum","Accès au Forum Interne R&M", "http://relaismago.forumactif.com/");
 
-	if ( userIsGuilde() ) 
+	if ( userIsGuilde() || userIsGroupSpec()) 
 	  $pos = addItemMenu(true,false,$pos,"Cockpit","Mix vue2d, Recherchator, Radar", "/cockpit.php?id_troll=$_SESSION[AuthTroll]");
 	else
   	$pos = addItemMenu(false,false,$pos,"Vue2d","Vue2d Relais&Mago Publique", "/public.php","jouer");

@@ -55,7 +55,7 @@ function initChangePassword($act="")
 					Si vous avez changé de mot de passe sur Mountyhall, vous devez aussi le changer dans les outils.<br><br>
 					<? } ?>
 					Renseignez les informations nécessaires ci-dessous puis cliquer sur Changer.<br><br>
-					Si toutefois vous avez des soucis, envoyez un MP à Bodéga (49145) ou à Toddmiller (4570) <br>
+					Si toutefois vous avez des soucis, envoyez un MP à glupglup (51166)<br>
 					avec le md5 de votre actuel mot de passe calculé là =>
 					<a href='/md5.php'>MD5</a>
 				</td>
