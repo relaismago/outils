@@ -20,7 +20,7 @@ function selectDbGpsTrolls($x_min,$x_max,$y_min,$y_max,$type)
 	$sql .= " is_wanted_troll, is_tk_troll, is_venge_troll, is_admin_troll, ";
 	$sql .= " x_troll, y_troll, z_troll, UNIX_TIMESTAMP(date_troll) as date_troll, statut_troll, race_troll,";
 	$sql .= " nom_image_troll, is_seen_troll, pass_troll, ";
-	$sql .= " niveau_troll, equipement_troll,";
+	$sql .= " niveau_troll, equipement_troll, maj_groupe_spec_troll, ";
 	$sql .= " TO_DAYS(NOW()) - TO_DAYS(date_troll) delai";
 
 	$sql .= " FROM trolls t, guildes";
@@ -79,12 +79,12 @@ function selectDbGpsTrolls($x_min,$x_max,$y_min,$y_max,$type)
 	      $lesTrolls[$i][x_troll]=$trolls[x_troll];
 	      $lesTrolls[$i][y_troll]=$trolls[y_troll];
 	      $lesTrolls[$i][z_troll]=$trolls[z_troll];
-  	    $lesTrolls[$i][date_troll]=$trolls[date_troll];
+  	      $lesTrolls[$i][date_troll]=$trolls[date_troll];
 	      $lesTrolls[$i][race_troll]=$trolls[race_troll];
 	      $lesTrolls[$i][niveau_troll]=$trolls[niveau_troll];
-		    $lesTrolls[$i][is_seen_troll]=$trolls[is_seen_troll];
+		  $lesTrolls[$i][is_seen_troll]=$trolls[is_seen_troll];
 	      $lesTrolls[$i][equipement_troll]=$trolls[equipement_troll];
-				
+		  $lesTrolls[$i][maj_groupe_spec_troll]=$trolls[maj_groupe_spec_troll];	
 				$i++;
 			}
 		} 

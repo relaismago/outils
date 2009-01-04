@@ -879,6 +879,11 @@ function affiche_trolls($page,$x_min,$x_max,$y_min,$y_max,$type,$swap)
 	}
 	for($i=1;$i<=$nbTrolls;$i++) {
 		$res = $lesTrolls[$i];
+		if (!userIsGroupSpec() && $res[maj_groupe_spec_troll] =='oui' ){
+				$res[x_troll]=0;
+				$res[y_troll]=0;
+				$res[z_troll]=0;
+		}
 		//$lien = "target=troll HREF='http://games.mountyhall.com/mountyhall/View/PJView_Events.php?ai_IDPJ=$res[1]'";
 		$lien = "href='engine_view.php?troll=$res[id_troll]'";
 		echo "<tr class=\"item-impair\" onmouseover=\"this.className='item-mouseover'\"";
