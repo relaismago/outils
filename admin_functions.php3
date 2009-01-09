@@ -3086,7 +3086,7 @@ function afficherRechercheTrollsResultat($id_troll, $nom_troll, $race_troll, $no
 				<td>Diplo Guilde</td>
 				<td colspan=3>Position</td>
 				<td>Date de Mise &agrave; jour </td>
-				<td>Acc&eagrave;s </td>
+				<td>Acc&egrave;s </td>
 				</tr>
 <?
 
