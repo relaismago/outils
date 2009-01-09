@@ -50,8 +50,8 @@ function selectDbGpsTrolls($x_min,$x_max,$y_min,$y_max,$type)
 		$sql .= " AND t.guilde_troll=$type";
 	}
 	
-	if (!userIsGroupSpec){
-		$sql .= " AND t.maj_groupe_spec_troll<>'oui'";
+	if (!userIsGroupSpec()){
+		$sql .= " AND t.maj_groupe_spec_troll != 'oui'";
 	}
 
 	$sql .= " ORDER by t.nom_troll";
@@ -264,6 +264,11 @@ function selectDbMicheline($id_objet_depart,$id_objet_arrivee,$type_objet_depart
 			case "troll":
 				$res = selectDbTrolls($id_objet);
 				$res = $res[1];
+				if (!userIsGroupSpec() && $res[maj_groupe_spec_troll] =='oui' ){
+					$res[x_troll]=0;
+					$res[y_troll]=0;
+					$res[z_troll]=0;
+				}
 				$x = $res[x_troll];
 				$y = $res[y_troll];
 				$z = $res[z_troll];
