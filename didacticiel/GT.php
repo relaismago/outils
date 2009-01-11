@@ -93,7 +93,7 @@
                         <div align="center">
                           <strong>
                           <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
-                          <a target="_blank" style="color: #FBBA2C" href="http://outils.relaismago.com/magasin/">Les stocks des Grandes Tanières</a></font></strong></div>
+                          <a target="_blank" style="color: #FBBA2C" href="../magasin/">Les stocks des Grandes Tanières</a></font></strong></div>
                         </td>
                       </tr>
                     </table>

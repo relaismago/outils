@@ -158,7 +158,7 @@
                     Je m'appelle <b>Leroidelaclasse</b>, je suis Gentil 
                     Organisateur de pique-niques conviviaux à 4 ou 5 compagnons 
                     ou de mémorables <b>
-                    <a style="color: #F9BB2F" href="http://outils.relaismago.com/histoires/la_liche.php">garden-party inter-guildes</a></b> et &quot;<i>j'aime qu'un plan 
+                    <a style="color: #F9BB2F" href="../histoires/la_liche.php">garden-party inter-guildes</a></b> et &quot;<i>j'aime qu'un plan 
                     se déroule sans accrocs</i>&quot;.</font></p>
                     <p class="MsoNormal">
                     <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
@@ -235,9 +235,7 @@
                     <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/Diplomatie_titres.gif" width="249" height="51"></p>
                     <p align="justify">
                     <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
-                    Car </font><font SIZE="2">
-                    <font face="Verdana, Arial, Helvetica, sans-serif" color #000000"">
-                    si la stratégie ne suffit plus, nos diplomates ont toujours 
+                    Car si la stratégie ne suffit plus, nos diplomates ont toujours 
                     leurs extincteurs dans leur besace pour calmer les incendies 
                     (ou les raviver).</font></p>
                     </font>

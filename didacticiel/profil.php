@@ -529,7 +529,7 @@
                         case CSS :</font></p>
                         <p align="center">
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" color="#000000" size="2">
-                        <strong>http://outils.relaismago.com/didacticiel/css_generale_RM.css</strong></font></p>
+                        <strong>http://<?=$_SERVER['HTTP_HOST']; ?>/didacticiel/css_generale_RM.css</strong></font></p>
                         <p align="left">
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" color="#000000" size="2">
                         <strong>
@@ -561,7 +561,7 @@
                         peu comme ça :</font></p>
                         <p align="center">
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
-                        <img src="http://www.pipeshow.net/RM/Titre_profil_leroidelaclass.gif" width="476" height="115"></font></p>
+                        <img src="http://www.pipeshow.net/RM/Titre_profil_glupglup.gif" width="476" height="115"></font></p>
                         <p align="justify">&nbsp;</p>
                         <p align="justify">
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">

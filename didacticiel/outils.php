@@ -72,7 +72,7 @@
                             <div align="center">
                               <strong>
                               <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
-                              <a style="color: #FBBA2C" href="http://outils.relaismago.com/">L'Interface 
+                              <a style="color: #FBBA2C" href="../index.php">L'Interface 
                               de la Guilde</a></font></strong></div>
                             </td>
                           </tr>
@@ -88,7 +88,7 @@
                         <img src="images/puce.gif" width="10" height="10"></font>
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
                         Renseigne ton mot de passe <strong>
-                        <a style="color: #FBBA2C" href="http://outils.relaismago.com/change_password.php">ici</a></strong>.<br>
+                        <a style="color: #FBBA2C" href="../change_password.php">ici</a></strong>.<br>
                         (Le mot de passe doit être le même que celui de 
                         MountyHall)</font></p>
                         <p style="margin-top: 0; margin-bottom: 0">
@@ -114,7 +114,7 @@
                             <div align="center">
                               <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
                               <strong>
-                              <a style="color: #FBBA2C" href="http://outils.relaismago.com/vtt/vtt.php">Le Visiotrollotron (VTT)</a></strong></font></div>
+                              <a style="color: #FBBA2C" href="../vtt/vtt.php">Le Visiotrollotron (VTT)</a></strong></font></div>
                             </td>
                           </tr>
                         </table>
@@ -125,7 +125,7 @@
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" color="#000000" size="2">
                         <img src="images/puce.gif" width="10" height="10"></font><font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2"> 
                         Pour le mettre à jour, copie/colle ton profil <strong>
-                        <a style="color: #FBBA2C" href="http://outils.relaismago.com/vtt/parser_profil.php?id=">ici</a>.</strong> </font></p>
+                        <a style="color: #FBBA2C" href="../vtt/parser_profil.php?id=">ici</a>.</strong> </font></p>
                         <p>
                         <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" color="#000000" size="2">
                         <img src="images/puce.gif" width="10" height="10"></font><font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2"> 
@@ -136,7 +136,7 @@
                             <div align="center">
                               <font face="Verdana, Arial, Helvetica, sans-serif" color="#000000" size="2">
                               <strong>
-                              <a style="color: #FBBA2C" href="http://outils.relaismago.com/firemago/tutorial/tutorial.php">Le Tutorial&nbsp;de&nbsp;Firemago</a></strong></font></div>
+                              <a style="color: #FBBA2C" href="../firemago/tutorial/tutorial.php">Le Tutorial&nbsp;de&nbsp;Firemago</a></strong></font></div>
                             </td>
                           </tr>
                         </table>
