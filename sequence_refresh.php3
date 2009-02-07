@@ -7,6 +7,7 @@ include_once ("functions.php3");
 
 //$auto = false;
 $auto = $_REQUEST['auto'];
+$refresh = $_REQUEST['refresh'];
 
 if ($auto != "") {
 	if (md5($auto) == MD5_PASS_EXTERNE) {
@@ -18,7 +19,7 @@ if ($auto != "") {
 	}
 }
 
-if ( userIsGuilde() || ($auto) || userIsGroupSpec() ) {
+if ( userIsGuilde() || $auto!="" || userIsGroupSpec() ) {
 
 	$state = $_REQUEST['state'];
 	$maj_troll_id=$_REQUEST['maj_troll_id'];
@@ -30,7 +31,7 @@ if ( userIsGuilde() || ($auto) || userIsGroupSpec() ) {
 		initSequenceRefresh($state);
 	}
 
-	suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_troll,$maj_z_troll);
+	suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_troll,$maj_z_troll,$refresh);
 } else {
   die("Accès refusé");
 }
@@ -99,7 +100,7 @@ function initSequenceRefresh($state)
 	
 }
 
-function suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll="",$maj_y_troll="",$maj_z_troll="")
+function suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll="",$maj_y_troll="",$maj_z_troll="",$refresh)
 {
 
   $vert = "<b><font color=gree>Fait</font></b>  ";
@@ -107,7 +108,7 @@ function suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll="",$maj_y_
 	if ($state == 51) {
 		global $db_vue_rm;
 
-		$tab = maj_vue_refresh($auto,$state,$maj_troll_id);
+		$tab = maj_vue_refresh($auto,$state,$maj_troll_id,$refresh);
 		
 		$maj_x_troll = $tab[maj_x_troll];
 		$maj_y_troll = $tab[maj_y_troll];
@@ -155,7 +156,7 @@ function suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll="",$maj_y_
 		@mysql_close($db_vue_rm);
 	
 	} elseif ($state != '') {
-		maj_vue_refresh($auto,$state,$maj_troll_id);
+		maj_vue_refresh($auto,$state,$maj_troll_id,$refresh);
 	}
 }
 ?>

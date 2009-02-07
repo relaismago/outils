@@ -709,7 +709,7 @@ function refreshVue($id, $auto=false)
 
 	if ($DEV) echo "DEBUG : on parse depuis refreshVue <br>";
 	
-	parseFile2($id,$auto, $X,$Y,$Z,$nCasesVue);
+	parseFile2($id,$auto, $X,$Y,$Z,$nCasesVue,"s_public");
 	exit;
 }
 
@@ -799,13 +799,13 @@ function updateSeenChampi($sub_sql,$sub_sql_list,$sub_sql_update,$date)
 # dans la table objets, ainsi que sa vue
 # dans la table trolls
 #######################################
-function updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue=-1, $malade='-', $auto)
+function updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue=-1, $malade='-', $auto, $refresh)
 {
   global $db_vue_ok, $db_vue_rm, $DEV;
 
 	if ($DEV) echo "DEBUG updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue, $malade) entré<br>";
 	$grpspec = 'non';
-	if ( userIsGroupSpec() || $auto ){
+	if ( userIsGroupSpec() || $auto != "" || $refresh != "" ){
 		$sql = "select groupe_spec_troll from trolls WHERE id_troll =$id";
 		$query=mysql_query($sql,$db_vue_rm);
 		echo mysql_error();
@@ -1730,7 +1730,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 }
 
 
-function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='')
+function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='',$refresh)
 {
 	global $lt,$lm, $ll, $lc, $lo, $trolls, $champi, $came;
 	global $streums, $lieux, $nCasesVue, $X, $Y, $Z, $db_vue_rm ;
@@ -1829,7 +1829,7 @@ function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='')
 		deleteDb_zone('tresor',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ);
 		deleteDb_zone('lieu',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $lesTanieres);
 			
-		$lien = "sequence_refresh.php3?auto=$auto&state=1&maj_troll_id=$TROLL";
+		$lien = "sequence_refresh.php3?auto=$auto&state=1&maj_troll_id=$TROLL&refresh=$refresh";
 		$_SESSION['state'] = 1;
 		if (!$auto) {
 			echo "<br>Fichier Récupéré, début de la mise à jour de la base.<br>";
@@ -1846,7 +1846,7 @@ function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='')
 	}
 }
 
-function maj_vue_refresh($auto,$state,$maj_troll_id)
+function maj_vue_refresh($auto,$state,$maj_troll_id,$refresh)
 {
 	global $db_vue_rm;
 
@@ -1956,7 +1956,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
 			# TROLLS
 				case 20: 
 					list($tId, $tX, $tY, $tZ, $malade) = split (";",$line);
-					updateSeenTroll($tId,$tX,$tY,$tZ,$date,-1,$malade,$auto);
+					updateSeenTroll($tId,$tX,$tY,$tZ,$date,-1,$malade,$auto,$refresh);
 					break;
 
 			 # STREUMS 
@@ -2087,7 +2087,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
 
 				case 70: # POSITION
 					list($nCasesVue, $X, $Y, $Z) = split (";",$line);
-					updateSeenTroll($maj_troll_id,$X,$Y,$Z,$date, $nCasesVue,'-',$auto);
+					updateSeenTroll($maj_troll_id,$X,$Y,$Z,$date, $nCasesVue,'-',$auto, $refresh);
 
 					$miniX=$X-$nCasesVue;
 					$maxiX=$X+$nCasesVue;
@@ -2110,14 +2110,14 @@ function maj_vue_refresh($auto,$state,$maj_troll_id)
   fclose ($view);
 	$_SESSION['state'] .=" - ".$state;
 	if ( ($state == 21) || ($state == 31) || ($state == 41) || ($state == 51)) {
-		afficheNextSequence($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_troll,$maj_z_troll);
+		afficheNextSequence($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_troll,$maj_z_troll,$refresh);
 	}
 	return $tab;
 }
 
-function afficheNextSequence($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_troll,$maj_z_troll)
+function afficheNextSequence($auto,$state,$maj_troll_id,$maj_x_troll,$maj_y_troll,$maj_z_troll,$refresh)
 {
-	$lien = "sequence_refresh.php3?auto=$auto&state=$state&";
+	$lien = "sequence_refresh.php3?auto=$auto&state=$state&refresh=$refresh&";
 	$lien .= "maj_troll_id=$maj_troll_id&maj_x_troll=$maj_x_troll&maj_y_troll=$maj_y_troll&maj_z_troll=$maj_z_troll";
 
 	if (!$auto) {
