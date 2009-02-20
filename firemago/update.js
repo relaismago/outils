@@ -1,2 +1,2 @@
-if(numVersionFiremago != "2.2")
-      alert("Une nouvelle version de Firemago est disponible\n\nVeuillez mettre l'extension à jour en cliquant dans outils puis extensions puis mise à jour.\n(vous pouvez désactiver ce messages dans la page de configuration de firemago)");
+if(numVersionFiremago != "2.3")
+      alert("Une nouvelle version de Firemago est disponible\n\nVeuillez mettre l'extension à jour en cliquant dans outils puis modules complémentaires puis mise à jour.\n(vous pouvez désactiver ce messages dans la page de configuration de firemago)");
