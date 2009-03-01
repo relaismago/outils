@@ -1,672 +1,670 @@
-// ******************************************************************
-// HTML display functions
-// ******************************************************************
+/*********************************************************************************
+*    This file is part of Mountyzilla modified for zoryazilla                    *
+*********************************************************************************/
 
-
-function newForm ( name, URL, method, target )
-{
-	if ( typeof method == "undefined" ) { method = 'post'; }
-	var myForm= document.createElement ( 'form' );
-	myForm.setAttribute ( 'method', method );
-	myForm.setAttribute ( 'action', URL );
-	myForm.setAttribute ( 'name', name );
-	if ( typeof target != "undefined" ) { myForm.setAttribute ( 'target', target ); }
-	return myForm;
+/*********************************************************************************
+*   Modifications du DOM              *
+*********************************************************************************/
+function insertBefore(next, el) {
+	next.parentNode.insertBefore(el, next);
 }
 
-function newHidden ( name, value )
-{
-	var myInput = document.createElement ( 'input' );
-	myInput.setAttribute ( 'type', 'hidden' );
-	myInput.setAttribute ( 'name', name );
-	myInput.setAttribute ( 'wrap', 'off' );
-	myInput.setAttribute ( 'value', value );
-	return myInput;
+function appendTr(tbody, clas) {
+	var tr = document.createElement('TR');
+	if (clas)
+		tr.setAttribute('class', clas);
+	tbody.appendChild(tr);
+	return tr;
 }
 
-function newButton ( name, value, onClick )
-{
-	myInput = document.createElement ( 'input' );
-	myInput.setAttribute ( 'name', name );
-	myInput.setAttribute ( 'type', 'submit' );
-	myInput.setAttribute ( 'value', value );
-	myInput.setAttribute( 'class', 'mh_form_submit' );
-	if ( typeof onClick != "undefined" ) { myInput.setAttribute ( 'onClick', onClick ); }
-	return myInput;
+function insertTr(next, clas) {
+	var tr = document.createElement('TR');
+	if (clas)
+		tr.setAttribute('class', clas);
+	insertBefore(next, tr);
+	return tr;
 }
 
-function newText ( name, value, size, max )
-{
-	var myInput = document.createElement ( 'input' );
-	myInput.setAttribute ( 'type', 'text' );
-	myInput.setAttribute ( 'class', 'TextboxV2' );
-	myInput.setAttribute ( 'name', name );
-	myInput.setAttribute ( 'wrap', 'off' );
-	myInput.setAttribute ( 'value', value );
-	if ( typeof size != "undefined" ) { myInput.setAttribute ( 'size', size ); }
-	if ( typeof max != "undefined" ) { myInput.setAttribute ( 'maxlength', max ); }
-	return myInput;
+function appendTd(tr) {
+	var td = document.createElement('TD');
+	if (tr)
+		tr.appendChild(td);
+	return td;	
 }
 
-function newCheckbox ( name, onClick )
-{
-	myInput = document.createElement ( 'input' );
-	myInput.setAttribute ( 'name', name );
-	myInput.setAttribute ( 'type', 'checkbox' );
-	if ( typeof onClick != "undefined" ) { myInput.setAttribute ( 'onClick', onClick ); }
-	return myInput;
+function insertTd(next) {
+	var td = document.createElement('TD');
+	insertBefore(next, td);
+	return td;
 }
 
-function newTable ( name )
-{
-	myElt = document.createElement ( 'table' );
-	myElt.setAttribute ( 'name', name );
-	myElt.setAttribute ( 'width', '98%' );
-	myElt.setAttribute ( 'border', '0' );
-	myElt.setAttribute ( 'align', 'center' );
-	myElt.setAttribute ( 'cellpadding', '4' );
-	myElt.setAttribute ( 'cellspacing', '1' );
-	myElt.setAttribute ( 'class', 'mh_tdborder' );
-	return myElt;
+function appendTdText(tr, text, bold) {
+	var td = appendTd(tr);
+	appendText(td, text, bold);
+	return td;
 }
 
-function newTR ()
-{
-	myElt = document.createElement ( 'tr' );
-	myElt.setAttribute ( 'class','mh_tdtitre' );
-	return myElt;
+function insertTdText(next, text, bold) {
+	var td = insertTd(next);
+	appendText(td, text, bold);
+	return td;
 }
 
-function newTD ()
-{
-	myElt = document.createElement ( 'td' );
-	myElt.setAttribute ( 'class','mh_tdtitre' );
-	return myElt;
+function insertTdElement(next, el) {
+	var td = insertTd(next);
+	if (el)
+		td.appendChild(el);
+	return td;
 }
 
-function insertBeforeCR ( element, insertPoint )
-{
-	var newline = document.createElement ( 'p' );
-	insertPoint.parentNode.insertBefore ( newline, insertPoint );
-	newline.parentNode.insertBefore ( element, newline );
+function insertBr(next) {
+	insertBefore(next, document.createElement('br'));
 }
 
-function insertBeforeTab ( element, insertPoint )
-{
-	var tab = documentCdm.createTextNode ( '\t' );
-	insertPoint.parentNode.insertBefore ( tab, insertPoint );
-	newline.parentNode.insertBefore ( element, tab );
+function appendBr(paren) {
+	paren.appendChild(document.createElement('BR'));
 }
 
-// ******************************************************************
-// Error logging functions
-// ******************************************************************
-
-var errorLog = '';
-
-function error ( e, msg )
-{
-	errorLog += '<br> [ ' + msg + ' ] ' + e.error + ' : ' + e.message + '\n';
+function insertText(next, text, bold) {
+	if (bold) {
+		var b = document.createElement('b');
+		appendText(b, text);
+		insertBefore(next, b);
+	} else
+		insertBefore(next, document.createTextNode(text));
 }
 
-function displayErrors ( insertPoint )
-{
-	if ( errorLog != '' )
+function appendText(paren, text, bold) {
+	if (bold) {
+		var b = document.createElement('b');
+		b.appendChild(document.createTextNode(text));
+		paren.appendChild(b);
+	} else
+		paren.appendChild(document.createTextNode(text));
+}
+
+// Fonctions utiles
+
+function aff(nbr) {
+	return nbr >= 0 ? '+' + nbr : nbr;
+}
+
+function trim(str) {
+	return str.replace(/(^\s*)|(\s*$)/g, '');
+}
+
+function str_woa(str) {
+	return str.replace(/[éèêë]/g, 'e').replace(/[àâä]/g, 'a').replace(/[ùûü]/g, 'u')
+			.replace(/[ïî]/g, 'i').replace(/[öô]/g, 'o');
+}
+
+function resiste(x) {
+	x = Math.floor(x);
+	if (x > 50)
+		return x - 0.25 + degbmm/2;
+	var val1 = Math.pow(3, x);
+	val1 = x - (Math.floor(val1 / 2) + (x % 2)) / (2 * val1);
+	return Math.round(val1 * 100) / 100 + degbmm/2;
+}
+
+function getPortee(param) {
+	return Math.ceil((Math.sqrt(19 + 8 * (param + 3)) - 7) / 2);
+}
+
+// On extrait les valeurs qui nous intéressent de la page
+
+function cleanValue(val) {
+	if(val.tagName=="TR")
+		return val;
+	val = trim(val.slice(val.indexOf(':') + 1));
+	return val.replace(/[\n\r]/, '').replace(/D6/, '').replace(/D3/, '').replace(/Cases/, '').replace(/points/,'')
+			.replace(/[\)]/g, '').replace(/[\+\(]/g, '').replace(/[ ]+/g,' ');
+}
+
+function extractBonus(val) {
+	if(val.tagName=="TR")
 	{
-		var myTable = newTable ( 'FMerrors' );
-		myTable.appendChild ( myTR = newTR () );
-		myTR.appendChild ( myTD = newTD () );
-		myTD.innerHTML = '<b> Firemago a rencontré les erreurs suivantes : </b> \n' + errorLog;
-		
-		try { insertBeforeCR ( myTable, insertPoint ); } catch ( e ) { alert ( 'Could not display FireMago errors : ' + e ); }
+		var vals = new Array();
+		if(!isNaN(parseInt(val.childNodes[3].childNodes[0].nodeValue)))
+			vals.push(parseInt(val.childNodes[3].childNodes[0].nodeValue));
+		if(!isNaN(parseInt(val.childNodes[5].childNodes[0].nodeValue)))
+			vals.push(parseInt(val.childNodes[5].childNodes[0].nodeValue));
+		if(!isNaN(parseInt(val.childNodes[7].childNodes[0].nodeValue)))
+			vals.push(parseInt(val.childNodes[7].childNodes[0].nodeValue));
+		return vals;
 	}
-}
-
-var debugLog = '';
-
-function debug ( msg )
-{
-	debugLog += msg + '\n';
-}
-
-function displayDebug ( insertPoint )
-{
-	if ( debugLog != '' )
-	{
-		var myTable = newTable ( 'FMdebug' );
-		myTable.appendChild ( myTR = newTR () );
-		myTR.appendChild ( myTD = newTD () );
-		myTD.innerHTML = '<b> Firemago a généré les messages de debug suivants : </b> \n' + debugLog;
-		
-		try { insertBeforeCR ( myTable, insertPoint ); } catch ( e ) { alert ( 'Could not display FireMago debug : ' + e ); }
-	}
-}
-
-// ******************************************************************
-// Cookies functions
-// ******************************************************************
-
-function getCookie ( name ) 
-{
-	var dc = document.cookie;
-	var prefix = name + "=";
-	var begin = dc.indexOf ( "; " + prefix );
-	if ( begin == -1 ) 
-	{
-		begin = dc.indexOf ( prefix );
-		if ( begin != 0 ) return '';
-	} 
-	else { begin += 2; }
-	var end = document.cookie.indexOf ( ";", begin );
-	if ( end == -1 ) { end = dc.length; }
-	return unescape ( dc.substring ( begin + prefix.length, end ) );
-}
-
-function setCookie ( name, value, expires, path, domain, secure ) 
-{
-	var expdate = new Date ();
-	expdate.setTime ( expdate.getTime () + (24 * 60 * 60 * 1000 * 31 ) );
-	var curCookie = name + "=" + escape ( value ) +
-		( (expires) ? "; expires=" + expires.toGMTString () : "; expires=" + expdate.toGMTString () ) +
-		( (path) ? "; path=" + path : path ) +
-		( (domain) ? "; domain=" + domain : "" ) +
-		( (secure) ? "; secure" : "" );
-	document.cookie = curCookie;
-}
-
-function deleteCookie( name, path, domain ) 
-{
-  if (getCookie(name)) 
-	{
-     document.cookie = name + "=" +
-     ((path) ? "; path=" + path : "") +
-     ((domain) ? "; domain=" + domain : "") +
-     "; expires=Thu, 01-Jan-70 00:00:01 GMT";
-  }
-}
-
-function cookifyButton ( btn )
-{
-	var btnName = btn.getAttribute ( "NAME" );
-	if ( btn.checked == true ) { setCookie ( btnName, "true" ); } else { setCookie ( btnName, "false" ); }
-	return btn.checked;
-}
-
-function uncookifyButton ( btn )
-{
-	if ( getCookie ( btn.getAttribute ( "NAME" ) ) == "true" ) { btn.checked = true; }
-	return btn.checked;
-}
-
-function cookifyInput ( input )
-{
-	setCookie ( input.getAttribute ( "NAME" ), input.value );
-	return input.value;
-}
-
-function uncookifyInput ( input )
-{
-	input.value = getCookie ( input.getAttribute ( "NAME" ) );
-	return input.value;
-}
-
-// ******************************************************************
-// node to text functions
-// ******************************************************************
-
-function flattenNode ( node )
-{
-	var result = '';
-	for ( var i = 0; i < node.childNodes.length; i++ ) 
-	{
-		if ( node.childNodes[i].hasChildNodes () )
-		{
-			if ( node.childNodes[i].nodeName == "TR" ) { result += "\n"; }
-			if ( node.childNodes[i].nodeName == "LI" ) { result += "\n"; }
-			if ( node.childNodes[i].nodeName == "TD" ) { result += "\t"; }
-			if ( node.childNodes[i].nodeName == "P" ) { result += "\n"; }
-			result += flattenNode ( node.childNodes[i] );
-		}
-		else
-		{
-			if ( node.childNodes[i].nodeName == "BR" ) { result += "\n"; }
-			if ( node.childNodes[i].nodeValue != null )
-			{
-				var text = new String ( node.childNodes[i].nodeValue );
-				result += text.replace ( /\s+/g, " " );
-			}
-		}
-	}
-	return result;
-}
-
-// ********************************************************
-// Clean Value
-// ********************************************************
-
-function trim ( string ) 
-{
-   	return string.replace ( /(^\s*)|(\s*$)/g, '' );
-}
-
-function str_woa( str ) {
-        str = str.replace( /[éèêë]/g, 'e');
-        str = str.replace( /[àâä]/g, 'a' );
-        str = str.replace( /[ùûü]/g, 'u' );
-        str = str.replace( /[ïî]/g, 'i' );
-        str = str.replace( /[öô]/g, 'o' );
-
-        return str;
-}
-
-function cleanValue ( val ) 
-{
-        val = val.slice ( val.indexOf( ':' ) + 1 );
-        val = trim ( val );
-        val = val.replace ( /[\n\r]/, '');
-        val = val.replace ( /D6/, '');
-        val = val.replace ( /D3/, '');
-        val = val.replace ( /Cases/, '');
-        val = val.replace ( /[ \)]/g, '');
-        val = val.replace ( /[\+\(]/, ' ');
-        val = val.replace ( /[\-]/g, ' -');
-
-        return val;
-}
-
-function extractBonus ( val ) 
-{
-	var vals = val.split ( ' ' );
-	
-	if ( vals.length == 1 ) { vals[1] = 0; }
-	for ( var i = 0; i < vals.length; i++ ) 
-	{
-		vals[i] = parseInt ( vals[i] );
-	}
+	var vals = trim(val).split(' ');
+	if (vals.length == 1)
+		vals[1] = 0;
+	for (var i = 0; i < vals.length; i++)
+		vals[i] = parseInt(vals[i]);
 	return vals;
 }
 
-// Averages for fight part
-function fightAverage ( anchor )
+function setInfoDateCreation()
 {
-	if ( anchor.nodeValue.indexOf ( "D6" ) != -1 ) { fact = 3.5; } else { fact = 2; }
-	value = extractBonus ( cleanValue ( anchor.nodeValue ) );
-	De = value[0];
-	Bonus = value[1];
-	Average = fact * De + Bonus;
-	try { anchor.nodeValue += " --> " + Average + " "; } catch ( e ) { error ( e, 'Average error' ); }
-	return value;
+	var node = document.evaluate("//tr/td/text()[contains(.,'Date de Création')]",
+			arrTable[3], null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+	if(nbjours!=1)
+		node.nodeValue+=" ("+nbjours+" jours dans le hall)";
+	else
+		node.nodeValue+=" (Bienvenue à toi pour ton premier jour dans le hall)";
 }
 
-// Total for magik
-function totalMagik ( anchor )
+function getDateCreation()
 {
-	value = extractBonus ( cleanValue ( anchor.nodeValue ) );
-	total = value[0] + value[1]
-	try { anchor.nodeValue += " = " + total + ""; } catch ( e ) { error ( e, 'Total error' ); }
-	return value;
+	var text = document.evaluate("//tr/td/text()[contains(.,'Date de Création')]",
+			arrTable[3], null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.nodeValue;
+	text = text.substring(text.indexOf("(")+1,text.indexOf(")"));
+	var date = new Date(text.replace(/([0-9]+)\/([0-9]+)\//,"$2/$1/"));
+	return date;
 }
 
-// fight sorts which are resisted
-function resiste(x)
+function getDateActuelle()
 {
-  if(x>50)
-     return x-0.25;
-  var val1= Math.pow(3,x);
-  var val2= Math.floor(val1/2)+(x % 2);
-  val1=val2/(2*val1);
-  val1=x-val1;
-  val1 = Math.round(val1*100)/100;
-  return val1;
+	var text = document.evaluate("//tr/td/text()[contains(.,'Heure Serveur')]",
+			arrTable[3], null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.nodeValue;
+	text = text.substring(text.indexOf("Heure")+13);
+	text = text.substring(text.indexOf(": ")+2,text.indexOf("]"));
+	var date = new Date(text.replace(/([0-9]+)\/([0-9]+)\//,"$2/$1/"));
+	return date;
 }
 
-function porte(param)
-{
-   return Math.ceil((Math.sqrt(19+8*(param+3))-7)/2);
+function init() {
+	arrTable = document.getElementsByTagName('table');
+	arrTR = document.getElementsByTagName('tr');
+
+	var listeValeurs = new Array();
+	listeValeurs['vue'] = arrTable[3].childNodes[1].childNodes[4].childNodes[3].childNodes[3].nodeValue;
+	listeValeurs['pva'] = arrTable[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[0].childNodes[1].childNodes[1].childNodes[0].nodeValue;
+	listeValeurs['pvm'] = arrTable[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[2].childNodes[1].childNodes[0].nodeValue;
+	listeValeurs['reg'] = arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[0];
+	listeValeurs['att'] = arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[2];
+	listeValeurs['esq'] = arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[4];
+	listeValeurs['deg'] = arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[6];
+	listeValeurs['arm'] = arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[8];
+	listeValeurs['rm'] = arrTable[3].childNodes[1].childNodes[18].childNodes[3].childNodes[0].nodeValue;
+	listeValeurs['mm'] = arrTable[3].childNodes[1].childNodes[18].childNodes[3].childNodes[2].nodeValue;
+	listeValeurs['niv'] = arrTable[3].childNodes[1].childNodes[6].childNodes[3].childNodes[0].nodeValue;
+	for (var key in listeValeurs) {
+		listeValeurs[key] = cleanValue(listeValeurs[key]);
+		listeValeurs[key] = extractBonus(listeValeurs[key]);
+	}
+
+	var a = arrTR[6].childNodes[3].firstChild.nodeValue.split("|");
+	posX = a[0].substring(4, a[0].length - 1) * 1;
+	posY = a[1].substring(5, a[1].length - 1) * 1;
+	posN = a[2].substring(5, a[2].length - 1) * 1;
+
+	vue = listeValeurs['vue'][0];
+	vuetotale = Math.max(0, listeValeurs['vue'][0] + listeValeurs['vue'][1]);
+
+	niveau = listeValeurs['niv'][0];
+
+	pvtotal = listeValeurs['pvm'][0];
+	pvactuels = listeValeurs['pva'][0];
+	
+	reg = listeValeurs['reg'][0];
+	regbonus = listeValeurs['reg'][1]+listeValeurs['reg'][2];
+	regmoy = reg * 2 + regbonus;
+	appendTdText(arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[0], '(moyenne : ' + regmoy + ')',false);
+	
+	att = listeValeurs['att'][0];
+	attbonus = listeValeurs['att'][1];
+	attbmm = listeValeurs['att'][2];
+	
+	attmoy = 3.5 * att + attbonus + attbmm;
+	appendTdText(arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[2],'(moyenne : ' + attmoy + ')',false);
+	
+	esq = listeValeurs['esq'][0];
+	esqbonus = listeValeurs['esq'][1]+listeValeurs['esq'][2];
+	esqmoy = 3.5 * esq + esqbonus;
+	appendTdText(arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[4],'(moyenne : ' + esqmoy + ')',false);
+	
+	deg = listeValeurs['deg'][0];
+	degbonus = listeValeurs['deg'][1];
+	degbmm = listeValeurs['deg'][2];
+	degmoy = deg * 2 + degbonus+degbmm;
+	appendTdText(arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[6],'(moyenne : ' + degmoy + '/' + (Math.floor(deg * 3 / 2) * 2 + degbonus + degbmm) + ')',false);
+	appendTdText(arrTable[3].childNodes[1].childNodes[10].childNodes[3].childNodes[0].childNodes[1].childNodes[8],'(total : ' + (listeValeurs['arm'][0]+listeValeurs['arm'][1]) + ')',false);
+	
+	rm = listeValeurs['rm'][0];
+	rmbonus = listeValeurs['rm'][1];
+	rmtotal = rm + listeValeurs['rm'][1];
+	mm = listeValeurs['mm'][0];
+	mmbonus = listeValeurs['mm'][1];
+	mmTroll = mm + listeValeurs['mm'][1];
+	arm = listeValeurs['arm'][1];
+	armbonus = listeValeurs['arm'][0];
+	nbjours = Math.floor((getDateActuelle()-getDateCreation())/1000/60/60/24)+1;
+	setInfoDateCreation();
 }
 
-// ********************************************************
-// SORTS AND COMPETENCES
-// ********************************************************
+function setNextDla() {
+		 // Heure de DLA.
+		 var dateDla = arrTR[5].childNodes[3].childNodes[1].childNodes[0].nodeValue;
+		 strDateDla = dateDla.toString();
 
-// competences
-function competences(comp, niv)
+		 var dateNext = new Date()
+		 // Le jour
+		 var posStart = 0;
+		 var posEnd = strDateDla.indexOf("/", posStart );
+		 dateNext.setDate( strDateDla.substring( posStart, posEnd ) );
+
+		 // Le mois
+		 posStart = posEnd + 1;
+		 posEnd = strDateDla.indexOf("/", posStart );
+		 dateNext.setMonth( strDateDla.substring( posStart, posEnd ) - 1 );
+
+		 // L'année
+		 posStart = posEnd + 1;
+		 posEnd = strDateDla.indexOf(" ", posStart );
+		 dateNext.setYear( strDateDla.substring( posStart, posEnd ) );
+
+		 // Les heures
+		 posStart = posEnd + 1;
+		 posEnd = strDateDla.indexOf(":", posStart );
+		 dateNext.setHours( strDateDla.substring( posStart, posEnd ) );
+
+		 posStart = posEnd + 1;
+		 posEnd = strDateDla.indexOf(":", posStart );
+		 dateNext.setMinutes( strDateDla.substring( posStart, posEnd ) );
+
+		 posStart = posEnd + 1;
+		 dateNext.setSeconds( strDateDla.substring( posStart, posStart+2) );
+
+		 var totalMSec = dateNext.getTime();
+		 // Durée prochain tour.
+		 var DlaLength = arrTR[5].childNodes[3].childNodes[8].childNodes[1].childNodes[0].nodeValue;
+		 posStart = DlaLength.indexOf(":", 0 );
+		 posStart = posStart + 2;
+		 posEnd = DlaLength.indexOf(" ", posStart );
+		 // On ajoute les heures de la durée de la dla
+		 totalMSec = totalMSec + DlaLength.substring( posStart, posEnd ) * 3600000;
+		 posStart = DlaLength.indexOf("et ", posEnd )+3;
+		 posEnd = DlaLength.indexOf(" ", posStart );
+		 // On ajoute les minutes de la durée de la dla
+		 totalMSec = totalMSec + DlaLength.substring( posStart, posEnd ) * 60000;
+
+		 dateNext.setTime( totalMSec );
+		 arrTR[5].childNodes[3].childNodes[8].childNodes[1].innerHTML += "<BR>---> Prochaine DLA (estimée)............: " + formatDate(dateNext);
+}
+
+function addZero(i)
 {
-	var texte = '';
-	var moyenne = '';
-	if((comp.indexOf('Attaque Precise') != -1) && (niv>=0)){
-	 	var attlim = Math.min(Math.floor(att*1.5), Math.floor(att+3*niv));
-	 	texte = 'Attaque : <b>' + attlim + '</b> D6 ';
-		if(attbonus >= 0)
-			texte += '+' + attbonus;
-		else
-			texte += attbonus;
-		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
-		if(degbonus >= 0)
-			texte += '+';
-		texte += degbonus;
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + 
-			(Math.floor(attlim*7/2)+attbonus) + '</b><br/>';
-		texte += 'Dégâts moyens : <b>' + degmoy + '/' + 
-			(degmoy+Math.floor(deg/2)*2)+'</b>';
-	}
-	if((comp.indexOf('Attaque Precise') != -1) && (niv<0)){
-	 	texte += '';
-	 	for (var i=-niv+1; i>0; i--) { 
-		 	var attlim = Math.min(Math.floor(att*1.5), Math.floor(att+3*i));
-		 	texte += 'Niveau <b>'+i+'</b> => Attaque : <b>' + attlim + '</b> D6 ';
-			if(attbonus >= 0)
-				texte += '+' + attbonus;
-			else
-				texte += attbonus;
-			texte += ' (moyenne=<b>' + (Math.floor(attlim*7/2)+attbonus) + '</b>)<br/>';
-		}
-	}
-	if(comp.indexOf('Botte Secrete') != -1){
-		texte = 'Attaque : <b>' + Math.floor(att/2) + '</b> D6 ';
-		if(attbonus >=0)
-			texte += '+' + Math.floor(attbonus/2);
-		else
-			texte += Math.floor(attbonus/2);
-		texte += '<br/>Dégâts : <b>' + Math.floor(att/2) + '</b> D3 ';
-		if(degbonus >=0)
-			texte += '+';
-		texte += Math.floor(degbonus/2);
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + 
-			((Math.floor(att/2)*7/2)+Math.floor(attbonus/2)) + '</b><br/>';
-		texte += 'Dégâts moyens : <b>' + 
-			(Math.floor(att/2)*2+Math.floor(degbonus/2)) + '/' + 
-			(Math.floor(Math.floor(att/2)*1.5)*2+Math.floor(degbonus/2))+'</b>';
-	}
-	if(comp.indexOf('Charger') != -1){
-		if(vuetotale<=0)
-			texte = '<b>Impossible de charger</b>';
-		else 
-		{
-			texte = 'Attaque : <b>' + att + '</b> D6 ';
-			if(attbonus >=0)
-				texte += '+' + attbonus;
-			else
-				texte += attbonus;
-			texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
-			if(degbonus >=0)
-				texte += '+';
-			texte += degbonus;
-			var aux = Math.ceil(pvactuels/10)+reg;
-			var portee = 0;
-			if(aux<=4)
-				portee = 1;
-			else if(aux<=9)
-				portee = 2;
-			else if(aux<=15)
-				portee = 3;
-			else if(aux<=22)
-				portee = 4;
-			else if(aux<=30)
-				portee = 5;
-			else if(aux<=39)
-				portee = 6;
-			portee=porte(aux);
-			portee=Math.min(portee,vuetotale);
-			texte += '<br/>Portée : <b>' + portee + '</b> case';
-			if(portee>1)
-				texte += 's';
-			texte += '<hr/>';
-			texte += 'Attaque moyenne : <b>' + attmoy + '</b><br/>';
-			texte += 'Dégâts moyens : <b>' + degmoy + '/' + 
-				(degmoy+Math.floor(deg/2)*2)+'</b>';
-		}
-	}
-	if(comp.indexOf('Connaissance des Monstres') != -1)
-		texte = 'Portée horizontale : <b>' + Math.max(vuetotale,0) + '</b> cases<br/> Portée verticale : <b>' + Math.max(Math.ceil(vuetotale/2),0) + '</b> cases';
-	if(comp.indexOf('Construire un Piege') != -1){
-		texte = 'Dégats du piège à feu : <b>' + Math.floor((esq+vue)/2) + '</b> D3<hr/>';
-		texte += 'Dégâts moyens : <b>' + Math.floor((esq+vue)/2)*2 + ' (';
-		texte += '' + resiste(Math.floor((esq+vue)/2))+')</b>';
-	}
-	if(comp.indexOf('Contre-Attaquer') != -1){
-		texte = 'Attaque : <b>' + Math.floor(att/2) + '</b> D6';
-		if(attbonus >=0)
-			texte += '+' + Math.floor(attbonus/2);
-		else
-			texte += Math.floor(attbonus/2);
-		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
-		if(degbonus >= 0)
-			texte += '+';
-		texte += degbonus;
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + (Math.floor(att/2)*3.5+Math.floor(attbonus/2));
-		texte += '</b><br/>Dégâts moyens : <b>' + (degmoy) +'/' + (degmoy+Math.floor(deg/2)*2)+'</b>';
-		
-	}
-	if((comp.indexOf('Coup de Butoir') != -1)&& (niv>0)){
-	 	var deglim = Math.min(Math.floor(deg*1.5), Math.floor(deg+3*niv));
-		texte = 'Attaque : <b>' + att + '</b> D6 ';
-		if(attbonus >= 0)
-			texte += '+' + attbonus;
-		else
-			texte += attbonus;
-		texte += '<br/>Dégâts : <b>' + deglim + '</b> D3 ';
-		if(degbonus >=0)
-			texte += '+';
-		texte += degbonus;
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + attmoy;
-		texte += '</b><br/>Dégâts moyens : <b>' + (deglim*2+degbonus) + '/' + (deglim*2+deg+degbonus)+'</b>';
-//		texte += '</b><br/>Dégâts moyens : <b>' + (degmoy+Math.floor(deg/2)*2) + '/' + (deg*2*2+degbonus)+'</b>';
-	}
-	if((comp.indexOf('Coup de Butoir') != -1) && (niv<0)){
-	 	texte += '';
-	 	for (var i=-niv+1; i>0; i--) { 
-		 	var deglim = Math.min(Math.floor(deg*1.5), Math.floor(deg+3*i));
-		 	texte += 'Niveau <b>'+i+'</b> => Dégâts : <b>' + deglim + '</b> D3 ';
-			if(degbonus >=0)
-				texte += '+';
-			texte += degbonus;
-			texte += ' (moyenne=<b>' + (deglim*2+degbonus) + '|' + (deglim*2+deg+degbonus)+'</b>)<br/>';
-	 	}
-	}
-	if(comp.indexOf('Frenesie') != -1){
-		texte = 'Attaque : <b>' + att + '</b> D6 ';
-		if(attbonus >=0)
-			texte += '+' + attbonus;
-		else
-			texte += attbonus;
-		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ';
-		if(degbonus >=0)
-			texte += '+';
-		texte += degbonus;
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + attmoy;
-		texte += '</b><br/>Dégâts moyens : <b>' + degmoy + '/' + (degmoy+Math.floor(deg/2)*2)+'</b>';
-	}
-	if(comp.indexOf('Lancer de Potions') != -1)
+	if(i<10)
+		return "0"+""+i;
+	return i;
+}
+
+function formatDate(dateNext)
+{
+	return addZero(dateNext.getDate())+"/"+addZero(dateNext.getMonth()+1)+"/"+dateNext.getFullYear()+" "+addZero(dateNext.getHours())+":"+addZero(dateNext.getMinutes())+":"+addZero(dateNext.getSeconds());
+}
+// Fonctions modifiant la page
+
+function setLieu() {
+	arrTR[4].childNodes[5].setAttribute('rowspan','11');
+	var myTR=document.createElement('tr');
+	myTR.setAttribute('class','mh_tdpage');
+	var myTD=document.createElement('td');
+	myTD.setAttribute('valign','top');
+	myTD.setAttribute('class','mh_tdtitre');
+	myTD.appendChild(document.createElement('b'));
+	myTD.childNodes[0].appendChild(document.createTextNode('Lieux les plus proches :'));
+	myTR.appendChild(myTD);
+	myTD=document.createElement('td');
+	myTD.setAttribute('valign','top');
+	myTR.appendChild(myTD);
+	var mySpan1=document.createElement('span');
+	var mySpan2=document.createElement('span');
+	var mySpan3=document.createElement('span');
+	var mySpan4=document.createElement('span');
+	var mySpan5=document.createElement('span');
+	arrTR[8].parentNode.insertBefore(myTR,arrTR[8]);
+	var newA=document.createElement('a');
+	newA.appendChild(document.createTextNode("Chez les Bricol' Trolls"));
+	newA.setAttribute("href","http://trolls.ratibus.net/mountyhall/lieux.php?search=position&orderBy=distance&posx="+posX+"&posy="+posY+"&posn="+posN+"&typeLieu=4");
+	newA.setAttribute("target","_blank");
+	myTD.appendChild(newA);
+}
+
+function setFatigue() {
+	var node3183 = arrTable[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1];
+	var nodes = document.evaluate("//img[contains(@src,'milieu.gif') or contains(@src,'lifebar.gif')]",
+								 document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	if (nodes.snapshotLength > 0)
+		nodes.snapshotItem(0).setAttribute('title', '1 PV de perdu = +'
+				+ Math.floor(2500 / pvtotal) / 10 + ' minute(s) de DLA');
+
+	// heure DLA et heure courante
+	var nodes = document.evaluate("//b[contains(preceding::text()[1],'Date Limite d')]/text()[1]",
+			document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	var dla = nodes.snapshotItem(0).nodeValue;
+	dla = dla.substr(dla.lastIndexOf('/') + 6);
+	dla = 60 * 60 * dla.substring(0, 2) + 60 * dla.substring(3, 5) + 1 * dla.substring(6, 8);
+	nodes = document.evaluate("//td/text()[contains(.,'Heure Serveur : ')]",
+			document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	var ct = nodes.snapshotItem(0).nodeValue;
+	ct = ct.substr(ct.lastIndexOf('/') + 6);
+	var ct = 60 * 60 * ct.substring(0, 2) + 60 * ct.substring(3, 5) + 1 * ct.substring(6, 8);
+	while (ct > dla)
+		dla += 24 * 60 * 60;
+//	node.nodeValue += "Estimation DLA suivante : " + ct + " - " + dla_ut;
+//	appendBr(node);
+//	appendTdText(node, "test2");
+//
+	nodes = document.evaluate("//td/text()[contains(.,'Fatigue...')]",
+			                        document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	if (nodes.snapshotLength > 0)
 	{
-		texte = 'Portée : <b>' + (2+Math.floor(vuetotale/5))+ '</b> cases';
-	}
-        if(comp.indexOf('Parer') != -1)
-        {
-                texte = 'Parade : <b>' +Math.floor(att/2) + '</b> D6 ';
-		if(attbonus >=0)
-                        texte += '+' + Math.floor(attbonus/2);
-                else
-                        texte += Math.floor(attbonus/2);
-		texte +='<hr/>';
-		texte += 'Parade moyenne : <b>' + (Math.floor(att/2)*3.5+Math.floor(attbonus/2))+'</b>';
-        }
-	if(comp.indexOf('Pistage') != -1)
-		texte = 'Portée horizontale : <b>' + Math.max(0,vuetotale*2) + '</b> cases<br/>Portée verticale : <b>' + Math.max(0,Math.ceil(vuetotale/2)*2) + '</b> cases';
-	if(comp.indexOf('Regeneration Accrue') != -1){
-		texte = 'Régénération : <b>' + Math.floor(pvtotal/20) + '</b> D3<hr/>';
-		texte += 'Régénération moyenne : <b>' + Math.floor(pvtotal/20)*2+'</b>';
-	}
-	if(comp.indexOf('Insultes') != -1){
-		texte = 'Portée : <b>1</b> case (horizontale)';
-	}
-	if(comp.indexOf('Deplacement Eclair') != -1){
-		texte = 'Permet d\'économiser <b>1</b> PA par rapport au déplacement classique';
-	}
-	if(comp.indexOf('Identification des Champignons') != -1)
-		texte = 'Portée : <b>' +  Math.max(0,(Math.floor(vuetotale/2)))+ '</b> cases';
-	if(comp.indexOf('Balluchonnage') != -1)
-		texte = 'Un beau noeud évite souvent de mauvaises surprises...	';
-	if(comp.indexOf('Acceleration du Metabolisme') != -1)
-		texte = 'Fatigue du kastar : <b>1</b>PV = <b>'+fatigueDuKastar+'</b> minutes.';
-	if(comp.indexOf('Ecriture Magique') != -1)
-		texte = 'Réaliser la copie d\'un sortilège après en avoir découvert la formule nécessite de réunir les composants de cette formule, d\'obtenir un parchemin vierge sur lequel écrire (par le biais de la compétence Grattage), et de récupérer un champignon adéquat pour confectionner l\'encre.';
-	if(comp.indexOf('Hurlement Effrayant') != -1)
-		texte = 'Le troll choisit une cible qui fuira si tout se passe bien.';
-	if(comp.indexOf('Grattage') != -1)
-		texte = 'Permet de confectionner un Parchemin Vierge à partir de composants et de Gigots de Gob\' .';
-	if(comp.indexOf('Miner') != -1)
-		texte = 'Portée horizontale : <b>' + Math.max(0,vuetotale*2) + '</b> cases <i><font size =-2>(non-officiel)</font></i><br/>Portée verticale : <b>' + Math.max(0,Math.ceil(vuetotale/2)*2) + '</b> cases <i><font size =-2>(non-officiel)</font></i>';
-	if(comp.indexOf('Camouflage') != -1) {
-		texte =  'Pour conserver son camouflage, <br>il faut réussir un jet sous:<hr/>';
-		texte += 'Déplacement: <b>75%</b> du niveau du sortilège<br> ';
-		texte += 'Attaque: <b>perte automatique</b><br>';
-		texte += 'Projectile Magique: <b>25%</b> du niveau du sortilège';
-	}
-	if(comp.indexOf('Tailler') != -1)
-		texte = 'Permet d\'augmenter sensiblement la valeur marchande de certain minerai. Mais cette opération délicate n\'est pas sans risques...';
-	if(comp.indexOf('Shamaner') != -1)
-		texte = 'Permet de contrecarrer certains effets des pouvoirs spéciaux des monstres en utilisant des champignons (de 1 à 3).';
-	if(comp.indexOf('Planter un champignon') != -1)
-		texte = 'Planter un Champignon est une compétence qui vous permet de créer des colonies d\'un type et d\'un goût de champignon à partir de quelques exemplaires préalablement enterrés.';
-	if(comp.indexOf('Parer') != -1) {
-		texte = 'Jet de Parade : <b>'+Math.floor(att/2)+ '</b>D6';
-		if(attbonus >=0)
-			texte += '+<b>' + Math.floor(attbonus/2);
+		var node = nodes.snapshotItem(0).nodeValue;
+		var td = nodes.snapshotItem(0).parentNode;
+		appendBr(td);
+		td.setAttribute('colspan',2);
+		var pvAcceleration = Math.ceil(Math.floor((dla - ct) / 60) /
+				node.substring(node.indexOf('=') + 2, node.indexOf("'")));
+		minuteFatigue = parseInt(node.substring(node.indexOf('=') + 2, node.indexOf("'")));
+		if (arrTable[3].childNodes[1].childNodes[2].childNodes[3].childNodes[5].childNodes[0].nodeValue.substr(1, 1) < 2)
+			appendText(td, "Vous n'avez pas assez de PA pour accélérer.");
+		else if (pvactuels > pvAcceleration)
+		{
+			appendText(td, "Vous devez accélérer d'au moins " + pvAcceleration + " PV pour rejouer de suite");
+			if(pvAcceleration!=1)
+			{
+				var gain_secondes = dla-ct-((pvAcceleration-1)*60*node.substring(node.indexOf('=') + 2, node.indexOf("'")));
+				if(gain_secondes%60==0)
+				{
+					appendText(td, " ("+(pvAcceleration-1)+" PV dans "+Math.floor(gain_secondes/60)+" min)");
+				}
+				else
+				{
+					appendText(td, " ("+(pvAcceleration-1)+" PV dans "+Math.floor(gain_secondes/60)+" min "+(gain_secondes%60)+" sec)");
+				}
+			}
+		}
 		else
-			texte += Math.floor(attbonus/2);
-		texte += '</b><hr/>';
-		texte += 'Jet de Parade moyen : <b>' + (Math.floor(att/2)*3.5+Math.floor(attbonus/2))+'</b>';
+			appendText(td, "Vous ne pouvez pas rejouer de suite.");
 	}
-	if(comp.indexOf('Necromancie') != -1)
-		texte = 'La Nécromancie permet à partir des composants d\'un monstre de faire "revivre" ce monstre.';
-	if(comp.indexOf('Melange magique') != -1)
-		texte = 'Cette Compétence permet d\'utiliser deux Potions pour en réaliser une nouvelle qui aura comme effet la somme des effets des potions initiales.';
-	if(comp.indexOf('Dressage') != -1)
-		texte = 'Le dressage permet d\'apprivoiser un gowap redevenu sauvage ou un gnu sauvage.';
-	if(comp.indexOf('Bidouille') != -1)
+}
+
+function setPiForNextLevel() {
+	var piForNextLevel = niveau * (niveau + 3) * 5;
+	var px_ent = 2 * niveau;
+
+	var parentPx = arrTable[3].childNodes[1].childNodes[6].childNodes[3];
+
+	var nodeLvl = parentPx.childNodes[0];
+	var pi_tot = parseInt(nodeLvl.nodeValue.substring(nodeLvl.nodeValue.indexOf('(') + 1,
+			nodeLvl.nodeValue.indexOf(' PI')));
+	nodeLvl.nodeValue = nodeLvl.nodeValue.substring(0, nodeLvl.nodeValue.length - 1) + " | Niveau "
+			+ (niveau + 1) + " : " + piForNextLevel + " PI => ";
+	nodeLvl.nodeValue += Math.ceil((piForNextLevel - pi_tot) / px_ent) + " entrainement";
+	if (Math.ceil((piForNextLevel - pi_tot) / px_ent) > 1)
+		nodeLvl.nodeValue += "s";
+	nodeLvl.nodeValue += ")";
+
+	var px = parentPx.childNodes[2].nodeValue;
+	var px_per = px.substring(px.indexOf('\n', 10), 5000);
+	px_per = parseInt(px_per.substring(px_per.indexOf(':') + 1, 5000));
+	px = parseInt(px.substring(px.indexOf(':') + 1, px.indexOf('\n', 10)));
+
+	var nodePx = parentPx.childNodes[3];
+	insertBr(nodePx);
+	if (px + px_per >= px_ent)
+		insertText(nodePx, "Entraînement possible. Il vous restera " + (px + px_per - px_ent) + " PX.");
+	else
+		insertText(nodePx, "Il vous manque " + (px_ent - px - px_per) + " PX pour vous entrainer. ");
+	
+	var span = document.createElement('SPAN');
+	span.setAttribute("title",(Math.round(10*(pi_tot+px+px_per)/nbjours)/10)+" PI par jour");
+	appendText(span, nodeLvl.nodeValue);
+	parentPx.replaceChild(span,nodeLvl);
+}
+
+function setRatioKillDeath() {
+	var node = arrTable[3].childNodes[1].childNodes[12].childNodes[3].childNodes[1];
+	var killnode = node.childNodes[0];
+	var kill = killnode.data.substring(killnode.data.indexOf('Nombre d\'Adversaires tués....: ') + 30, killnode.data.length) * 1;
+	var span = document.createElement('SPAN');
+	span.setAttribute("title","Un kill tous les "+(Math.round(10*nbjours/kill)/10)+" jours");
+	appendText(span, killnode.nodeValue);
+	node.replaceChild(span,killnode);
+	var deathnode = node.childNodes[2];
+	var death = deathnode.data.substring(deathnode.data.indexOf('Nombre de Décès...................: ') + 36, deathnode.data.length) * 1;
+	if (death != 0) {
+		span = document.createElement('SPAN');
+		span.setAttribute("title","Une mort tous les "+(Math.round(10*nbjours/death)/10)+" jours");
+		appendText(span, deathnode.nodeValue);
+		node.replaceChild(span,deathnode);
+		appendBr(node);
+		appendText(node, ' Rapport kills/deaths : ' + Math.floor((kill / death) * 1000) / 1000);
+	}
+}
+
+function setCurrentEsquive() {
+	var nodes = document.evaluate("//p/text()[contains(.,'esquive en moins')]",
+			document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	var esqmod = nodes.snapshotItem(0).nodeValue;
+	esqmod = Math.abs(esqmod.substring(esqmod.indexOf(': ') + 2, esqmod.length));
+	nodes.snapshotItem(0).nodeValue += ' (Moyenne esquive : ' + Math.max(esqmoy - 3.5 * esqmod, esqbonus) + ')';
+	nodes = document.evaluate("//p/text()[contains(.,'attaque en moins')]",
+			document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	var attmod = nodes.snapshotItem(0).nodeValue;
+	attmod = Math.abs(attmod.substring(attmod.indexOf(': ') + 2, attmod.length));
+	nodes.snapshotItem(0).nodeValue += ' (Moyenne attaque : ' + Math.max(attmoy - 3.5 * attmod, attbonus) + ')';
+	nbattaques = 1*esqmod;
+}
+
+function setTotalMagie() {
+	var span = document.createElement('SPAN');
+	span.setAttribute("title",(Math.round(10*rm/nbjours)/10)+" ("+(Math.round(10*rmtotal/nbjours)/10)+") points de RM par jour | "
+		+(Math.round(10*rm/niveau)/10)+" ("+(Math.round(10*rmtotal/niveau)/10)+") points de RM  par niveau");
+	appendText(span, arrTable[3].childNodes[1].childNodes[18].childNodes[3].childNodes[0].nodeValue+' (Total : ' + rmtotal + ')');
+	arrTable[3].childNodes[1].childNodes[18].childNodes[3].replaceChild(span,arrTable[3].childNodes[1].childNodes[18].childNodes[3].childNodes[0]);
+	span = document.createElement('SPAN');
+	span.setAttribute("title",(Math.round(10*mm/nbjours)/10)+" ("+(Math.round(10*mmTroll/nbjours)/10)+") points de MM  par jour | "
+		+(Math.round(10*mm/niveau)/10)+" ("+(Math.round(10*mmTroll/niveau)/10)+") points de MM  par niveau");
+	appendText(span, arrTable[3].childNodes[1].childNodes[18].childNodes[3].childNodes[2].nodeValue+' (Total : ' + mmTroll + ')');
+	arrTable[3].childNodes[1].childNodes[18].childNodes[3].replaceChild(span,arrTable[3].childNodes[1].childNodes[18].childNodes[3].childNodes[2]);
+}
+
+function setTotalPourcentages() {
+	var node = arrTable[8].childNodes[1];	
+	var listeComp = node.childNodes[2].childNodes[1].childNodes[0].childNodes[1];
+	var listeSort = node.childNodes[2].childNodes[3].childNodes[0].childNodes[1];
+	node.childNodes[0].childNodes[1].childNodes[0].childNodes[0].nodeValue += ' (Total : ' + creerInfoBulles(listeComp, "competences") + '%)';
+	node.childNodes[0].childNodes[3].childNodes[0].childNodes[0].nodeValue += ' (Total : ' + creerInfoBulles(listeSort, "sortileges") + '%)';
+}
+
+
+// Textes des popups pour les compétences et sortilèges
+
+function competences(comp, niveau) {
+	var texte = '';
+	if(comp.indexOf('Acceleration du Metabolisme') != -1 && minuteFatigue != null)
+		texte = '<b>1</b>PV = <b>'+minuteFatigue+'</b> minutes.';
+	else if (comp.indexOf('Attaque Precise') != -1) {
+		for(var i=Math.min(niveau+1,5);i>=1;i--)
+		{
+			if(i>niveau) texte += "<i>";
+			texte += 'Attaque (niveau '+i+') : <b>' + Math.min(Math.floor(att*1.5), Math.floor(att+3*i)) + '</b> D6 ' + aff(attbonus+attbmm)+' => ';
+			texte += '<b>' + (Math.floor(Math.min(Math.floor(att*1.5), Math.floor(att+3*i))* 7 / 2) + attbonus + attbmm) + '</b><br/>';
+			if(i>niveau) texte += "</i>";
+		}
+		texte += 'Dégâts : <b>' + deg + '</b> D3 ' + aff(degbonus+degbmm)+' => ';
+		texte += '<b>' + degmoy + '/' + (degmoy + Math.floor(deg / 2) * 2) + '</b>';
+	} else if(comp.indexOf('Balluchonnage') != -1) {
+		texte = 'Un beau noeud évite souvent de mauvaises surprises...	';
+	} else if(comp.indexOf('Bidouille') != -1) {
 		texte = 'Bidouiller un trésor permet de compléter le nom d\'un objet de votre inventaire avec le texte de son choix.';
-	if(comp.indexOf('Retraite') != -1)
-		texte = 'Vous jugez la situation avec sagesse et estimez qu\'il serait préférable de préparer un repli stratégique pour déconcerter l\'ennemi et lui foutre une bonne branlée ... plus tard. AHAHA ! Quelle intelligence démoniaque..';
-	if(comp.indexOf('Marquage') != -1)
+	} else if (comp.indexOf('Botte Secrete') != -1) {
+		texte = 'Attaque : <b>' + Math.floor(att / 2) + '</b> D6 ' + aff(Math.floor((attbonus+attbmm) / 2));
+		texte += ' => <b>' + ((Math.floor(att / 2) * 7 / 2) + Math.floor((attbonus+attbmm) / 2)) + '</b><br/>';
+		texte += 'Dégâts : <b>' + Math.floor(att / 2) + '</b> D3 ' + aff(Math.floor((degbonus+degbmm) / 2));
+		texte += ' => <b>' + (Math.floor(att / 2) * 2 + Math.floor((degbonus+degbmm) / 2)) + '/'
+				+ (Math.floor(Math.floor(att / 2) * 1.5) * 2 + Math.floor((degbonus+degbmm) / 2)) + '</b>';
+	} else if(comp.indexOf('Camouflage') != -1) {
+		texte =  'Pour conserver son camouflage, <br>il faut réussir un jet sous:<hr/>';
+		texte += 'Déplacement: <b>'+setSortComp('Camouflage')+'</b>.';
+		texte += 'Attaque: <b>perte automatique</b>.<br>';
+		texte += 'Projectile Magique: <b>25%</b>.';
+	} else if (comp.indexOf('Charger') != -1) {
+		if (vuetotale <= 0)
+			texte = '<b>Impossible de charger</b>';
+		else {
+			texte = 'Attaque : <b>' + att + '</b> D6 ' + aff(attbonus+attbmm);
+			texte += ' => <b>' + attmoy + '</b><br/>';
+			texte += 'Dégâts : <b>' + deg + '</b> D3 ' + aff(degbonus+degbmm);
+			texte += ' => <b>' + degmoy + '/' + (degmoy + Math.floor(deg / 2) * 2) + '</b>';
+			var aux = Math.ceil(pvactuels / 10) + reg;
+			var portee = Math.min(getPortee(aux), vuetotale);
+			texte += '<br/>Portée : <b>' + portee + '</b> case';
+			if (portee > 1)
+				texte += 's';			
+		}
+	} else if (comp.indexOf('Connaissance des Monstres') != -1) {
+		texte = 'Portée horizontale : <b>' + vuetotale + '</b> cases<br/>';
+		texte += 'Portée verticale : <b>' + Math.ceil(vuetotale / 2) + '</b> cases';
+	} else if (comp.indexOf('Construire un Piege') != -1) {
+		texte = 'Dégats du piège à feu : <b>' + Math.floor((esq + vue) / 2) + '</b> D3<hr/>';
+		texte += 'Dégâts moyens : <b>' + Math.floor((esq + vue) / 2) * 2 + ' (';
+		texte += resiste((esq + vue) / 2) + ')</b>';
+	} else if (comp.indexOf('Contre-Attaquer') != -1) {
+		texte = 'Attaque : <b>' + Math.floor(att / 2) + '</b> D6' + aff(Math.floor((attbonus+attbmm)/ 2));
+		texte += ' => <b>' + (Math.floor(att / 2) * 3.5 + Math.floor((attbonus+attbmm) / 2))+"</b>";
+		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ' + aff(degbonus+degbmm);
+		texte += ' => <b>' + (degmoy) + '/' + (degmoy + Math.floor(deg / 2) * 2) + '</b>';
+	} else if (comp.indexOf('Coup de Butoir') != -1) {
+		texte = 'Attaque : <b>' + att + '</b> D6 ' + aff(attbonus+attbmm);
+		texte += ' => <b>' + attmoy+"</b>";
+		for(var i=Math.min(niveau+1,5);i>=1;i--)
+		{
+			if(i>niveau) texte+="<i>";
+			texte += '<br/>Dégâts (niveau '+i+') : <b>' + Math.min(Math.floor(deg*1.5), Math.floor(deg+3*i)) + '</b> D3 ' + aff(degbonus+degbmm);
+			texte += ' => <b>' + (degmoy + Math.min(Math.floor(deg / 2),Math.floor(3*i)) * 2)
+				+ '/' + (degmoy + Math.min(Math.floor(deg / 2),Math.floor(3*i)) * 2 + Math.floor(deg / 2) * 2) + '</b>';
+			if(i>niveau) texte+="</i>";
+		}
+	} else if(comp.indexOf('Deplacement Eclair') != -1) {
+		texte = 'Permet d\'économiser <b>1</b> PA par rapport au déplacement classique';
+	} else if(comp.indexOf('Dressage') != -1) {
+		texte = 'Le dressage permet d\'apprivoiser un gowap redevenu sauvage ou un gnu sauvage.';
+	} else if(comp.indexOf('Ecriture Magique') != -1) {
+		texte = 'Réaliser la copie d\'un sortilège après en avoir découvert la formule nécessite de réunir les composants de cette formule, d\'obtenir un parchemin vierge sur lequel écrire (par le biais de la compétence Grattage), et de récupérer un champignon adéquat pour confectionner l\'encre.';
+	} else if (comp.indexOf('Frenesie') != -1) {
+		texte = 'Attaque : <b>' + att + '</b> D6 ' + aff(attbonus+attbmm)+" => <b>"+attmoy+"</b>";
+		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 ' + aff(degbonus+degbmm);
+		texte += ' => <b>' + degmoy + '/' + (degmoy + Math.floor(deg / 2) * 2) + '</b>';
+	} else if(comp.indexOf('Grattage') != -1) {
+		texte = 'Permet de confectionner un Parchemin Vierge à partir de composants et de Gigots de Gob\'.'; 
+	} else if(comp.indexOf('Hurlement Effrayant') != -1) {
+		texte = 'Fait fuir un monstre si tout se passe bien.<br>Lui donne de gros bonus sinon.';
+	} else if (comp.indexOf('Identification des Champignons') != -1) {
+		texte = 'Portée horizontale : <b>' + Math.ceil(vuetotale/2) + '</b> cases<br/>';
+		texte += 'Portée verticale : <b>' + Math.ceil(vuetotale / 4) + '</b> cases';
+	} else if(comp.indexOf('Insultes') != -1) {
+		texte = 'Portée : <b>1</b> case (horizontale)';
+	} else if (comp.indexOf('Lancer de Potions') != -1) {
+		texte = 'Portée : <b>' + (2 + Math.floor(vuetotale / 5)) + '</b> cases';
+	} else if(comp.indexOf('Marquage') != -1) {
 		texte = 'Marquage permet de rajouter un sobriquet à un monstre. Il faut bien choisir le nom à ajouter car celui-ci sera définitif. Il faut se trouver dans la même caverne que le monstre pour le marquer..';
+	} else if(comp.indexOf('Melange magique') != -1) {
+		texte = 'Cette Compétence permet d\'utiliser deux Potions pour en réaliser une nouvelle qui aura comme effet la somme des effets des potions initiales.';
+	} else if (comp.indexOf('Miner') != -1) {
+		texte = 'Portée horizontale officieuse : <b>' + (vuetotale*2) + '</b> cases<br/>';
+		texte += 'Portée verticale officieuse : <b>' + (Math.ceil(vuetotale / 2)*2) + '</b> cases';
+	} else if(comp.indexOf('Necromancie') != -1) {
+		texte = 'La Nécromancie permet à partir des composants d\'un monstre de faire "revivre" ce monstre.';
+	} else if (comp.indexOf('Parer') != -1) {
+		texte = 'Parade : <b>' + Math.floor(att / 2) + '</b> D6 ';
+		texte += aff(Math.floor((attbonus+attbmm) / 2));
+		texte += ' => <b>' + (Math.floor(att / 2) * 3.5 + Math.floor((attbonus+attbmm) / 2)) + '</b>';
+	} else if (comp.indexOf('Pistage') != -1) {
+		texte = 'Portée horizontale : <b>' + vuetotale * 2 + '</b> cases<br/>';
+		texte += 'Portée verticale : <b>' + Math.ceil(vuetotale / 2) * 2 + '</b> cases';
+	} if(comp.indexOf('Planter un champignon') != -1) {
+		texte = 'Planter un Champignon est une compétence qui vous permet de créer des colonies d\'un type et d\'un goût de champignon à partir de quelques exemplaires préalablement enterrés.';
+	} else if (comp.indexOf('Regeneration Accrue') != -1) {
+		texte = 'Régénération : <b>' + Math.floor(pvtotal / 20) + '</b> D3<hr/>';
+		texte += 'Régénération moyenne : <b>' + Math.floor(pvtotal / 20) * 2 + '</b>';
+	} else 	if(comp.indexOf('Retraite') != -1) {
+		texte = 'Vous jugez la situation avec sagesse et estimez qu\'il serait préférable de préparer un repli stratégique pour déconcerter l\'ennemi et lui foutre une bonne branlée ... plus tard. AHAHA ! Quelle intelligence démoniaque..';
+	} else if(comp.indexOf('Shamaner') != -1) {
+		texte = 'Permet de contrecarrer certains effets des pouvoirs spéciaux des monstres en utilisant des champignons (de 1 à 3).';
+	} else if(comp.indexOf('Tailler') != -1) {
+		texte = 'Permet d\'augmenter sensiblement la valeur marchande de certain minerai. Mais cette opération délicate n\'est pas sans risques...';
+	}
 	return texte;
 }
 
-// Sorts
-function sortileges(sort)
-{
-		var texte = '';
-	if(sort.indexOf('Analyse Anatomique') != -1)
-		texte = 'Portée horizontale : <b>' + Math.max(0,Math.floor(vuetotale/2)) + '</b> cases<br/>Portée verticale : <b>' + Math.max(0,Math.floor(Math.ceil(vuetotale/2)/2)) + '</b> cases';
-	if(sort.indexOf('Armure Etheree') != -1)
-		texte = 'Armure : <b>+'+reg+'</b> <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Augmentation') != -1 && sort.indexOf('Attaque')!=-1)
-		texte = 'Attaque : <b>+'+(1+Math.floor((att-3)/2))+'</b> <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Augmentation') != -1 && sort.indexOf('Esquive')!=-1)
-		texte = 'Esquive : +<b>'+(1+Math.floor((esq-3)/2))+'</b> <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Augmentation des Degats') != -1)
-		texte = 'Dégâts : +<b>'+(1+Math.floor((deg-3)/2))+'</b> <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Bulle Anti-Magie') != -1)
-		texte = 'RM : <b>+' + Math.floor(rm) + '</b> <i><font size =-2>(2 tours)</font></i><br/>MM : <b>-' + Math.floor(mm) + '</b> <i><font size =-2>(4 tours)</font></i>';
-	if(sort.indexOf('Bulle Magique') != -1)
-		texte = 'MM : <b>+' + Math.floor(mm) + '</b> <i><font size =-2>(2 tours)</font></i><br/>RM : <b>-' + Math.floor(rm) + '</b> <i><font size =-2>(4 tours)</font></i>';
-	if(sort.indexOf('Explosion') != -1){
-		texte = 'Attaque : <b>Automatique</b><br/>'; 
-		texte += 'Dégâts : <b>' + Math.floor((deg+Math.floor(pvtotal/10))/2+1) + '</b> D3<hr/>';
-		texte += 'Moyenne Dégâts : <b>' + Math.floor((deg+Math.floor(pvtotal/10))/2+1)*2 + ' (';
-		texte += resiste(Math.floor((deg+Math.floor(pvtotal/10))/2+1))+')</b>';
-	}
-	if(sort.indexOf('Faiblesse Passagere') != -1)
-		texte = 'Dégâts : <b>-' + Math.floor((Math.floor((pvactuels-30)/10)+deg-3)/2+1) + '</b> <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Flash Aveuglant') != -1)
-		texte = 'Vue, Attaque, Esquive : <b>-'+(1+Math.floor(vue/5))+'</b> <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Glue') != -1)
-		texte = 'Portée : <b>'+(1+Math.floor(vuetotale/3))+'</b> cases <i><font size =-2>(2 tours)</font></i>';
-	if(sort.indexOf('Griffe du Sorcier') != -1){
-		texte = 'Attaque : <b>' + att + '</b> D6<br/>Dégâts : <b>' + Math.floor(deg/2) + '</b> D3<br/>';
-		texte += 'Durée : <b>'+(1+Math.floor(vue/5))+'</b> tours<br/>Poison : <b>'+(1+Math.floor(pvtotal/30))+'</b> D3<hr/>';
-		texte += 'Attaque moyenne : <b>'+Math.floor(att*3.5)+'</b><br/>';
-		texte += 'Dégats moyens : <b>'+(Math.floor(deg/2)*2)+'/'+Math.floor(Math.floor(deg/2)*1.5)*2;
-		texte += ' ('+resiste(Math.floor(deg/2))+'/'+resiste(Math.floor(Math.floor(deg/2)*1.5))+')</b></br>';
-		texte += 'Poison : <b>'+(1+Math.floor(pvtotal/30))*2+'</b> <i><font size =-2>('+(1+Math.floor(vue/5))+' tours)</font></i>';
-	}
-	if(sort.indexOf('Hypnotisme') != -1){
-		texte = 'Esquive : <b>-' + Math.floor(esq*1.5) + '</b> Dés ';
-		texte += '(<b>-' + Math.floor(esq/3) + '</b> Dés)</br>';
-		texte += 'Durée : Jusqu\'à la <b>fin de la DLA</b> en cours';
-	}
-	if(sort.indexOf('Projectile Magique') != -1){
-		texte = 'Attaque : <b>' + vue + '</b> D6<br/>dég : <b>' + Math.floor(vue/2) + '</b> D3<br/>';
-		var portee = 0;
-		if(vuetotale<=0)
-			portee=0;
-		else if(vuetotale<=4)
-			portee = 1;
-		else if(vuetotale<=9)
-			portee = 2;
-		else if(vuetotale<=15)
-			portee = 3;
-		else if(vuetotale<=22)
-			portee = 4;
-		else if(vuetotale<=30)
-			portee = 5;
-		else if(vuetotale<=39)
-			portee = 6;
-		else if(vuetotale<=49)
-			portee = 7;
-		else if(vuetotale<=60)
-			portee = 8;
-		else if(vuetotale<=72)
-			portee = 9;
-		else if(vuetotale<=85)
-			portee = 10;
-		portee=porte(vuetotale);
-		texte += 'Portée : <b>' + portee + '</b> case';
-		if(portee>1)
+function sortileges(sort) {
+	var texte = '';
+	if (sort.indexOf('Analyse Anatomique') != -1) {
+		texte = 'Portée horizontale : <b>' + Math.floor(vuetotale / 2) + '</b> cases<br/>';
+		texte += 'Portée verticale : <b>' + Math.floor(Math.ceil(vuetotale / 2) / 2) + '</b> cases';
+	} else if (sort.indexOf('Armure Etheree') != -1)
+		texte = 'Armure : <b>+' + reg + '</b>';
+	else if (sort.indexOf('Augmentation') != -1 && sort.indexOf('Attaque') != -1)
+		texte = 'Attaque Magique : <b>+' + (1 + Math.floor((att - 3) / 2)) + '</b>';
+	else if (sort.indexOf('Augmentation') != -1 && sort.indexOf('Esquive') != -1)
+		texte = 'Esquive : +<b>' + (1 + Math.floor((esq - 3) / 2)) + '</b>';
+	else if (sort.indexOf('Augmentation des Degats') != -1)
+		texte = 'Dégâts Magiques : +<b>' + (1 + Math.floor((deg - 3) / 2)) + '</b>';
+	else if (sort.indexOf('Bulle Anti-Magie') != -1)
+		texte = 'RM : <b>+' + Math.floor(rm) + ' (Total : '+(rm+rm+rmbonus)+')</b><br/>MM : <b>-' + Math.floor(mm) + ' (Total : '+(mmbonus)+')</b>';
+	else if (sort.indexOf('Bulle Magique') != -1)
+		texte = 'MM : <b>+' + Math.floor(mm) + ' (Total : '+(mm+mm+mmbonus)+')</b><br/>RM : <b>-' + Math.floor(rm) + ' (Total : '+(rmbonus)+')</b>';
+	else if (sort.indexOf('Explosion') != -1) {
+		texte = 'Attaque : <b>Automatique</b><br/>';
+		texte += 'Dégâts : <b>' + Math.floor((deg + Math.floor(pvtotal / 10)) / 2 + 1) + '</b> D3 '+aff(degbmm);
+		texte += ' => <b>' + (Math.floor((deg + Math.floor(pvtotal / 10)) / 2 + 1) * 2 + degbmm) + ' (';
+		texte += resiste((deg + Math.floor(pvtotal / 10)) / 2 + 1) + ')</b>';
+	} else if (sort.indexOf('Faiblesse Passagere') != -1)
+		texte = 'Dégâts : <b>-' + Math.floor((Math.floor((pvactuels - 30) / 10) + deg - 3) / 2 + 1) + '</b>';
+	else if (sort.indexOf('Flash Aveuglant') != -1)
+		texte = 'Vue, Attaque, Esquive : <b>-' + (1 + Math.floor(vue / 5)) + '</b>';
+	else if (sort.indexOf('Glue') != -1)
+		texte = 'Portée : <b>' + (1 + Math.floor(vuetotale / 3)) + '</b> cases';
+	else if (sort.indexOf('Griffe du Sorcier') != -1) {
+		texte = 'Attaque : <b>' + att + '</b> D6 '+aff(attbmm);
+		texte += ' => <b>' + (Math.floor(att * 3.5) + attbmm) + '</b>'+'<br/>';
+		texte += 'Dégâts : <b>' + Math.floor(deg / 2) + '</b> D3 '+aff(degbmm);
+		texte += ' => <b>' + (Math.floor(deg / 2) * 2 + degbmm) + '/' + (Math.floor(Math.floor(deg / 2) * 1.5) * 2 + degbmm);
+		texte += ' (' + resiste(deg / 2) + '/' + resiste(Math.floor(deg / 2) * 1.5) + ')</b></br>';
+		texte += 'Durée : <b>' + (1 + Math.floor(vue / 5)) + '</b> tours<br/>';
+		texte += 'Poison : <b>' + (1 + Math.floor(pvtotal / 30)) + '</b> D3';
+		texte += ' => <b>' + (1 + Math.floor(pvtotal / 30)) * 2 + '</b>';
+	} else if (sort.indexOf('Hypnotisme') != -1) {
+		texte = 'Esquive : <b>-' + Math.floor(esq * 1.5) + '</b> Dés ';
+		texte += '(<b>-' + Math.floor(esq / 3) + '</b> Dés )';
+	} else if(sort.indexOf('Identification des tresors') != -1) {
+		texte = 'Permet de connaitre les caractéristiques et effets précis d\'un trésor.';
+	} else if(sort.indexOf('Invisibilite') != -1) {
+		texte = 'Un troll invisible est indétectable même quand on se trouve sur sa zone. Toute action physique ou sortilège d\'attaque fait disparaître l\'invisibilité.';
+	} else if (sort.indexOf('Projectile Magique') != -1) {
+		texte = 'Attaque : <b>' + vue + '</b> D6 '+aff(attbmm);
+		texte += ' => <b>' + (Math.floor(vue * 3.5)+attbmm) + '</b>';
+		texte += '<br/>Dégâts : <b>' + Math.floor(vue / 2) + '</b> D3 '+aff(degbmm);
+		texte += ' => <b>' + (Math.floor(vue / 2) * 2 + degbmm) + '/';
+		texte += (Math.floor(Math.floor(vue / 2) * 1.5) * 2 + degbmm) + ' (';
+		texte += resiste(vue / 2) + '/';
+		texte += resiste(Math.floor(vue / 2) * 1.5) + ')</b>';
+		var portee = getPortee(vuetotale);
+		texte += '<br/>Portée : <b>' + portee + '</b> case';
+		if (portee > 1)
 			texte += 's';
-		texte += '<hr/>';
-		texte += 'Attaque moyenne : <b>' + Math.floor(vue*3.5) + '</b><br/>';
-		texte += 'Dégâts moyens : <b>' + Math.floor(vue/2)*2 + '/';
-		texte += Math.floor(Math.floor(vue/2)*1.5)*2 + ' (';
-		texte += resiste(Math.floor(Math.floor(vue/2))) + '/';
-		texte += resiste(Math.floor(Math.floor(vue/2)*1.5))+')</b>';
-	}
-	if(sort.indexOf('Rafale Psychique') != -1){
-		texte = 'Attaque : <b>Automatique</b><br/>Dégâts : <b>' + deg + '</b> D3<br/>Régénération : <b>-' + deg + '</b><hr/>';
-		texte += 'Dégâts moyens : <b>' + deg*2 + ' (';
-		texte += resiste(deg)+')</b>';
-	}
-	if(sort.indexOf('Teleportation') != -1){
-		var pmh=Math.floor(20+vue+porte(totalMM/5));
-		var pmv=Math.floor(3+porte(totalMM/5)/3);
-		texte = 'Portée horizontale  : <b>'+pmh+'</b> cases<br/>Portée verticale : <b>'+pmv+'</b> cases<br/>';
-		texte += 'Durée : de <b>2</b> à <b>7</b> jours';
-		texte+= '<hr/>';
-		texte+='X compris entre '+(x-pmh)+' et '+(x+pmh)+'<br/>';
-		texte+='Y compris entre '+(y-pmh)+' et '+(y+pmh)+'<br/>';
-		texte+='N compris entre '+(n-pmv)+' et '+Math.min(-1,(n+pmv))+'<br/>';
-	}
-	if(sort.indexOf('Vampirisme') != -1){
-		texte = 'Attaque : <b>' + Math.floor(deg*2/3) + '</b> D6<br/>Dégâts : <b>' + deg + '</b> D3<hr/>';
-		texte += 'Attaque moyenne : <b>' + Math.floor((Math.floor(deg*2/3))*3.5) + '</b><br/>';
-		texte += 'Dégâts moyens : <b>' + deg*2 + '/';
-		texte += Math.floor(deg*1.5)*2 + ' (';
-		texte += resiste(deg) + '/';
-		texte += resiste(Math.floor(deg*1.5))+')</b>';
-	}
-	if(sort.indexOf('Vision Accrue') != -1)
-		texte = 'Vue : <b>+' + Math.floor(vue/2) + '</b>';
-	if(sort.indexOf('Voir le Cache') != -1)
-		texte = 'Portée horizontale : <b>'+Math.max(0,Math.floor(vuetotale/2))+'</b> cases<br/>Portée verticale : <b>'+Math.max(0,Math.floor(vuetotale/4))+'</b> cases';
-	if(sort.indexOf('Vue Troublee') != -1)
-		texte = 'Vue : <b>-'+Math.floor(vue/3)+'</b>';
-	if(sort.indexOf('Sacrifice') != -1) {
+	} else if(sort.indexOf('Projection') != -1) {
+		texte = 'Si le jet de résistance de la victime est raté:<br>';
+		texte +='la victime est <b>déplacée</b> et perd <b>1D6</b> en Esquive<hr/>';
+		texte += 'Si le jet de résistance de la victime est réussi:<br>';
+		texte +='la victime ne <b>bouge pas</b> mais perd <b>1D6</b> en Esquive.';
+	} else if (sort.indexOf('Rafale Psychique') != -1) {
+		texte = 'Attaque : <b>Automatique</b><br/>';
+		texte += 'Dégâts : <b>' + deg + '</b> D3 '+aff(degbmm);
+		texte += ' => <b>' + (deg * 2 + degbmm) + ' (' + resiste(deg) + ')</b><br/>';
+		texte += 'Régénération : <b>-' + deg + '</b>';
+	} else if(sort.indexOf('Sacrifice') != -1) {
 		texte += 'Perte : Sacrifice + 1D3 + 1D3 par tranche 5PV.<hr/>';
 		texte += '<i><u>Exemple</i></u>:<BR>';
 		texte += 'soin de <b>4</b>PV, perte de  <b>5</b> à <b>7</b>PV<BR>';
@@ -675,14 +673,7 @@ function sortileges(sort)
 		texte += 'soin de <b>19</b>PV, perte de <b>23</b> à <b>31</b>PV<BR>';
 		texte += 'soin de <b>24</b>PV, perte de <b>29</b> à <b>39</b>PV<BR>';
 		texte += 'soin de <b>29</b>PV, perte de <b>35</b> à <b>47</b>PV';
-	}
-	if(sort.indexOf('Identification des tresors') != -1)
-		texte = 'Permet de connaitre les caractéristiques et effets précis d\'un trésor.';
-	if(sort.indexOf('Invisibilite') != -1)
-		texte = 'Un troll invisible est indétectable même quand on se trouve sur sa zone. Toute action physique ou sortilège d\'attaque fait disparaître l\'invisibilité.';
-	if(sort.indexOf('Vision lointaine') != -1)
-		texte = 'En ciblant une zone située n\'importe où dans le Monde Souterrain, votre Trõll peut voir comme s\'il s\'y trouvait.';
-	if(sort.indexOf('Telekinesie') != -1) {
+	} else if(sort.indexOf('Telekinesie') != -1) {
 		texte = 'Portée (horizontale uniquement) :<hr/>';
 		var  vt= Math.floor(vuetotale/2) + 2; if (vt<0) vt=0;
 		texte += '<b>'+vt+'</b>: Les trésors d\'une Plum \' et Très Léger<br>';
@@ -693,454 +684,260 @@ function sortileges(sort)
 		var  vt= Math.floor(vuetotale/2)-1; if (vt<0) vt=0;
 		texte += '<b>'+vt+'</b>: Les trésors Lourd<br>';
 		var  vt= Math.floor(vuetotale/2)-2; if (vt<0) vt=0;
-		texte += '<b>'+vt+'</b>: Les trésors Très Lourd et d\'une Ton\'';		
-	}
-	if(sort.indexOf('Projection') != -1) {
-		texte = 'Si le jet de résistance de la victime est raté:<br>';
-		texte +='la victime est <b>déplacée</b> et perd <b>1D6</b> en Esquive<hr/>';
-		texte += 'Si le jet de résistance de la victime est réussi:<br>';
-		texte +='la victime ne <b>bouge pas</b> mais perd <b>1D6</b> en Esquive.';
-    }
+		texte += '<b>'+vt+'</b>: Les trésors Très Lourd et d\'une Ton\'';
+	} else if (sort.indexOf('Teleportation') != -1) {
+		var pmh = Math.floor(20 + vue + getPortee(mmTroll / 5));
+		var pmv = Math.floor(3 + getPortee(mmTroll / 5) / 3);
+		texte = 'Portée horizontale  : <b>' + pmh + '</b> cases<br/>Portée verticale : <b>' + pmv + '</b> cases<br/>';
+		texte += '<hr/>';
+		texte += 'X compris entre ' + (posX - pmh) + ' et ' + (posX + pmh) + '<br/>';
+		texte += 'Y compris entre ' + (posY - pmh) + ' et ' + (posY + pmh) + '<br/>';
+		texte += 'N compris entre ' + (posN - pmv) + ' et ' + Math.min(-1, (posN + pmv)) + '<br/>';
+	} else if (sort.indexOf('Vampirisme') != -1) {
+		texte = 'Attaque : <b>' + Math.floor(deg * 2 / 3) + '</b> D6 '+aff(attbmm);
+		texte += ' => <b>' + Math.floor((Math.floor(deg * 2 / 3)) * 3.5 + attbmm) + '</b>';
+		texte += '<br/>Dégâts : <b>' + deg + '</b> D3 '+aff(degbmm);
+		texte += ' => <b>' + (deg * 2 + degbmm) + '/' + (Math.floor(deg * 1.5) * 2 + degbmm) + ' ('
+				+ resiste(deg) + '/' + resiste(deg * 1.5) + ')</b>';
+	} else if (sort.indexOf('Vision Accrue') != -1)
+		texte = 'Vue : <b>+' + Math.floor(vue / 2) + '</b>';
+	else if(sort.indexOf('Vision lointaine') != -1) {
+		texte = 'En ciblant une zone située n\'importe où dans le Monde Souterrain, votre Trõll peut voir comme s\'il s\'y trouvait.';
+	} else if (sort.indexOf('Voir le Cache') != -1) {
+		texte = 'Portée horizontale : <b>' + Math.floor(vuetotale / 2) + '</b> cases<br/>';
+		texte += 'Portée verticale : <b>' + Math.floor(vuetotale / 4) + '</b> cases';
+	} else if (sort.indexOf('Vue Troublee') != -1)
+		texte = 'Vue : <b>-' + Math.floor(vue / 3) + '</b>';
 	return texte;
 }
 
+// Fonctions créant les infos-bulles
 
-// ********************************************************
-// POPUPS
-// ********************************************************
 function creerBulle() {
-        var newTd = document.createElement( 'td' );
-        newTd.appendChild( document.createTextNode( 'Titre' ) );
-
-        var newTr = document.createElement( 'tr' );
-        newTr.setAttribute( 'class', 'mh_tdtitre' );
-        newTr.appendChild( newTd );
-
-        var newTable = document.createElement( 'table' );
-        newTable.setAttribute( 'id', 'bulle' );
-        newTable.setAttribute( 'class', 'mh_tdborder' );
-        newTable.setAttribute( 'width', '300' );
-        newTable.setAttribute( 'border', '0' );
-        newTable.setAttribute( 'cellpadding', '5' );
-        newTable.setAttribute( 'cellspacing', '1' );
-        newTable.setAttribute( 'style', 'position:absolute;visibility:hidden;z-index:800;height:auto;' );
-        newTable.appendChild( newTr );
-
-        newTd = document.createElement( 'td' );
-        newTd.appendChild( document.createTextNode( 'Contenu' ) );
-
-        newTr = document.createElement( 'tr' );
-        newTr.setAttribute( 'class', 'mh_tdpage' );
-        newTr.appendChild( newTd );
-
-        newTable.appendChild( newTr );
-
-        var aList = document.getElementsByTagName( 'a' );
-        aList[aList.length-1].parentNode.appendChild( newTable );
+	var newTable = document.createElement('table');
+	newTable.setAttribute('id', 'bulle');
+	newTable.setAttribute('class', 'mh_tdborder');
+	newTable.setAttribute('width', '300');
+	newTable.setAttribute('border', '0');
+	newTable.setAttribute('cellpadding', '5');
+	newTable.setAttribute('cellspacing', '1');
+	newTable.setAttribute('style', 'position:absolute;visibility:hidden;z-index:800;height:auto;');
+	var tr = appendTr(newTable, 'mh_tdtitre');
+	appendTdText(tr, 'Titre');
+	tr = appendTr(newTable, 'mh_tdpage');
+	appendTdText(tr, 'Contenu');
+	var aList = document.getElementsByTagName('a');
+	aList[aList.length - 1].parentNode.appendChild(newTable);
 }
 
-function creerInfoBulles( liste ,fonction ) {
-        var i = 0;
-		var pourcen=0;
-        while ( true ) {
-                if ( liste.childNodes[i] == null ) {
-                        break;
-                }
-                if ( liste.childNodes[i].childNodes[3] != null ) {
-//                      creerInfoBulle( liste.childNodes[i].childNodes[3].childNodes[1] , fonction );
-                        creerInfoBulle( liste.childNodes[i] , fonction );
-                        var str=liste.childNodes[i].childNodes[5].childNodes[1].childNodes[0].nodeValue;
-                        str=str.substring(str.indexOf(':')+1,str.indexOf('%'));
-                        pourcen+=str*1;
-			for(var j=4;j<liste.childNodes[i].childNodes[5].childNodes.length;j+=2)
-			{
-				str=liste.childNodes[i].childNodes[5].childNodes[j].nodeValue;
-	                        str=str.substring(str.indexOf(':')+1,str.indexOf('%'));
-        	                pourcen+=str*1;
+function setSortComp(nom,pourcentage,niveau) {
+	if(niveau == null)	niveau = 1;
+	pourcentage = parseInt(pourcentage);
+
+}
+
+function creerInfoBulles(liste, fonction) {
+
+	var i = 0;
+	var pourcen = 0;
+	while (liste.childNodes[i] != null) {
+		if (liste.childNodes[i].childNodes[3] != null) {
+			var nom = trim(str_woa(liste.childNodes[i].childNodes[3].childNodes[0].firstChild.nodeValue));
+			var str = liste.childNodes[i].childNodes[5].childNodes[0].childNodes[0].nodeValue;
+			var niveau = parseInt(str.substring(str.indexOf('niveau')+7,str.indexOf(':')-1));
+			creerInfoBulle(liste.childNodes[i].childNodes[3].childNodes[0], fonction,niveau);
+			pourcen += str.substring(str.indexOf(':') + 1, str.indexOf('%')) * 1;
+			setSortComp(nom,str.substring(str.indexOf(':') + 1, str.indexOf('%')) * 1,niveau);
+			for (var j = 3; j < liste.childNodes[i].childNodes[5].childNodes.length; j += 2) {
+				str = liste.childNodes[i].childNodes[5].childNodes[j].nodeValue;
+				niveau = parseInt(str.substring(str.indexOf('niveau')+7,str.indexOf(':')-1));
+				str = str.substring(str.indexOf(':') + 1, str.indexOf('%'));
+				setSortComp(nom,str * 1,niveau);
+				pourcen += str * 1;
 			}
-                }
-                i += 2;
-        }
-	return  pourcen;
-}
-
-function creerInfoBulle( noeud , fonction ) {
-        var nom = trim( str_woa( noeud.childNodes[3].childNodes[1].firstChild.nodeValue ) );
-        var niv="0";
-        if (fonction=='competences') {
-		    niv=trim( str_woa( noeud.childNodes[5].childNodes[1].firstChild.nodeValue ) );
-		    niv=niv.replace(/\n/gi, "");
-	        niv = trim(niv.slice( niv.indexOf('niveau')+7, niv.indexOf(':')-1));	    
-			if (niv>0) {
-		        noeud.childNodes[5].setAttribute( 'onmouseover', "infoBulle('"+nom+"','"+-niv+"',event,'"+fonction+"');" );
-	    	    noeud.childNodes[5].setAttribute( 'onmouseout', "cacherInfoBulle();" );
-	    	}
-
 		}
-        noeud.childNodes[3].childNodes[1].setAttribute( 'onmouseover', "infoBulle('"+nom+"','"+niv+"',event,'"+fonction+"');" );
-        noeud.childNodes[3].childNodes[1].setAttribute( 'onmouseout', "cacherInfoBulle();" );
+		i += 2;
+	}
+	return pourcen;
 }
 
-function infoBulle( nom, niv, evt, fonction ) {
-       var str;
-        var val = nom.replace( /[ ]/g, '');
-        val = nom.replace( /\W/g, '');
-        val = val.toLowerCase();
-		var nivtexte = '';
-		if (niv>1) nivtexte = '<br>(niveau '+niv+')';
+function creerInfoBulle(noeud, fonction, niveau) {
+	var nom = trim(str_woa(noeud.firstChild.nodeValue));
+	noeud.setAttribute("nom",nom);
+	noeud.setAttribute("fonction",fonction);
+	noeud.setAttribute("niveau",niveau);
+	noeud.addEventListener("mouseover", infoBulle,true);
+	noeud.addEventListener("mouseout", cacherInfoBulle,true);
+}
 
-        eval ( "str = "+fonction+"('"+nom+"', '"+niv+"');" );
-	if(str=="")
+function infoBulle(evt) {
+	var nom = this.getAttribute("nom");
+	var fonction = this.getAttribute("fonction");
+	var niveau = parseInt(this.getAttribute("niveau"));
+	var str="";
+	if(fonction=="competences")
+		str=competences(nom,niveau);
+	else if(fonction=="sortileges")
+		str=sortileges(nom,niveau);
+	if (str == "")
 		return;
-        var xfenetre, yfenetre, xpage, ypage, element = null;
-        var offset= 15;
-        var bulleWidth=300;
-        if ( !hauteur ) hauteur = 50;
+	
+	var xfenetre, yfenetre, xpage, ypage, element = null;
+	var offset = 15;
+	var bulleWidth = 300;
+	if (!hauteur)
+		hauteur = 50;
+	element = document.getElementById('bulle');
+	xfenetre = evt.clientX;
+	yfenetre = evt.clientY;
+	xpage = xfenetre;
+	ypage = yfenetre;
+	if (evt.pageX)
+		xpage = evt.pageX;
+	if (evt.pageY)
+		ypage = evt.pageY;
+	if (element) {
+		bulleStyle = element.style;
+//		element.childNodes[0].childNodes[0].innerHTML = '<b>' + nom + '</b>';
+        element.childNodes[0].childNodes[0].innerHTML = '<TABLE><TR><TD><TD><TD valign=center> <b>'+nom+'</b></TD></TR></TABLE>';
+		element.childNodes[1].childNodes[0].innerHTML = str;
+	}
 
-        element = document.getElementById( 'bulle' );
-        xfenetre = evt.clientX;
-        yfenetre = evt.clientY;
-        xpage = xfenetre;
-        ypage = yfenetre;
-        if( evt.pageX ) xpage = evt.pageX;
-        if( evt.pageY ) ypage = evt.pageY;
-
-        if( element ) {
-                bulleStyle = element.style;
-                element.childNodes[0].childNodes[0].innerHTML = '<TABLE><TR><TD><TD><TD valign=center> <b>'+nom+'</b><i>'+nivtexte+'</i></TD></TR></TABLE>';
-                element.childNodes[1].childNodes[0].innerHTML = str;
-        }
-
-        if( bulleStyle ) {
-                if ( xfenetre > bulleWidth + offset ) xpage = xpage - bulleWidth - offset;
-                else xpage = xpage + 15;
-                if ( yfenetre > hauteur + offset ) ypage = ypage - hauteur - offset;
-
-                bulleStyle.width = bulleWidth;
-                bulleStyle.left = xpage + 'px';
-                bulleStyle.top = ypage + 'px';
-                bulleStyle.visibility = "visible";
-        }
-}
-
-function cacherInfoBulle() {
-        if( bulleStyle )
-                bulleStyle.visibility="hidden";
-}
-
-// ********************************************************
-// FATIGUE DU KASTAR
-// ********************************************************
-
-function fatigue()
-{
-    var nodes = document.evaluate("descendant::img[contains(@src,'milieu.gif') or contains(@src,'lifebar.gif')]", anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3], null,XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-    if(nodes.snapshotLength>0)
-    {
-       var node = nodes.snapshotItem(0);
-       node.setAttribute('title','1 PV de perdu = + '+Math.floor(250/pvtotal)+' minutes de DLA');
-    }
-			    
-	var td = anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[4].childNodes[3];
-	if(td.childNodes[0].nodeValue.indexOf("Fatigue")!=-1)
-	{
-	   anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[2].appendChild(td);
-	   anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[0].childNodes[3].setAttribute('rowspan',0);
-	   var ntd = document.createElement("td");
-	   //var dla = anchorAllTables[3].childNodes[1].childNodes[2].childNodes[3].childNodes[1].childNodes[0].nodeValue;
-	   var pa = anchorAllTables[3].childNodes[1].childNodes[2].childNodes[3].childNodes[5].childNodes[0].nodeValue;
-	   dla=dla.substr(dla.lastIndexOf('/')+1,5000);
-	   dla=dla.substr(dla.indexOf(' ')+1,5000);
-	   pa=pa.substr(1,1)*1;
-	   var ut=60*60*dla.substring(0,2)+60*dla.substring(3,5)+1*dla.substring(6,8);
-	   var ct=arrTr[arrTr.length-1].childNodes[1].childNodes[3].nodeValue;
-	   if(ct.indexOf('GMT')!=-1)
-	     ct=60*60*ct.substr(ct.indexOf('GMT')-9,2)+60*ct.substr(ct.indexOf('GMT')-6,2)+1*ct.substr(ct.indexOf('GMT')-3,2);
-	   while(ct>ut)
-	     ut+=60*60*24;
-	   var nbmin=1*td.childNodes[0].nodeValue.substring(td.childNodes[0].nodeValue.indexOf('=')+2,td.childNodes[0].nodeValue.indexOf("'"));
-	   fatigueDuKastar=nbmin;
-	   if(pa<2)
-	     ntd.appendChild(document.createTextNode("Vous n'avez pas assez de PA pour accélérer"));
-	   else if(pvactuels>(Math.ceil(Math.floor((ut-ct)/60)/nbmin)))
- 	     ntd.appendChild(document.createTextNode("Vous devez accélérer d'au moins "+(Math.ceil(Math.floor((ut-ct)/60)/nbmin))+" PV pour rejouer de suite"));
-	   else
-	     ntd.appendChild(document.createTextNode("Vous ne pouvez pas rejouer de suite"));
-	   anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[4].appendChild(ntd);
+	if (bulleStyle) {
+		if (xfenetre > bulleWidth + offset)
+			xpage -= bulleWidth + offset;
+		else
+			xpage += offset;
+		if (yfenetre > hauteur + offset)
+			ypage -= hauteur + offset;
+		bulleStyle.width = bulleWidth;
+		bulleStyle.left = xpage + 'px';
+		bulleStyle.top = ypage + 'px';
+		bulleStyle.visibility = "visible";
 	}
 }
 
-function setPiForNextLevel() 
-{
-    var piForNextLevel =  level * ( level * 1 + 3 ) * 5;
-    var nodeLvl = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[0];
-    nodeLvl.nodeValue = nodeLvl.nodeValue.substring(0,nodeLvl.nodeValue.length-1)+" | Niveau "+(level*1+1)+" : "+piForNextLevel+" PI => ";
-	var px_ent=2*level;
-	var nodePx = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[3];
-	nodePx.parentNode.insertBefore(document.createElement("BR"),nodePx);
-	if(px+px_per>=px_ent)
-	   nodePx.parentNode.insertBefore(document.createTextNode("Entrainement possible. Il restera "+(px+px_per-px_ent)+" PX"),nodePx);
-	else
-	   nodePx.parentNode.insertBefore(document.createTextNode("Il manque "+(px_ent-px-px_per)+" PX pour vous entrainer. "),nodePx);
-	nodeLvl.nodeValue+=Math.ceil((piForNextLevel-pi_tot)/px_ent)+" entrainement";
-	if(Math.ceil((piForNextLevel-pi_tot)/px_ent)>1)
-	   nodeLvl.nodeValue+="s";
-	 nodeLvl.nodeValue+=")";
+function cacherInfoBulle() {
+	if (bulleStyle)
+		bulleStyle.visibility = "hidden";
 }
 
-// ********************************************************
-// MAIN CODE
-// ********************************************************
+/*********************************************************************************
+*   fonction ZZ            *
+*********************************************************************************/
+/*function setNewsZZ(news) {
+    IdNewZZ=news*1;
+    if (zzlink) {
+     	var cnews=getCookie("ZZ_NewsID")*1;
+     	//alert('Cookie='+cnews+' ZZ='+news);
+     	if (cnews<news) {
+	        zzlink.innerHTML="<FONT SIZE=-1>(Info ZZ: <IMG height=15px SRC=/mountyhall/Images/New.gif>)</FONT>";   
+		}
+    }
+} 
 
-var anchorAllTables = document.getElementsByTagName ( 'table' ); // ANCHOR
-var anchorMainTr = anchorAllTables[3].getElementsByTagName ( 'tr' ); // ANCHOR
-var arrTr = document.getElementsByTagName('tr');
-
-// position
-var a=arrTr[6].childNodes[3].firstChild.nodeValue.split("|");
-var x=a[0].substring(4,a[0].length-1)*1;
-var y=a[1].substring(5,a[1].length-1)*1;
-var n=a[2].substring(5,a[2].length-1)*1;
-
-try 
-{ 
-	var text = new String ();
-	
-	text = anchorMainTr[0].getElementsByTagName ( 'a' )[0].innerHTML;
-	var trollNomId = text.substring ( text.indexOf ( '.: ' ), text.indexOf ( ' - ' ) + 1 );
-	
-	//var trollRM = anchorMainTr[13].innerHTML;
-} catch ( e ) { error ( e, 'Data collect error' ); }
-
-try 
-{
-	anchorAllTables[2].getElementsByTagName ( 'tr' )[0].getElementsByTagName ( 'td' )[0].setAttribute ( 'colspan', '2' );
-} catch ( e ) { error ( e, 'Title display error' ); }
-
-// ********************************************************
-// Adding login IFRAME
-// ********************************************************
-
-function deconn()
-{
-	var newdeConnScript = document.createElement ( 'script' );
-  	newdeConnScript.setAttribute ( 'language', 'JavaScript' );
-  	newdeConnScript.setAttribute ( 'src',  URLLoginRM + '?logout=true' );
-  	document.body.appendChild ( newdeConnScript );
-}
-
-function connect()
-{
-	var newConnectScript = document.createElement ( 'script' );
-  	newConnectScript.setAttribute ( 'language', 'JavaScript' );
-  	newConnectScript.setAttribute ( 'src',  URLLoginRM +'?login=true&numTroll='+document.getElementById('numTroll').value +'&password='+document.getElementById('password').value + '&autologin='+document.getElementById('autologin').value );
-  	document.body.appendChild ( newConnectScript );
-}
-
-var myTr = newTR();
-var myTd = document.createElement ( 'td' );
-myTd.setAttribute ( 'colspan', '3' );
-
-var myDiv = document.createElement ( 'div' );
-myDiv.setAttribute ( 'id', 'conn' );
-var newConnScript = document.createElement ( 'script' );
-newConnScript.setAttribute ( 'language', 'JavaScript' );
-newConnScript.setAttribute ( 'src',  URLLoginRM );
-
-document.body.appendChild ( newConnScript );
-
-myTd.appendChild ( myDiv );
-myTr.appendChild ( myTd );
-try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth R&M error' ); }
-
-// ********************************************************
-// GGC and VVT links
-// ********************************************************
-
-var profil;
-try { profil = flattenNode ( anchorAllTables[3] ) + "Compétences " + flattenNode ( anchorAllTables[8] ) + "\n" + flattenNode ( anchorAllTables[9] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
-
-myTr = newTR ();
-myTr.appendChild ( myTd1 = newTD () );
-myTd1.setAttribute ( 'align', 'right' );
-myTr.appendChild ( myTd2 = newTD () );
-myTd2.setAttribute ( 'align', 'center' );
-myTr.appendChild ( myTd3 = newTD () );
-myTd3.setAttribute ( 'align', 'left' );
-
-// VTT
-myTd1.appendChild ( myForm = newForm ( 'formVTT', URLVtt ) );
-var onSubmit = "window.open('', 'popupVtt'); this.target='popupVtt'";
-myForm.setAttribute ( 'onsubmit', onSubmit );
-myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
-myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
-myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le VTT' ) );
-
-// GGC
-myTd2.appendChild ( myForm = newForm ( 'formGGC', URLGgc ) );
-var onSubmit = "window.open('', 'popupGgc'); this.target='popupGgc'";
-myForm.setAttribute ( 'onsubmit', onSubmit );
-myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
-myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
-myForm.appendChild ( newHidden ( 'action', 'add' ) );
-myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC' ) );
-
-//Partages
-var URLPartages = URLOutils + 'partagepx/partage.php';
-myTd3.appendChild ( myForm = newForm ( 'formPartages', URLPartages + '?modif=1&troll=' + trim ( trollNomId ) +'' ) );
-var onSubmit = "window.open('', 'popupPartages'); this.target='popupPartages'";
-myForm.setAttribute ( 'onsubmit', onSubmit );
-myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );
-
-try { anchorAllTables[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'GGC and VTT error' ); }
-
-
-// ********************************************************
-// Divers
-// ********************************************************
-
-// Number of the troll
-var numTroll = anchorMainTr[0].childNodes[3].childNodes[1].getAttribute('href');
-numTroll = numTroll.slice ( numTroll.indexOf ( '(' ) + 1, numTroll.indexOf ( ',' ) );
-
-// Next Level
-var pi_tot = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[0].nodeValue;
-pi_tot = parseInt(pi_tot.substring(pi_tot.indexOf('(')+1,pi_tot.indexOf(' PI')));
-var px = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[2].nodeValue;
-px = parseInt(px.substring(px.indexOf(':')+1,px.indexOf('\n',10)));
-var px_per = anchorAllTables[3].childNodes[1].childNodes[6].childNodes[3].childNodes[2].nodeValue;
-px_per = px_per.substring(px_per.indexOf('\n',10),5000);
-px_per = parseInt(px_per.substring(px_per.indexOf(':')+1,5000));
-var anchorCellLevel = anchorMainTr[3].childNodes[3].firstChild;
-var levelDesc = anchorCellLevel.nodeValue;
-var level = levelDesc.substring( levelDesc.indexOf ( ":" ) + 2, levelDesc.indexOf ( "(" ) - 8 );
-setPiForNextLevel();
-
-// Regen
-var anchorCellRegen = anchorMainTr[8].childNodes[1].firstChild;
-var regen = fightAverage ( anchorCellRegen );
-var regbonus = regen[1];
-var reg = regen[0];
-var regmoy = reg*2+regbonus;
-
-// Attaque
-var anchorCellAtt = anchorMainTr[9].childNodes[3].childNodes[0];
-var att = fightAverage ( anchorCellAtt );
-var attbonus = att[1];
-att = att[0];
-var attmoy=3.5*att+attbonus;
-
-// Esquive
-var anchorCellEsq = anchorMainTr[9].childNodes[3].childNodes[2];
-var esq = fightAverage ( anchorCellEsq );
-var esqbonus = esq[1]
-esq = esq[0];
-var esqmoy=3.5*esq+esqbonus;
-
-// Dégats
-var anchorCellDeg = anchorMainTr[9].childNodes[3].childNodes[4];
-var deg = fightAverage ( anchorCellDeg );
-var degbonus = deg[1];
-deg = deg[0];
-var degmoy = deg*2+degbonus;
-
-// Esquive after attak subie
-var anchorCellAttEsq = anchorMainTr[9].childNodes[3].childNodes[7].childNodes[0];
-var nbAttak = cleanValue ( anchorCellAttEsq.nodeValue );
-if ( nbAttak != 0 )
-{
-	var esqmodmoy = Math.max ( esq[0] * 3.5 + esq[1] - 3.5 * nbAttak, esq[1] );
-	anchorCellAttEsq.nodeValue += "(moy esquive = " + esqmodmoy + ")";
-}
-
-// RM
-var anchorCellRM = anchorMainTr[13].childNodes[3].childNodes[0];
-var RM = totalMagik ( anchorCellRM );
-var totalRM = RM[0] + RM[1];
-var rm = RM[0];
-
-// MM
-var anchorCellMM = anchorMainTr[13].childNodes[3].childNodes[2];
-var MM = totalMagik ( anchorCellMM );
-var totalMM = MM[0] + MM[1];
-var mm = MM[0];
-
-// PV
-var anchorPvTotal = anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[2].childNodes[1].childNodes[0].nodeValue;
-pvtotal = cleanValue(anchorPvTotal);
-var anchorPvActuels = anchorAllTables[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[0].childNodes[1].childNodes[1].childNodes[0].nodeValue;
-pvactuels = cleanValue(anchorPvActuels);
-
-// view
-var anchorView = anchorAllTables[3].childNodes[1].childNodes[4].childNodes[3].childNodes[3].nodeValue;
-var arrView = extractBonus ( cleanValue ( anchorView ) );
-var vue = arrView[0];
-var vuetotale = arrView[0] + arrView[1];
-
-// Date of the next DLA
-try
-{
-	var dla= anchorMainTr[1].childNodes[3].childNodes[1].firstChild.nodeValue;
-	var dlaNext = anchorMainTr[1].childNodes[3].childNodes[8].childNodes[1].firstChild.nodeValue;
-
-	var datArr = dla.split(" ");
-	var dayArr = datArr[1].split("/");
-	var timeArr = datArr[2].split(":");
-
-	var d = new Date ( dayArr[2], dayArr[1]-1, dayArr[0], timeArr[0], timeArr[1], timeArr[2]);
-
-	var dataDlaNext = dlaNext.substring(38,dlaNext.length);
-	var dataDlaNextArr = dataDlaNext.split("heures et ");
-	var nbHours = trim(dataDlaNextArr[0]) * 1;
-
-	var nbMinutes = trim ( dataDlaNextArr[1].substring(0,2)) * 1;
-
-	d.setHours(d.getHours()+nbHours);
-	d.setMinutes(d.getMinutes()+nbMinutes);
-
-	var itDlaNext = document.createElement("i");
-	var txtDlaNext = document.createTextNode("Prochaine dla : " + d.toLocaleString());
-	itDlaNext.appendChild(txtDlaNext);
-	anchorMainTr[1].childNodes[3].appendChild(itDlaNext);
-}
-catch ( e ) { error ( e, 'Next DLA error' ); }
-
-// fatigue
-var fatigueDuKastar=0;
-fatigue();
-
-
-// *********************************************
-// Competences and sorts popups
-// *********************************************
-
+function newZZ() {    
+	var TiD=getCookie("NUM_TROLL");
+    if (IdNewZZ>0) {
+        var expdate = new Date ();
+        expdate.setTime (expdate.getTime() + (24 * 60 * 60 * 1000 * 712));
+        setCookie("ZZ_NewsID",IdNewZZ,expdate,"/");
+    }
+    var Source="MH_Profil$";
+	if ((getCookie("IT_"+getCookie('NUM_TROLL'))=="ITM$") && (getCookie("INFOSSGG_"+getCookie('NUM_TROLL')).split('$').length==2)) {
+	    var t=getCookie("INFOSSGG_"+TiD).split('$');  
+	    Source=Source+escape(getCookie("INFOSSGG_"+getCookie('NUM_TROLL')));
+	} else {
+	 	var t = new Array(); t[0]=""; t[1]=""; 
+	    Source=Source+"StandAlone$StandAlone";
+	}	    
+	var version="1.0.3";
+	try {version=ZZversion;} catch (e) {}			
+    Source=Source+"$"+version;		
+		
+    var PG=escape(getCookie("MH_Package"));
+ 	document.location.href=ZZDB+'/zoryazilla.php?&Source='+Source+'&action=Newzz&TiD='+TiD+'&CoterieName='+escape(t[0])+'&CoteriePWD='+escape(t[1])+'&PG='+escape(PG);
+} 
+*/
+/*********************************************************************************
+*   Main MZ             *
+*********************************************************************************/
 var hauteur = 50;
 var bulleStyle = null;
-//var listeComp = anchorAllTables[3].childNodes[1].childNodes[20].childNodes[1].childNodes[1].childNodes[1];
-var listeComp = anchorAllTables[7].childNodes[1].childNodes[2].childNodes[1].childNodes[1].childNodes[1];
-//var listeSort = anchorAllTables[3].childNodes[1].childNodes[24].childNodes[1].childNodes[1].childNodes[1];
-var listeSort = anchorAllTables[7].childNodes[1].childNodes[2].childNodes[3].childNodes[1].childNodes[1];
 
+var arrTable;
+var arrTR;
+
+var posX, posY, posN;
+var vue, vuetotale;
+var pvtotal, pvactuels;
+var minuteFatigue;
+var reg, regbonus, regmoy;
+var att, attbonus, attmoy;
+var esq, esqbonus, esqmoy;
+var deg, degbonus, degmoy;
+var arm, armbonus;
+var rm, mm, rmtotal;
+var nbattaques;
+var nbjours;
+var niveau;
+
+init();
 creerBulle();
-creerInfoBulles( listeComp , "competences" );
-creerInfoBulles( listeSort , "sortileges" );
-//anchorAllTables[7].childNodes[1].childNodes[0].childNodes[1].childNodes[0].childNodes[0].nodeValue+=' (Total : '+creerInfoBulles( listeComp , "competences" )+'%)';
-//anchorAllTables[7].childNodes[1].childNodes[0].childNodes[3].childNodes[0].childNodes[0].nodeValue+=' (Total : '+creerInfoBulles( listeSort , "sortileges" )+'%)';
+setNextDla();
+setPiForNextLevel();
+setFatigue();
+setCurrentEsquive();
+setRatioKillDeath();
+setTotalMagie();
+setTotalPourcentages();
+setLieu();
 
+/*********************************************************************************
+*   MMain ZZ            *
+*********************************************************************************/
+/*
+var TiD=arrTR[4].childNodes[3].childNodes[1].getAttribute('href');
+TiD=TiD.slice(TiD.indexOf('(')+1,TiD.indexOf(','));
+var tName=arrTR[4].childNodes[3].childNodes[1].childNodes[0].nodeValue;
+tName=tName.substring(tName.indexOf('-')+2);
+var tRace=arrTR[4].childNodes[3].childNodes[4].nodeValue.split(':');
+var pTroll=arrTR[6].childNodes[3].childNodes[0].nodeValue.split('|');
+var pX=trim(pTroll[0].slice(3));
+var pY=trim(pTroll[1].slice(4));
+var pN=trim(pTroll[2].slice(4));
+var tCam=0;
 
-// *********************************************
-// Update cookies
-// *********************************************
-var expdate = new Date ();
-expdate.setTime ( expdate.getTime() + ( 24 * 60 * 60 * 1000 * 7 ) );
-deleteCookie ( "MM_TROLL", "/" );
-setCookie ( "MM_TROLL", MM[0] + MM[1], expdate, "/" );
-deleteCookie ( "NIV_TROLL", "/" );
-setCookie ( "NIV_TROLL", level, expdate, "/" );
-deleteCookie ( "NUM_TROLL", "/" );
-setCookie( "NUM_TROLL", numTroll, expdate, "/" );
-deleteCookie ( "RM_TROLL", "/" );
-setCookie( "RM_TROLL", RM[0] + RM[1], expdate, "/" );
+if (typeof(arrTR[6].childNodes[3].childNodes[1].childNodes[1].childNodes[2])!='undefined') {
+    if(arrTR[6].childNodes[3].childNodes[1].childNodes[1].childNodes[2].nodeValue.indexOf('[Camouflé]')>0) {
+        tCam=1; // Le troll est Camouflé
+    }
+} 
 
-displayErrors ( anchorAllTables[3] );
-displayDebug ( anchorAllTables[3] );
+var IdNewZZ=0;
+var data="&TypeData=Profil";
+data=data+"&Troll="+escape(trim(tName))+"&Race="+trim(tRace[1])+"&Niveau="+niveau;
+data=data+"&TiD="+TiD+"&PVMax="+pvtotal+"&PV="+pvactuels;
+data=data+"&PA="+trim(arrTR[5].childNodes[3].childNodes[5].childNodes[0].nodeValue).substr(0,1);;
+data=data+"&DLA="+trim(arrTR[5].childNodes[3].childNodes[1].childNodes[0].nodeValue).replace(" ", "_");
+var TimeStamp=arrTable[arrTable.length-2].childNodes[1].childNodes[0].childNodes[1].childNodes[3].nodeValue;
+TimeStamp=TimeStamp.substr(TimeStamp.indexOf('GMT')-20, 19);
+TimeStamp=TimeStamp.replace(" ", "_");
+data=data+"&TimeStamp="+TimeStamp;
+data=data+"&X="+pX+"&Y="+pY+"&N="+pN+"&Camoufle="+tCam;  
+
+var newScriptZ = document.createElement('script');
+newScriptZ.setAttribute('language','JavaScript');
+newScriptZ.setAttribute('src',ZZDB+'/mzData.php?'+data);
+document.body.appendChild(newScriptZ);
+var nodes = document.evaluate("//B/text()[contains(.,'MON PROFIL')]", document, null,XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+if (nodes.snapshotLength==1) {
+    var node = nodes.snapshotItem(0);
+    node.nodeValue="MON PROFIL  ";
+    node.parentNode.appendChild(document.createElement('A'));
+    node.parentNode.childNodes[1].setAttribute('CLASS','AllLinks');
+    node.parentNode.childNodes[1].setAttribute('href','javascript:newZZ()');
+    var zzlink=document.createElement('B')
+    zzlink.innerHTML="<FONT SIZE=-1>(Info ZZ)</FONT>";   
+    node.parentNode.childNodes[1].appendChild(zzlink);
+}*/
