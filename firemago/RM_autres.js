@@ -64,7 +64,7 @@ function getMm() {
     } else {
       string="\u2264 "+Math.round((100-sr)*rm/50);
     }
-    if(node.parentNode.parentNode.childNodes.length>6)
+    if(node.parentNode.parentNode.childNodes.length>5)
     {
       var lastNode=node.parentNode.nextSibling.nextSibling.nextSibling.nextSibling;
       lastNode.parentNode.insertBefore(document.createElement('br'),lastNode);
@@ -184,7 +184,7 @@ function getRm() {
       string=Math.round(50*mm/(100-sr));
     } else {
       string="\u2265 "+Math.round(50*mm/(100-sr)); }
-    if(node.parentNode.parentNode.childNodes.length>5)
+    if(node.parentNode.parentNode.childNodes.length>6)
     {
       var lastNode=node.parentNode.nextSibling.nextSibling.nextSibling.nextSibling;
       lastNode.parentNode.insertBefore(document.createElement('br'),lastNode);
