@@ -823,43 +823,6 @@ function cacherInfoBulle() {
 }
 
 /*********************************************************************************
-*   fonction ZZ            *
-*********************************************************************************/
-/*function setNewsZZ(news) {
-    IdNewZZ=news*1;
-    if (zzlink) {
-     	var cnews=getCookie("ZZ_NewsID")*1;
-     	//alert('Cookie='+cnews+' ZZ='+news);
-     	if (cnews<news) {
-	        zzlink.innerHTML="<FONT SIZE=-1>(Info ZZ: <IMG height=15px SRC=/mountyhall/Images/New.gif>)</FONT>";   
-		}
-    }
-} 
-
-function newZZ() {    
-	var TiD=getCookie("NUM_TROLL");
-    if (IdNewZZ>0) {
-        var expdate = new Date ();
-        expdate.setTime (expdate.getTime() + (24 * 60 * 60 * 1000 * 712));
-        setCookie("ZZ_NewsID",IdNewZZ,expdate,"/");
-    }
-    var Source="MH_Profil$";
-	if ((getCookie("IT_"+getCookie('NUM_TROLL'))=="ITM$") && (getCookie("INFOSSGG_"+getCookie('NUM_TROLL')).split('$').length==2)) {
-	    var t=getCookie("INFOSSGG_"+TiD).split('$');  
-	    Source=Source+escape(getCookie("INFOSSGG_"+getCookie('NUM_TROLL')));
-	} else {
-	 	var t = new Array(); t[0]=""; t[1]=""; 
-	    Source=Source+"StandAlone$StandAlone";
-	}	    
-	var version="1.0.3";
-	try {version=ZZversion;} catch (e) {}			
-    Source=Source+"$"+version;		
-		
-    var PG=escape(getCookie("MH_Package"));
- 	document.location.href=ZZDB+'/zoryazilla.php?&Source='+Source+'&action=Newzz&TiD='+TiD+'&CoterieName='+escape(t[0])+'&CoteriePWD='+escape(t[1])+'&PG='+escape(PG);
-} 
-*/
-/*********************************************************************************
 *   Main MZ             *
 *********************************************************************************/
 var hauteur = 50;
@@ -892,52 +855,3 @@ setRatioKillDeath();
 setTotalMagie();
 setTotalPourcentages();
 setLieu();
-
-/*********************************************************************************
-*   MMain ZZ            *
-*********************************************************************************/
-/*
-var TiD=arrTR[4].childNodes[3].childNodes[1].getAttribute('href');
-TiD=TiD.slice(TiD.indexOf('(')+1,TiD.indexOf(','));
-var tName=arrTR[4].childNodes[3].childNodes[1].childNodes[0].nodeValue;
-tName=tName.substring(tName.indexOf('-')+2);
-var tRace=arrTR[4].childNodes[3].childNodes[4].nodeValue.split(':');
-var pTroll=arrTR[6].childNodes[3].childNodes[0].nodeValue.split('|');
-var pX=trim(pTroll[0].slice(3));
-var pY=trim(pTroll[1].slice(4));
-var pN=trim(pTroll[2].slice(4));
-var tCam=0;
-
-if (typeof(arrTR[6].childNodes[3].childNodes[1].childNodes[1].childNodes[2])!='undefined') {
-    if(arrTR[6].childNodes[3].childNodes[1].childNodes[1].childNodes[2].nodeValue.indexOf('[Camouflé]')>0) {
-        tCam=1; // Le troll est Camouflé
-    }
-} 
-
-var IdNewZZ=0;
-var data="&TypeData=Profil";
-data=data+"&Troll="+escape(trim(tName))+"&Race="+trim(tRace[1])+"&Niveau="+niveau;
-data=data+"&TiD="+TiD+"&PVMax="+pvtotal+"&PV="+pvactuels;
-data=data+"&PA="+trim(arrTR[5].childNodes[3].childNodes[5].childNodes[0].nodeValue).substr(0,1);;
-data=data+"&DLA="+trim(arrTR[5].childNodes[3].childNodes[1].childNodes[0].nodeValue).replace(" ", "_");
-var TimeStamp=arrTable[arrTable.length-2].childNodes[1].childNodes[0].childNodes[1].childNodes[3].nodeValue;
-TimeStamp=TimeStamp.substr(TimeStamp.indexOf('GMT')-20, 19);
-TimeStamp=TimeStamp.replace(" ", "_");
-data=data+"&TimeStamp="+TimeStamp;
-data=data+"&X="+pX+"&Y="+pY+"&N="+pN+"&Camoufle="+tCam;  
-
-var newScriptZ = document.createElement('script');
-newScriptZ.setAttribute('language','JavaScript');
-newScriptZ.setAttribute('src',ZZDB+'/mzData.php?'+data);
-document.body.appendChild(newScriptZ);
-var nodes = document.evaluate("//B/text()[contains(.,'MON PROFIL')]", document, null,XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-if (nodes.snapshotLength==1) {
-    var node = nodes.snapshotItem(0);
-    node.nodeValue="MON PROFIL  ";
-    node.parentNode.appendChild(document.createElement('A'));
-    node.parentNode.childNodes[1].setAttribute('CLASS','AllLinks');
-    node.parentNode.childNodes[1].setAttribute('href','javascript:newZZ()');
-    var zzlink=document.createElement('B')
-    zzlink.innerHTML="<FONT SIZE=-1>(Info ZZ)</FONT>";   
-    node.parentNode.childNodes[1].appendChild(zzlink);
-}*/

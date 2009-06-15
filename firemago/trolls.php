@@ -22,7 +22,7 @@ if ($_SESSION['AuthGuilde'] == 450)
 		$id_guilde_troll = $res[id_guilde];
 		$nom_troll = $res[nom_troll];
 		$nom_troll=htmlentities($nom_troll, ENT_QUOTES);
-		$rang = $i + $begin;
+		$rang = $i*2 + $begin;
 		//echo "alert($rang + ': ' + $trollsid[$i]);";
 		//echo "alert('$id_guilde_troll');";
 		

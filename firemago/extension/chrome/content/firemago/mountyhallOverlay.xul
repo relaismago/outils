@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<overlay id="mountyhallOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+// This imports our javascript.
+
+	<script type="application/x-javascript" src="mountyhallOverlay.js" />
+	<script type="application/x-javascript">
+	window.addEventListener("load",mountyhallDisplayCheck,true);
+	</script>
+</overlay>

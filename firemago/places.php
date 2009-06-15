@@ -14,7 +14,7 @@ if ($_SESSION['AuthGuilde'] == 450)
 	
 	for ( $i = 0; $i < count ( $placesId ); $i++ )
 	{
-		$rang = $i + $begin;
+		$rang = $i*2 + $begin;
 		
 		$sql = " SELECT id_troll_taniere";
 		$sql .= " FROM tanieres";

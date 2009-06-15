@@ -1,9 +1,15 @@
 var totaltab = document.getElementsByTagName ( 'table' );
-var tableMonsters = totaltab[4].childNodes[0].childNodes;  // ANCHOR
-var tableTrolls = totaltab[6].childNodes[0].childNodes;  // ANCHOR
-var tableTreasures = totaltab[8].childNodes[0].childNodes;  // ANCHOR
-var tableMushrooms = totaltab[10].childNodes[0].childNodes;  // ANCHOR
-var tablePlaces = totaltab[12].childNodes[0].childNodes;  // ANCHOR
+
+for (i=0; i<totaltab.length; i++) {
+	var ttab="";	
+	try {ttab=totaltab[i].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].nodeValue;} catch (e) {}
+	if (ttab=="MA VUE") {var tableView = totaltab[i-1];}		
+	if (ttab=="MONSTRES ERRANTS") {var tableMonsters = totaltab[i-1].childNodes[1].childNodes;}	
+	if (ttab=="TROLLS") {var tableTrolls = totaltab[i-1].childNodes[1].childNodes;}			
+	if (ttab=="TRÉSORS"){var tableTreasures = totaltab[i-1].childNodes[1].childNodes;}			
+	if (ttab=="CHAMPIGNONS") {var tableMushrooms = totaltab[i-1].childNodes[1].childNodes;}		
+	if (ttab=="LIEUX PARTICULIERS") {var tablePlaces = totaltab[i-1].childNodes[1].childNodes;}		
+}
 
 // ******************************************************************
 // HTML display functions
@@ -267,7 +273,7 @@ function flattenNode ( node )
 function toggleListElements ( list, checkFunction, checkParam, hide )
 {
 	var param = ( new String  ( checkParam ) ).toLowerCase ();
-	for ( var i = 2; i < list.length; i++ )
+	for ( var i = 4; i < list.length; i=i+2 )
 	{
 		if ( list[i].childNodes[0].firstChild.nodeValue < 2 && (checkParam == 'Gowap' || checkParam == 'mh_trolls_0'))
 		{
@@ -295,7 +301,7 @@ function toggleListElements ( list, checkFunction, checkParam, hide )
 function filterListElements ( list, checkFunction, checkParam )
 {
 	var param = ( new String  ( checkParam ) ).toLowerCase ();
-	for ( var i = 2; i < list.length; i++ )
+	for ( var i = 4; i < list.length; i=i+2 )
 	{
 		if ( (list[i].className == 'mh_tdpage' || list[i].className == '') && checkFunction ( list[i], param ) ) 
 		{
@@ -601,7 +607,7 @@ function createBarrePV(color, pvr, pv, comment) { //color: 0=red, 1=gris
 function getVueScript () 
 {
 	var maChaine = "MA VUE\n";
-	maChaine += flattenNode ( totaltab[3] );
+	maChaine += flattenNode ( tableView );
 	maChaine += "\nMONSTRES ERRANTS\n";
 	maChaine += flattenNode ( tableMonsters[0].parentNode );
 	maChaine += "\nTROLLS\n";
@@ -737,22 +743,21 @@ function hideDanger ()
 var tableTitle;
 
 // Add monsters filter buttons
+
 try {
-	anchorTitle = tableMonsters[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
+	anchorTitle = tableMonsters[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
 	anchorTitle.appendChild ( document.createTextNode (" [ ") );
 	anchorTitle.appendChild ( newCheckbox ( 'delgowap', 'toggleGowap()' ) );
 	anchorTitle.appendChild ( document.createTextNode ( 'Gowaps' ) );
 	anchorTitle.appendChild ( document.createTextNode (" ] ") );
 	anchorTitle.appendChild ( newText ( 'filterMonsters', '', 12, 20 ) );
 	anchorTitle.appendChild ( newButton ( 'filterMonstersBtn', 'Filtrer', 'filterMonsters()' ) );
-	/*anchorTitle.appendChild ( document.createTextNode ( 'Plier' ) );
-	anchorTitle.appendChild ( newCheckbox ( 'deltabmonster', 'toggleTableau(5)' ) );*/
 	
 } catch ( e ) { error ( e, 'monsterFilters' ); }
 
 // Add trolls filter buttons
 try {
-	anchorTitle = tableTrolls[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
+	anchorTitle = tableTrolls[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
 	anchorTitle.appendChild ( document.createTextNode (" [ ") );
 	anchorTitle.appendChild ( newCheckbox ( 'delint', 'toggleIntangible()' ) );
 	anchorTitle.appendChild ( document.createTextNode ( 'Intangibles' ) );
@@ -763,7 +768,7 @@ try {
 
 // Add treasures filter buttons
 try {
-	anchorTitle = tableTreasures[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
+	anchorTitle = tableTreasures[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
 	anchorTitle.appendChild ( document.createTextNode (" [ ") );
 	anchorTitle.appendChild ( newCheckbox ( 'delgg', 'toggleGG()' ) );
 	anchorTitle.appendChild ( document.createTextNode ( 'GGs' ) );
@@ -886,9 +891,9 @@ else
 var hauteur = 50;
 var bulleStyle = null;
 creerBulle();
-creerInfoBulle ( tableMonsters[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorMonsters" );
-creerInfoBulle ( tableTrolls[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorTrolls" );
-creerInfoBulle ( tablePlaces[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorPlaces" );
+//creerInfoBulle ( tableMonsters[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorMonsters" );
+//creerInfoBulle ( tableTrolls[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorTrolls" );
+//creerInfoBulle ( tablePlaces[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0],"colorPlaces" );
 
 // ***********************************************
 // LEGENDES
@@ -935,22 +940,22 @@ myB.appendChild ( document.createTextNode( 'Niveau') );
 myTd = newTD();
 myTd.setAttribute( 'width', '25' );
 myTd.appendChild(myB);
-tableMonsters[1].insertBefore( myTd, tableMonsters[1].childNodes[2] );
+tableMonsters[2].insertBefore( myTd, tableMonsters[2].childNodes[2] );
 myB = document.createElement( 'b' );
 myB.appendChild ( document.createTextNode( 'PV') );
 myTd = newTD();
 myTd.setAttribute( 'width', '25' );
 myTd.setAttribute( 'align', 'center' );
 myTd.appendChild(myB);
-tableMonsters[1].insertBefore( myTd, tableMonsters[1].childNodes[4] );
+tableMonsters[2].insertBefore( myTd, tableMonsters[2].childNodes[4] );
 //tableMonsters[1].appendChild( myTd );
 tableMonsters[0].childNodes[0].setAttribute ('colspan','8');
 
 
 arrayMonster = "";
-begin = 2;
+begin = 4;
 
-for ( var i = 2; i < tableMonsters.length; i++ )
+for ( var i = 4; i < tableMonsters.length; i=i+2 )
 {
 	try {
 		var anchorRow = tableMonsters[i];
@@ -976,15 +981,15 @@ for ( var i = 2; i < tableMonsters.length; i++ )
 		anchorRow.insertBefore ( newTdPv, tableMonsters[i].childNodes[4] );
 		// Adding script for coloring monster's wanted or without cdm
 		
-		if ( i%10 == 0 )
+		if ( i%30 == 0 )
 		{
 		  arrayMonster += "begin=" + begin;
 		  newMonsterScript = document.createElement ( 'script' );
 		  newMonsterScript.setAttribute ( 'language', 'JavaScript' );
 		  newMonsterScript.setAttribute ( 'src',  URLMonsterInfos  + arrayMonster );
-		  ( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newMonsterScript );
+		  document.body.appendChild ( newMonsterScript );
 		  arrayMonster = "";
-		  begin = i + 1;
+		  begin = i + 2;
 		}
 	} catch ( e ) { error ( e, 'Monster Compendium error (' + i + ')' ); }
 }
@@ -994,10 +999,10 @@ if ( arrayMonster != "")
 	try 
 	{
 		arrayMonster += "begin=" + begin;
-  	newMonsterScript = document.createElement ( 'script' );
-  	newMonsterScript.setAttribute ( 'language', 'JavaScript' );
-  	newMonsterScript.setAttribute ( 'src',  URLMonsterInfos  + arrayMonster );
-  	( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newMonsterScript );
+  		newMonsterScript = document.createElement ( 'script' );
+  		newMonsterScript.setAttribute ( 'language', 'JavaScript' );
+  		newMonsterScript.setAttribute ( 'src',  URLMonsterInfos  + arrayMonster );
+  		document.body.appendChild ( newMonsterScript );
 	} catch ( e ) { error ( e, 'Monster Colouring error' ); }
 }
 
@@ -1091,20 +1096,20 @@ newTd = document.createElement( 'td' );
 newTd.setAttribute( 'width', '5' );
 newTd.setAttribute( 'align', 'center' );
 newTd.appendChild( newB );
-tableTrolls[1].insertBefore( newTd, tableTrolls[1].childNodes[2] );
+tableTrolls[2].insertBefore( newTd, tableTrolls[2].childNodes[2] );
 myB = document.createElement( 'b' );
 myB.appendChild ( document.createTextNode( 'PV') );
 myTd = newTD();
 myTd.setAttribute( 'width', '25' );
 myTd.setAttribute( 'align', 'center' );
 myTd.appendChild(myB);
-tableTrolls[1].insertBefore( myTd, tableTrolls[1].childNodes[7] );
+tableTrolls[2].insertBefore( myTd, tableTrolls[2].childNodes[7] );
 tableTrolls[0].childNodes[0].setAttribute ('colspan','12');
 
 var arrayTroll = "";
 var arrayGuild = "";
-begin = 2;
-for ( var i = 2; i < tableTrolls.length; i++ )
+begin = 4;
+for ( var i = 4; i < tableTrolls.length; i = i+2 )
 {
 	try {
 		var newTd = document.createElement( 'td' );		// Pour la box MP
@@ -1188,16 +1193,16 @@ for ( var i = 2; i < tableTrolls.length; i++ )
   		var newTrollScript = document.createElement ( 'script' );
   		newTrollScript.setAttribute ( 'language', 'JavaScript' );
   		newTrollScript.setAttribute ( 'src',  URLTrollInfos  + arrayTroll );
-  		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newTrollScript );
+  		document.body.appendChild ( newTrollScript );
 			arrayTroll = "";
 			
   		var newGuildeScript = document.createElement ( 'script' );
   		newGuildeScript.setAttribute ( 'language', 'JavaScript' );
   		newGuildeScript.setAttribute ( 'src',  URLGuildeInfos + arrayGuild );
-  		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newGuildeScript );
+  		document.body.appendChild ( newGuildeScript );
 			arrayGuild = "";
 
-			begin = i + 1;
+			begin = i + 2;
 		}
 		
 	} catch ( e ) { error ( e, 'Troll and Guild Compendium error (' + i + ')' ); }
@@ -1211,7 +1216,7 @@ if ( arrayTroll != "" )
 		var newTrollScript = document.createElement ( 'script' );
 		newTrollScript.setAttribute ( 'language', 'JavaScript' );
 		newTrollScript.setAttribute ( 'src',  URLTrollInfos  + arrayTroll );
-		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newTrollScript );
+		document.body.appendChild ( newTrollScript );
 	} catch ( e ) { error ( e, 'Trolls Colouring error' ); }
 
 	try
@@ -1219,15 +1224,15 @@ if ( arrayTroll != "" )
 		var newGuildeScript = document.createElement ( 'script' );
 		newGuildeScript.setAttribute ( 'language', 'JavaScript' );
 		newGuildeScript.setAttribute ( 'src',  URLGuildeInfos + arrayGuild );
-		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newGuildeScript );
+		document.body.appendChild ( newGuildeScript );
 	} catch ( e ) { error ( e, 'Guild Colouring error' ); }
 }
 // ********************************************************
 // Places colours
 // ********************************************************
 var arrayPlace = "";
-begin = 2;
-for ( var i = 2; i < tablePlaces.length; i++ )
+begin = 4;
+for ( var i = 4; i < tablePlaces.length; i=i+2 )
 {
 	try
 	{
@@ -1240,9 +1245,9 @@ for ( var i = 2; i < tablePlaces.length; i++ )
 			var newPlaceScript = document.createElement ( 'script' );
 			newPlaceScript.setAttribute ( 'language', 'JavaScript' );
 			newPlaceScript.setAttribute ( 'src',  URLPlaceInfos  + arrayPlace );
-			( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
+			document.body.appendChild ( newPlaceScript );
 			arrayPlace = "";
-			begin = i + 1;
+			begin = i + 2;
 		}
 	} catch ( e ) { error ( e, 'Places Colouring error' ); }
 	
@@ -1255,7 +1260,7 @@ if ( arrayPlace != "" )
 		var newPlaceScript = document.createElement ( 'script' );
 		newPlaceScript.setAttribute ( 'language', 'JavaScript' );
 		newPlaceScript.setAttribute ( 'src',  URLPlaceInfos  + arrayPlace );
-		( tablePlaces[tablePlaces.length-1].parentNode.parentNode.parentNode ).appendChild ( newPlaceScript );
+		document.body.appendChild ( newPlaceScript );
 	}catch ( e ) { error ( e, 'Places Colouring error' ); }
 }
 

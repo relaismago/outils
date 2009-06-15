@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window class="dialog"
+	title="FireMago - A propos"
+	orient="vertical"
+	autostretch="always"
+	onload="sizeToContent()"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<!-- Original template by Jed Brown -->
+
+<groupbox align="center" orient="horizontal">
+<vbox>
+  <text value="FireMago" style="font-weight: bold; font-size: x-large;"/>
+  <separator class="thin"/>
+  <text value="Personnalisation du jeu :"/>
+  <text value="MountyHall" class="url" onclick="window.open('http://www.mountyhall.com/'); window.close();" style="color: blue; text-decoration: underline; cursor=hand"/>
+  <separator class="thin"/>
+  <text value="Auteurs de Mountyzilla (base de l'extension firemago)" style="font-weight: bold;"/>
+  <text value="Ratibus" class="url" onclick="window.open('http://trolls.game-host.org/'); window.close();" style="color: blue; text-decoration: underline; cursor=hand"/>
+  <text value="Mini TilK" class="url" onclick="window.open('http://resel.enst-bretagne.fr/club/mountyhall/'); window.close();" style="color: blue; text-decoration: underline; cursor=hand"/>
+  <text value="Auteurs de FireMago" style="font-weight: bold;"/>
+  <text value="DomFada" class="url" onclick="window.open('http://www.relaismago.com/guilde.php'); window.close();" style="color: blue; text-decoration: underline; cursor=hand"/>
+  <text value="glupglup" class="url" onclick="window.open('http://www.relaismago.com/guilde.php'); window.close();" style="color: blue; text-decoration: underline; cursor=hand"/>
+  <separator class="thin"/>
+</vbox>
+<spring flex="1"/>
+<image src="chrome://firemago/skin/rm_icone.png"/>
+</groupbox>
+
+  <hbox>
+  <spacer flex="1"/>
+   <button label="Close" oncommand="window.close();"/>
+  </hbox>
+
+</window>

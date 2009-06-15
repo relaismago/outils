@@ -18,9 +18,9 @@ $nbMonsters = count ( $monsterIds );
 
 for ( $i = 0; $i < $nbMonsters; $i++ )
 {
-	$rang = $i + $begin;
+	$rang = $i*2 + $begin;
    
-	//echo "alert('$nbMonsters : $i');";
+	//echo "alert('nb = $nbMonsters et r= $rang et i= $i');";
 	
     $name=ereg_replace('[\\]',"",$monsterNames[$i]);
 	$infos = getInfoFromMonstre($name);
@@ -60,6 +60,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	";
 	
 	$txtmonster = $monsterNames[$i];
+	$txtmonster = ereg_replace("'","\'",$txtmonster);
 	$urlmonster = "URLBestiaire + escape ('$infos[monstre]') + '&Age=' + escape ('$infos[age]') + '&MH=$monsterIds[$i]'";
 	
 	//si l'utilisateur fait parti de la guilde, on met un peu de couleurs

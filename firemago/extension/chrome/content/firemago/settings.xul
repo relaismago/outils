@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE window>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="Preferences de Firemago"
+	id="firemagoPreferencesWindow"
+	onload="loadPrefWindow();"
+	commentx="^^^___ flag to inform filter-contextMenu -- workaround for coordinate-bug"
+	innerWidth="600px"
+	innerHeight="65px"
+	persist="screenX screenY width height persist-list-selectedIndex">
+
+<script src="settings.js"/>
+
+<groupbox flex="1">
+	<caption label="v2.3 by DomFada and glupglup"/>
+	<hbox align="center">
+		<checkbox id="enabled" label="Utiliser Firemago"/>
+		<spacer id="header-spacer.i" width="5px"/>
+		<checkbox id="showupdate" label="Prevenir des mises a jour"/>
+		<spacer id="header-spacer.iv" width="5px"/>
+	</hbox>
+	
+	<spacer id="entry-spacer.i" height="5px"/>
+	<hbox id="entryarea" align="center">
+		<label id="scriptEntryLabel" value="Script :"/>
+		<textbox id="newScript" flex="1"/>
+		<toolbarbutton id="newbutton" label=" Rechercher " oncommand="findfile();"/>
+		<spacer id="entry-spacer.iii" width="5px"/>
+	</hbox>
+	<spacer id="entry-spacer.ii" height="5px"/>
+	<!--  /text-entry  -->
+ <spacer id="entry-spacer.i" height="5px"/>
+
+ <hbox id="urlmharea" align="center">
+ 	<label id="urlmhEntryLabel" value="URL MH :"/>
+ 	<textbox id="newURLMH" flex="1"/>
+	<spacer id="entry-spacer.iii" width="5px"/>
+ </hbox>
+
+<hbox id="urlrmarea" align="center">
+   <label id="urlrmEntryLabel" value="URL outils :"/>
+   <textbox id="newURLRM" flex="1"/>
+   <spacer id="entry-spacer.iii" width="5px"/>
+</hbox>
+	
+	<spacer id="entry-spacer.ii" height="5px"/>
+
+
+	<hbox align="center">
+		<button id="defaultbutton" label="Par Defaut" oncommand="setDefault();" default="true"/>
+		<spacer id="header-spacer.iv" width="5px"/>
+		<button id="donebutton" label="Valider" oncommand="saveSettings();" default="true"/>
+	</hbox>
+</groupbox>
+</window>
