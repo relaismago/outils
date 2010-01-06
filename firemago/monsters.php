@@ -57,6 +57,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
    	anchorCellID.removeChild ( anchorCellID.childNodes[0] );
    	anchorCellID.appendChild ( newLink );
 	newLink = document.createElement ( 'a' );
+	newLink.setAttribute ( 'class', monsterStyle );
 	";
 	
 	$txtmonster = $monsterNames[$i];
@@ -81,7 +82,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
       		$res2 = mysql_fetch_assoc($result2);
       		$id_troll_gowap = $res2[id_troll_gowap];
       		$nom_troll = ereg_replace("'","\'",$res2[nom_troll]);
-      		$txtmonster .= " appartient à $nom_troll";
+      		$txtmonster .= " appartient Ã  $nom_troll";
       		$urlmonster =  "URLGowap + '$monsterIds[$i]'";
 			echo "
 			colortd=colorRM;
@@ -121,21 +122,18 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
           			";
         		}
     		}
-			else
+		}
+		//Search for CDM
+		if (( $infos[id_template] != "" ) && ($infos[id_age] != "") ) 
+		{
+        	$tab_cdm = SelectCdMs($infos[race],$infos[id_template],$infos[id_age],"-1","-1", true);
+        	if (count($tab_cdm) ==  0)
 			{
-				//Search for CDM
-				if (( $infos[id_template] != "" ) && ($infos[id_age] != "") ) 
-				{
-        			$tab_cdm = SelectCdMs($infos[race],$infos[id_template],$infos[id_age],"-1","-1", true);
-        			if (count($tab_cdm) ==  0)
-					{
-						echo "
-						colortd=colorCdm;
-          				anchorRow.setAttribute ( 'class', '' );
-          				anchorRow.setAttribute ( 'style', 'background-color:' + colorCdm );
-          				";
-					}
-				}
+				echo "
+				//colortd=colorCdm;
+          		newLink.setAttribute ( 'class', 'mh_trolls_0' );
+          		//anchorRow.setAttribute ( 'style', 'background-color:' + colorCdm );
+          		";
 			}
 		}
 	}// fin colorisation
@@ -144,7 +142,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	if ($tab_cdm_mh)
 	{
 		$last_cdm = count($tab_cdm_mh)-1;
-		$titre = "cdm recoupées du monstre au ".$tab_cdm_mh[$last_cdm]['date_cdm'];
+		$titre = "cdm recoupÃ©es du monstre au ".$tab_cdm_mh[$last_cdm]['date_cdm'];
 		if ($tab_cdm_mh[$last_cdm]['nbj_cdm'] > 5)
 			$colPV = 1 ;
 		else
@@ -166,7 +164,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$pdv = "> à ".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']." (bestiaire : ".$caracs_moyennes[pdv].")";
+			$pdv = "> Ã  ".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']." (bestiaire : ".$caracs_moyennes[pdv].")";
 			$ble = $tab_cdm_mh[$last_cdm]['blessure_cdm']."%";
 			echo "var myTablePVm = createBarrePV($colPV,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm'].",'$ble');
 				  bless =true;
@@ -178,7 +176,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$att = "> à ".$tab_cdm_mh[$last_cdm]['attmin_cdm']." (bestiaire : ".$caracs_moyennes[att].")";
+			$att = "> Ã  ".$tab_cdm_mh[$last_cdm]['attmin_cdm']." (bestiaire : ".$caracs_moyennes[att].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['esqmax_cdm'] != 99 )
 		{
@@ -186,7 +184,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$esq = "> à ".$tab_cdm_mh[$last_cdm]['esqmin_cdm']." (bestiaire : ".$caracs_moyennes[esq].")";
+			$esq = "> Ã  ".$tab_cdm_mh[$last_cdm]['esqmin_cdm']." (bestiaire : ".$caracs_moyennes[esq].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['degmax_cdm'] != 99 )
 		{
@@ -194,7 +192,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$deg = "> à ".$tab_cdm_mh[$last_cdm]['degmin_cdm']." (bestiaire : ".$caracs_moyennes[deg].")";
+			$deg = "> Ã  ".$tab_cdm_mh[$last_cdm]['degmin_cdm']." (bestiaire : ".$caracs_moyennes[deg].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['regmax_cdm'] != 99 )
 		{
@@ -202,7 +200,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$reg = "> à ".$tab_cdm_mh[$last_cdm]['regmin_cdm']." (bestiaire : ".$caracs_moyennes[reg].")";
+			$reg = "> Ã  ".$tab_cdm_mh[$last_cdm]['regmin_cdm']." (bestiaire : ".$caracs_moyennes[reg].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['armmax_cdm'] != 99 )
 		{
@@ -210,7 +208,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$arm = "> à ".$tab_cdm_mh[$last_cdm]['armmin_cdm']." (bestiaire : ".$caracs_moyennes[arm].")";
+			$arm = "> Ã  ".$tab_cdm_mh[$last_cdm]['armmin_cdm']." (bestiaire : ".$caracs_moyennes[arm].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['vuemax_cdm'] != 99 )
 		{
@@ -218,7 +216,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$vue = "> à ".$tab_cdm_mh[$last_cdm]['vuemin_cdm']." (bestiaire : ".$caracs_moyennes[vue].")";
+			$vue = "> Ã  ".$tab_cdm_mh[$last_cdm]['vuemin_cdm']." (bestiaire : ".$caracs_moyennes[vue].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['mmmax_cdm'] != 99999 )
 		{
@@ -228,7 +226,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['mmmin_cdm'] != 0)
 			{
-				$mm = "> à ".$tab_cdm_mh[$last_cdm]['mmmin_cdm'];
+				$mm = "> Ã  ".$tab_cdm_mh[$last_cdm]['mmmin_cdm'];
 			}
 			$mm .= "(moy bestiaire : ".$caracs_moyennes[mm].")";	
 		}
@@ -240,7 +238,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['rmmin_cdm'] != 0)
 			{
-				$rm = "> à ".$tab_cdm_mh[$last_cdm]['rmmin_cdm'];
+				$rm = "> Ã  ".$tab_cdm_mh[$last_cdm]['rmmin_cdm'];
 			}
 			$rm .= " (moy bestiaire : ".$caracs_moyennes[rm].")";
 		}
@@ -252,7 +250,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['dlamin_cdm'] != 0)
 			{
-				$dla = "> à ".$tab_cdm_mh[$last_cdm]['dlamin_cdm'];
+				$dla = "> Ã  ".$tab_cdm_mh[$last_cdm]['dlamin_cdm'];
 			}
 			$dla .= " (moy bestiaire : ".$caracs_moyennes[dla].")";	
 		}
@@ -262,7 +260,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		$attdist = $tab_cdm_mh[$last_cdm]['attdist_cdm']." (bestiaire : ".$caracs_moyennes[attdist].")";
 		$etatdla = $tab_cdm_mh[$last_cdm]['etatdla_cdm'];
 		$charge = $tab_cdm_mh[$last_cdm]['charge_cdm'];
-		$bm = $tab_cdm_mh[$last_cdm]['bm_cdm'];
+		$bm = ereg_replace("'"," ",$tab_cdm_mh[$last_cdm]['bm_cdm']);
 		
 	}
 	else //pas de cdm pour ce monstre, on calcule la moyenne
@@ -298,7 +296,6 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	";
 	echo "
 	newLink.setAttribute ( 'target', '\"_blank\"' );
-    newLink.setAttribute ( 'class', monsterStyle );
 	//newLink.setAttribute ( 'onmouseout', 'cacherInfoBulle();');
 	//newLink.setAttribute ( 'onclick', 'this.onmouseout=function () {};');
     anchorCellDesc.removeChild ( anchorCellDesc.getElementsByTagName ( 'a' )[0] );
