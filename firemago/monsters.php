@@ -82,7 +82,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
       		$res2 = mysql_fetch_assoc($result2);
       		$id_troll_gowap = $res2[id_troll_gowap];
       		$nom_troll = ereg_replace("'","\'",$res2[nom_troll]);
-      		$txtmonster .= " appartient Ã  $nom_troll";
+      		$txtmonster .= " appartient à  $nom_troll";
       		$urlmonster =  "URLGowap + '$monsterIds[$i]'";
 			echo "
 			colortd=colorRM;
@@ -142,7 +142,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 	if ($tab_cdm_mh)
 	{
 		$last_cdm = count($tab_cdm_mh)-1;
-		$titre = "cdm recoupÃ©es du monstre au ".$tab_cdm_mh[$last_cdm]['date_cdm'];
+		$titre = "cdm recoupées du monstre au ".$tab_cdm_mh[$last_cdm]['date_cdm'];
 		if ($tab_cdm_mh[$last_cdm]['nbj_cdm'] > 5)
 			$colPV = 1 ;
 		else
@@ -164,7 +164,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$pdv = "> Ã  ".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']." (bestiaire : ".$caracs_moyennes[pdv].")";
+			$pdv = "> à  ".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']." (bestiaire : ".$caracs_moyennes[pdv].")";
 			$ble = $tab_cdm_mh[$last_cdm]['blessure_cdm']."%";
 			echo "var myTablePVm = createBarrePV($colPV,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."-".$tab_cdm_mh[$last_cdm]['blessure_cdm']."*".$tab_cdm_mh[$last_cdm]['pdvmin_cdm']."/100,".$tab_cdm_mh[$last_cdm]['pdvmin_cdm'].",'$ble');
 				  bless =true;
@@ -176,7 +176,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$att = "> Ã  ".$tab_cdm_mh[$last_cdm]['attmin_cdm']." (bestiaire : ".$caracs_moyennes[att].")";
+			$att = "> à  ".$tab_cdm_mh[$last_cdm]['attmin_cdm']." (bestiaire : ".$caracs_moyennes[att].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['esqmax_cdm'] != 99 )
 		{
@@ -184,7 +184,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$esq = "> Ã  ".$tab_cdm_mh[$last_cdm]['esqmin_cdm']." (bestiaire : ".$caracs_moyennes[esq].")";
+			$esq = "> à  ".$tab_cdm_mh[$last_cdm]['esqmin_cdm']." (bestiaire : ".$caracs_moyennes[esq].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['degmax_cdm'] != 99 )
 		{
@@ -192,7 +192,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$deg = "> Ã  ".$tab_cdm_mh[$last_cdm]['degmin_cdm']." (bestiaire : ".$caracs_moyennes[deg].")";
+			$deg = "> à  ".$tab_cdm_mh[$last_cdm]['degmin_cdm']." (bestiaire : ".$caracs_moyennes[deg].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['regmax_cdm'] != 99 )
 		{
@@ -200,7 +200,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$reg = "> Ã  ".$tab_cdm_mh[$last_cdm]['regmin_cdm']." (bestiaire : ".$caracs_moyennes[reg].")";
+			$reg = "> à  ".$tab_cdm_mh[$last_cdm]['regmin_cdm']." (bestiaire : ".$caracs_moyennes[reg].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['armmax_cdm'] != 99 )
 		{
@@ -208,7 +208,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$arm = "> Ã  ".$tab_cdm_mh[$last_cdm]['armmin_cdm']." (bestiaire : ".$caracs_moyennes[arm].")";
+			$arm = "> à  ".$tab_cdm_mh[$last_cdm]['armmin_cdm']." (bestiaire : ".$caracs_moyennes[arm].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['vuemax_cdm'] != 99 )
 		{
@@ -216,7 +216,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		}
 		else
 		{
-			$vue = "> Ã  ".$tab_cdm_mh[$last_cdm]['vuemin_cdm']." (bestiaire : ".$caracs_moyennes[vue].")";
+			$vue = "> à  ".$tab_cdm_mh[$last_cdm]['vuemin_cdm']." (bestiaire : ".$caracs_moyennes[vue].")";
 		}
 		if ( $tab_cdm_mh[$last_cdm]['mmmax_cdm'] != 99999 )
 		{
@@ -226,7 +226,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['mmmin_cdm'] != 0)
 			{
-				$mm = "> Ã  ".$tab_cdm_mh[$last_cdm]['mmmin_cdm'];
+				$mm = "> à  ".$tab_cdm_mh[$last_cdm]['mmmin_cdm'];
 			}
 			$mm .= "(moy bestiaire : ".$caracs_moyennes[mm].")";	
 		}
@@ -238,7 +238,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['rmmin_cdm'] != 0)
 			{
-				$rm = "> Ã  ".$tab_cdm_mh[$last_cdm]['rmmin_cdm'];
+				$rm = "> à  ".$tab_cdm_mh[$last_cdm]['rmmin_cdm'];
 			}
 			$rm .= " (moy bestiaire : ".$caracs_moyennes[rm].")";
 		}
@@ -250,7 +250,7 @@ for ( $i = 0; $i < $nbMonsters; $i++ )
 		{
 			if ( $tab_cdm_mh[$last_cdm]['dlamin_cdm'] != 0)
 			{
-				$dla = "> Ã  ".$tab_cdm_mh[$last_cdm]['dlamin_cdm'];
+				$dla = "> à  ".$tab_cdm_mh[$last_cdm]['dlamin_cdm'];
 			}
 			$dla .= " (moy bestiaire : ".$caracs_moyennes[dla].")";	
 		}
