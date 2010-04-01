@@ -1032,10 +1032,6 @@ try { arrTable[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth R&M err
 //GGC and VVT links
 //********************************************************
 
-
-
-alert (profil);
-
 myTr = newTR ();
 myTr.appendChild ( myTd1 = newTD () );
 myTd1.setAttribute ( 'align', 'right' );
