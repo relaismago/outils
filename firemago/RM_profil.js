@@ -1,7 +1,49 @@
 /*********************************************************************************
 *    This file is part of Mountyzilla modified for zoryazilla                    *
 *********************************************************************************/
+// ******************************************************************
+// Error logging functions
+// ******************************************************************
 
+var errorLog = '';
+
+function error ( e, msg )
+{
+	errorLog += '<br> [ ' + msg + ' ] ' + e.error + ' : ' + e.message + '\n';
+}
+
+function displayErrors ( insertPoint )
+{
+	if ( errorLog != '' )
+	{
+		var myTable = newTable ( 'FMerrors' );
+		myTable.appendChild ( myTR = newTR () );
+		myTR.appendChild ( myTD = newTD () );
+		myTD.innerHTML = '<b> Firemago a rencontré les erreurs suivantes : </b> \n' + errorLog;
+		
+		try { insertBeforeCR ( myTable, insertPoint ); } catch ( e ) { alert ( 'Could not display FireMago errors : ' + e ); }
+	}
+}
+
+var debugLog = '';
+
+function debug ( msg )
+{
+	debugLog += msg + '\n';
+}
+
+function displayDebug ( insertPoint )
+{
+	if ( debugLog != '' )
+	{
+		var myTable = newTable ( 'FMdebug' );
+		myTable.appendChild ( myTR = newTR () );
+		myTR.appendChild ( myTD = newTD () );
+		myTD.innerHTML = '<b> Firemago a généré les messages de debug suivants : </b> \n' + debugLog;
+		
+		try { insertBeforeCR ( myTable, insertPoint ); } catch ( e ) { alert ( 'Could not display FireMago debug : ' + e ); }
+	}
+}
 /*********************************************************************************
 *   Modifications du DOM              *
 *********************************************************************************/
@@ -81,6 +123,95 @@ function appendText(paren, text, bold) {
 		paren.appendChild(b);
 	} else
 		paren.appendChild(document.createTextNode(text));
+}
+
+function newTable ( name )
+{
+	myElt = document.createElement ( 'table' );
+	myElt.setAttribute ( 'name', name );
+	myElt.setAttribute ( 'width', '98%' );
+	myElt.setAttribute ( 'border', '0' );
+	myElt.setAttribute ( 'align', 'center' );
+	myElt.setAttribute ( 'cellpadding', '4' );
+	myElt.setAttribute ( 'cellspacing', '1' );
+	myElt.setAttribute ( 'class', 'mh_tdborder' );
+	return myElt;
+}
+
+function newTR ()
+{
+	myElt = document.createElement ( 'tr' );
+	myElt.setAttribute ( 'class','mh_tdtitre' );
+	return myElt;
+}
+
+function newTD ()
+{
+	myElt = document.createElement ( 'td' );
+	myElt.setAttribute ( 'class','mh_tdtitre' );
+	return myElt;
+}
+
+function newForm ( name, URL, method, target )
+{
+	if ( typeof method == "undefined" ) { method = 'post'; }
+	var myForm= document.createElement ( 'form' );
+	myForm.setAttribute ( 'method', method );
+	myForm.setAttribute ( 'action', URL );
+	myForm.setAttribute ( 'name', name );
+	if ( typeof target != "undefined" ) { myForm.setAttribute ( 'target', target ); }
+	return myForm;
+}
+
+function newHidden ( name, value )
+{
+	var myInput = document.createElement ( 'input' );
+	myInput.setAttribute ( 'type', 'hidden' );
+	myInput.setAttribute ( 'name', name );
+	myInput.setAttribute ( 'wrap', 'off' );
+	myInput.setAttribute ( 'value', value );
+	return myInput;
+}
+
+function newButton ( name, value, onClick )
+{
+	myInput = document.createElement ( 'input' );
+	myInput.setAttribute ( 'name', name );
+	myInput.setAttribute ( 'type', 'submit' );
+	myInput.setAttribute ( 'value', value );
+	myInput.setAttribute( 'class', 'mh_form_submit' );
+	if ( typeof onClick != "undefined" ) { myInput.setAttribute ( 'onClick', onClick ); }
+	return myInput;
+}
+
+//******************************************************************
+//node to text functions
+//******************************************************************
+
+function flattenNode ( node )
+{
+	var result = '';
+	for ( var i = 0; i < node.childNodes.length; i++ ) 
+	{
+		if ( node.childNodes[i].hasChildNodes () )
+		{
+			if ( node.childNodes[i].nodeName == "TR" ) { result += "\n"; }
+			if ( node.childNodes[i].nodeName == "LI" ) { result += "\n"; }
+			if ( node.childNodes[i].nodeName == "TD" ) { result += "\t"; }
+			if ( node.childNodes[i].nodeName == "P" ) { result += "\n"; }
+			result += flattenNode ( node.childNodes[i] );
+		}
+		else
+		{
+			if ( node.childNodes[i].nodeName == "BR" ) { result += "\n"; }
+			if ( node.childNodes[i].nodeValue != null )
+			{
+				var text = new String ( node.childNodes[i].nodeValue );
+				result += text.replace ( /\s+/g, " " );
+			}
+		}
+	}
+	return result;
 }
 
 // Fonctions utiles
@@ -173,7 +304,9 @@ function getDateActuelle()
 function init() {
 	arrTable = document.getElementsByTagName('table');
 	arrTR = document.getElementsByTagName('tr');
+}
 
+function init2() {
 	var listeValeurs = new Array();
 	listeValeurs['vue'] = arrTable[3].childNodes[1].childNodes[4].childNodes[3].childNodes[3].nodeValue;
 	listeValeurs['pva'] = arrTable[3].childNodes[1].childNodes[8].childNodes[3].childNodes[1].childNodes[1].childNodes[0].childNodes[1].childNodes[1].childNodes[0].nodeValue;
@@ -822,6 +955,26 @@ function cacherInfoBulle() {
 		bulleStyle.visibility = "hidden";
 }
 
+//********************************************************
+//Adding login IFRAME
+//********************************************************
+
+function deconn()
+{
+	var newdeConnScript = document.createElement ( 'script' );
+	newdeConnScript.setAttribute ( 'language', 'JavaScript' );
+	newdeConnScript.setAttribute ( 'src',  URLLoginRM + '?logout=true' );
+	document.body.appendChild ( newdeConnScript );
+}
+
+function connect()
+{
+	var newConnectScript = document.createElement ( 'script' );
+	newConnectScript.setAttribute ( 'language', 'JavaScript' );
+	newConnectScript.setAttribute ( 'src',  URLLoginRM +'?login=true&numTroll='+document.getElementById('numTroll').value +'&password='+document.getElementById('password').value + '&autologin='+document.getElementById('autologin').value );
+	document.body.appendChild ( newConnectScript );
+}
+
 /*********************************************************************************
 *   Main MZ             *
 *********************************************************************************/
@@ -846,6 +999,9 @@ var nbjours;
 var niveau;
 
 init();
+var profil;
+try { profil = flattenNode ( arrTable[3] ) + "Compétences " + flattenNode ( arrTable[8] ) + "\n" + flattenNode ( arrTable[9] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
+init2();
 creerBulle();
 setNextDla();
 setPiForNextLevel();
@@ -855,3 +1011,62 @@ setRatioKillDeath();
 setTotalMagie();
 setTotalPourcentages();
 setLieu();
+
+var myTr = newTR();
+var myTd = document.createElement ( 'td' );
+myTd.setAttribute ( 'colspan', '3' );
+
+var myDiv = document.createElement ( 'div' );
+myDiv.setAttribute ( 'id', 'conn' );
+var newConnScript = document.createElement ( 'script' );
+newConnScript.setAttribute ( 'language', 'JavaScript' );
+newConnScript.setAttribute ( 'src',  URLLoginRM );
+
+document.body.appendChild ( newConnScript );
+
+myTd.appendChild ( myDiv );
+myTr.appendChild ( myTd );
+try { arrTable[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth R&M error' ); }
+
+//********************************************************
+//GGC and VVT links
+//********************************************************
+
+
+
+alert (profil);
+
+myTr = newTR ();
+myTr.appendChild ( myTd1 = newTD () );
+myTd1.setAttribute ( 'align', 'right' );
+myTr.appendChild ( myTd2 = newTD () );
+myTd2.setAttribute ( 'align', 'left' );
+/*myTr.appendChild ( myTd3 = newTD () );
+myTd3.setAttribute ( 'align', 'left' );*/
+
+//VTT
+myTd1.appendChild ( myForm = newForm ( 'formVTT', URLVtt ) );
+var onSubmit = "window.open('', 'popupVtt'); this.target='popupVtt'";
+myForm.setAttribute ( 'onsubmit', onSubmit );
+myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
+myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
+myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le VTT' ) );
+
+//GGC
+myTd2.appendChild ( myForm = newForm ( 'formGGC', URLGgc ) );
+var onSubmit = "window.open('', 'popupGgc'); this.target='popupGgc'";
+myForm.setAttribute ( 'onsubmit', onSubmit );
+myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
+myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
+myForm.appendChild ( newHidden ( 'action', 'add' ) );
+myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC' ) );
+
+//Partages
+/*var URLPartages = URLOutils + 'partagepx/partage.php';
+myTd3.appendChild ( myForm = newForm ( 'formPartages', URLPartages + '?modif=1&troll=' + trim ( trollNomId ) +'' ) );
+var onSubmit = "window.open('', 'popupPartages'); this.target='popupPartages'";
+myForm.setAttribute ( 'onsubmit', onSubmit );
+myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );*/
+
+try { arrTable[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'GGC and VTT error' ); }
+

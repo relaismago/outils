@@ -94,7 +94,7 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 			$troll_reg_bm	= trim($resultat[2]);  
                 endif;
 		
-		if(eregi('[ \t]*Combat.+Atta.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Atta.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_att_base	= trim($resultat[1]);
 			$troll_att_bm	= trim($resultat[2]);
 		endif;
@@ -106,7 +106,7 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 			$troll_deg_base	= trim($resultat[1]);
 			$troll_deg_bm	= trim($resultat[2]);
 		endif;
-		if(eregi('[ \t]*Armure\.+:[ \t]*([0-9]+)[ \t]+(.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Armure\.+:[ \t]+(.+)[ \t]+(.+)',$lignes[$i],$resultat)):
 			$troll_arm_base	= trim($resultat[1]);
 			$troll_arm_bm	= trim($resultat[2]);
 		endif;
@@ -116,11 +116,11 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		if(eregi('[ \t]*Nombre.+D.c.s.+:[ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_death	= trim($resultat[1]);
 		endif;
-		if(eregi('[ \t]*Magie.+R.sistance.+Magie.+:[ \t]*([0-9]+) (.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Magie.+R.sistance.+Magie.+:[ \t]*([0-9]+)[ \t]*points*(.+)',$lignes[$i],$resultat)):
 			$troll_rm_base	= trim($resultat[1]);
 			$troll_rm_bm	= trim($resultat[2]);
 		endif;
-		if(eregi('[ \t]*Ma.trise.+Magie.+:[ \t]*([0-9]+) (.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Ma.trise.+Magie.+:[ \t]*([0-9]+)[ \t]*points*(.+)',$lignes[$i],$resultat)):
 			$troll_mm_base	= trim($resultat[1]);
 			$troll_mm_bm	= trim($resultat[2]);
 		endif;
