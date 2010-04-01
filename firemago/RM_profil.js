@@ -1000,7 +1000,7 @@ var niveau;
 
 init();
 var profil;
-try { profil = flattenNode ( arrTable[3] ) + "Compétences " + flattenNode ( arrTable[8] ) + "\n" + flattenNode ( arrTable[9] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
+try { profil = flattenNode ( arrTable[3] ) + "Compétences " + flattenNode ( arrTable[9] ) + "Sorts\n" + flattenNode ( arrTable[10] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
 init2();
 creerBulle();
 setNextDla();
