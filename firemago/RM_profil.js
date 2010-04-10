@@ -214,6 +214,74 @@ function flattenNode ( node )
 	return result;
 }
 
+//******************************************************************
+//Cookies functions
+//******************************************************************
+
+function getCookie ( name ) 
+{
+	var dc = document.cookie;
+	var prefix = name + "=";
+	var begin = dc.indexOf ( "; " + prefix );
+	if ( begin == -1 ) 
+	{
+		begin = dc.indexOf ( prefix );
+		if ( begin != 0 ) return '';
+	} 
+	else { begin += 2; }
+	var end = document.cookie.indexOf ( ";", begin );
+	if ( end == -1 ) { end = dc.length; }
+	return unescape ( dc.substring ( begin + prefix.length, end ) );
+}
+
+function setCookie ( name, value, expires, path, domain, secure ) 
+{
+	var expdate = new Date ();
+	expdate.setTime ( expdate.getTime () + (24 * 60 * 60 * 1000 * 31 ) );
+	var curCookie = name + "=" + escape ( value ) +
+		( (expires) ? "; expires=" + expires.toGMTString () : "; expires=" + expdate.toGMTString () ) +
+		( (path) ? "; path=" + path : path ) +
+		( (domain) ? "; domain=" + domain : "" ) +
+		( (secure) ? "; secure" : "" );
+	document.cookie = curCookie;
+}
+
+function deleteCookie( name, path, domain ) 
+{
+  if (getCookie(name)) 
+	{
+     document.cookie = name + "=" +
+     ((path) ? "; path=" + path : "") +
+     ((domain) ? "; domain=" + domain : "") +
+     "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+  }
+}
+
+function cookifyButton ( btn )
+{
+	var btnName = btn.getAttribute ( "NAME" );
+	if ( btn.checked == true ) { setCookie ( btnName, "true" ); } else { setCookie ( btnName, "false" ); }
+	return btn.checked;
+}
+
+function uncookifyButton ( btn )
+{
+	if ( getCookie ( btn.getAttribute ( "NAME" ) ) == "true" ) { btn.checked = true; }
+	return btn.checked;
+}
+
+function cookifyInput ( input )
+{
+	setCookie ( input.getAttribute ( "NAME" ), input.value );
+	return input.value;
+}
+
+function uncookifyInput ( input )
+{
+	input.value = getCookie ( input.getAttribute ( "NAME" ) );
+	return input.value;
+}
+
 // Fonctions utiles
 
 function aff(nbr) {
@@ -331,7 +399,10 @@ function init2() {
 
 	vue = listeValeurs['vue'][0];
 	vuetotale = Math.max(0, listeValeurs['vue'][0] + listeValeurs['vue'][1]);
-
+	
+	numTroll = arrTR[4].childNodes[3].childNodes[1].getAttribute('href');
+	numTroll = numTroll.slice ( numTroll.indexOf ( '(' ) + 1, numTroll.indexOf ( ',' ) );
+	
 	niveau = listeValeurs['niv'][0];
 
 	pvtotal = listeValeurs['pvm'][0];
@@ -996,7 +1067,7 @@ var arm, armbonus;
 var rm, mm, rmtotal;
 var nbattaques;
 var nbjours;
-var niveau;
+var niveau,numTroll;
 
 init();
 var profil;
@@ -1065,4 +1136,18 @@ myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );*/
 
 try { arrTable[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'GGC and VTT error' ); }
+
+//*********************************************
+//Update cookies
+//*********************************************
+var expdate = new Date ();
+expdate.setTime ( expdate.getTime() + ( 24 * 60 * 60 * 1000 * 7 ) );
+deleteCookie ( "MM_TROLL", "/" );
+setCookie ( "MM_TROLL", mmTroll, expdate, "/" );
+deleteCookie ( "NIV_TROLL", "/" );
+setCookie ( "NIV_TROLL", niveau, expdate, "/" );
+deleteCookie ( "NUM_TROLL", "/" );
+setCookie( "NUM_TROLL", numTroll, expdate, "/" );
+deleteCookie ( "RM_TROLL", "/" );
+setCookie( "RM_TROLL", rmtotal, expdate, "/" );
 
