@@ -5,5 +5,10 @@
       <participant chance="1" win="1">101859</participant>
       <participant chance="1">42637</participant>
     </attrib>
+    <attrib name="Le Régiment des Que Dalle - Projection" pseudo="-R-" date="05-07-2010 21h33" random="14">
+      <participant chance="10">Micko</participant>
+      <participant chance="10" win="1">Minh O\'Thort</participant>
+      <participant chance="5">Rögen</participant>
+    </attrib>
   </attribs>
 </data>

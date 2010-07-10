@@ -1,14 +1,20 @@
 <?
 require_once ( "../top.php" );
+require_once ( "functions.php" );
 ?>
 <br/>
 <table class='mh_tdborder' width='70%' align='center'>
 	<tr>
 		<td>
 			<table width='100%' cellspacing='0' >
-				<tr class='mh_tdtitre' align="center">
+				<tr class='mh_tdtitre' align='center'>
 					<td>
 						<h2>IROLL</h2>
+					</td>
+				</tr>
+				<tr class='mh_tdtitre' align='center'>
+					<td>
+						<h3>L'outil qui fait de l'ombre à notre Liche !</h3>
 					</td>
 				</tr>
 			</table>
@@ -17,11 +23,11 @@ require_once ( "../top.php" );
 </table>
 <br/>
 <br/>
-<table width="100%" class='mh_tdborder'>
-	<tr class="mh_tdtitre">
-		<td class='mh_tdpage'>Faire une nouvelle attribution : </td>
+<table width="80%" class='mh_tdborder' align='center' cellspacing='0'>
+	<tr class="mh_tdtitre" align='center'>
+		<td class='mh_tdpage'><h2>Faire une nouvelle attribution : </h2></td>
 	</tr>
-	<tr class="mh_tdtitre">
+	<tr class="mh_tdtitre" align='center'>
 		<td class='mh_tdpage'>
 		Eviter les caract&eacute;res sp&eacute;ciaux tel que "\/ pour chaque saisie.
 		<form action="attribution.php" method="post" >
@@ -33,20 +39,15 @@ require_once ( "../top.php" );
 		</form>
 		</td>
 	</tr>
-	<tr class="mh_tdtitre">
-		<td class='mh_tdpage'>Attributions Effectu&eacute;es : </td>
-	<tr>
+	<tr class="mh_tdtitre" align='center'>
+		<td class='mh_tdpage'><h2>Attributions Effectu&eacute;es : </h2></td>
+	</tr>
+	<tr align='center'>
 		<td class='mh_tdpage'>
-		<?php
-		
-			include "functions.php";
-			
-			// affiche les attributions effectuÃ©es
-			echo get_attributions();
-		
-		?>
+			<?php echo get_attributions();?>
 		</td>
 	</tr>
 </table>
-</body>
-</html>
+<?
+include('../foot.php');
+?>
