@@ -1,0 +1,4 @@
+content	firemago jar:chrome/firemago.jar!/content/firemago/
+skin firemago classic jar:chrome/firemago.jar!/skin/classic/firemago/
+overlay chrome://browser/content/browser.xul chrome://firemago/content/mountyhallOverlay.xul
+overlay chrome://browser/content/navigator.xul chrome://firemago/content/mountyhallOverlay.xul

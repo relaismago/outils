@@ -16,7 +16,7 @@
 <script src="settings.js"/>
 
 <groupbox flex="1">
-	<caption label="v2.3 by DomFada and glupglup"/>
+	<caption label="v2.4 by glupglup"/>
 	<hbox align="center">
 		<checkbox id="enabled" label="Utiliser Firemago"/>
 		<spacer id="header-spacer.i" width="5px"/>

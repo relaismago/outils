@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
+                   em:name="FireMago"
+                   em:version="2.4"
+                   em:description="Extension RelaisMago de Mountyzilla"
+                   em:creator="DomFada"
+                   em:contributor="glupglup"
+                   em:homepageURL="http://outilsrm.cat-the-psion.net/firemago/"
+                   em:aboutURL="chrome://firemago/content/about.xul"
+                   em:iconURL="chrome://firemago/skin/rm_icone_32.png"
+                   em:optionsURL="chrome://firemago/content/settings.xul"
+                   em:updateURL="http://outilsrm.cat-the-psion.net/firemago/update.rdf"
+                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtmLdFFQQFEK8SRqvTX00xvCYef/P0lCnWCLHo7XW0kfU18ODxQnToP8P2FkxEaGI4W1NNlgNVTEhWz+Jt5+1AvQNXjh2wkN2PV2KMBQpxIEPi+j9F6dKlERUBMHhJCR2BkYyP03NPBXVRoyqLXS0lJuHiAm7A+6J+cdoD8zJEzQIDAQAB">
+    <em:file RDF:resource="urn:mozilla:extension:file:firemago.jar"/>
+    <em:targetApplication RDF:resource="rdf:#$54lKV3"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$54lKV3"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="0.7"
+                   em:maxVersion="3.*" />
+  <RDF:Description RDF:about="urn:mozilla:extension:file:firemago.jar"
+                   em:package="content/firemago/"
+                   em:skin="skin/classic/firemago/"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJYhNaPb8ikEq0DMI3M3XOxkF1Hcni7b3A1YMTCu03vQ+syHZVzlFSNocl7lM2XXkWpuhRITJR4fiBapX5l5QV9qt/P/E72Ms1alRVynsRsRSjGScjsoasSbSulXj277aMj80Vmso2GJrRGV7xVN9QCYl5HLsM/lBPB/KvJt7T53" />
+</RDF:RDF>

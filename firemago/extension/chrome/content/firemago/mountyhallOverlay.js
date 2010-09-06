@@ -16,7 +16,7 @@
 *    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA  *
 *********************************************************************************/
 
-const versionFM = "2.3";
+const versionFM = "2.4";
 const pageNews = "/mountyhall/MH_Play/Play_news.php";
 const updateScript = "http://outilsrm.cat-the-psion.net/firemago/update.js";
 
