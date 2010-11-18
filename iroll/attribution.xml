@@ -10,5 +10,116 @@
       <participant chance="10" win="1">Minh O\'Thort</participant>
       <participant chance="5">Rögen</participant>
     </attrib>
+    <attrib name="Don de BaM" pseudo="Rögen" date="25-07-2010 18h52" random="60">
+      <participant chance="100" win="1">Kasskou</participant>
+    </attrib>
+    <attrib name="Garde Emeraude IDT" pseudo="kor-skarn" date="26-07-2010 09h13" random="6">
+      <participant chance="5">Mmago</participant>
+      <participant chance="5" win="1">Mornass</participant>
+      <participant chance="5">Wolftrolll</participant>
+    </attrib>
+    <attrib name="Garde Emeraude BUM" pseudo="kor-skarn" date="03-08-2010 18h58" random="2">
+      <participant chance="1">Natty Dread</participant>
+      <participant chance="1" win="1">Peace</participant>
+    </attrib>
+    <attrib name="Le Régiment des Que Dalle - Analyse Anatomique" pseudo="Rögen" date="05-08-2010 22h00" random="42">
+      <participant chance="10">Huskar</participant>
+      <participant chance="10">Kasskou</participant>
+      <participant chance="8">Micko</participant>
+      <participant chance="10">Tagou</participant>
+      <participant chance="10" win="1">Kikraam</participant>
+    </attrib>
+    <attrib name="la horde sauvage- Analyse Anatomique" pseudo="Torock" date="09-08-2010 19h23" random="1">
+      <participant chance="1" win="1">Bgh</participant>
+      <participant chance="1">Grom</participant>
+      <participant chance="1">Kezako</participant>
+    </attrib>
+    <attrib name="Aubert de Maille en Mithril - Gorg" pseudo="Gorg" date="15-08-2010 20h24" random="15">
+      <participant chance="50" win="1">kor-skarn</participant>
+      <participant chance="50">Grossecarotte</participant>
+    </attrib>
+    <attrib name="Le Régiment des Que Dalle - Mouche à Héros + %age" pseudo="Rögen" date="17-08-2010 13h35" random="12">
+      <participant chance="10">Draz</participant>
+      <participant chance="10" win="1">Kasskou</participant>
+    </attrib>
+    <attrib name="Le Régiment des Que Dalle - Vision Accrue" pseudo="Rögen" date="21-08-2010 00h05" random="1">
+      <participant chance="8" win="1">Micko</participant>
+      <participant chance="5">Rögen</participant>
+    </attrib>
+    <attrib name="Les Hyppocampes magiques - Plate mithril temps - le 22-08-2010" pseudo="Megatol" date="22-08-2010 14h12" random="3">
+      <participant chance="6" win="1">dwarden</participant>
+      <participant chance="9">glupglup</participant>
+      <participant chance="10">Megatol</participant>
+    </attrib>
+    <attrib name="Les Hyppocmapes magique - Mission changement de mouche" pseudo="Megatol">
+      <participant chance="1">dwarden</participant>
+      <participant chance="10">LeRoiDeLaClasse</participant>
+      <participant chance="10">Megatol</participant>
+    </attrib>
+    <attrib name="Les Hyppocmapes magiques - Mission changement de mouche" pseudo="Megatol" date="04-09-2010 18h55" random="2">
+      <participant chance="1">dwarden</participant>
+      <participant chance="10" win="1">LeRoiDeLaClasse</participant>
+      <participant chance="10">Megatol</participant>
+    </attrib>
+    <attrib name="Attribution de guilde - Mission [19113] ()" pseudo="Rögen" date="05-09-2010 22h05" random="83">
+      <participant chance="50">Les Hippocampes Magiques</participant>
+      <participant chance="50" win="1">La Horde Sauvage</participant>
+    </attrib>
+    <attrib name="Attribution de guilde - Mission [19113] () v2.0" pseudo="Rögen" date="08-09-2010 08h46" random="17">
+      <participant chance="20" win="1">Les Hippocampes Magiques</participant>
+      <participant chance="20">La Horde Sauvage</participant>
+      <participant chance="20">troll'ichon</participant>
+    </attrib>
+    <attrib name="Le Régiment des Que Dalle - Mouche de Héros" pseudo="Rögen" date="09-09-2010 19h52" random="12">
+      <participant chance="10">Tagou</participant>
+      <participant chance="5" win="1">Rögen</participant>
+    </attrib>
+    <attrib name="Le Régiment des Que Dalle - Gowap [553918]" pseudo="Rögen" date="12-09-2010 18h03" random="19">
+      <participant chance="10">Myrmidion</participant>
+      <participant chance="4">Rögen</participant>
+      <participant chance="8" win="1">Minh O'Thort</participant>
+    </attrib>
+    <attrib name="Les pilleurs de tombe ! - Identification des trésors" pseudo="Megatol" date="13-09-2010 22h01" random="1">
+      <participant chance="1" win="1">Maurice</participant>
+      <participant chance="1">Megatol</participant>
+    </attrib>
+    <attrib name="La Horde Sauvage - Mission +1% comp/sort" pseudo="Maurice" date="04-10-2010 19h30" random="2">
+      <participant chance="1">maurice</participant>
+      <participant chance="1" win="1">sylv</participant>
+    </attrib>
+    <attrib name="La Horde Sauvage - Mission renommage" pseudo="Maurice" date="04-10-2010 19h32" random="1">
+      <participant chance="1" win="1">Torpck</participant>
+    </attrib>
+    <attrib name="La Horde Sauvage - Mission renommage corrigé" pseudo="Maurice" date="04-10-2010 19h33" random="3">
+      <participant chance="1">Torock</participant>
+      <participant chance="1">Kezako</participant>
+      <participant chance="1" win="1">Gromouton</participant>
+    </attrib>
+    <attrib name="La Horde Sauvage - Mission +1% DEFINITIF" pseudo="Maurice" date="05-10-2010 00h01" random="1">
+      <participant chance="1" win="1">maurice</participant>
+      <participant chance="1">sylv</participant>
+    </attrib>
+    <attrib name="La Horde Sauvage - Mission Renommage DEFINITIF" pseudo="Maurice" date="05-10-2010 00h02" random="3">
+      <participant chance="1">Torock</participant>
+      <participant chance="1">Kezako</participant>
+      <participant chance="1" win="1">Gromouton</participant>
+    </attrib>
+    <attrib name="La Horde Sauvage - TP" pseudo="Torock" date="28-10-2010 14h41" random="2">
+      <participant chance="1">Torock</participant>
+      <participant chance="1" win="1">Grossecarotte</participant>
+      <participant chance="1">kezako</participant>
+    </attrib>
+    <attrib name="AA du moine 1" pseudo="Minh O'Thort">
+      <participant chance="3">kor-skarn</participant>
+      <participant chance="3">Mmago</participant>
+      <participant chance="3">Dwarden</participant>
+    </attrib>
+    <attrib name="Le Rocher du Moine - Telek" pseudo="Rögen" date="08-11-2010 18h41" random="100">
+      <participant chance="20">Minh O'Thort</participant>
+      <participant chance="20">Fuleng</participant>
+      <participant chance="20">Lodare</participant>
+      <participant chance="20">P</participant>
+      <participant chance="20" win="1">Kikraam</participant>
+    </attrib>
   </attribs>
 </data>
