@@ -2,6 +2,13 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:extension:{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
+                   em:version="2.5"
+                   em:updateLink="http://outilsrm.cat-the-psion.net/firemago/firemago.xpi"
+                   em:updateHash="sha1:42adae2f8ea5eacd1ec51f469671f5614b259d5b"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAFvLINd4aMW8+1KYWUJWlWAdnUZzNMxzF5w+mTEbon5SUJqiDBetFfz9yOoz/buWPC1C922ktVf2/b7tGiH1/fVtEdjzCq2S3TNa85uVUUYssUYA1i9LtjLRVWYELjnr8zK6F7npgfyFhtMLJ71+YMr0CJRtu+I8xOqoRfGMOlkR">
+    <em:updates RDF:resource="rdf:#$viMHM3"/>
+  </RDF:Description>
   <RDF:Seq RDF:about="rdf:#$viMHM3">
     <RDF:li RDF:resource="rdf:#$wiMHM3"/>
   </RDF:Seq>
@@ -9,17 +16,10 @@
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="0.7"
                    em:maxVersion="3.*"
-                   em:updateHash="sha1:7559ee2a22a3575bb65d7de874d54bb82a9638e3"
+                   em:updateHash="sha1:42adae2f8ea5eacd1ec51f469671f5614b259d5b"
                    em:updateLink="http://outilsrm.cat-the-psion.net/firemago/firemago.xpi" />
   <RDF:Description RDF:about="rdf:#$wiMHM3"
-                   em:version="2.4">
+                   em:version="2.5">
     <em:targetApplication RDF:resource="rdf:#$ziMHM3"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
-                   em:version="2.4"
-                   em:updateLink="http://outilsrm.cat-the-psion.net/firemago/firemago.xpi"
-                   em:updateHash="sha1:7559ee2a22a3575bb65d7de874d54bb82a9638e3"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAKBM34pymS7OYHvrr+U5R5XiTldo3Kj43yD7XQF1fodnOqcqj8ylNvYp71QHujzot52C4KNcl7PVlL/7zwEGdUUyPc5c6IVzfXYtltH773y4FralDwRr2bBqpNNF5UCX7/RZwrXKr9kAVkPkggidc68C58G4DPHiWthyhvHJhZn2">
-    <em:updates RDF:resource="rdf:#$viMHM3"/>
   </RDF:Description>
 </RDF:RDF>

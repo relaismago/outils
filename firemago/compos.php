@@ -1,6 +1,6 @@
 <?
 session_start();
-include_once ( "../admin_functions_db.php3" );
+include_once ( "../admin_functions_db.php" );
 
 
 $compoIds = $_REQUEST['composId'];

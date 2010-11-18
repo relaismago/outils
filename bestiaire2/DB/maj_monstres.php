@@ -1,7 +1,7 @@
 <?php
-require_once ("../../inc_connect.php3");
+require_once ("../../inc_connect.php");
 
-echo date("G:i:s");
+/*echo date("G:i:s");
 
 $sql="SELECT id_monstre,nbatt_monstre,vitdep_monstre,vlc_monstre,attdist_monstre FROM `best_monstres`;";
 if($query=mysql_query($sql,$db_vue_rm))
@@ -72,7 +72,7 @@ if($query=mysql_query($sql,$db_vue_rm))
     		{
     			$sompv += $retb['pdvmin_cdm'] + $retb['pdvmax_cdm'];
     			$nbrpv = $nbrpv + 2;
-    		}*/
+    		}
     	}
     	$sqlupdate  = "update best_monstres set";
     	$sqlupdate .= " pdvsom_monstre = ".$monstre['pdvsom_monstre'];
@@ -123,7 +123,12 @@ function recoup_cdm1 ($carac,$max)
 	$monstre[$carac.'nbr_monstre'] = $monstre[$carac.'nbr_monstre'] + 2;  	
   }
 }
+*/
 
-
+$sql = "UPDATE `best_races` SET `niv_base` = '20' WHERE `best_races`.`nom_race` ='Labeilleux' LIMIT 1 ;";
+if(mysql_query($sql,$db_vue_rm))
+	echo "requête ok";
+else
+	echo mysql_error();
 
 ?>

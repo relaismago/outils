@@ -1,6 +1,6 @@
 <?
 session_start();
-include_once ( "../admin_functions_db.php3" );
+include_once ( "../admin_functions_db.php" );
 include_once ( "../bestiaire2/Libs/functions.php" );
 include_once ( "../bestiaire2/DB/inc_initdata.php" );
 

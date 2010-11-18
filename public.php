@@ -1,3 +1,3 @@
 <?
-	include("get_vue.php3");
+	include("get_vue.php");
 ?>

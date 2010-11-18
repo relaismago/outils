@@ -30,7 +30,7 @@ if (isset($HTTP_POST_VARS['nmin'])) {
 	$nmin=-100; $nmax=0;
 }
 
-include("./inc_connect.php3");
+include("./inc_connect.php");
 include("./statFunctions.php");
 
 ?>

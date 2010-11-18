@@ -45,7 +45,7 @@ function engine_guilde($isAdmin,$id)
 	// Sinon, on affiche la liste des baronnies afin de donner un 
 	// lien pour les éditer
 	}else {
-		// l'ajout des guildes dans la bdd se fait avec update_troll.php3
+		// l'ajout des guildes dans la bdd se fait avec update_troll.php
 		// Donc on fait pas de liens "ajouter une guilde"
 		// $id peut valoir sort_diplomatie pour trier par diplomatie
 		afficherListeGuildes($id);
@@ -101,7 +101,7 @@ function engine_troll($isAdmin,$id, $troll_type_action, $troll_action)
 	// Sinon, on affiche la liste des baronnies afin de donner un 
 	// lien pour les éditer
 	} else {
-		// l'ajout des Trolls dans la bdd se fait avec update_troll.php3
+		// l'ajout des Trolls dans la bdd se fait avec update_troll.php
 		// Donc on fait pas de liens "ajouter un troll"
 		// $id peut valoir sort_tk, sort_wanted, all, guilde_diplomatie pour trier 
 		afficherListeTrolls($id);

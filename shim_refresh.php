@@ -5,7 +5,7 @@ Script utilisé pour le refresh auto des trolls de la guilde
 *****/
 	include_once("inc_define_vars.php");
 	include_once("functions_auth.php");
-	include_once("functions.php3");
+	include_once("functions.php");
 
 if (md5($_REQUEST['auto']) == MD5_PASS_EXTERNE) {
 	if ($_REQUEST['refresh_error'] == 'oui')

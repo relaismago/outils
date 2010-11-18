@@ -45,7 +45,7 @@ function init_cockpit() {
 
     function updateRadar(x,y,z)
     { 
-      document.getElementById("radar").src="gps.php3?mode_radar=radar&vue=10&taille_map=120&x="+x+"&y="+y+"&quadrillage=on&repere=on&viseur=non&info_text=50&relaismago=on&baronnies=&tanieres_rm=&gowaps_rm=&allies=on&ennemis=on&guilde_ennemie=-1&champignons=non";
+      document.getElementById("radar").src="gps.php?mode_radar=radar&vue=10&taille_map=120&x="+x+"&y="+y+"&quadrillage=on&repere=on&viseur=non&info_text=50&relaismago=on&baronnies=&tanieres_rm=&gowaps_rm=&allies=on&ennemis=on&guilde_ennemie=-1&champignons=non";
 	}
 				window.onload = onLoad;
 			</script>

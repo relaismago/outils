@@ -3,8 +3,8 @@ global $Auth, $AuthTroll, $AuthGuilde;
 
 session_start ();
 
-include_once ( "../inc_connect.php3" );
-include_once ( "inc_FM_authent.php3" );
+include_once ( "../inc_connect.php" );
+include_once ( "inc_FM_authent.php" );
 
 // ----------------------------------------
 // Main

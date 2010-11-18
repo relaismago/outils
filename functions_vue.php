@@ -419,11 +419,11 @@
 
 ########################## Déclaration des fonctions
 
-include_once ("inc_connect.php3");
+include_once ("inc_connect.php");
 include_once ("functions_auth.php");
-include_once ("functions.php3");
-include_once ("admin_functions.php3");
-include_once ("functions_dev.php3");
+include_once ("functions.php");
+include_once ("admin_functions.php");
+include_once ("functions_dev.php");
 
 include_once ("functions_help.php");
 require_once('includes/ggc_groupe.class.php');
@@ -440,7 +440,7 @@ function initRefresh()
 	if ($_REQUEST['refresh'] == 'copie_colle') { 
 		
 			echo "<script language='JavaScript'>";
-			echo "document.location.href='get_vue.php3?id_troll=$id_troll'";
+			echo "document.location.href='get_vue.php?id_troll=$id_troll'";
 			echo "</script>";
 
 	} elseif ($refresh == 's_public') {

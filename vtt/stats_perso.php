@@ -1,5 +1,5 @@
 <?
-require_once("../inc_connect.php3");
+require_once("../inc_connect.php");
 require_once("../functions_auth.php");
 require_once("../top.php");
 require_once("../secure.php");

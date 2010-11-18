@@ -1,10 +1,10 @@
 <?
 
-include_once ("inc_connect.php3");
+include_once ("inc_connect.php");
 include_once ("inc_define_vars.php");
 
-include_once ("admin_functions.php3");
-include_once ("admin_functions_db.php3");
+include_once ("admin_functions.php");
+include_once ("admin_functions_db.php");
 include_once ("functions_engine.php");
 include_once ("functions_display.php");
 

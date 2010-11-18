@@ -1,9 +1,8 @@
 // Configuration
-var URLTopMH = URLMH;
+var URLTopMH = 'http://games.mountyhall.com';
 var URLPack = '/mountyhall/installPack.php';
 var URLVue = '/mountyhall/MH_Play/Play_vue.php';
 var URLProfil = '/mountyhall/MH_Play/Play_profil.php';
-var URLProfilOld = '/mountyhall/MH_Play/Play_profil_old.php';
 var URLOption = '/mountyhall/MH_Play/Options/Play_o_Interface.php';
 var URLMessageBot = '/mountyhall/Messagerie/ViewMessageBot.php';
 var URLCompCdm = '/mountyhall/MH_Play/Actions/Competences/Play_a_Competence16b.php';
@@ -27,16 +26,14 @@ var URLAttaque = '/mountyhall/MH_Play/Actions/Play_a_Attack.php';
 var URLLieu = '/mountyhall/MH_Lieux/Lieu_Description.php';
 var URLMenu = '/mountyhall/MH_Play/Play_menu.php';
 var URLAutres = '/mountyhall/MH_Play/Actions';
-var URLTaniereTroll = '/mountyhall/View/TaniereDescription.php';
 
 // Modify HERE for local testing
-var URLOutils = URLRM;
-var URLTopJs = URLOutils + 'firemago/';
+var URLOutils = 'http://outilsrm.kathryl.net/';
+var URLTopJs = 'http://outilsrm.kathryl.net/firemago/';
 
 var URLVueJs = 		URLTopJs + 'RM_vue.js';
 var URLMessageBotJs = 	URLTopJs + 'RM_message_bot.js';
 var URLProfilJs = 		URLTopJs + 'RM_profil.js';
-var URLProfilOldJs = 		URLTopJs + 'RM_profil_old.js';
 var URLOptionJs = 		URLTopJs + '';
 var URLCompCdmJs = 	URLTopJs + 'RM_comp_cdm.js';
 var URLNewsJs = 		URLTopJs + 'RM_news.js';
@@ -53,7 +50,6 @@ var URLAttaqueJs = URLTopJs + 'RM_attaque.js';
 var URLLieuJs = URLTopJs + 'RM_lieu.js';
 var URLMenuJs = URLTopJs + 'RM_menu.js';
 var URLAutresJs = URLTopJs + 'RM_autres.js';
-var URLTaniereTrollJs = URLTopJs + 'RM_tanieres.js';
 
 var URLBestiaire = 	URLOutils + 'bestiaire2/bestiaire.php?Monstre=';
 var URLRGTroll = URLOutils + 'engine_view.php?troll=';
@@ -97,10 +93,6 @@ else if ( window.self.location.toString ().indexOf( URLProfil ) != -1 )
 {
 	includeScript ( window.self, URLProfilJs );
 }
-else if ( window.self.location.toString ().indexOf( URLProfilOld ) != -1 ) 
-{
-	includeScript ( window.self, URLProfilOldJs );
-}
 else if ( window.self.location.toString ().indexOf( URLOption ) != -1 ||  window.self.location.toString().indexOf ( URLPack ) != -1 ) 
 {
 	includeScript ( window.self, URLOptionJs );
@@ -115,6 +107,7 @@ else if ( window.self.location.toString ().indexOf( URLTaniereAchat ) != -1 )
 }
 else if ( window.self.location.toString ().indexOf( URLNews ) != -1 ) 
 {
+//	window.location.href = URLTopMH + URLProfil;
 	includeScript ( window.self, URLNewsJs );
 } 
 else if ( window.self.location.toString ().indexOf( URLSuivantsProfil ) != -1 ) 
@@ -177,11 +170,6 @@ else if ( window.self.location.toString ().indexOf( URLAutres ) != -1 )
 {
   includeScript ( window.self, URLAutresJs );
 }
-else if ( window.self.location.toString ().indexOf( URLTaniereTroll ) != -1 )
-{
-  includeScript ( window.self, URLTaniereTrollJs );
-}
-
 
 function includeScript ( win, scriptURL )
 {
@@ -196,9 +184,6 @@ function includeScript ( win, scriptURL )
 		var insertPoint = currentDocument.getElementsByTagName ('body')[0];
 		try {
 			insertPoint.parentNode.appendChild ( newScript );
-		} catch ( e ) 
-		{ 
-			alert ( 'Could not display FireMago page-specific script : ' + e ); 
-		}
+		} catch ( e ) { alert ( 'Could not display FireMago page-specific script : ' + e ); }
 	}
 }

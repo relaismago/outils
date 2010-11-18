@@ -1,6 +1,6 @@
 <?
 session_start();
-include_once ( "../admin_functions_db.php3" );
+include_once ( "../admin_functions_db.php" );
 
 $compoNames = $_REQUEST['compo'];
 $compoLoc = $_REQUEST['loc'];

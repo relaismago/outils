@@ -13,8 +13,8 @@ if ( (md5($_REQUEST['pass']) != MD5_PASS_EXTERNE) &&
 	   ($_SESSION[admin] != "authenticated") )
 	die("Accès refusé");
 
-include_once('inc_connect.php3');
-include_once('admin_functions_db.php3');
+include_once('inc_connect.php');
+include_once('admin_functions_db.php');
 
 global $db_vue_rm;
 

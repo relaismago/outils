@@ -238,7 +238,7 @@ function afficherLien($type_objet,$type_lien,$id,$x="",$y="",$z="",$titre="",$wr
   $mh_base_link = "href=http://games.mountyhall.com/mountyhall/View";
   switch($type_objet) {
     case "troll" :
-      $lien_gps_adv = "<a href=gps_advanced.php3?swap_affutage=block&";
+      $lien_gps_adv = "<a href=gps_advanced.php?swap_affutage=block&";
       $lien_gps_adv .= "swap_reglage=block&vue=40&poi_viseur_id_troll=$id&";
       $lien_gps_adv .= "relaismago_old=on&relaismago=on&allies_old=on&ennemis_old=on&guilde_ennemie=-1>";
 
@@ -257,7 +257,7 @@ function afficherLien($type_objet,$type_lien,$id,$x="",$y="",$z="",$titre="",$wr
     case "gowap" :
       $lien_fiche = "<a href=/engine_view.php?gowap=$id>";
       $lien_vue2d = "<a href=/cockpit.php?cX=$x&cY=$y&cZ=$z>";
-      $lien_gps_adv = "<a href=/gps_advanced.php3?taille_map=600&vue=40&x=$x&y=$y&";
+      $lien_gps_adv = "<a href=/gps_advanced.php?taille_map=600&vue=40&x=$x&y=$y&";
       $lien_gps_adv .= "gowaps_rm_old=non&gowaps_rm=on&allies_old=non&allies=non&ennemis_old=non&ennemis=non";
       $lien_gps_adv .= "&swap_poi=block&vue=20>";
 
@@ -266,7 +266,7 @@ function afficherLien($type_objet,$type_lien,$id,$x="",$y="",$z="",$titre="",$wr
     case "taniere" :
       $lien_fiche = "<a href=/engine_view.php?taniere=$id>";
       $lien_vue2d = "<a href=/cockpit.php?cX=$x&cY=$y&cZ=$z>";
-      $lien_gps_adv = "<a href=/gps_advanced.php3?taille_map=600&vue=40&x=$x&y=$y&";
+      $lien_gps_adv = "<a href=/gps_advanced.php?taille_map=600&vue=40&x=$x&y=$y&";
       $lien_gps_adv .= "tanieres_rm_old=non&tanieres_rm=on&allies_old=non&allies=non";
       $lien_gps_adv .="&ennemis_old=non&ennemis=non&swap_poi=block&vue=20>";
       $lien_mh_profil = "<a $mh_base_link/TaniereDescription.php?ai_IDLieu=$id>";

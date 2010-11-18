@@ -1,7 +1,7 @@
 <?
 session_start();
 
-include_once ( "../admin_functions_db.php3" );
+include_once ( "../admin_functions_db.php" );
 
 setlocale (LC_TIME, 'fr_FR.ISO8859-1');
 

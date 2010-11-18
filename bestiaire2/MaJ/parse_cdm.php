@@ -23,7 +23,7 @@
 *                                                                             *
 *******************************************************************************/
 
-require_once ("../../inc_connect.php3"); // connexion à la base
+require_once ("../../inc_connect.php"); // connexion à la base
 require_once ("../DB/inc_initdata.php");     // recup des données statiques
 require_once ("../Libs/functions.php");  // fonction d'affichage du résultat du parsing
 require_once ("../Libs/inc_affichage.php");  // fonction d'affichage du résultat du parsing

@@ -395,7 +395,7 @@ function toggleTableau( num ) {
 
 function filterMonsters ()
 {
-	var anchorTitle = tableMonsters[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
+	var anchorTitle = tableMonsters[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0]; // ANCHOR
 	document.getElementsByName ( 'delgowap' )[0].checked=false;
 	cookifyButton ( document.getElementsByName ( 'delgowap' )[0] );
 	if ( document.getElementsByName ( "filterMonsters" )[0].value != '' )
@@ -413,7 +413,7 @@ function filterMonsters ()
 
 function filterTrolls ()
 {
-	var anchorTitle = tableTrolls[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
+	var anchorTitle = tableTrolls[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0]; // ANCHOR
 	document.getElementsByName ( 'delint' )[0].checked = false;
 	cookifyButton ( document.getElementsByName ( 'delint' )[0] );
 	if ( document.getElementsByName ( "filterTrolls" )[0].value != '' )
@@ -431,7 +431,7 @@ function filterTrolls ()
 
 function filterTreasures ()
 {
-	var anchorTitle = tableTreasures[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]; // ANCHOR
+	var anchorTitle = tableTreasures[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0]; // ANCHOR
 	document.getElementsByName ( 'delgg' )[0].checked = false;
 	cookifyButton ( document.getElementsByName ( 'delgg' )[0] );
 	document.getElementsByName ( 'delcomp' )[0].checked = false;

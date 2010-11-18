@@ -19,7 +19,7 @@ function acronyme($chaine)
   if (eregi('Identification.+', $chaine, $trash)) {return "IdT";}
   if (eregi('Invisibilit.+', $chaine, $trash))    {return "Invisi";}
   if (eregi('Projectile.+', $chaine, $trash))     {return "PM";}
-  if (eregi('Projection', $chaine, $trash))        {return "Projection";}
+  if (eregi('Projection', $chaine, $trash))       {return "Projection";}
   if (eregi('Rafale.+', $chaine, $trash))         {return "RP";}
   if (eregi('Sacrifice', $chaine, $trash))        {return "Sacrifice";}
   if (eregi('Vampirisme', $chaine, $trash))       {return "Vampi";}
@@ -27,8 +27,12 @@ function acronyme($chaine)
   if (eregi('T.l.portation', $chaine, $trash))    {return "TP";}
   if (eregi('T.l.kin.sie', $chaine, $trash))      {return "T&eacute;l&eacute;kin&eacute;sie";}
   if (eregi('.+Accrue', $chaine, $trash))         {return "VA";}
-  if (eregi('.+Lointaine', $chaine, $trash))       {return "VL";}
+  if (eregi('.+Lointaine', $chaine, $trash))      {return "VL";}
   if (eregi('Vue.+', $chaine, $trash))            {return "VT";}
+  if (eregi('L.vitation.+', $chaine, $trash))     {return "L&eacute;vitation";}
+  if (eregi('Sublifusion.+Medius', $chaine, $trash))    {return "Sublifusion Magesque Medius";}
+  if (eregi('Sublifusion.+Minus', $chaine, $trash))    {return "Sublifusion Magesque Minus";}
+  if (eregi('Sublifusion.+Maexus', $chaine, $trash))    {return "Sublifusion Magesque Maexus";}
   
   return htmlspecialchars($chaine, ENT_QUOTES);
 }
@@ -89,10 +93,11 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		if(eregi('[ \t]*R.g.n.ration\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)[ \t]*-{3}.+',$lignes[$i],$resultat)):
 			$troll_reg_base	= trim($resultat[1]);
 			$troll_reg_bm	= trim($resultat[2]);
+			//$troll_reg_bmm	= trim($resultat[3]);
  		elseif (eregi('[ \t]*R.g.n.ration\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_reg_base	= trim($resultat[1]);
-			$troll_reg_bm	= trim($resultat[2]);  
-                endif;
+			$troll_reg_bm	= trim($resultat[2]);
+        endif;
 		
 		if(eregi('[ \t]*Atta.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_att_base	= trim($resultat[1]);
@@ -161,7 +166,7 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> DLA	(base/réél)	</b></td><td width='50%'>".$troll_dla_base_hh."H".$troll_dla_base_mm."</td><td width='17%'>".exporter(troll_dla_reel_hh)."H".exporter(troll_dla_reel_mm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> VUE	(base/bm)	</b></td><td width='50%'>".exporter(troll_vue_base)."</td><td width='17%'>".exporter(troll_vue_bm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> PV			</b></td><td width='50%'>".exporter(troll_pvact)."/".exporter(troll_pv)."</td><td width='17%'>&nbsp;</td></tr>\n";
-		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> REG	(base/bm)	</b></td><td width='50%'>".exporter(troll_reg_base)."</td><td width='17%'>".exporter(troll_reg_bm)."</td></tr>\n";	
+		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> REG	(base/bm)	</b></td><td width='50%'>".exporter(troll_reg_base)."</td><td width='17%'>".exporter(troll_reg_bm)." ".exporter(troll_reg_bmm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> ATT	(base/bm)	</b></td><td width='50%'>".exporter(troll_att_base)."</td><td width='17%'>".exporter(troll_att_bm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> ESQ	(base/bm)	</b></td><td width='50%'>".exporter(troll_esq_base)."</td><td width='17%'>".exporter(troll_esq_bm)."</td></tr>\n";
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> DEG	(base/bm)	</b></td><td width='50%'>".exporter(troll_deg_base)."</td><td width='17%'>".exporter(troll_deg_bm)."</td></tr>\n";	

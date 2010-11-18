@@ -1,5 +1,5 @@
 <?
-include('gps_advanced_functions.php3');
+include('gps_advanced_functions.php');
 function afficherCockpitRadar()
 {
 	$vue = 10;
@@ -337,7 +337,7 @@ function javascriptRecherchator()
 			document.getElementById("link_rg").href ='engine_view.php?troll='+id_troll;
 			document.getElementById("link_mh").href ='http://games.mountyhall.com/mountyhall/View/PJView.php?ai_IDPJ='+id_troll;
 
-      lien_gps_adv = "gps_advanced.php3?swap_affutage=block&";
+      lien_gps_adv = "gps_advanced.php?swap_affutage=block&";
       lien_gps_adv = lien_gps_adv + "swap_reglage=block&vue=40&guilde_ennemie=-1&";
       lien_gps_adv = lien_gps_adv + "relaismago_old=on&relaismago=on&allies_old=on&ennemis_old=on&poi_viseur_id_troll=";
 
@@ -422,8 +422,8 @@ function javascriptRecherchator()
 
 		function updateRadar(x,y,z,mid)
 		{
-			document.getElementById("radar").src="gps.php3?mode_radar=radar&vue=10&taille_map=120&x="+x+"&y="+y+"&quadrillage=on&repere=on&viseur=non&info_text=50&relaismago=on&baronnies=&tanieres_rm=&gowaps_rm=&allies=on&ennemis=on&guilde_ennemie=-1&champignons=non";
-			document.getElementById('lien_gps').href="gps_advanced.php3?swap_affutage=block&swap_reglage=block&vue=40&poi_viseur_id_troll="+mid+"&relaismago_old=on&relaismago=on&allies=on&ennemis=on&allies_old=on&ennemis_old=on&guilde_ennemie=-1";
+			document.getElementById("radar").src="gps.php?mode_radar=radar&vue=10&taille_map=120&x="+x+"&y="+y+"&quadrillage=on&repere=on&viseur=non&info_text=50&relaismago=on&baronnies=&tanieres_rm=&gowaps_rm=&allies=on&ennemis=on&guilde_ennemie=-1&champignons=non";
+			document.getElementById('lien_gps').href="gps_advanced.php?swap_affutage=block&swap_reglage=block&vue=40&poi_viseur_id_troll="+mid+"&relaismago_old=on&relaismago=on&allies=on&ennemis=on&allies_old=on&ennemis_old=on&guilde_ennemie=-1";
 
 		}
 

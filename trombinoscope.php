@@ -1,7 +1,7 @@
 <?
 
-include_once('inc_connect.php3');
-include_once('admin_functions_db.php3');
+include_once('inc_connect.php');
+include_once('admin_functions_db.php');
 
 
 init_trombinoscope();

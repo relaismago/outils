@@ -58,10 +58,10 @@ var URLTaniereTrollJs = URLTopJs + 'RM_tanieres.js';
 var URLBestiaire = 	URLOutils + 'bestiaire2/bestiaire.php?Monstre=';
 var URLRGTroll = URLOutils + 'engine_view.php?troll=';
 var URLRGGuilde = URLOutils + 'engine_view.php?guilde=';
-var URLLoginRM = 	URLTopJs + 'FM_authent.php3';
+var URLLoginRM = 	URLTopJs + 'FM_authent.php';
 var URLVtt = 		URLOutils + 'vtt/completer_profil.php';
 var URLGgc = 		URLOutils + 'ggc/maj_profil.php';
-var URLVue2D= 	URLOutils + 'get_vue.php3';
+var URLVue2D= 	URLOutils + 'get_vue.php';
 var URLGowap = URLOutils + 'engine_view.php?gowap=';
 
 var URLTrollInfos = URLTopJs + 'trolls.php?';

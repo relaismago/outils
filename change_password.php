@@ -78,7 +78,7 @@ function initChangePassword($act="")
 
 function changeDbPassword()
 {
-	include('inc_connect.php3');
+	include('inc_connect.php');
 
   global $db_vue_rm;
 

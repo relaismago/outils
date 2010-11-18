@@ -121,5 +121,8 @@
       <participant chance="20">P</participant>
       <participant chance="20" win="1">Kikraam</participant>
     </attrib>
+    <attrib name="test" pseudo="51166">
+      <participant chance="15">15</participant>
+    </attrib>
   </attribs>
 </data>

@@ -1,7 +1,7 @@
 <?
 
 include_once ("bugs_functions_db.php");
-include_once ("admin_functions.php3");
+include_once ("admin_functions.php");
 
 function afficherFicheBug($id_bug)
 {
