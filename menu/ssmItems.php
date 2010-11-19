@@ -86,6 +86,7 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"Ustensiles", "Les ustensiles du Hall", "/pratique/ustensils.php");
   $pos = addItemMenu(false,false,$pos,"PartagePX", "Partage des PX du groupe", "/partagepx/partage.php");
   $pos = addItemMenu(false,false,$pos,"IRoll", "Attributions diverses", "/iroll/");
+  $pos = addItemMenu(false,false,$pos,"GMAB", "Give me a battlefield", "/gmab/");
 	
   $pos = addItemMenu(false,true,'special',"Spécial", "Spécial");
   $pos = addItemMenu(false,false,$pos,"Miss Mountyhall 2005!", "Miss Mountyhall 2005!", "/miss/miss.php");
