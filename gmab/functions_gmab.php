@@ -162,11 +162,11 @@
 		
 		$retour = array();
 		
-		// extrait les monstres de la vue
-		$s = preg_replace("#.*DEBUT MONSTRES#s","$1",$view);
-		$s = trim(preg_replace("#\#FIN MONSTRES.*#s","",$s));		
+		// Récupération des monstres
+		$s = preg_split("#DEBUT MONSTRES#s",$view);
+		$s = preg_split("#\#FIN MONSTRES.*#s",$s[1]);
 		
-		$monsters = explode("\n",$s);
+		$monsters = explode("\n",trim($s[0]));
 		
 		// supprime les gowaps et parse sous forme de tableau les monstres
 		foreach( $monsters as $monster )
