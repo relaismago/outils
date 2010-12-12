@@ -1,21 +1,19 @@
 <?php
 
-        function do_attrib($post){
+        function do_attrib( $post, $pseudo ){
                 
                 $retour = "";
                 $start = "<tr class='mh_tdtitre' align='center'><td class='mh_tdpage'>";
                 $end = "</td></tr>";
                 
-                if ( array_key_exists('attrib',$post) && array_key_exists('pseudo',$post) ){
+                if ( array_key_exists('attrib',$post) ){
                         
-                        $nom_attrib = trim($post['attrib']);
-                        $pseudo = trim($post['pseudo']);
+                        $nom_attrib = htmlspecialchars( trim($post['attrib']), ENT_QUOTES );
+                        $pseudo = htmlspecialchars( trim($pseudo), ENT_QUOTES );
                         
                         // vérifie les saisies
                         if ( empty($nom_attrib) )
                                 $retour .= $start ."<h3>Veuillez saisir un nom d'attribution !</h3>". $end;
-                        if ( empty($pseudo) )
-                                $retour .= $start ."<h3>Veuillez saisir un nom de Troll !</h3>". $end;
                                 
                         if ( !empty($nom_attrib) && !empty($pseudo) ){
                                 
@@ -38,7 +36,7 @@
                         
                         $nom_attrib = $post['hidden'];
                         $chance = intval(trim($post['chance']));
-                        $pseudo = trim($post['pseudo']);
+                        $pseudo = htmlspecialchars( trim($post['pseudo']), ENT_QUOTES );
                         $retour .= $start ."<h2>Nom de l'attribution : " .$nom_attrib. "</h2>". $end;;
                         
                         // vérifie les saisies
@@ -107,11 +105,11 @@
         function create_participant($nom_attrib,$pseudo,$chance){
         // ajoute un participant dans le fichier xml
                 
-                $dom = get_dom();       
+                $dom = get_dom();      
 
                 $participant = $dom->createElement("participant",utf8_encode($pseudo));
                 $participant->setAttribute("chance", $chance);                  
-                get_attribution($dom,$nom_attrib)->appendChild($participant);
+                get_last_attribution($dom)->appendChild($participant);
                 $dom->formatOutput = true;
                 $dom->save("attribution.xml");          
                 
@@ -149,7 +147,7 @@
         function check_participants($nom_attrib){
         // vérifie l'existance de participants dans une attribution
                 
-                return get_attribution(get_dom(),$nom_attrib)->hasChildNodes();
+                return get_last_attribution(get_dom())->hasChildNodes();
                 
         }
         
@@ -171,7 +169,7 @@
                 $retour = "";
                 $dom = get_dom();               
                 
-                $participants = get_attribution($dom,$nom_attrib)->getElementsByTagName("participant");
+                $participants = get_last_attribution($dom)->getElementsByTagName("participant");
                                 
                 foreach ( $participants as $participant )       
                         $retour .= "<tr class='mh_tdtitre'><td align='center'>" .utf8_decode(stripslashes($participant->nodeValue)). "</td><td align='center'>" .$participant->getAttribute("chance"). "</td></tr>";    
@@ -204,16 +202,17 @@
                 
         }
         
-        function get_attribution($dom,$nom_attrib){
+        function get_last_attribution($dom){
         // retourne l'attribution correspondante
         
-                foreach( $dom->getElementsByTagName("attrib") as $attrib )
-                        if ( utf8_decode($attrib->getAttribute("name")) == $nom_attrib )
-                                return $attrib; 
+        		$attrib = NULL;
+				$attrib = $dom->getElementsByTagName("attrib")->item($dom->getElementsByTagName("attrib")->length-1);			
+	
+				return $attrib;		
 
         }
         
-        function get_result($nom_attrib){
+        function get_result(){
         // retourne le code html du résultat de l'attribution
                 
                 $retour = "";
@@ -223,7 +222,7 @@
                 
                 $dom = get_dom();               
                 
-                $attribution = get_attribution($dom,$nom_attrib);
+                $attribution = get_last_attribution($dom);
                 
                 if ( $attribution->hasAttribute("random") )
                         $retour = $start ."<h2>Attribution d&eacute;ja  effectu&eacute; !</h2>". $end;

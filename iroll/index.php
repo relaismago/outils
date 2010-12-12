@@ -29,12 +29,9 @@ require_once ( "functions_iroll.php" );
         </tr>
         <tr class="mh_tdtitre" align='center'>
                 <td class='mh_tdpage'>
-                Eviter les caract&eacute;res sp&eacute;ciaux tel que "\/ pour chaque saisie.
                 <form action="attribution.php" method="post" >
                         <label for="attrib">Nom de l'attribution : </label>
-                        <input name="attrib" id="attrib" type="text" />
-                        <label for="pseudo">Nom du responsable : </label>
-                        <input name="pseudo" id="pseudo" type="text" />                 
+                        <input name="attrib" id="attrib" type="text" />                
                         <input type="submit" value="GO !" />
                 </form>
                 </td>

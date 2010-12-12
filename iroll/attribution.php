@@ -24,8 +24,12 @@ require_once ( "functions_iroll.php" );
 <br/>
 <br/>
 <table width="80%" class='mh_tdborder' align='center' cellspacing='0'>
-        <?php echo do_attrib($_POST); ?>
-        <br/>
+        <?php 
+			if ( isset($_SESSION["AuthNomTroll"]) ) 
+				echo do_attrib( $_POST, $_SESSION["AuthNomTroll"] ); 
+			else 
+				echo "<tr class='mh_tdtitre' align='center'><td class='mh_tdpage'>Il faut être connecté !</tr></td>";
+		?>
         <tr class='mh_tdtitre' align='center'><td class='mh_tdpage'>
                 <a href="index.php" style="text-decoration:none;"><img src="img/flecheg.jpg" alt="back"/></a>
         </tr>
