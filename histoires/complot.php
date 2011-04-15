@@ -187,7 +187,7 @@ function hist_complot_PeaceTroll_1()
 	Déçu, Peace&Troll se retira tard dans sa caverne apres avoir erré durant de longues heures a travers les entrailles du Hall... Des centaines de questions lui brulaient la cervelle, ce besoin de réflexion le faisait chavirer tant la force necessaire etait grande... Le mysterieux "emplumé", comme il aimait a le nommer, l'avait convié dans la reserve du grand Takian afin d'y tenir un pow-wow, et l'arrivée impromptue d'un Géneral et du terrible Bollocks, armé de deux protubérances dignes du plus puissant Balrog, les avait contraint a se séparer sans même pouvoir entamer de véritable discussion ni finir les amuses-gueule du Shaman...<br>
 	Son amertume dissipée, il décida d'agir, de renverser le pouvoir afin de lui meme devenir chef, puis conquerir plus de territoires suivi d'une armée rassemblant plus de trolls qu'aucune autre, pour pouvoir enfin devenir Roi et gouverner le Hall avec fermete et honneur. Et quand cela serait fait, il pourrait enfin prendre sa revanche sur Poass, celui a cause de qui tout arrive, celui qui fait tomber les pierres quand le Gob est mourrant... enfin pouvoir venger la Mort de ses parents qu'il n'avait même pas pu gouter...<br>
 	<br>
-	Mais pour le moment il devait aller retrouver l'emplumé pour lui dire que sa salade etait vraiment pas bonne et trop seche... en plus elle lui donnait mal au crane et les couleurs tout autour c'est rigolo au début mais apres ca lasse.....<nr>
+	Mais pour le moment il devait aller retrouver l'emplumé pour lui dire que sa salade etait vraiment pas bonne et trop seche... en plus elle lui donnait mal au crane et les couleurs tout autour c'est rigolo au début mais apres ca lasse.....<br>
 	<i>"J'sui hoù mouà ?"</i> furent ses derniers mots avant un sommeil liberé de toutes ces questions dont jamais il ne connut l'origine...<br>
 	<?	tutorial_haut_bas_droit("http://www.pipeshow.net/RM/avatars/Peaceandtroll_avatar_bleu.gif", "Peace & Troll (31202)");
 }
@@ -614,7 +614,7 @@ function hist_complot_Silkette_2()
 	Ensuite, à leur grand étonnement, il entrèrent dans la cuisine de Silkette . Personne, à part ceux qui ont pu l’aider et son Kapoo d’amour, n’avait jamais vu cet endroit. Ben non… personne ne peut entrer en ce royaume secret d’où Silkette fait sortir nombre de plats dont les recettes restent secrètes…<br>
 	Ils purent sentir les odeurs alléchantes des plat qui mijotaient pour le souper… Il étaient comme en transe. Et pourtant il n’étaient pas sous l’influence de l’Herbe Qui Chante! Mais c’était pour eux comme s'ils avaient pénétré dans un sanctuaire sacré… Elle les fit enfin entrer dans le garde manger où reposaient afin de rancir nombre de carcasses de monstres…<br>
 	Ils étaient là, bouche bée et muets d’admiration…<br>
-	<bt>
+	<br>
 	<i>"Et bien ! Vos cervelles ne sont pas plus grandes qu’un petit poids !!! Pourquoi n’êtes vous pas venus plus tôt ??? Plus vite vous veniez et plus vite je pouvais vous exposer mon plan."</i><br>
 	P&T pris la parole : <i>"Heu….. Je peux prendre la parole au nom de tous mes amis ici présent ? Mais c’est un peu hors sujet…"<br>
 	"Bah… vas-y toujours, on verra si ça en valait la peine…"<br>
