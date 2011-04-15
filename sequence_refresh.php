@@ -88,7 +88,7 @@ function initSequenceRefresh($state)
   echo "Lieux mis à jour $lieux<br>";
 
 	if ($state != 51) {
-		echo "Champignons et Troll mis à jour $rouge<br>";
+		echo "Champignons mis à jour $rouge<br>";
 
 		?>
 			</td></tr>
@@ -120,14 +120,13 @@ function suiteSequenceRefresh($auto,$state,$maj_troll_id,$maj_x_troll="",$maj_y_
 		$sql .= " WHERE id_troll=$maj_troll_id";
 		mysql_query($sql,$db_vue_rm);	
 		
-		$lien = "cockpit.php?id_troll=$maj_troll_id";//&centrer=1&cX=";
-		//$lien .= "$maj_x_troll&cY=$maj_y_troll&cZ=$maj_z_troll";
+		$lien = "cockpit.php?id_troll=$maj_troll_id";
 
-		@unlink("vues/$maj_troll_id");
-		@unlink("vues/vue_tmp.$maj_troll_id.txt");
+		//@unlink("vues/$maj_troll_id");
+		//@unlink("vues/vue_tmp.$maj_troll_id.txt");
 
 		if (!$auto) {
-			echo "Champignons et Troll mis à jour $vert<br><br>";
+			echo "Champignons mis à jour $vert<br><br>";
 			echo "<b>La base de données a été mise à jour avec la vue du troll $maj_troll_id.</b>";
 		
 			echo "<br><h2><a href='$lien'>Cliquez ici pour aller à la vue2d ou attendez 2 secondes</h2></a>";

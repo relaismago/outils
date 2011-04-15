@@ -87,38 +87,38 @@ UpdateIt();
 </script>
 <!-- end -->
 
-<br><br><table width='100%'>
+<br/><br/><table width='100%'>
 <tr valign='top'><td>
-<? afficherFormAuth(); ?>
+<?php afficherFormAuth(); ?>
 </td><td align='left' width='60%' valign='top'>
 
-<? if ( userIsGuilde() ) { ?>
+<?php if ( userIsGuilde() ) { ?>
 <table width="100%" class='mh_tdborder'>
 	<tr class="mh_tdtitre">
 		<td>
-			<marquee behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="3" onmouseover='this.stop()' onmouseout='this.start()'>
-<? echo "Maj liste trolls : ".getTraitement("TROLLS"); ?>
+			<marquee behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="3" onmouseover='this.stop();' onmouseout='this.start();'>
+<?php echo "Maj liste trolls : ".getTraitement("TROLLS"); ?>
  &nbsp; &nbsp; &nbsp; &nbsp; 
-<? echo "Maj liste guildes: ".getTraitement("GUILDES"); ?>
+<?php echo "Maj liste guildes: ".getTraitement("GUILDES"); ?>
  &nbsp; &nbsp; &nbsp; &nbsp; 
-<? echo "Maj avatars clairs: ".getTraitement("AVATARS_CLAIRS"); ?>
+<?php echo "Maj avatars clairs: ".getTraitement("AVATARS_CLAIRS"); ?>
  &nbsp; &nbsp; &nbsp; &nbsp; 
-<? echo "Maj avatars sombres: ".getTraitement("AVATARS_SOMBRES"); ?>
+<?php echo "Maj avatars sombres: ".getTraitement("AVATARS_SOMBRES"); ?>
  &nbsp; &nbsp; &nbsp; &nbsp; 
-<? echo "Maj affiches wanted: ".getTraitement("AFFICHES_WANTED"); ?>
+<?php echo "Maj affiches wanted: ".getTraitement("AFFICHES_WANTED"); ?>
 			</marquee>
 		</td>
 	</tr>
-		<?
+		<?php
 		loterie_info_top();
 		?>
 </table>
-<? } ?>
+<?php } ?>
 
 
 </td>
 
-<? if ( userIsGuilde() || userIsGroupSpec() ) { 
+<?php if ( userIsGuilde() || userIsGroupSpec() ) { 
 	echo "<td align='left' width='40%' valign='top'>";
 	afficherAccesRapide();
 	$recherche = new recherche();
@@ -129,7 +129,7 @@ UpdateIt();
 </tr>
 </table>
 
-<? 
+<?php 
 unset($_SESSION['options']);
 if ( userIsGuilde() || userIsGroupSpec() ) { 
 	if (!isset($_SESSION['options'])) {
@@ -148,9 +148,9 @@ if ($options["date_option"] == '') {
 				r&eacute;gl&eacute;es ! C'est par là => <a href='/options.php'>Ici</a></font></h2>
 			</td>
 		</tr>
-	</table><br>
+	</table><br/>
 
-	<?
+	<?php
 }
 ?>
     <div id="status_recherche" style="display: none">
@@ -164,6 +164,6 @@ if ($options["date_option"] == '') {
     </div>
     <div id="recherche_cage">
     </div>
-<?
+<?php
 } 
 ?>

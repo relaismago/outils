@@ -17,9 +17,9 @@ function init_trombinoscope()
 function view_all()
 {
 
-	$type = $_REQUEST[type];
+	$type = $_REQUEST["type"];
 
-	if ($type != "")
+	if ( !empty($type) )
 		$path = "images/avatars/cache";
 	else
 		$path = "http://www.pipeshow.net/RM";
@@ -82,7 +82,7 @@ function view_all()
 			echo "<img alt=\"[".addslashes($res[nom_troll])."]\"";
 			echo " src='$path/avatars/$res[nom_image_troll]_avatar_bleu.gif' ".afficheInfosTroll($res).">";
 
-			$res[nom_troll] = "Bollocks Le TransplantÃ©";
+			$res[nom_troll] = "Bollocks Le Transplanté";
 			$res[nom_image_troll] = "Bollocks";
 			$res[nom_rang_troll] = "Monument de la Guilde (PNJ)";
 			$res[race_troll] = "Kastar";
@@ -160,38 +160,33 @@ function afficheInfosTroll($res)
 
 function affiche_ancien_blasons()
 {
+	
 	affiche_ancien("Will");
 	affiche_ancien("Rodalgen");
 	affiche_ancien("Tinette");
+	affiche_ancien("Obno");	
+	
 	echo "<br>";
 	affiche_ancien("Sirlor");
 	affiche_ancien("Bouritou");
+	affiche_ancien("Skalimero");		
 
 	echo "<br>";
-	affiche_ancien("Harpoon");
 	affiche_ancien("Liril");
 	affiche_ancien("Neso");
 	affiche_ancien("Ladytroll");
-	affiche_ancien("Inconnu3");
 
 	echo "<br>";
 	affiche_ancien("Grokitach");
 	affiche_ancien("Ess");
 	affiche_ancien("Darkdragon");
-	affiche_ancien("Warkragg");
+
 
 	echo "<br>";
-	affiche_ancien("Ankras");
 	affiche_ancien("Creak");
 	affiche_ancien("Balladurzgate");
-	affiche_ancien("Daviskasskrout");
-	affiche_ancien("Fedmankassad");
-	affiche_ancien("Toto42");
+	affiche_ancien("Warkragg");	
 
-	echo "<br>";
-	affiche_ancien("Skalimero");
-	affiche_ancien("Hyaragorne");
-	affiche_ancien("Obno");
 }
 
 function affiche_ancien($nom)

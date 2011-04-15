@@ -440,7 +440,7 @@ function afficherFicheTroll($id_troll)
 		</td></tr></table>
 <?
 
-	echo "<form action='$page?troll=edit' method='POST'>";
+	echo "<div align='center'><form action='$page?troll=edit' method='POST'>";
 	echo "<input type='hidden' name='id_troll' value='$id_troll'>";
 	echo "<input type='hidden' name='nom_troll' value=\"".htmlentities(addslashes($nom_troll))."\">";
 	
@@ -476,7 +476,6 @@ function afficherFicheTroll($id_troll)
 	if ($id_guilde == ID_GUILDE) {
 		afficherFicheTrollVtt($id_troll) ;
 		afficherFicheTrollMouches($id_troll);
-		afficherFicheTrollEquipement($id_troll,$equipement_troll,$equipement2_troll);
 	} else {
 		afficheFicheTrollAnatomique($id_troll);
 	}	
@@ -491,7 +490,8 @@ function afficherFicheTroll($id_troll)
 	} elseif ($nom_image_troll != "") {
 		echo "<img src='$nom_image_troll' width='150' height='231'>";
 	}
-
+	echo "<br/>";
+	afficherFicheTrollEquipement($id_troll,$equipement_troll,$equipement2_troll);
 	/* -------- Boutons ---------- */
 	/* ------------ fin du tableu ------------- */
 	echo "</td></tr></table>";
@@ -594,7 +594,7 @@ function afficherFicheTroll($id_troll)
 	echo "</td></tr></table>";
 	echo "</td></tr></table>";
 
-	echo "</form>";
+	echo "</form></div>";
 }
 
 ##############################
@@ -1022,17 +1022,19 @@ function afficherFicheTrollEquipement($id_troll,$equipement_troll,$equipement2_t
 					Équipement
 				</td>
 			</tr>
-     <tr class='mh_tdpage'><td>
-		<?
-		$equipement2_troll = explode("|",$equipement2_troll);
-
-		for ($i=0; $i<count($equipement2_troll); $i++) {
-			$equip = substr($equipement2_troll[$i], 2);
-			echo $equip."<br>";
-		}	
-		?>
-				</td>
-			</tr>
+     <tr class='mh_tdpage'>
+     	<td>
+     		<p>
+				<?
+				
+				$equipement2_troll = explode("|",$equipement2_troll);
+				for ($i=0; $i<count($equipement2_troll); $i++)
+					echo stripslashes(preg_replace( "#,(.+)#", " <strong>$1</strong>", substr($equipement2_troll[$i], 2) ))."<br/>";
+				
+				?>
+			</p>	
+		</td>
+	</tr>
       <tr class='mh_tdtitre'>
        <td align='center' colspan='2'>
 				Détails
@@ -3277,7 +3279,7 @@ function afficherRechercheChampignonsResultat($id_champi, $nom_champi, $x_champi
 		if ( is_numeric($x_champi) && is_numeric($y_champi) && is_numeric($z_champi) ) {
 			echo "<td width='1%'>$res[distance_pa]</td>";
 		}	
-		echo "<td>".htmlentities($res[nom_champi])." ($res[id_champi])</td>";
+		echo "<td>".htmlentities($res[nom_champi])." ($res[nombre_champi])</td>";
 		echo "<td width=10>X=$res[x_champi]</td>";
 		echo "<td width=10>Y=$res[y_champi]</td>";
 		echo "<td width=40>N=$res[z_champi]</td>";
@@ -3819,7 +3821,6 @@ function afficherFicheComposant($id_composant)
 
 	if ($id_composant== "new") {
 		$info = "Ajouter";
-		$date_fin_composant =date("Y-m-d H-i-s");
 		$nom_composant="";
 		$commentaire_composant = "";
 		$id_race_composant = "";
@@ -3827,11 +3828,9 @@ function afficherFicheComposant($id_composant)
 	} else {
 		$lesComposants = selectDbComposants($id_composant);
 		$res = $lesComposants[1];
-
 		$id_composant = $res[id_composant];
 		$nom_composant = stripslashes($res[nom_composant]);
 		$id_race_composant = stripslashes($res[id_race_composant]); // c'est une chaine !
-		$date_fin_composant = $res[date_fin_composant];
 		$priorite_composant = $res[priorite_composant];
 		$commentaire_composant = html_entity_decode(stripslashes($res[commentaire_composant]));
 		$info = "Modifier";
@@ -3862,36 +3861,6 @@ function afficherFicheComposant($id_composant)
 	afficher_listbox_select("haute", $priorite_composant,"Super urgent");
 	afficher_listbox_select("superhaute", $priorite_composant,"Pour hier");
 	echo "</select>";
-	echo "</td></tr>";	
-
-	echo "<tr><td>Date de fin</td>";
-	$date_fin=date("m/d/Y H:i",$date_fin_composant);
-		echo "<td>\n";
-        echo "<select name='jour' onChange='javascript:changeJourTroll()'>";
-        afficher_listbox_select("1", $jour,"Mundidey");
-				for ($i=2;$i<29;$i++) {
-          afficher_listbox_select($i, $jour,$i."e jour");
-				}
-        echo "</select>";
-        echo "<select name='mois' onChange='javascript:changeJourTroll()'>";
-        afficher_listbox_select("0", $mois,"de la saison du hum");
-				for ($i=1;$i<14;$i++) {
-          afficher_listbox_select($i, $mois,"du mois ".$MUNDIDEY[$i]);
-				}
-        echo "</select> du ";
-        echo "<select name='cycle' onChange='javascript:changeJourTroll()'>";
-				for ($i=1;$i<10;$i++) {
-          afficher_listbox_select($i, $cycle,$i."e");
-				}
-        echo "</select> cycle après Ragnarok";
-		$tab=zhomtotroll($date_fin_composant);
-	echo "<br><input type='textbox' value=\"$date_fin\" name='date_fin_composant'";
-	echo " maxlength='19' size='19'> JJ/MM/YYYY HH:MM";
-	echo "<font size=1> (convertisseur à venir)</font>";
-	echo "<br>\n";
-
-	$tab=zhomtotroll($date_fin_composant);
-	echo "le ".daystr($tab[0],$tab[1],$tab[2]);
 	echo "</td></tr>";	
 
 	echo "<tr><td>Commentaire</td>";
@@ -3946,8 +3915,6 @@ function afficherListeComposants()
 	echo "<table width='100%'>";
 	echo "<tr class='mh_tdtitre'><td>Nom</td>";
 	echo "<td>Race</td>";
-	echo "<td>Date de fin</td>";
-	echo "<td>Date de fin Troll</td>";
 	echo "<td>Priorité</td>";
 	echo "<td>Commentaire</td>";
 	echo "<td>Editer</td>";
@@ -3960,11 +3927,6 @@ function afficherListeComposants()
 
 		echo "<tr><td>".stripslashes($res['nom_composant']). "</td>";
 		echo "<td>".stripslashes($res['id_race_composant']). "</td>";
-		echo "<td>".date("d/m/y H:i",$res['date_fin_composant'])."</td>";
-		echo "<td>";
-		$tab=zhomtotroll($res['date_fin_composant']);
-		echo "le ".daystr($tab[0],$tab[1],$tab[2]);
-		echo "</td>";
 		echo "<td>".$res['priorite_composant']."</td>";
 		echo "<td>".stripslashes($res['commentaire_composant'])."</td>";
 		echo "<td><a href='$lien'>Editer</td>";

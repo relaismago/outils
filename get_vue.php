@@ -1,18 +1,17 @@
-<?
+<?php
 
 session_start();
 
 include_once("functions_auth.php");
 include_once("functions_dev.php");
 
-if ( ($_REQUEST[datas]!="") ) {
+if ( is_array($_REQUEST["datas"]) || isset($_REQUEST["datas"]) )
 	formulaire_to_file();
-} else {
+else {
 	include_once('top.php');
 	affiche_formulaire();
 }
-
-
+	
 #############################
 # Affichage du formulaire pour copier / coller la vue
 #############################
@@ -43,23 +42,21 @@ function affiche_formulaire()
    <tr class='mh_tdpage'>
 	 	<td width='100%' align="center">
 
-	<? 
-	$id_troll=$_SESSION[AuthTroll];
-	// Un RM peut choisir de mettre à jour la vue de quelqu'un d'autre en cas de TS
-	if ( userIsGuilde() ) {
-		echo "<p><b>Selectionnez-bien votre numéro de TROLL !</b><br>";
-		echo "Numéro du troll : <input type=text name='id_troll' size=6 value='$id_troll'>";
-		echo "<br>La base de données des Relais&Mago va être mise à jour avec la vue.";
-	} else {
-		echo "<p><b>Si vous avez une vue importante, vous pouvez la limiter en renseignant la taille.</b><br> <br>";
-		echo "Taille de la vue : <input type='textbox' name='taille_vue_publique' size='3' maxlength='3'> cavernes.<br><br>";
-
-		echo "<p><b>Également, si votre vue est importante, vous pouvez limiter la taille en PA du trollometer.<br>";
-		echo " Le Trollometer résume les éléments vus sur la vue2d en dessous de celle-ci.</b><br> <br>";
-		echo "Taille du Trollometer : <input type='textbox' name='max_pa_publique' size='3' maxlength='3'> Pa";
-		$id_session = session_id();
-		echo "<input type='hidden' name='TROLL' value='$id_session'>";
-	}
+	<?php
+		// Un RM peut choisir de mettre à jour la vue de quelqu'un d'autre en cas de TS
+		if ( userIsGuilde() ) {
+			echo "<p><b>Selectionnez-bien votre numéro de TROLL !</b><br>";
+			echo "Numéro du troll : <input type=text name='id_troll' size=6 value='" .$_SESSION["AuthTroll"]. "'>";
+			echo "<br>La base de données des Relais&Mago va être mise à jour avec la vue.";
+		} else {
+			echo "<p><b>Si vous avez une vue importante, vous pouvez la limiter en renseignant la taille.</b><br> <br>";
+			echo "Taille de la vue : <input type='textbox' name='taille_vue_publique' size='3' maxlength='3'> cavernes.<br><br>";
+	
+			echo "<p><b>Également, si votre vue est importante, vous pouvez limiter la taille en PA du trollometer.<br>";
+			echo " Le Trollometer résume les éléments vus sur la vue2d en dessous de celle-ci.</b><br> <br>";
+			echo "Taille du Trollometer : <input type='textbox' name='max_pa_publique' size='3' maxlength='3'> Pa";
+			echo "<input type='hidden' name='TROLL' value='" .session_id(). "'>";
+		}
 	?>
 	<br><br>
 	<input type=submit name="Submit" value="[Uploader] - la vue du troll" class='mh_form_submit' ><br><br>
@@ -69,7 +66,7 @@ function affiche_formulaire()
 	</table>
 	</form>
 
-	<?
+	<?php
 include('foot.php');
 }
 
@@ -78,16 +75,14 @@ include('foot.php');
 ################################
 function formulaire_to_file()
 {
-	# On envoie le texte dans le cache, et on le parse
-	$datas2=preg_replace("//","\n",$_REQUEST[datas]); 
-	if ($_REQUEST[id_troll]=="")
-		$id_troll = session_id();
-	else
-		$id_troll = $_REQUEST[id_troll];
+	# On envoie le texte dans le cache, et on le parse	
+	$id_troll = ( empty($_REQUEST["id_troll"]) ) ? session_id() : $_REQUEST["id_troll"];
 		
 	$tmpfile = fopen ("vues/vue_tmp.$id_troll.txt","w");
 
-	fwrite($tmpfile,$datas2);
+	$datas = ( is_array($_REQUEST["datas"]) ) ? implode("",$_REQUEST["datas"]) : $_REQUEST["datas"];
+
+	fwrite($tmpfile,$datas);
 	fwrite($tmpfile,"\n\n");
 	fwrite($tmpfile,getenv(REMOTE_ADDR));
 	fclose($tmpfile);

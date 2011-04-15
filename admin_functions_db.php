@@ -1535,23 +1535,7 @@ function selectDbRechercheChampignons($id_champi, $nom_champi="", $x_champi="", 
 
 	if ($is_seen_champi != "")
 		$sql .= " AND is_seen_champi = '$is_seen_champi'";
-/*		
-	if ( ($x_champi != "") && ($y_champi != "") && ($z_champi != "")) {
-		$x_max = $x_champi - $limite;	
-		$x_min = $x_champi + $limite;	
-		$y_max = $y_champi - $limite;	
-		$y_min = $y_champi + $limite;	
-		$z_max = $z_champi - $limite;	
-		$z_min = $z_champi + $limite;	
-		
-		$sql .= " AND x_champi >= $x_min";
-		$sql .= " AND x_champi <= $x_max";
-		$sql .= " AND y_champi >= $y_min";
-		$sql .= " AND y_champi <= $y_max";
-		$sql .= " AND z_champi >= $z_min";
-		$sql .= " AND z_champi <= $z_max";
-	}
-	*/	
+
 	$sql .= " ORDER BY nom_champi ";
 	//$sql .= " LIMIT 0,100 ";
 
@@ -1563,7 +1547,7 @@ function selectDbRechercheChampignons($id_champi, $nom_champi="", $x_champi="", 
 			if ( is_numeric($x_champi) && is_numeric($y_champi) && is_numeric($z_champi) ) {
 				$lesChampignons[$i]['distance_pa']= calcPA($x_champi,$y_champi,$z_champi,$champi[x_champi],$champi[y_champi],$champi[z_champi]);
 			}
-			$lesChampignons[$i]['id_champi']=$champi['id_champi'];
+			$lesChampignons[$i]['id_champi']=$champi['id_champi'];	
 			$lesChampignons[$i]['nom_champi']=$champi['nom_champi'];
 			$lesChampignons[$i]['x_champi']=$champi['x_champi'];
 			$lesChampignons[$i]['y_champi']=$champi['y_champi'];
@@ -1939,10 +1923,7 @@ function editDbComposant()
 	$nom_composant = $_REQUEST['nom_composant'];
 	$id_race_composant = $_REQUEST['id_race_composant'];
 	$priorite_composant = $_REQUEST['priorite_composant'];
-	$date_fin_composant = $_REQUEST['date_fin_composant'];
 	$commentaire_composant = $_REQUEST['commentaire_composant'];
-
-	$date_fin_composant = substr($date_fin_composant,6,4)."-".substr($date_fin_composant,3,2)."-".substr($date_fin_composant,0,2);
 
 	// Si l'on veut ajouter le composant
 	if ($id_composant == "new") {
@@ -1960,7 +1941,6 @@ function editDbComposant()
 	$sql .= " nom_composant ='".addslashes($nom_composant)."',";
 	$sql .= " id_race_composant ='".addslashes($id_race_composant)."',"; // C'est une chaine !
 	$sql .= " priorite_composant ='".$priorite_composant."',";
-	$sql .= " date_fin_composant ='".$date_fin_composant."',";
 	$sql .= " commentaire_composant ='".htmlentities(addslashes($commentaire_composant))."'";
 	$sql .= " WHERE id_composant = $id_composant";
 
@@ -1991,7 +1971,6 @@ function selectDbComposants($id="")
 	$i=1;
 
 	$sql = "SELECT id_composant, nom_composant, id_race_composant,";
-	$sql .= " UNIX_TIMESTAMP(date_fin_composant) as date_fin_composant,";
 	$sql .= " priorite_composant, commentaire_composant";
 	$sql .= " FROM composants";
 
@@ -2008,7 +1987,6 @@ function selectDbComposants($id="")
 			$lesComposants[$i]['id_composant']=$composant['id_composant'];
 			$lesComposants[$i]['nom_composant']=$composant['nom_composant'];
 			$lesComposants[$i]['priorite_composant']=$composant['priorite_composant'];
-			$lesComposants[$i]['date_fin_composant']=$composant['date_fin_composant'];
 			$lesComposants[$i]['id_race_composant']=$composant['id_race_composant'];
 			$lesComposants[$i]['commentaire_composant']=$composant['commentaire_composant'];
 			$i++;

@@ -535,7 +535,7 @@ function refreshVue($id, $auto=false)
 	$date_less_10_min=date("Y-m-d H-i-s", mktime(date("H"), date("i")-10, date("s"), date("m")  , date("d"), date("Y")));
 	
 
-	if ($_SESSION[AuthTroll] != $id)
+	if ($_SESSION["AuthTroll"] != $id)
 	  $refresh_by_me = "non";
 	else
 	  $refresh_by_me = "oui";
@@ -620,63 +620,41 @@ function refreshVue($id, $auto=false)
   # Subtilité: par défaut en php, les " et ' sont backslashés. Il faut donc enlever les \
 	unset($error);unset($ente);unset($deb);
 
-	$deb=0;
 	if ($DEV) echo "DEBUG refreshVue() http://sp.mountyhall.com/SP_Vue2.php?Numero=$id&Motdepasse=$pass&Tresors=1&Lieux=1&Champignons=1";
 
-	$fp=fopen("http://sp.mountyhall.com/SP_Vue2.php?Numero=$id&Motdepasse=$pass&Tresors=1&Lieux=1&Champignons=1","r");
+	$fp = fopen("http://sp.mountyhall.com/SP_Vue2.php?Numero=$id&Motdepasse=$pass&Tresors=1&Lieux=1&Champignons=1","r");
 	if ($fp == FALSE)
 		die ("Erreur lors de l'appel du fichier public. Procédure de refresh stoppée");
-
-	while ( ($line=fgets($fp)) && (!$error) ){
-		$line = html_entity_decode($line);
-		if ($deb<1) {
-			if (strpos($line,"Erreur")!==false) {
-				$error=true;
-				if (strpos($line,"Erreur 3")!==false) {
-
-  				$date=date("Y-m-d H-i-s");
-				  $tmpfile=fopen ("vues/list_mdp_error.txt","a");
-				  fwrite($tmpfile,$date.": Troll n° ".$id."\n");
-				  fclose($tmpfile);
-					
-					die("<br><b class=red>Erreur de mot de passe.</b><br>");
-					break;
-				} elseif (preg_match("/Erreur (4|5)/",$line)) {
-					die("<br><b class=red>Erreur du serveur.</b><br>
-					    Il est encore en vrac. Il faudra repasser plus tard
-					    quand les DM l'auront remis enroute...<br>");
-					break;
-				} elseif (strpos($line,"Erreur 1")!==false) {
-					die( "<br><b class=red>Paramètres incorrects</b><br>
-					     Mais... qu'est-ce que vous avez donc tapé ? Envoyez-moi un mail avec vos paramètres,
-				     	 je tenterais de débugguer le truc.<br>");
-					break;
-				}
-				die("erreur");
-				break;
-			} else {
-				if ($DEV) echo "DEBUG refreshVue() $pass - $id / $passw <br>";
-				if ($DEV) echo "DEBUG refreshVue() ouverture du fichier vues/$id en w<br>";
-				$v2=fopen("vues/$id","w");
-			}
-			$deb++;
-		}
+	$vue = html_entity_decode(stream_get_contents($fp));	
+	
+	if ( preg_match( "#.*Erreur 1 : paramètres incorrects .*#", $vue ) )
+		die( "<h1 style='color:red;'>Paramètres incorrects</h1><p>Mais... qu'est-ce que vous avez donc tapé ? Envoyez-moi un mail avec vos paramètres, je tenterais de débugguer le truc.</p>");
+	
+	if ( preg_match( "#.*Erreur 3 : mot de passe incorrect.*#", $vue ) ){
 		
-		if ($state == 10) {
-			list($nCasesVue, $X, $Y, $Z) = split (";",$line);
-			$state=11;
-		}
-			
-		if (preg_match("/#DEBUT ORIGINE/",$line))
-			$state=10;
+		$date=date("Y-m-d H-i-s");
+		$tmpfile=fopen ("vues/list_mdp_error.txt","a");
+		fwrite($tmpfile,$date.": Troll n° ".$id."\n");
+		fclose($tmpfile);
+		die("<br><b class=red>Erreur de mot de passe.</b><br>");		
 		
-		fputs ($v2, $line);
-	}
+	}	
+	
+	if ( preg_match( "#Erreur (4|5)#", $vue ) )
+		die("<h1 style='color:red;'>Erreur du serveur.</h1><p>Il est encore en vrac. Il faudra repasser plus tard	quand les DM l'auront remis enroute...</p>");
+
+	preg_match( "@.*#DEBUT ORIGINE(.*)#FIN ORIGINE.*@s", $vue, $origine );
+
+	list($nCasesVue, $X, $Y, $Z) = explode(";",trim($origine[1]));
+		
+	$v2 = fopen("vues/$id","w");
+	fwrite($v2, $vue);
+	
 	fclose($fp);
+	fclose($v2);	
 
-	if (!$DEV) fclose($v2);
 	// Le troll doit exister dans la base de données !
-	$troll=getTroll($id); 
+	$troll = getTroll($id); 
 
   // On met à jour le mot de passe du troll car c'est un RM
 	if ($troll[6] == ID_GUILDE) {
@@ -769,27 +747,28 @@ function updateSeenChampi($sub_sql,$sub_sql_list,$sub_sql_update,$date)
   
 	if ($DEV) echo "DEBUG updateSeenChampi() entré <br>\n";
 
-	$sql = "DELETE FROM champignons WHERE";
-	$sql .= " id_champi = $sub_sql_list";
+	if ( $sub_sql_list ){
+		$sql = "DELETE FROM champignons WHERE";
+		$sql .= " id_champi = $sub_sql_list";
+		mysql_query($sql,$db_vue_rm);	
+		echo mysql_error(); 
+	}
 	
-  mysql_query($sql,$db_vue_rm);	
-  echo mysql_error(); 
-
-	$sql = "INSERT INTO champignons";
-	$sql .= " (id_champi, nom_champi, x_champi, y_champi, z_champi, date_champi, is_seen_champi)";
-	$sql .= " VALUES $sub_sql";
-
-  mysql_query($sql,$db_vue_rm);	
-  echo mysql_error(); 
-
+	if ( $sub_sql ){
+		$sql = "INSERT INTO champignons";
+		$sql .= " (id_champi, nom_champi, x_champi, y_champi, z_champi, date_champi, is_seen_champi)";
+		$sql .= " VALUES $sub_sql";
+		mysql_query($sql,$db_vue_rm);	
+		echo mysql_error(); 
+	}
+	
 	if ($sub_sql_update) {
 		$sql = "UPDATE champignons";
 		$sql .= " SET date_champi = '$date', is_seen_champi='oui' ";
 		$sql .= " WHERE id_champi = $sub_sql_update";
-
-		echo "DEBUG updateSeenChampi() UPDATE $sql <br>";
- 		mysql_query($sql,$db_vue_rm);	
-	  echo mysql_error(); 		
+		if ($DEV) echo "DEBUG updateSeenChampi() UPDATE $sql <br>";
+		mysql_query($sql,$db_vue_rm);	
+		echo mysql_error(); 		
 	}
 }
 
@@ -962,48 +941,31 @@ function updateDb_zone_to_not_view($type, $miniX, $maxiX, $miniY, $maxiY, $miniZ
 	
 	global $db_vue_rm, $DEV;
 	
-	if ($type == "troll")
-		$table = "trolls";
-	elseif ($type == "champi")
-		$table = "champignons";
-	elseif ($type == "monstre")
-		$table = "monstres";
+	if ($type == "troll") { $table = "trolls"; }
+	if ($type == "monstre") { $table = "monstres"; }
+	if ($type == "champi") { $table = "champignons"; }	
 	
 	$date_less_5d = date("Y-m-d H-i-s", mktime(date("H"), date("i"), date("s"), date("m")  , date("d")-5, date("Y")));
 
-	// On update tous les Trolls ou Champignons de la zone comme étant non vus
+	// On update tous les Trolls/Monstres/Champignons de la zone comme étant non vus
 	// mais uniquement s'ils étaient vus avant.
-	for ($i=1; $i<=2 ; $i++) {
-		if ($i == 1) {
-			if ($DEV) {
-				echo "Debug updateDb_zone_to_not_view(): is_seen_troll='non' pour les trolls qui sont sur le quadrillage ";
-				echo "que l'on va remettre à jour ensuite <br>"; 
-			}
-		} else {
-			if ($DEV) echo "Debug updateDb_zone_to_not_view(): is_seen_troll ='non' pour date_troll > à 5 jours<br>"; 
-		}
+	$sql = " UPDATE $table";
+	$sql .= " SET is_seen_$type='non',";
+	$sql .= " date_$type='$date'";
+	$sql .= " WHERE";
 
-		$sql = " UPDATE $table";
-		$sql .= " SET is_seen_$type='non',";
-		$sql .= " date_$type='$date'";
-		$sql .= " WHERE";
-
-		if ($i == 1) {
-			$sql .= " x_$type >= $miniX";
-			$sql .= " AND x_$type <= $maxiX";
-			$sql .= " AND y_$type >= $miniY";
-			$sql .= " AND y_$type <= $maxiY";
-			$sql .= " AND z_$type >= $miniZ";
-			$sql .= " AND z_$type <= $maxiZ";
-			$sql .= " AND is_seen_$type = 'oui'";
-		} elseif ($i == 2) {
-			$sql .= " date_$type < '$date_less_5d'";
-		}
-		
-		if ($DEV) echo "DEBUG updateDb_zone_to_not_view() $sql <br>";
-		mysql_query($sql,$db_vue_rm);
-		echo mysql_error();
-	}
+	$sql .= " (x_$type >= $miniX";
+	$sql .= " AND x_$type <= $maxiX";
+	$sql .= " AND y_$type >= $miniY";
+	$sql .= " AND y_$type <= $maxiY";
+	$sql .= " AND z_$type >= $miniZ";
+	$sql .= " AND z_$type <= $maxiZ";
+	$sql .= " AND is_seen_$type = 'oui')";
+	$sql .= " OR (date_$type < '$date_less_5d');";
+	
+	if ($DEV) echo "DEBUG updateDb_zone_to_not_view() $sql <br>";
+	mysql_query($sql,$db_vue_rm);
+	echo mysql_error();
 	
 }
 
@@ -1016,84 +978,72 @@ function deleteDb_zone($type, $miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $t
 
 	if ($DEV) echo "Debug deleteDb_zone($type, $miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $tabRM) entré <br>"; 
 	
-	if ($type == "lieu") { $table = "lieux"; $n=1; }
-	if ($type == "tresor") { $table = "tresors"; $n=2; }
-	if ($type == "monstre") { $table = "monstres"; $n=2; }
-	if ($type == "champi") { $table = "champignons"; $n=2; }
-
-	$date_less_5d=date("Y-m-d H-i-s", mktime(date("H"), date("i"), date("s"), date("m")  , date("d")-5, date("Y")));
-
-	for ($k=1; $k<=$n; $k++) {
-		if ($k == 1) {
-			if ($DEV) {
-				echo "Debug deleteDb_zone(): Suppression des données du quadrillage ";
-				echo "que l'on va remettre à jour ensuite <br>"; 
-			}
-		} else {
-			if ($DEV) echo "Debug deleteDb_zone(): suppression pour les données > à 5 jours<br>"; 
-		}
-		
-		$sql = "SELECT id_$type as id FROM $table";
-		$sql .= " WHERE ";
-		
-		if ($k == 1) {
-			$sql .= " x_$type>=$miniX";
-			$sql .= " AND x_$type<=$maxiX";
-			$sql .= " AND y_$type>=$miniY";
-			$sql .= " AND y_$type<=$maxiY";
-			$sql .= " AND z_$type>=$miniZ";
-			$sql .= " AND z_$type<=$maxiZ";
-		} elseif ($k == 2) {
-			$sql .= " date_$type < '$date_less_5d'";
-		}
-		
-		// On ne doit pas supprimer les gowaps RM
-		if (($tabRM != "") && ($type=="monstre")) {
-			$nbGowaps =count($tabRM);
-		  for($i=1;$i<=$nbGowaps;$i++) {
-		 	  $res = $tabRM[$i];
-				$sql .= " AND id_monstre!=$res[id_gowap]";
-		  }
-		} elseif (($tabRM != "") && ($type=="lieu")) {
-		// On ne doit pas supprimer les tanieres RM
-			$nbTanieres =count($tabRM);
-		  for($i=1;$i<=$nbTanieres;$i++) {
-		 	  $res = $tabRM[$i];
-				$sql .= " AND id_lieu != $res[id_taniere]";
-		  }
-		}
+	if ($type == "lieu") { $table = "lieux"; $deleteWithDate = false; }
+	if ($type == "tresor") { $table = "tresors"; $deleteWithDate = true; }
+	if ($type == "monstre") { $table = "monstres"; $deleteWithDate = true; }
+	if ($type == "champi") { $table = "champignons"; $deleteWithDate = true; }
 	
-		if ($DEV) echo "Debug deleteDb_zone(): $sql <br>"; 
-	
-		$result=mysql_query($sql,$db_vue_rm);
-		echo mysql_error();
-	
-		$sub_sql = "";
-		if (mysql_num_rows($result)!=0) {
-			while ($res=mysql_fetch_array($result)) {
-				$sub_sql .= "id_$type = ".$res[id]." OR ";
-			}
-		}
-	
-		if ($sub_sql != "") {
-			$sub_sql=substr($sub_sql,0,strlen($substr)-4);
-			$sql = "DELETE FROM $table";
-			$sql .= " WHERE $sub_sql";
-		
-			mysql_query($sql,$db_vue_rm);
-			if ($DEV) echo "Debug deleteDb_zone(): $sql <br>"; 
-		}
-	}
-	
-/* => ne fonctionne pas avec mysql !!!
-	$sql =" DELETE FROM $table";
-	$sql .= " WHERE x_$type>=$miniX";
+	$sql = "SELECT id_$type as id FROM $table WHERE";
+	$sql .= " (x_$type>=$miniX";
 	$sql .= " AND x_$type<=$maxiX";
 	$sql .= " AND y_$type>=$miniY";
 	$sql .= " AND y_$type<=$maxiY";
 	$sql .= " AND z_$type>=$miniZ";
 	$sql .= " AND z_$type<=$maxiZ";
-*/
+
+	// On ne doit pas supprimer les gowaps RM/tanieres RM
+	if ( !empty($tabRM) ) {
+		
+		if( $type == "monstre")
+			foreach( $tabRM  as $gowap )
+				if ( is_numeric($gowap["id_gowap"]) )
+					$sql .= " AND id_monstre != ".$gowap["id_gowap"];
+		
+		if ( $type=="lieu" ) 
+			foreach( $tabRM  as $taniere )
+				if ( is_numeric($taniere["id_taniere"]) )
+					$sql .= " AND id_lieu != ".$taniere["id_taniere"];
+		
+	}
+	
+	$sql .= ")";
+	
+	if ( $deleteWithDate ){
+		
+		$date_less_5d = date("Y-m-d H-i-s", mktime(date("H"), date("i"), date("s"), date("m")  , date("d")-5, date("Y")));
+		
+		$sql .= " OR (date_$type < '$date_less_5d'";
+		
+		if( $type == "monstre")
+			foreach( $tabRM  as $gowap )
+				if ( is_numeric($gowap["id_gowap"]) )
+					$sql .= " AND id_monstre != ".$gowap["id_gowap"];		
+		
+		$sql .= ")";		
+		
+	}	
+
+	if ($DEV) echo "Debug deleteDb_zone(): $sql <br>"; 
+
+	$result = mysql_query($sql,$db_vue_rm);
+	echo mysql_error();
+
+	$sub_sql = "";
+	if ( mysql_num_rows($result)> 0 ){
+		
+		while ( $res = mysql_fetch_array($result) ) 
+			$sub_sql .= "id_$type = ".$res["id"]." OR ";
+
+		$sub_sql = substr($sub_sql,0,-4);
+		$sql = "DELETE FROM $table";
+		$sql .= " WHERE $sub_sql;";
+	
+		mysql_query($sql,$db_vue_rm);
+		echo mysql_error();
+		if ($DEV) echo "Debug deleteDb_zone(): $sql <br>"; 
+		
+	}
+	
 }
 
 ###########################################
@@ -1333,9 +1283,9 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	} else {
 		$sql .= " AND is_seen_troll = 'oui'";
 	}
-	if (!userIsGroupSpec()){
+	/*if (!userIsGroupSpec()){
 		$sql .= " AND maj_groupe_spec_troll <> 'oui'";
-	}
+	}*/
 
 	if ($DEV) echo "DEBUG parseZone() TROLLS $sql <br>";
 	$res=mysql_query($sql, $db_vue_rm);
@@ -1648,7 +1598,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	$sql .= " AND z_champi >= $miniZ";
 	$sql .= " AND z_champi <= $maxiZ";
 	$sql .= " AND is_seen_champi ='oui'";
-	
+
 	if ($DEV) echo "DEBUG parseZone() CHAMPI $sql <br>";
 	$res=mysql_query($sql, $db_vue_rm);
 	echo mysql_error();
@@ -1754,9 +1704,6 @@ function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='',$refresh)
 	$result=mysql_query($sql,$db_vue_rm);
 	echo mysql_error();
 	
-/*	if (mysql_affected_rows() > 0) 
-		die("<h1>Un refresh du troll $TROLL est en activité. Attendez 5 min et ré-essayez.</h1>");
-*/
 	/* on place le lock dans la base et la datetime */
 	$sql = "UPDATE trolls SET ";
 	$sql .= " date_last_refresh_himself_troll='$date', ";
@@ -1812,7 +1759,7 @@ function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='',$refresh)
 		if ($DEV) echo "DEBUG parseFile minX=$miniX, maxX=$maxiX, minY=$miniY, maxY=$maxiY, minZ=$miniZ, maxZ=$maxiZ<br>";
 		
 		updateDb_zone_to_not_view('troll',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $date );
-		updateDb_zone_to_not_view('champi',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $date );
+		
 		// puis pour les monstres, mais c'est utile que Pour les gowaps RM
 		// On met tous les monstres à non vus sur la zone (gowaps et les autres compris)
 		// sachant qu'ensuite la table monstres verra tous les monstres, sauf les gowaps RM) de supprimés de 
@@ -1820,19 +1767,17 @@ function parseFile2($TROLL,$auto, $cX='',$cY='',$cZ='',$taille='',$refresh)
 		updateDb_zone_to_not_view('monstre',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $date );
 
 		$lesGowaps = selectDbGowaps();
-		$nbGowaps = count($lesGowaps);
 
 		$lesTanieres = selectDbTanieres();
-		$nbTanieres = count($lesTanieres);
 
 		deleteDb_zone('monstre',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $lesGowaps);
 		deleteDb_zone('tresor',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ);
+		deleteDb_zone('champi',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ);
 		deleteDb_zone('lieu',$miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $lesTanieres);
 			
 		$lien = "sequence_refresh.php?auto=$auto&state=1&maj_troll_id=$TROLL&refresh=$refresh";
 		$_SESSION['state'] = 1;
 		if (!$auto) {
-			echo "<br>Fichier Récupéré, début de la mise à jour de la base.<br>";
 			echo "<script language='JavaScript'>";
 			echo "document.location.href='$lien'";
 			echo "</script>";
@@ -1925,7 +1870,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id,$refresh)
 			if ( ($sub_sql_champi != "") ||	
 		       ($sub_sql_champi_update != "") ) {	
 				$sub_sql_champi = substr($sub_sql_champi,0,strlen($substr)-1);
-				$sub_sql_champi_list_id = substr($sub_sql_champi_list_id,0,strlen($substr)-14);
+				$sub_sql_champi_list_id = substr($sub_sql_champi_list_id,0,strlen($substr)-15);			
 				$sub_sql_champi_update = substr($sub_sql_champi_update,0,strlen($substr)-15);
 				updateSeenChampi($sub_sql_champi,$sub_sql_champi_list_id,$sub_sql_champi_update,$date);
 			}
@@ -2046,14 +1991,13 @@ function maj_vue_refresh($auto,$state,$maj_troll_id,$refresh)
 		      break;
 
 				case 60: # CHAMPIGNONS
-					list($oId, $nom, $oX, $oY, $oZ) = split (";",$line);
-					/* si le libellé n'est pas champi, on regarde si le champi est dans la base déjà */
-					$flag = true;
+					list($nombre, $nom, $oX, $oY, $oZ) = split (";",$line);
 
+					/* si le libellé n'est pas champi, on regarde si le champi est dans la base déjà */
 					if (preg_match("/Champignon.*inconnu/",$nom) ||
 					    preg_match("/champi/",$nom)) {
-						$sql = "SELECT nom_champi";
-						$sql .= " FROM champignons WHERE id_champi=$oId";
+						$sql = "SELECT id_champi, nom_champi";
+						$sql .= " FROM champignons WHERE x_champi = $oX AND y_champi = $oY AND z_champi = $oZ;";
 	
 						if ($DEV) echo "DEBUG refreshVue() $sql <br>\n";
 						$result = mysql_query($sql,$db_vue_rm);
@@ -2061,27 +2005,14 @@ function maj_vue_refresh($auto,$state,$maj_troll_id,$refresh)
 						
 						/* Si le champi existe dans la base */
 						if (mysql_affected_rows() > 0) {
-							list($nom_champi) = mysql_fetch_array($result); 
-							/* et que son nom contient le terme champi*/
-							if ((preg_match("/Champignon.*inconnu/",$nom_champi)) ||
-							 (preg_match("/champi/",$nom_champi))) {
-
-								/* on supprime et met à jour */
-								$flag = true;
-							} else {
-								/* sinon, on met juste à jour la date */
-								echo "DEBUG refreshVue() Update du champi $oId $oX, $oY, $oZ , Nom Champi connu<br>\n";
-								$sub_sql_champi_update .= "$oId OR id_champi=";
-								$flag = false;
-							}
+							list($id_champ, $nom_champi) = mysql_fetch_array($result); 
+							/* on met à jour la date */
+							if ($DEV) echo "DEBUG refreshVue() Update du champi $nom_champi $oId $oX, $oY, $oZ , Nom Champi connu<br>\n";
+							$sub_sql_champi_update .= " $id_champ OR id_champi =";
 						} else {
 							/* si le champi n'existe pas dans la base, on l'ajoute */
-							$flag = true;
+							$sub_sql_champi .= "('', '".addslashes($nom)."', $oX, $oY, $oZ, '$date', 'oui'),";
 						}
-					}
-					if ($flag) {
-						$sub_sql_champi .= "($oId, '".addslashes($nom)."', $oX, $oY, $oZ, '$date', 'oui'),";
-						$sub_sql_champi_list_id .= "$oId OR id_champi=";
 					}
 					break;
 

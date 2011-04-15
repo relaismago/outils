@@ -611,9 +611,9 @@ function update_traitement($code,$etat) {
 }
 
 if (md5($_REQUEST['pass']) == MD5_PASS_EXTERNE) {
-	getFilePublicTrolls();
-	getTrollInFile(1);
-	epurerVtt();
+	getFilePublicGuildes();
+	getGuildeInFile(1);
+
 } else {
 	echo "Accès non autorisé<br>";
 }

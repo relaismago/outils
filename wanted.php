@@ -1,33 +1,25 @@
-<?
+<?php
+
 session_start();
 define("PATH_IMG", "images/wanted/");
 
-include_once('inc_connect.php3');
+include_once('inc_connect.php');
 include_once('inc_define_vars.php');
 include_once('functions_auth.php');
-include_once('admin_functions_db.php3');
+include_once('admin_functions_db.php');
 
-if ($_REQUEST[id]=='all') {
-	if ( (md5($_REQUEST['pass']) != MD5_PASS_EXTERNE) &
-     ($_SESSION[admin] != "authenticated") )
-	{
-  	die("Accès refusé");
-	} else {
-  	generate_all();
-	}
-} elseif ($_REQUEST[id]=='viewall') {
-	//if ( userIsGuilde()  )
-	  view_all();
-	/*else {
-		include_once('top.php');
-		die("<br><br><br><h1>Veuillez vous identifier</h1>");
-	}*/
-} elseif (is_numeric($_REQUEST[id])) {
-	if (md5($_REQUEST['pass']) != MD5_PASS_EXTERNE) {
+if ($_REQUEST["id"] == 'all') {
+	if ( md5($_REQUEST['pass']) != MD5_PASS_EXTERNE && $_SESSION["admin"] != "authenticated" )
   		die("Accès refusé");
-	} else {
-  		init_wanted($_REQUEST[id]);
-	}
+	else
+  		generate_all();
+} elseif ($_REQUEST["id"]=='viewall') {
+	  view_all();
+} elseif (is_numeric($_REQUEST["id"])) {
+	if (md5($_REQUEST['pass']) != MD5_PASS_EXTERNE) 
+  		die("Accès refusé");
+	else
+  		init_wanted($_REQUEST["id"]);
 }
 
 
@@ -178,15 +170,16 @@ function init_wanted($id_troll)
 function generate_all()
 {
 
-  $lesTrolls = selectDbTrolls("","filter_wanted");
-  $nbTrolls = count($lesTrolls);
-
-  update_traitement("AFFICHES_WANTED", "EN_COURS");
-  for($i=1;$i<=$nbTrolls;$i++) {
-    $res = $lesTrolls[$i];
-    echo "<img src='wanted.php?id=$res[id_troll]&pass=".$_REQUEST['pass']."'>";
-  }
-  update_traitement("AFFICHES_WANTED", "OK");
+	$lesTrolls = selectDbTrolls("","filter_wanted");
+	$nbTrolls = count($lesTrolls);
+	
+	update_traitement("AFFICHES_WANTED", "EN_COURS");
+	for($i=1;$i<=$nbTrolls;$i++) {
+		$res = $lesTrolls[$i];
+		echo "<img src='wanted.php?id=$res[id_troll]&pass=".$_REQUEST['pass']."'>";
+	}
+	update_traitement("AFFICHES_WANTED", "OK");
+  
 }
 
 
@@ -217,7 +210,7 @@ function view_all()
           <table width='100%' cellspacing='0'>
             <tr class='mh_tdtitre' align="center">
               <td>
-                Bien que peu nombreux ( <?echo $nbTrolls;?> ), ils existent : les trolls fous qui ont fait du tort à nos membres...
+                Bien que peu nombreux ( <?php echo $nbTrolls; ?> ), ils existent : les trolls fous qui ont fait du tort à nos membres...
 								Ils sont responsables d'au moins un vol de trésor, une agression "sauvage" voire de l'assassinat de l'un de nos membres.
 								Un impact de balle sera ajouté à leur fiche pour chaque vengeance obtenue...
 								Si vous laissez votre curseur de souris sur leur fiche (et/ou si vous cliquez dessus), vous aurez accès à plus d'informations...
@@ -302,13 +295,11 @@ function afficheInfosWanted($id_troll,$nom_troll,$race_troll,$niveau_troll,$x_tr
 	$text .= "</font>";
 
 
-//	$text = str_replace("\r","",$text);
 	$text = str_replace("\r\n","<br>",$text);
 	$text = addslashes($text);
-	//$text = preg_replace("/\n/","<br>",$text);
-  echo " onmouseover=\"return overlib('<font color=red> <b>Cliquez là où vous êtes !</b></font> <br>$text');\" ";
-  echo " onclick=\"return overlib('$text', STICKY, CAPTION, 'Informations',CLOSECLICK, EXCLUSIVE);\" ";
-  echo " onmouseout=\"return nd();\"";
+	echo " onmouseover=\"return overlib('<font color=red> <b>Cliquez là où vous êtes !</b></font> <br>$text');\" ";
+	echo " onclick=\"return overlib('$text', STICKY, CAPTION, 'Informations',CLOSECLICK, EXCLUSIVE);\" ";
+	echo " onmouseout=\"return nd();\"";
 
 }
 

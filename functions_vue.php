@@ -430,10 +430,7 @@ require_once('includes/ggc_groupe.class.php');
 function initRefresh()
 {
 
-	$id_troll = $_REQUEST[id_troll];
-	if ($id_troll <= 0) {
-		$id_troll = $_SESSION[AuthTroll]; 
-	}
+	$id_troll = ($_REQUEST["id_troll"] <= 0) ? $_SESSION["AuthTroll"] : $_REQUEST["id_troll"];
 
 	$refresh = $_REQUEST['refresh'];
 	
@@ -443,24 +440,9 @@ function initRefresh()
 			echo "document.location.href='get_vue.php?id_troll=$id_troll'";
 			echo "</script>";
 
-	} elseif ($refresh == 's_public') {
-
-		$troll = refreshVue($id_troll,false);
+	} elseif ($refresh == 's_public')
+		$troll = refreshVue($id_troll);
 	
-		if ($troll[erreur] == "erreur") {
-			echo "il y a un souci";
-	
-		} elseif ($troll[erreur] == "param&egrave;tres") {
-			echo "Y'a un truc louche. Votre login / mot de passe est foireux. ";
-			echo "Envoyez un MP &agrave; glupglup pour les lui donner, et debugguer...";
-	
-		} elseif ($troll[erreur] == "Serveur") {
-			echo "Le serveur MH est encore cass&eacute;. Repassez plus tard...";
-	
-		} elseif ($troll[erreur] != '') {
-			echo "Erreur du serveur : $troll[erreur].";
-		}
-	}
 }
 
 function afficherOptionsVue2d($info) 
@@ -1086,7 +1068,7 @@ function vue2d_afficher_zone_bas($x_position,$y_position,$z_position,$taille_vue
 	</tr>
 	</table>
 	<br><br>
-<?
+<?php
 }
 
 function info_membre_ggc($troll) {

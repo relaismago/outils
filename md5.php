@@ -5,9 +5,10 @@ C'est un cryptage de votre mot de passe, qui permet d'utiliser les divers outils
 permettre d'accéder à l'interface de jeu.
 Ainsi, vous pouvez utiliser sans risques les outils des différentes guildes (donc Relais&Mago, bien sûr)
 <br>Mot de passe à transformer :
-<input type="text" value="<? echo "$passe"; ?>" name=passe>
-<input type=submit value="Envoyer le MD5 !"
+<input type="text" name="passe"/>
+<input type=submit value="Envoyer le MD5 !"/>
 </form>
-<? 
-if ($_REQUEST[passe]!="") { echo "MD5 : ". md5($_REQUEST[passe]); }
+<?php 
+	if ( !empty($_REQUEST["passe"]) ) 
+		echo "MD5 : ". md5($_REQUEST["passe"]); 
 ?>
