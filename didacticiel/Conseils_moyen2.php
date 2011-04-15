@@ -133,7 +133,7 @@ function MM_swapImage() { //v3.0
               <tr>
                 <td>
                 <div align="center">
-                  <a href="Conseils_moyen1.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Precédant','','../didacticiel/images/conseil_precedent.gif',1)">
+                  <a href="Conseils_moyen1.php" onMouseOut="MM_swapImgRestore();" onMouseOver="MM_swapImage('Precédant','','../didacticiel/images/conseil_precedent.gif',1);">
                   <img src="images/conseil_precedent2.gif" alt="Précédent" name="Precédant" width="160" height="38" border="0"></a></div>
                 </td>
                 <td width="250" height="40">
@@ -143,7 +143,7 @@ function MM_swapImage() { //v3.0
                 </td>
                 <td>
                 <div align="center">
-                  <a href="Conseils_moyen3.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Suivant','','../didacticiel/images/conseil_suivant2.gif',1)">
+                  <a href="Conseils_moyen3.php" onMouseOut="MM_swapImgRestore();" onMouseOver="MM_swapImage('Suivant','','../didacticiel/images/conseil_suivant2.gif',1);">
                   <img src="images/conseil_suivant.gif" alt="Suivant" name="Suivant" width="148" height="38" border="0"></a></div>
                 </td>
               </tr>

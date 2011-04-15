@@ -154,7 +154,7 @@ function MM_swapImage() { //v3.0
               <tr>
                 <td>
                 <p align="center">
-                <a href="Conseils_debutants9.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Precédant','','../didacticiel/images/conseil_precedent.gif',1)">
+                <a href="Conseils_debutants9.php" onMouseOut="MM_swapImgRestore();" onMouseOver="MM_swapImage('Precédant','','../didacticiel/images/conseil_precedent.gif',1);">
                 <img src="images/conseil_precedent2.gif" alt="Précédent" name="Precédant" border="0" width="160" height="38"></a></td>
                 <td height="40">
                 <div align="center">
