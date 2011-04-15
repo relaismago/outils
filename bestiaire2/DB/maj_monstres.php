@@ -1,5 +1,5 @@
 <?php
-require_once ("../../inc_connect.php");
+require_once ("../../inc_connect.php3");
 
 /*echo date("G:i:s");
 

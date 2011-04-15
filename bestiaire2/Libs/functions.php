@@ -385,7 +385,7 @@ function SelectCdM_mh($MH,$Race,$IDAge)
   $tab_cdm=array();
   $sql="SELECT *,TO_DAYS(NOW()) - TO_DAYS(date_cdm) nbj_cdm FROM `best_cdms` WHERE `id_mh`=$MH";
   // et on rajoute l'âge si on l'a
-  if($IDAge!="-1" && $IDAge != "") $sql.=" AND `id_age_cdm`=$IDAge";
+  if ( $IDAge != "-1" && !empty($IDAge) ) $sql .= " AND `id_age_cdm`=$IDAge";
   if($query=mysql_query($sql,$db_vue_rm)){
     while($ret=mysql_fetch_array($query)){ // pour toutes les cdms correspondantes
       $ret['nom_race']=$Race; // on rajoute le nom de la race (seul id_race est présent)
@@ -433,9 +433,8 @@ function SelectCdMs($Race,$IDTemplate,$IDAge,$NegTemplate,$NegAge,$JustLastCdm =
   if($NegTemplate!="-1") $sql.=" AND `id_template_cdm`!=$NegTemplate";
   if($NegAge!="-1")      $sql.=" AND `id_age_cdm`!=$NegAge";
   $sql .= " ORDER BY date_cdm DESC";
-	if ($JustLastCdm) {
-		$sql .= " LIMIT 1";
-	}
+  $sql .= ($JustLastCdm) ? " LIMIT 1;" : " LIMIT 0,10;";
+
 	// print("<div align=center>DEBUG: ".$sql."</div>");
   // on peut lancer la requête
   if($query=mysql_query($sql,$db_vue_rm)){
