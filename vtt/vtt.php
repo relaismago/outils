@@ -44,7 +44,7 @@ echo "</table>";
 #==============
 # Les Critères
 #==============
-echo "<form action=\"vtt.php?id=".$id."\" method=POST>\n";
+echo "<form action=\"vtt.php?id=".$_SESSION["AuthTroll"]."\" method=POST>\n";
 ?>
 <table class='mh_tdborder' width='80%' align="center" >
   <tr><td class='mh_tdtitre' align="center">
@@ -90,55 +90,51 @@ for ($i=1; $i<=3; $i++)
 }
 echo "<input type=submit value=\"Go!\">\n";
 echo "</form>\n";
+echo "<br/>";
+echo "<br/>";
+echo "<form action=\"vtt.php?id=".$_SESSION["AuthTroll"]."\" method=POST>";
+	echo "<label>Nom du sort/comp</label>\n";
+	echo "<input name='nomCompSort' type='text' />\n";
+	echo "<input type='submit' value='Rechercher' />";
+echo "</form>";
 
 #======================
 # ecriture de la QUERY
 #======================
 $query = "SELECT *, -DLAH*60-DLAM as TDLA, VUE+VUEB as TVUE, REG*2+REGB as TREG, ATT*3.5+ATTB as TATT, ESQ*3.5+ESQB as TESQ, DEG*2+DEGB as TDEG, x_troll, y_troll, z_troll, race_troll, niveau_troll, "
-				." ARM+ARMB as TARM, RM+RMB as TRM, MM+MMB as TMM,"
+				." ARM+ARMB as TARM, RM+RMB as TRM, MM+MMB as TMM, KILLs, DEADs,"
 				." (TO_DAYS(NOW()) - TO_DAYS(DateMaj)) as Peremption"
 				." from "._TABLEVTT_.", trolls"
 				." WHERE id_troll = No";
-if (!isset($_REQUEST["c1"]))
-	{
-		//$query .= " ORDER BY Pseudo ASC";
+if ( isset($_POST["nomCompSort"]) ){
+	
+	$query .= " AND ( Comps LIKE '%" .addslashes($_POST["nomCompSort"]). "%' OR Sorts LIKE '%" .addslashes($_POST["nomCompSort"]). "%' );"; 
+	
+} else if ( !isset($_REQUEST["c1"]) ) {
+		
 		$i=4;
+		$query .= " ORDER BY nom_troll ";
 
-	$query .= " ORDER BY nom_troll ";
-
-	}
-else
-{	
+} else {	
 	# il y a au moins le 1er critère
 	$query .= " ORDER BY CacherData ASC, ";
-	for ($i=1; $i<=3; $i++)
-		{
-			$critere=$_REQUEST["c$i"];
-			if ($i>1 and $critere=="aucun")
-			{
-				# si c'est (aucun) qui a été choisi
-				$i=4;
-			}
-			else
-			{
-				# il y a un critère positionné, différent de (aucun)
-				if ($i>1)
-				{
-					$query .= ",";
-				}
-				$query .= " ".$critere;
-				# récupération de l'ordre de ce critère
-				$ordre = $_REQUEST["ordre$i"];
-				if ($ordre == "croissant")
-				{
-					$query .= " ASC";
-				}
-				else
-				{
-					$query .= " DESC";
-				}
-			}
+	for ($i=1; $i<=3; $i++){
+		$critere = $_REQUEST["c$i"];
+		# si c'est (aucun) qui a été choisi
+		if ($i>1 and $critere=="aucun")
+			$i=4;
+		else {
+			
+			# il y a un critère positionné, différent de (aucun)
+			if ($i>1)
+				$query .= ",";
+			$query .= " ".$critere;
+			# récupération de l'ordre de ce critère
+			$ordre = $_REQUEST["ordre$i"];
+			$query .= ($ordre == "croissant") ? " ASC" : " DESC";
+			
 		}
+	}
 }
 
 #========================
@@ -274,8 +270,8 @@ while ( $row = mysql_fetch_array($query_result) )
       echo "<td align=center>--</td>\n";
       echo "<td align=center>--</td>\n";
     }
-  echo "<td align=center>"; if (non_vide($row["nb_kills_troll"])) { echo htmlspecialchars($row["nb_kills_troll"]); } else { echo "&nbsp;"; } echo "</td>\n";
-  echo "<td align=center>"; if (non_vide($row["nb_morts_troll"])) { echo htmlspecialchars($row["nb_morts_troll"]); } else { echo "&nbsp;"; } echo "</td>\n";
+  echo "<td align=center>"; if (non_vide($row["KILLs"])) { echo htmlspecialchars($row["KILLs"]); } else { echo "&nbsp;"; } echo "</td>\n";
+  echo "<td align=center>"; if (non_vide($row["DEADs"])) { echo htmlspecialchars($row["DEADs"]); } else { echo "&nbsp;"; } echo "</td>\n";
   if (!$cacherdata)
     {
       echo "<td align=center>"; if (non_vide($row["RM"])) { echo htmlspecialchars($row["RM"]).plus($row["RMB"]).htmlspecialchars($row["RMB"]); } else { echo "&nbsp;"; } echo "</td>\n";

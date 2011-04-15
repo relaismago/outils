@@ -10,6 +10,7 @@ function acronyme($chaine)
   if (eregi('.+D.g.ts', $chaine, $trash))         {return "AdD";}
   if (eregi('.+Esquive', $chaine, $trash))        {return "AdE";}
   if (eregi('.+Magie', $chaine, $trash))          {return "BAM";}
+  if (eregi('Bulle Magique.+', $chaine, $trash))  {return "BuM";}
   if (eregi('Explosion', $chaine, $trash))        {return "Explo";}
   if (eregi('Faiblesse.+', $chaine, $trash))      {return "FP";}
   if (eregi('Flash.+', $chaine, $trash))          {return "Flash";}
@@ -87,31 +88,37 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 			$troll_pvact		= trim($resultat[1]);
 		endif;
 		if(eregi('[ \t]*Maximum\.+:[ \t]*(.+)',$lignes[$i],$resultat)):
-			$troll_pv		= trim($resultat[1]);
+			$resultat = explode(" ",$resultat[1]);
+			$troll_pv		= trim($resultat[0]+$resultat[1]);
 		endif;
 
 		if(eregi('[ \t]*R.g.n.ration\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)[ \t]*-{3}.+',$lignes[$i],$resultat)):
 			$troll_reg_base	= trim($resultat[1]);
-			$troll_reg_bm	= trim($resultat[2]);
-			//$troll_reg_bmm	= trim($resultat[3]);
+			$resultat = explode(" \t",$resultat[2]);			
+			$troll_reg_bm	= trim($resultat[0]+$resultat[1]);
  		elseif (eregi('[ \t]*R.g.n.ration\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_reg_base	= trim($resultat[1]);
-			$troll_reg_bm	= trim($resultat[2]);
+			$resultat = explode(" \t",$resultat[2]);			
+			$troll_reg_bm	= trim($resultat[0]+$resultat[1]);
         endif;
 		
 		if(eregi('[ \t]*Atta.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_att_base	= trim($resultat[1]);
-			$troll_att_bm	= trim($resultat[2]);
+			$resultat = explode(" \t",$resultat[2]);			
+			$troll_att_bm	= trim($resultat[0]+$resultat[1]);
 		endif;
 		if(eregi('[ \t]*Esquive\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_esq_base	= trim($resultat[1]);
-			$troll_esq_bm	= trim($resultat[2]);
+			$resultat = explode(" \t",$resultat[2]);
+			$troll_esq_bm	= trim($resultat[0]+$resultat[1]);
 		endif;
 		if(eregi('[ \t]*D.g.ts\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_deg_base	= trim($resultat[1]);
-			$troll_deg_bm	= trim($resultat[2]);
+			$resultat = explode(" \t",$resultat[2]);			
+			$troll_deg_bm	= trim($resultat[0]+$resultat[1]);
 		endif;
-		if(eregi('[ \t]*Armure\.+:[ \t]+(.+)[ \t]+(.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Armure\.+:[  \t]+(.+)',$lignes[$i],$resultat)):
+			$resultat = explode(" \t",$resultat[1]);
 			$troll_arm_base	= trim($resultat[1]);
 			$troll_arm_bm	= trim($resultat[2]);
 		endif;
@@ -165,7 +172,7 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> RACE	(race/niveau)	</b></td><td width='50%'>".exporter(troll_race)."</td><td width='17%'>Mis à jour automatiquement toutes les nuits.</td></tr>\n";
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> DLA	(base/réél)	</b></td><td width='50%'>".$troll_dla_base_hh."H".$troll_dla_base_mm."</td><td width='17%'>".exporter(troll_dla_reel_hh)."H".exporter(troll_dla_reel_mm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> VUE	(base/bm)	</b></td><td width='50%'>".exporter(troll_vue_base)."</td><td width='17%'>".exporter(troll_vue_bm)."</td></tr>\n";	
-		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> PV			</b></td><td width='50%'>".exporter(troll_pvact)."/".exporter(troll_pv)."</td><td width='17%'>&nbsp;</td></tr>\n";
+		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> PV			</b></td><td width='50%'>".exporter(troll_pvact)."</td><td width='17%'>".exporter(troll_pv)."</td></tr>\n";
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> REG	(base/bm)	</b></td><td width='50%'>".exporter(troll_reg_base)."</td><td width='17%'>".exporter(troll_reg_bm)." ".exporter(troll_reg_bmm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> ATT	(base/bm)	</b></td><td width='50%'>".exporter(troll_att_base)."</td><td width='17%'>".exporter(troll_att_bm)."</td></tr>\n";	
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> ESQ	(base/bm)	</b></td><td width='50%'>".exporter(troll_esq_base)."</td><td width='17%'>".exporter(troll_esq_bm)."</td></tr>\n";
@@ -179,8 +186,8 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b> Nb de Comp&eacute;tences</b></td><td width='50%'>".$nb_comps."</td><td width='17%'>&nbsp;</td></tr>\n";
 		for ($i=0; $i<$nb_comps; $i++) 
 			{
-			echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b>COMP. (nom/pourcentage) </b></td><td width='33%'>".$troll_cs[$i][0]."</td><td width='34%'>".$troll_cs[$i][1]."</td></tr>\n";
-			$chaine_comps.=($i==0?"":", ").htmlspecialchars($troll_cs[$i][0], ENT_QUOTES)." (".$troll_cs[$i][1]."%)";
+			echo "<tr class='mh_tdpage'><td class='mh_tdtitre' width='33%'><b>COMP. (nom/pourcentage) </b></td><td width='33%'>".str_replace( "Utiliser l'action ", "", $troll_cs[$i][0] )."</td><td width='34%'>".$troll_cs[$i][1]."</td></tr>\n";
+			$chaine_comps.=($i==0?"":", ").htmlspecialchars(str_replace( "Utiliser l'action ", "", $troll_cs[$i][0] ), ENT_QUOTES)." (".$troll_cs[$i][1]."%)";
 			}
 
                 $chaine_sorts="";
