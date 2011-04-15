@@ -48,7 +48,7 @@ function showToolbar()
   	$pos = addItemMenu(false,false,$pos,"Vue2d","Vue2d Relais&Mago Publique", "/public.php","jouer");
 		
   $pos = addItemMenu(false,false,$pos,"Bestiaire","Le Bestiaire", "/bestiaire2/");
-  $pos = addItemMenu(true,false,$pos,"GPS","Le GPS Relais&Mago", "/gps_advanced.php3");
+  $pos = addItemMenu(true,false,$pos,"GPS","Le GPS Relais&Mago", "/gps_advanced.php");
   $pos = addItemMenu(true,false,$pos,"GGC","Le Gestionnaire de Groupe de Chasse", "/ggc/accueil.php");
   //$pos = addItemMenu(true,false,$pos,"Magasin","Les boutiques R&M", "/magasin/");
   $pos = addItemMenu(true,false,$pos,"Trolliaire","Stockage des Ananlyses Anatomiques", "/anatomique/anatomique.php?id_troll=list");
@@ -86,12 +86,14 @@ function showToolbar()
   $pos = addItemMenu(false,false,$pos,"Ustensiles", "Les ustensiles du Hall", "/pratique/ustensils.php");
   $pos = addItemMenu(false,false,$pos,"PartagePX", "Partage des PX du groupe", "/partagepx/partage.php");
   $pos = addItemMenu(false,false,$pos,"IRoll", "Attributions diverses", "/iroll/");
-  $pos = addItemMenu(false,false,$pos,"GMAB", "Give me a battlefield", "/gmab/");
+  $pos = addItemMenu(false,false,$pos,"GMAB", "Recherche de spot", "/gmab/");
+  $pos = addItemMenu(false,false,$pos,"PimpMyTroll", "Customisation virtuelle de votre Troll", "/pimpmytroll/");
+  $pos = addItemMenu(false,false,$pos,"EasyEM", "L écriture magique facile", "/easyem/");  
 	
   $pos = addItemMenu(false,true,'special',"Spécial", "Spécial");
   $pos = addItemMenu(false,false,$pos,"Miss Mountyhall 2005!", "Miss Mountyhall 2005!", "/miss/miss.php");
   //$pos = addItemMenu(false,false,$pos,"Miss Relais&Mago 2005!", "Miss Relais&Mago 2005!", "/miss/miss.php");
-/*  $pos = addItemMenu(true,false,$pos,"VPG", "La Vengeance pour Grognon", "/histoires/la_vpg.php");*/
+  //$pos = addItemMenu(true,false,$pos,"VPG", "La Vengeance pour Grognon", "/histoires/la_vpg.php");
   $pos = addItemMenu(false,false,$pos,"La Liche", "L assaut de la Liche ", "/histoires/la_liche.php");
   $pos = addItemMenu(false,false,$pos,"Retour des Monstres", "Le retour des Monstres ", "/histoires/retour_monstres.php");
   $pos = addItemMenu(false,false,$pos,"Le Complot", "Le Complot ", "/histoires/complot.php");
