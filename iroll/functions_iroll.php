@@ -36,7 +36,7 @@
                         
                         $nom_attrib = $post['hidden'];
                         $chance = intval(trim($post['chance']));
-                        $pseudo = htmlspecialchars( trim($post['pseudo']), ENT_QUOTES );
+                        $pseudo = htmlspecialchars( trim($post['pseudo']), ENT_QUOTES, "UTF-8" );
                         $retour .= $start ."<h2>Nom de l'attribution : " .$nom_attrib. "</h2>". $end;;
                         
                         // vérifie les saisies
@@ -47,12 +47,14 @@
                                 
                         // ajoute le participant au fichier xml 
                         if ( !empty($pseudo) && !empty($chance) && is_int($chance) && $chance > 0 )
-                                create_participant($nom_attrib,$pseudo,$chance);
+                                create_participant($pseudo,$chance);
                                 
+						$attrib = get_last_attribution(get_dom());								
+								
                         // affiche les deux formulaires ainsi que les participants
                         $retour .= $start .create_troll_form($nom_attrib). $end;
-                        if ( check_participants($nom_attrib) )
-                                $retour .= $start .get_participants($nom_attrib). $end; 
+                        if ( check_participants($attrib) )
+                                $retour .= $start .get_participants($attrib). $end; 
                         $retour .= "<br/>";
                         $retour .= $start .create_validation_form($nom_attrib). $end;                                   
                         
@@ -102,13 +104,13 @@
                 
         }
         
-        function create_participant($nom_attrib,$pseudo,$chance){
+        function create_participant($pseudo,$chance){
         // ajoute un participant dans le fichier xml
                 
                 $dom = get_dom();      
 
-                $participant = $dom->createElement("participant",utf8_encode($pseudo));
-                $participant->setAttribute("chance", $chance);                  
+                $participant = $dom->createElement("participant",$pseudo);
+                $participant->setAttribute("chance", $chance);     
                 get_last_attribution($dom)->appendChild($participant);
                 $dom->formatOutput = true;
                 $dom->save("attribution.xml");          
@@ -163,16 +165,15 @@
                 
         }       
 
-        function get_participants($nom_attrib){
+        function get_participants($attribution){
         // retourne le code html des participants d'une attribution
                 
-                $retour = "";
-                $dom = get_dom();               
+                $retour = "";            
                 
-                $participants = get_last_attribution($dom)->getElementsByTagName("participant");
+                $participants = $attribution->getElementsByTagName("participant");
                                 
                 foreach ( $participants as $participant )       
-                        $retour .= "<tr class='mh_tdtitre'><td align='center'>" .utf8_decode(stripslashes($participant->nodeValue)). "</td><td align='center'>" .$participant->getAttribute("chance"). "</td></tr>";    
+                	$retour .= "<tr class='mh_tdtitre'><td align='center'>" .utf8_decode(stripslashes($participant->nodeValue)). "</td><td align='center'>" .$participant->getAttribute("chance"). "</td></tr>";    
                                 
                 return "<table class='mh_tdborder' align='center' border='2' frame='void'><tr class='mh_tdtitre' align='center' style='color:white;'><th>&nbsp;Pseudo&nbsp;</th><th>&nbsp;Nombre de Chance&nbsp;</th></tr>" .$retour. "</table>";
                 
@@ -283,7 +284,7 @@
                 $attribution = $dom->getElementsByTagName("attrib")->item($id);
                                 
                 $retour .= $start ."<h3>" .utf8_decode(stripslashes($attribution->getAttribute("name"))). " par " .utf8_decode(stripslashes($attribution->getAttribute("pseudo"))). " le " .$attribution->getAttribute("date"). "</h3>". $end;
-                $retour .= $start .get_participants(utf8_decode($attribution->getAttribute("name"))). $end;
+                $retour .= $start .get_participants($attribution). $end;
                 $retour .= $start ."<h3>Résutalt du jet : " .$attribution->getAttribute("random"). "</h3>". $end;
                 $retour .= $start ."<h3>Vainqueur : " .utf8_decode(get_winner($attribution)). "</h3>". $end;
                 
