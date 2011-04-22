@@ -169,5 +169,6 @@ AfficheConfirmation("Modification des données d'un monstre","Modifications effec
 /*	                PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
+mysql_close($db_link);
 
 ?>

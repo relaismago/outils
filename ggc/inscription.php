@@ -101,7 +101,7 @@ echo "<form action='inscription.php' method='post'>";
 	echo "<td width='100%' align='center'>";
 	echo "<input type='hidden' name='action' value='add'>";
 	echo "<br>Votre numéro de troll chez MountyHall<br><input type='text' name='num_troll' value='$id_troll_session'><br>";
-	echo "<br>Choisissez un mot de passe<br><input type='password' name='passe_membre'><br>";
+	echo "<br>Choisissez un mot de passe ( différent de celui de MH ! )<br><input type='password' name='passe_membre'><br>";
 	echo "<br><br><input CLASS='mh_form_submit' type='submit' value='Inscris moi vite !'><br>";
 	echo "<br><a href='index.php' onMouseOut='MM_swapImgRestore()' onMouseOver=\"MM_swapImage('retour','','images/retour2_over.gif',1)\"><img src='images/retour2.gif' name='retour' border='0'></a><br>";
 	echo "</td>";
@@ -120,6 +120,7 @@ break;
 /*	                PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
+mysql_close($db_link);
 
 ?>
 

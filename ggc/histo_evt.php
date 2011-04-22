@@ -98,5 +98,6 @@ echo "</table>\n";
 /*	                PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
+mysql_close($db_link);
 
 ?>

@@ -36,7 +36,7 @@ function TestSecurite() {
 	}
 	mysql_select_db($bdd);
 
-	if($_SESSION['AuthTroll']>0 &&  userIsGuilde() ){
+	if( $_SESSION['AuthTroll'] > 0 && userIsGuilde() || $_SESSION['AuthTroll'] > 0 && userIsGroupSpec() ){
 	//Le troll est connecté chez R&M
 
 	  $sql = "select id_troll from ggc_troll where id_troll='$_SESSION[AuthTroll]'";

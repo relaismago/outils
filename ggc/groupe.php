@@ -310,5 +310,6 @@ AfficheBasPage ();
 mysql_free_result($requete_groupe);
 mysql_free_result($requete_infos);
 mysql_free_result($requete_histo_evt);
+mysql_close($db_link);
 
 ?>

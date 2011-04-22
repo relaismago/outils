@@ -224,5 +224,6 @@ AfficheConfirmation("Ajout d'un évènement","Ajout réussit !","L'évènement a été 
 /*                 PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
+mysql_close($db_link); 
  
 ?>

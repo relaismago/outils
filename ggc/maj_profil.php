@@ -72,7 +72,10 @@ switch($action) {
 			$troll_pv_act = trim($resultat[1]);
 		endif;
 		if(eregi('[ \t]*Maximum\.+:[ \t]*(.+)',$lignes[$i],$resultat)):
-			$troll_pv_max = trim($resultat[1]);
+			$resultat = explode( " +", trim($resultat[1]) );
+			if ( isset($resultat[1]) )
+				$resultat[0] = $resultat[0] + $resultat[1];
+			$troll_pv_max = $resultat[0];
 		endif;
 		
 		if(eregi('[ \t]*Régénération.+Fatigue du Kastar.+:[ \t]*(.+).+\(',$lignes[$i],$resultat)):
@@ -227,5 +230,6 @@ switch($action) {
 /*	                PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
+mysql_close($db_link);
 
 ?>

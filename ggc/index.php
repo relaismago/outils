@@ -24,5 +24,4 @@ AfficheConfirmation("Bienvenue","Connexion","A partir de maintenant pour accèder
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
 
-
 ?>

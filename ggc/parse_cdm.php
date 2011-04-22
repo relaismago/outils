@@ -111,19 +111,25 @@ echo "           <tr>\n";
 echo "            <td height='30' align='center'><img src='images/bienvenue.gif'></td>\n";
 echo " 	         </tr>\n";
 echo "           <tr>\n";
-echo "            <td height='250' class='mh_tdpage'><br>Grumf,<br>Te voici dans le <b>GGC</b> : l'outils de Gestion des Groupe de Chasse Relais&Mago.<br>" .
-		"Le but du GGC est d'aider les trolls à synchroniser les attaques sur les monstres.<br>" .
-		"Quand les membres du groupe mettent à jour leurs profils, le dieu Péhàchepé<br>" .
-		"calcule et t'afiche les DLA's à venir !<br>" .
-		"Gloire à lui et la fée Unfor'Matik !<br>" .
-		"Bonnes chasse à tous !<br>" .
-		"Courbettes distinguées,<br>" .
-		"Fuleng<br><br></td>\n";
+echo "            <td height='250' class='mh_tdpage'>";
+//
+if ( isset($_POST["copiercoller"]) && isset($_POST["date"]) && isset($_POST["typecomp"]) ){
+	$message = preg_split( "#\*+#s", $_POST["copiercoller"] );
+	$cdm = addslashes(trim(preg_replace( "#Vous avez utilisé.*#", "", trim($message[1]) )));
+	$result = mysql_db_query($bdd,"SELECT date FROM ggc_competence WHERE nom = '" .$_POST["typecomp"]. "' AND date = '" .$_POST["date"]. "' AND id_cible = '" .$_POST["id"]. "';",$db_link) or die(mysql_error());	
+	if ( mysql_num_rows($result) > 0 )	
+		echo "La compétence ". $_POST["typecomp"]. " à ". $_POST["date"]. " pour le monstre ". $_POST["id"]. " a déja été enregistré !";
+	else {
+		mysql_db_query($bdd,"INSERT INTO `ggc_competence` ( `id_troll` , `id_cible` , `nom` , `texte` , `date` ) VALUES ( '" .$_SESSION["AuthTroll"]. "', '" .$_POST["id"]. "', '" .$_POST["typecomp"]. "', '$cdm', '" .$_POST["date"]. "' );",$db_link) or die(mysql_error());
+		echo "Monstre ajouté pour votre GGC !";		
+	}
+} else {
+	echo "Rien à parser !";
+}
+
+echo "            </td>";
 echo "	         </tr>\n";
-echo "          <tr>\n";
-echo "           <td><em>Merci à <b>Bodéga</b> pour tout se temps passé avec moi pour me dépatouiller mes pages !</em></td>\n";
-echo " 	        </tr>\n";
-echo "      </table>\n";
+echo "      	</table>\n";
 echo "		   <br>\n";
 echo "		  </tr>\n";
 echo "		 </td>\n";
@@ -176,6 +182,5 @@ echo "</table>\n";
 /*	                PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
-mysql_close($db_link);
 
 ?>

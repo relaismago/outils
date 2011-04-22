@@ -146,6 +146,6 @@ AfficheConfirmation("Ajout d'un monstre à suivre par le Groupe de Chasse","Ajout
 /*	                PIED DE LA PAGE HTML                           */
 /*-----------------------------------------------------------------*/
 AfficheBasPage ();
-    
+mysql_close($db_link);    
 
 ?>
