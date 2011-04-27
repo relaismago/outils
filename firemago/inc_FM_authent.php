@@ -24,20 +24,20 @@ function userLogin ( $numTroll, $md5pass )
 		$_SESSION['AuthGuilde'] = $DBAuthGuilde;
 		$_SESSION['AuthNomTroll'] = $DBNomTroll;
 	
-		if ( userIsGuilde() ) {
-      // Controle de l'administrateur
-      // Remplis la variable de session
-      if ( isDbAdministration() )
-        $_SESSION['admin'] = "authenticated";
-      else
-        $_SESSION['admin'] = "notauthorized";
-
-      $_SESSION['Status']="authentified";
-      setcookie ("cookie_id_troll", $_SESSION['AuthTroll'],time()+31536000); // on garde le cookie 1 an
-
-      enregistre_connection( $_SESSION['AuthTroll'] );
-			return true;
-    } 
+	if ( userIsGuilde() || userIsGroupSpec()) {
+		// Controle de l'administrateur
+		// Remplis la variable de session
+		if ( isDbAdministration() )
+		$_SESSION['admin'] = "authenticated";
+		else
+		$_SESSION['admin'] = "notauthorized";
+		
+		$_SESSION['Status']="authentified";
+		setcookie ("cookie_id_troll", $_SESSION['AuthTroll'],time()+31536000); // on garde le cookie 1 an
+		
+		enregistre_connection( $_SESSION['AuthTroll'] );
+		return true;
+	} 
 
 	} 
 	return false;

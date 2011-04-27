@@ -108,7 +108,7 @@ function firemago_tutorial_msg_2()
 
 					<div class="titre3">Installation de Firemago</div><br>
 					<img src="/images/puce.gif"> 1 - Tout d'abord, cliquer sur ce lien : 
-					<a class="AllLinks" href='/firemago/firemago.xpi' onclick="xpi={'mountyzilla':this.href};InstallTrigger.install(xpi);return false;">L'extension</a> (si rien ne se passe, autorise les popups pour le site des outils relaismago et recommence).
+					<a class="AllLinks" href='/firemago/firemago.xpi' onclick="xpi={'mountyzilla':this.href};InstallTrigger.install(xpi);">L'extension</a> (si rien ne se passe, autorise les popups pour le site des outils relaismago et recommence).
 					<br>
 					<img src="/images/puce.gif"> 2 - Redémarre Mozilla Firefox
 					<br>
