@@ -80,10 +80,13 @@
 					$name = trim($a[0]);
 					$age = trim(str_replace("]","",$a[1]));
 					$td_monstres .= '<tr><td>' .$monstre["level"]. '</td>';
-					$level += $monstre["level"];					
+					if ( $monstre["level"] != "?" )
+						$level += $monstre["level"];
+					else
+						--$i;
 					$td_monstres .= '<td><a href="" onClick="window.open(\'http://games.mountyhall.com/mountyhall/View/MonsterView.php?ai_IDPJ=' .$monstre["id"]. '\',\'_blank\',\'toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0, width=766, height=636\');return(false);">' .$monstre["id"]. '</a></td>';
-					$td_monstres .= '<td><a href="http://outilsrm.cat-the-psion.net/bestiaire2/bestiaire.php?Monstre=' .$name. '&Age=' .$age. '&MH=' .$monstre["id"]. '" target="_blank">' .$monstre["name"]. '</a></td>';
-					$td_monstres .= '<td><a href="http://outilsrm.cat-the-psion.net/cockpit.php?cX=' .$monstre["X"]. '&cY=' .$monstre["Y"]. '&cZ=' .$monstre["N"]. '" target="_blank">' .$monstre["X"] ." ". $monstre["Y"] ." ". $monstre["N"]. "</a></td></tr>";
+					$td_monstres .= '<td><a href="/bestiaire2/bestiaire.php?Monstre=' .$name. '&Age=' .$age. '&MH=' .$monstre["id"]. '" target="_blank">' .$monstre["name"]. '</a></td>';
+					$td_monstres .= '<td><a href="/cockpit.php?cX=' .$monstre["X"]. '&cY=' .$monstre["Y"]. '&cZ=' .$monstre["N"]. '" target="_blank">' .$monstre["X"] ." ". $monstre["Y"] ." ". $monstre["N"]. "</a></td></tr>";
 					++$i;
 					
 				}

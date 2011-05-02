@@ -2,6 +2,7 @@
 	
 	require_once ('../top.php');
 	require_once ('../functions.php');
+	require_once ('../lib/nusoap.php');	
 	require_once ('../bestiaire2/Libs/functions.php');
 	require_once ('functions_gmab.php');
 
@@ -53,6 +54,11 @@
 		echo mysql_error();		
 		$_POST["name"] = $troll["1"];
 		
+		/*$clientWs = new nusoap_client('http://sp.mountyhall.com/SP_WebService.php');
+		$vue = $clientWs ->call('Vue', array('numero' => $_POST["id"], 'mdp' => $troll["0"]));		
+		var_dump($vue);	
+		die;*/
+		
 		// Récupération de la vue
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "http://sp.mountyhall.com/SP_Vue2.php?Numero=" .$_POST["id"]. "&Motdepasse=" .$troll["0"]);
@@ -63,12 +69,13 @@
         // Vérifie si la vue a bien été récupéré
 	    if ( preg_match("#.*paramètres incorrects.*#", $_POST["view"]) || preg_match("#mot de passe incorrect#", $_POST["view"]) )
 	       	echo $start .$_POST["view"]. $end;
-	    else {					
-			echo $start .htmlDisplaySpots($_POST). $end;
-			updateScriptCall($_POST["id"],$db_vue_rm);
+	    else {				
+			updateScriptCall($_POST["id"],$db_vue_rm);	
+			//set_time_limit (0);
+			echo $start .htmlDisplaySpots($_POST). $end;	
 	    }
 			
-	}		
+	}	
 			
 ?>
 <tr class='mh_tdtitre' align='center'><td class='mh_tdpage'>

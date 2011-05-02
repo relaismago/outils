@@ -36,6 +36,7 @@
 		if ( preg_match("#.*" .$_POST["troll"]. ".*#i",$file) )
 			unlink("save/".$file);	
 			
+	//set_time_limit (0);			
 	// Enregistrement du fichier de recherche		
 	date_default_timezone_set('Europe/Berlin');		
 	$string = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
