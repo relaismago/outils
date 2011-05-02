@@ -47,8 +47,7 @@ function afficheAuthentifie($DEV=FALSE)
 					<input type=submit name='Submit_Pass' value='Connexion' class='mh_form_submit'> &nbsp;
 						<a href='change_password.php' title='Changement de Mot de passe, ou nouveau chez les Relais&Mago'>Changement de Mot de Passe ?</a>
 						<? 
-							$text = "Vous devez avoir le même mot de passe dans les outils ".RELAISMAGO." que dans Mountyhall.<br><br>";
-							$text .= "Si vous êtes nouveau ou si vous venez de changer de mot de passe, veuillez cliquer <br>";
+							$text = "Si vous êtes nouveau ou si vous venez de changer de mot de passe, veuillez cliquer <br>";
 							$text .= "sur ce lien.";
 							
 							affiche_popup("Renseignement Mot de Passe","yellow",$text,"",false);
@@ -166,7 +165,7 @@ function initAuth()
 		$md5pass="---"; // Initialisation, mais çà sert pas à grand chose ici
 	
 		// On regarde si le troll existe dans la base de données
-		$sql = "SELECT pass_troll, guilde_troll, nom_troll, nom_rang_troll, groupe_spec_troll";
+		$sql = "SELECT pass_outils_troll, guilde_troll, nom_troll, nom_rang_troll, groupe_spec_troll";
 		$sql .= " FROM trolls WHERE id_troll=$CHTROLL";
 	  $result=mysql_query($sql, $db_vue_rm);
 	  echo mysql_error();
@@ -224,7 +223,7 @@ function initAuth()
 			<br> soit c'est votre première connexion (réessayez)<br>
 			<br><br>Conclusion : 
 			<br>Vous n'avez pas accès à ces pages<br>
-			Contactez GlupGlup (51166) pour résoudre le problème.<br><br>
+			Contactez glupglup (51166) pour résoudre le problème.<br><br>
 			");
 		}
 	}

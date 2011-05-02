@@ -52,12 +52,10 @@ function initChangePassword($act="")
 					Vous êtes nouveau dans les outils <? echo RELAISMAGO ?>, vous devez renseigner ici votre mot de passe.<br><br>
 					Celui-ci doit être le même que sur Mountyhall, une vérification va être effectuée.<br><br>
 					<? } else { ?>
-					Si vous avez changé de mot de passe sur Mountyhall, vous devez aussi le changer dans les outils.<br><br>
+					Si vous avez changé de mot de passe sur Mountyhall, vous devez changer le mot de passe restreint dans les outils.<br><br>
 					<? } ?>
 					Renseignez les informations nécessaires ci-dessous puis cliquer sur Changer.<br><br>
 					Si toutefois vous avez des soucis, envoyez un MP à glupglup (51166)<br>
-					avec le md5 de votre actuel mot de passe calculé là =>
-					<a href='/md5.php'>MD5</a>
 				</td>
 			</tr>
 			
@@ -70,7 +68,8 @@ function initChangePassword($act="")
 								<input type='textbox' name='id_troll'><br><br>
 								Nouveau mot de passe<br>
 								<input type='password' name='new_password'><br><br>
-					
+								<a href="http://sp.mountyhall.com/md5.php">Mot de passe restreint MH qui servira pour les appels aux scripts publics</a><br>
+								<input type='password' name='mh_password'><br><br>
 								<input type='submit' value='Mettre à jour' class='mh_form_submit'><br>
 	
 <?
@@ -84,8 +83,14 @@ function changeDbPassword()
 
 
   $id_troll = $_REQUEST[id_troll];
-  $md5_new = md5($_REQUEST[new_password]);
-
+  $md5_new = $_REQUEST[mh_password];
+  $pass_troll = md5($_REQUEST[new_password]);
+  $erreur = "";
+  
+  if ($_REQUEST[new_password] == "") {
+  	$erreur .= "Le mot de passe doit contenir plusieurs caractères !<br>";
+  }
+  
   $date=date("Y-m-d H-i-s");
   $date_less_24=date("Y-m-d H-i-s", mktime(date("H"), date("i"), date("s"), date("m")  , date("d")-1, date("Y")));
 
@@ -115,7 +120,6 @@ function changeDbPassword()
 	if ($fp == FALSE)
 		die ("Erreur lors de l'appel au script public.");
 	
-	$erreur = "";
   while ( ($line=fgets($fp)) && (!$error) ){
     if ($deb<1) {
       if (strpos($line,"Erreur")!==false) {
@@ -127,20 +131,20 @@ function changeDbPassword()
           fwrite($tmpfile,$date.": Troll n° ".$id."\n");
           fclose($tmpfile);
 
-          $erreur = "<br><b class=red>Il faut mettre le même mot de passe que sur MountyHall - essayez encore.</b><br>";
+          $erreur .= "<br><b class=red>Le mot de passe restreint de MH n'est pas bon - essayez encore.</b><br>";
           break;
         } elseif (preg_match("/Erreur (4|5)/",$line)) {
-          $erreur = "<br><b class=red>Erreur du serveur.</b><br>
+          $erreur .= "<br><b class=red>Erreur du serveur.</b><br>
               Il est encore en vrac. Il faudra repasser plus tard
-              quand les DM l'auront remis enroute...<br>";
+              quand les DM l'auront remis en route...<br>";
           break;
         } elseif (strpos($line,"Erreur 1")!==false) {
-          $erreur = "<br><b class=red>Paramètres incorrects</b><br>
+          $erreur .= "<br><b class=red>Paramètres incorrects</b><br>
                Mais... qu'est-ce que vous avez donc tapé ? Envoyez-moi un mail avec vos paramètres,
                je tenterais de débugguer le truc.<br>";
           break;
         }
-        $erreur = "erreur Inconnue : $line";
+        $erreur .= "erreur Inconnue : $line";
         break;
 
 			} else {
@@ -173,7 +177,8 @@ function changeDbPassword()
 	if ( $erreur == "") {
 	
 		$sql = " UPDATE trolls SET"; 	
-		$sql .= " pass_troll='$md5_new'";
+		$sql .= " pass_troll='$md5_new',";
+		$sql .= " pass_outils_troll='$pass_troll'";
 		$sql .= " WHERE id_troll=$id_troll";
 
 		if (!$result=mysql_query($sql,$db_vue_rm)) {
@@ -181,14 +186,14 @@ function changeDbPassword()
 			$erreur .=  "<br>chaine sql = $sql<br>";
 			$erreur .=  "<font color=red>Erreur dans le changement du mot de passe du troll."; 	 
 			$erreur .=   "Copiez / Collez ce que vous voyez et postez"; 	 
-			$erreur .=   " cela dans le forum outils. Merci (ou contactez Bodéga 49145)</font>"; 	 
+			$erreur .=   " cela dans le forum outils. Merci (ou contactez glupglup 51166)</font>"; 	 
 		} else { 	 
 			$erreur .= 	 "<h2>Le mot de passe du troll n° $id_troll est modifié</h2>"; 	 
 			$erreur .= 	 "Connectez-vous, puis allez sur le cockpit.<br><br>"; 	 
 			$erreur .= 	 "Ensuite rafraichissez votre vue avec les scripts publics pour tester le changement de mot de passe."; 	 
 			$erreur .= 	 "<br><br>"; 	 
 		
-			$erreur .= 	 "Si toutefois vous avez des soucis, envoyez un MP à Bodéga (49145) ou à Toddmiller (4570)"; 	 
+			$erreur .= 	 "Si toutefois vous avez des soucis, envoyez un MP à glupglup (51166)"; 	 
 				$erreur .= 	 " avec le md5 de votre actuel mot de passe calculé là =>"; 	 
 			$erreur .= 	 "<a href='/md5.php'>MD5</a>"; 	 
 		}
