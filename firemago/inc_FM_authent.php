@@ -10,7 +10,7 @@ function userLogin ( $numTroll, $md5pass )
 {
 	global $db_vue_rm;
 	// On regarde si le troll existe dans la base de données
-	$sql = "SELECT pass_troll, guilde_troll, nom_troll";
+	$sql = "SELECT pass_outils_troll, guilde_troll, nom_troll";
 	$sql .= " FROM trolls WHERE id_troll=$numTroll";
   	$result = mysql_query ( $sql, $db_vue_rm);
 	if ( $result == false ) { return false; }
