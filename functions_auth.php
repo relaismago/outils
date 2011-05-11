@@ -1,5 +1,4 @@
 <?
-
 session_start();
 
 include_once("inc_define_vars.php");
