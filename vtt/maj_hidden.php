@@ -216,11 +216,11 @@
 		if (preg_match("#Vampirisme.*#", $chaine))       {return "Vampi";}
 		if (preg_match("#Voir.+#", $chaine))           {return "VlC";}
 		if (preg_match("#.l.portation.*#", $chaine))    {return "TP";}
-		if (preg_match("#.l.kin.sie.*#", $chaine))      {return "T&eacute;l&eacute;kin&eacute;sie";}
+		if (preg_match("#.l.kin.sie.*#", $chaine))      {return "Télék";}
 		if (preg_match("#.+Accrue.*#", $chaine))         {return "VA";}
 		if (preg_match("#.+lointaine.*#", $chaine))      {return "VL";}
 		if (preg_match("#Vue.+#", $chaine))            {return "VT";}
-		if (preg_match("#L.vitation.+#", $chaine))     {return "L&eacute;vitation";}
+		if (preg_match("#L.vitation.+#", $chaine))     {return "Lévitation";}
 		if (preg_match("#Sublifusion.+Medius.*#", $chaine))    {return "Sublifusion Magesque Medius";}
 		if (preg_match("#Sublifusion.+Minus.*#", $chaine))    {return "Sublifusion Magesque Minus";}
 		if (preg_match("#Sublifusion.+Maexus.*#", $chaine))    {return "Sublifusion Magesque Maexus";}

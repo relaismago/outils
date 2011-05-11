@@ -26,11 +26,11 @@ function acronyme($chaine)
   if (eregi('Vampirisme', $chaine, $trash))       {return "Vampi";}
   if (eregi('Voir.+', $chaine, $trash))           {return "VlC";}
   if (eregi('T.l.portation', $chaine, $trash))    {return "TP";}
-  if (eregi('T.l.kin.sie', $chaine, $trash))      {return "T&eacute;l&eacute;kin&eacute;sie";}
+  if (eregi('T.l.kin.sie', $chaine, $trash))      {return "Télék";}
   if (eregi('.+Accrue', $chaine, $trash))         {return "VA";}
   if (eregi('.+Lointaine', $chaine, $trash))      {return "VL";}
   if (eregi('Vue.+', $chaine, $trash))            {return "VT";}
-  if (eregi('L.vitation.+', $chaine, $trash))     {return "L&eacute;vitation";}
+  if (eregi('L.vitation.+', $chaine, $trash))     {return "Lévitation";}
   if (eregi('Sublifusion.+Medius', $chaine, $trash))    {return "Sublifusion Magesque Medius";}
   if (eregi('Sublifusion.+Minus', $chaine, $trash))    {return "Sublifusion Magesque Minus";}
   if (eregi('Sublifusion.+Maexus', $chaine, $trash))    {return "Sublifusion Magesque Maexus";}

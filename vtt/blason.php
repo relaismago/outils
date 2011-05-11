@@ -1,5 +1,5 @@
 <?php
-include('secure.php');
+include_once('secure.php');
 
 function initBlason($no) {
 	//$no = $_REQUEST["no"];

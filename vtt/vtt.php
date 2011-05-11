@@ -1,9 +1,8 @@
 <?php
 
 include_once('../top.php');
-include_once('../secure.php');
 
-include('secure.php');
+include_once('secure.php');
 
 include('blason.php');
 
@@ -236,7 +235,7 @@ while ( $row = mysql_fetch_array($query_result) )
   echo "</td>\n";
   echo "<td align=center>"; 
 	// Bouton Editer
-	if ($_SESSION[AuthTroll] == $row["No"]) {
+	if ($_SESSION['AuthTroll'] == $row["No"]) {
 		echo '&nbsp;<a href="parser_profil.php?id='.$row["No"].'" target="_parent"><img src="button_edit.png" alt="mettre à jour" border="0"></a>';
 	}
 
