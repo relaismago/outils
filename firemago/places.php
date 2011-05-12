@@ -1,6 +1,5 @@
 <?
-session_start();
-
+include_once ("../functions_auth.php");
 include_once ( "../admin_functions_db.php" );
 
 setlocale (LC_TIME, 'fr_FR.ISO8859-1');

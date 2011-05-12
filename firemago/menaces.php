@@ -1,8 +1,6 @@
 <?php
 global $Auth, $AuthTroll, $AuthGuilde;
 
-session_start ();
-
 include_once ( "../inc_connect.php" );
 include_once ( "inc_FM_authent.php" );
 

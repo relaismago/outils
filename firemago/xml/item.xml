@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Items>
+	<Item type="casque" temps="2.5" carac="ESQ : +1 | Vue : -1 | MM : +7.5">Cagoule</Item>
+	<Item type="casque" temps="5" carac="Armure : +1 | RM : +7.5">Casque en cuir</Item>
+	<Item type="casque" temps="5" carac="Armure : +1\+0 | MM : +8">Chapeau pointu</Item>
+	<Item type="casque" temps="10" carac="DEG : +0\-1 | REG : -1 | Armure : +1\+2">Couronne d'Obsidienne</Item>
+	<Item type="casque" temps="10" carac="Armure : +0\-1 | ESQ : -1 | DEG : +0\+1 | Vue : +3">Couronne de cristal</Item>
+	<Item type="casque" temps="2.5" carac="ESQ : -1 | Vue : +1 | MM : +7.5">Lorgnons</Item>
+	<Item type="casque" temps="2.5" carac="RM : +15">Turban</Item>
+	<Mithril>
+		<Item type="casque" temps="10" carac="DEG : +1 | ESQ : -1 | Armure : +3 | Vue : -1 | RM : +7.5">Casque à cornes</Item>
+		<Item type="casque" temps="12.5" carac="ATT : +1 | DEG : +1 | Armure : +3 | Vue : -1">Casque à Pointes</Item>
+		<Item type="casque" temps="10" carac="Armure : +2 | Vue : -1 | RM : +7.5">Casque en métal</Item>
+		<Item type="casque" temps="20" carac="ATT : -1 | Armure : +4 | Vue : -2 | RM : +15">Heaume</Item>
+	</Mithril>
+	<Item type="talisman" temps="6" carac="DEG : +1">Collier de dents</Item>
+	<Item type="talisman" temps="2.5" carac="RM : +7.5 | MM : +7.5">Collier de pierre</Item>
+	<Item type="talisman" temps="2.5" carac="Armure : +1">Gorgeron en cuir</Item>
+	<Item type="talisman" temps="2.5" carac="ATT : +1 | DEG : +2 | REG : -4 | RM : +31 | MM : +31">Talisman d'Obsidienne</Item>
+	<Item type="talisman" temps="2.5" carac="REG : -1 | RM : +15 | MM : +15">Talisman de pierre</Item>
+	<Item type="talisman" temps="2.5" carac="REG : -2 | RM : +31 | MM : +31">Torque de pierre</Item>	
+	<Mithril>
+		<Item type="talisman" temps="2.5" carac="DEG : +1 | ESQ : -1 | Armure : +1">Collier à Pointes</Item>
+		<Item type="talisman" temps="5" carac="REG : -1 | Armure : +2">Gorgeron en métal</Item>
+	</Mithril>
+	<Item type="armure" temps="50" carac="ESQ : -3 | Armure : +5 | RM : +35">Armure de bois</Item>
+	<Item type="armure" temps="10" carac="Armure : +2 | RM : +15">Armure de Cuir</Item>
+	<Item type="armure" temps="45" carac="ESQ : -2 | Armure : +4 | RM : +40">Armure de peaux</Item>
+	<Item type="armure" temps="120" carac="ESQ : -6 | Armure : +12 | RM : +105">Armure de pierre</Item>
+	<Item type="armure" temps="17.5" carac="ESQ : -1 | Armure : +3 | RM : +30">Cuir Bouilli</Item>
+	<Item type="armure" temps="68" carac="ESQ : -3 | Armure : +5 | RM : +22.5 | MM : +22.5">Cuirasse d'Ossements</Item>
+	<Item type="armure" temps="2.5" carac="ESQ : +1">Culotte en Cuir</Item>
+	<Item type="armure" temps="15" carac="Armure : +2 | RM : +20">Fourrures</Item>
+	<Item type="armure" temps="5" carac="ESQ : +2 | Armure : -1">Pagne en Cuir</Item>
+	<Item type="armure" temps="20" carac="ESQ : -1 | Armure : +2\+1 | RM : +15 | MM : +15">Robe de mage</Item>
+	<Item type="armure" temps="2.5" carac="ESQ : +1 | RM : +7.5 | MM : +7.5">Tunique</Item>
+	<Item type="armure" temps="30" carac="ESQ : -1 | Armure : +3 | RM : +22.5">Tunique d'écailles</Item>
+	<Mithril>
+		<Item type="armure" temps="80" carac="ESQ : -8 | Armure : +8 | RM : +135">Armure d'Anneaux</Item>		
+		<Item type="armure" temps="100" carac="ESQ : -5 | Armure : +10 | RM : +75">Armure de Plates</Item>
+		<Item type="armure" temps="70" carac="ESQ : -3 | Armure : +7 | RM : +50">Cotte de Mailles</Item>		
+		<Item type="armure" temps="60" carac="ESQ : -3 | Armure : +6 | RM : +50">Cuirasse d'écailles</Item>
+		<Item type="armure" temps="80" carac="ESQ : -4 | Armure : +8 | RM : +60">Haubert d'écailles</Item>
+		<Item type="armure" temps="90" carac="ESQ : -4 | Armure : +9 | RM : +65">Haubert de mailles</Item>
+		<Item type="armure" temps="7.5" carac="ESQ : +2 | Armure : +1">Pagne de Mailles</Item>		
+	</Mithril>		
+	<Item type="arme 1 main" temps="5" carac="ATT : +2 | DEG : +2 | REG : -2 | RM : -7.5 | MM : -22.5">Coutelas d'Obsidienne</Item>
+	<Item type="arme 1 main" temps="4" carac="DEG : +1">Coutelas en os</Item>
+	<Item type="arme 1 main" temps="4" carac="DEG : +1">Coutelas en Os</Item>	
+	<Item type="arme 1 main" temps="7.5" carac="ATT : +4 | DEG : -2">Fouet</Item>
+	<Item type="arme 1 main" temps="12.5" carac="ATT : -1 | DEG : +2">Gourdin</Item>
+	<Item type="arme 1 main" temps="15" carac="ATT : -1 | DEG : +3">Gourdin clouté</Item>
+	<Item type="arme 1 main" temps="20" carac="ATT : -1 | DEG : +3 | RM : +7.5">Grosse racine</Item>
+	<Item type="arme 1 main" temps="20" carac="ATT : +2 | DEG : +6 | REG : -3 | RM : -75 | MM : -15">Lame d'Obsidienne</Item>
+	<Item type="arme 1 main" temps="7.5" carac="DEG : +2">Lame en os</Item>
+	<Item type="arme 1 main" temps="20" carac="ATT : -2 | DEG : +4">Lame en pierre</Item>
+	<Item type="arme 1 main" temps="7.5" carac="ATT : +1 | DEG : +1 | Vue : +1">Torche</Item>		
+	<Mithril>
+		<Item type="arme 1 main" temps="15" carac="ATT : -3 | DEG : +5">Boulet et chaîne</Item>
+		<Item type="arme 1 main" temps="12.5" carac="ATT : -2 | DEG : +3">Crochet</Item>
+		<Item type="arme 1 main" temps="5" carac="DEG : +1">Dague</Item>
+		<Item type="arme 1 main" temps="10" carac="DEG : +2">Epée Courte</Item>
+		<Item type="arme 1 main" temps="20" carac="ATT : -2 | DEG : +4">Epée Longue</Item>	
+		<Item type="arme 1 main" temps="7.5" carac="ATT : -2 | ESQ : +1 | Armure : +2 | DEG : +1">Gantelet</Item>	
+		<Item type="arme 1 main" temps="20" carac="ATT : +1 | ESQ : -1 | DEG : +2">Machette</Item>
+		<Item type="arme 1 main" temps="15" carac="ATT : -1 | DEG : +3">Masse d'Arme</Item>							
+	</Mithril>		
+	<Item type="arme 2 mains" temps="7.5" carac="ATT : +2 | DEG : -1">Baton Lesté</Item>
+	<Item type="arme 2 mains" temps="7.5" carac="ATT : -4 | ESQ : +2 | Armure : +2">Bâtons de Parade</Item>
+	<Item type="arme 2 mains" temps="125" carac="ATT : -20 | ESQ : -15 | DEG : +28 | Vue : -4">Grosse Stalagmite</Item>
+	<Item type="arme 2 mains" temps="75" carac="ATT : -8 | DEG : +16 | REG : -4 | RM : -70 | MM : -22.5">Hache à deux mains d'Obsidienne</Item>
+	<Item type="arme 2 mains" temps="25" carac="ATT : -4 | DEG : +6">Hache de guerre en os</Item>
+	<Item type="arme 2 mains" temps="75" carac="ATT : -10 | DEG : +14 | RM : +7.5">Hache de guerre en pierre</Item>	
+	<Mithril>
+		<Item type="arme 2 mains" temps="35" carac="ATT : -2 | ESQ : +1 | DEG : +4">Chaîne Cloutée</Item>
+		<Item type="arme 2 mains" temps="40" carac="ATT : -6 | DEG : +8">Espadon</Item>			
+		<Item type="arme 2 mains" temps="30" carac="ATT : -4 | DEG : +6">Hache de Bataille</Item>
+		<Item type="arme 2 mains" temps="60" carac="ATT : -10 | DEG : +12">Hallebarde</Item>						
+	</Mithril>
+	<Item type="bouclier" temps="25" carac="ATT : -2\+2 | DEG : -1\+1 | MM : +7.5 | TOUR : +10">Grimoire</Item>
+	<Item type="bouclier" temps="15" carac="ESQ : +1 | Armure : +1">Rondache en bois</Item>
+	<Mithril>
+		<Item type="bouclier" temps="35" carac="ATT : +1 | DEG : +1 | ESQ : -1 | Armure : +4">Bouclier à Pointes</Item>		
+		<Item type="bouclier" temps="50" carac="ESQ : -1 | Armure : +5 | RM : +15">Gros'Porte</Item>			
+		<Item type="bouclier" temps="30" carac="ESQ : +1 | Armure : +2">Rondache en métal</Item>
+		<Item type="bouclier" temps="5" carac="ESQ : +1">Targe</Item>				
+	</Mithril>
+	<Item type="botte" temps="5" carac="ESQ : +2">Bottes</Item>
+	<Item type="botte" temps="10" carac="Armure : +1 | RM : +7.5">Jambières en cuir</Item>
+	<Item type="botte" temps="2.5" carac="Armure : +1 | RM : +7.5">Jambières en fourrure</Item>
+	<Item type="botte" temps="10" carac="ESQ : -1 | Armure : +2 | RM : +7.5">Jambières en os</Item>
+	<Item type="botte" temps="2.5" carac="ESQ : +1">Sandales</Item>
+	<Item type="botte" temps="10" carac="ESQ : -1 | Armure : +1\+1">Souliers dorés</Item>		
+	<Mithril>
+		<Item type="botte" temps="20" carac="ESQ : -1 | Armure : +3 | RM : +7.5">Jambières en maille</Item>
+		<Item type="botte" temps="25" carac="ESQ : -2 | Armure : +4 | RM : +7.5">Jambières en métal</Item>			
+	</Mithril>	
+</Items>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Templates>
+	<Template carac="ATT : +0\+1 | Vue : +1">de l'Aigle</Template>
+	<Template carac="Armure : +0\+3 | TOUR : +30">des Béhémoths</Template>
+	<Template carac="ATT : +0\+1 | DEG : +0\+1 | Vue : -1">des Cyclopes</Template>
+	<Template carac="ATT : +0\+1 | DEG : +0\+1 | ESQ : -1">des Enragés</Template>
+	<Template carac="DEG : +0\+1">de Feu</Template>
+	<Template carac="RM : +5 | MM : +5">des Mages</Template>
+	<Template carac="ESQ : +2 | DEG : +0\-1">de l'Orage</Template>
+	<Template carac="DEG : +0\+2 | PV : +5 | TOUR : +30">de l'Ours</Template>
+	<Template carac="Armure : +0\+2 | ESQ : -1">du Pic</Template>
+	<Template carac="ESQ : +1">du Rat</Template>
+	<Template carac="Armure : +0\+1">de Résistance</Template>
+	<Template carac="REG : +1">de la Salamandre</Template>
+	<Template carac="TOUR : -30">du Temps</Template>
+	<Template carac="REG : +2 | PV : +5 | TOUR : +30">de la Terre</Template>
+	<Template carac="ESQ : +3 | Vue : -1 | Armure : +0\-1">du Sable</Template>
+	<Template carac="ATT : +0\+1 | REG : +1">des Vampires</Template>
+	<Template carac="ATT : +0\+2">des Duellistes</Template>
+	<Template carac="Armure : +0\+1 | ESQ : -1">du Roc</Template>
+	<Template carac="Armure : +0\+2 | TOUR : +30">des Tortues</Template>
+	<Template carac="ESQ : +1 | DEG : +0\-1">du Vent</Template>
+	<Template carac="REG : +1 | Armure : +1 | RM : +5">du Glacier</Template>
+	<Template carac="">des Champions</Template>
+	<Template carac="">des Anciens</Template>
+</Templates> 

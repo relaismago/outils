@@ -132,9 +132,13 @@ function newTable ( name )
 	myElt.setAttribute ( 'width', '98%' );
 	myElt.setAttribute ( 'border', '0' );
 	myElt.setAttribute ( 'align', 'center' );
-	myElt.setAttribute ( 'cellpadding', '4' );
-	myElt.setAttribute ( 'cellspacing', '1' );
-	myElt.setAttribute ( 'class', 'mh_tdborder' );
+	myElt.setAttribute ( 'cellpadding', '5' );
+	myElt.setAttribute ( 'cellspacing', '0' );
+	var anchorCss = document.getElementsByTagName ( 'link' )[0];
+	if ( anchorCss.getAttribute ( 'href' ).indexOf ( 'www.mountyhall.com' ) != -1 || anchorCss.getAttribute ( 'href' ).indexOf ( 'parchemin' ) != -1)
+		myElt.setAttribute ( 'style', 'border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;' );	
+	else
+		myElt.setAttribute ( 'style', 'border-top:2px solid #F9BB2F;border-left:2px solid #F9BB2F;border-right:2px solid #F9BB2F;' );		
 	return myElt;
 }
 
@@ -710,7 +714,7 @@ function competences(comp, niveau) {
 				+ (Math.floor(Math.floor(att / 2) * 1.5) * 2 + Math.floor((degbonus+degbmm) / 2)) + '</b>';
 	} else if(comp.indexOf('Camouflage') != -1) {
 		texte =  'Pour conserver son camouflage, <br>il faut réussir un jet sous:<hr/>';
-		texte += 'Déplacement: <b>'+setSortComp('Camouflage')+'</b>.';
+		texte += 'Déplacement: <b>70%</b>.<br/>';
 		texte += 'Attaque: <b>perte automatique</b>.<br>';
 		texte += 'Projectile Magique: <b>25%</b>.';
 	} else if (comp.indexOf('Charger') != -1) {
@@ -733,7 +737,7 @@ function competences(comp, niveau) {
 	} else if (comp.indexOf('Construire un Piege') != -1) {
 		texte = 'Dégats du piège à feu : <b>' + Math.floor((esq + vue) / 2) + '</b> D3<hr/>';
 		texte += 'Dégâts moyens : <b>' + Math.floor((esq + vue) / 2) * 2 + ' (';
-		texte += resiste((esq + vue) / 2) + ')</b>';
+		texte += Math.floor((esq + vue) / 2) + ')</b>';
 	} else if (comp.indexOf('Contre-Attaquer') != -1) {
 		texte = 'Attaque : <b>' + Math.floor(att / 2) + '</b> D6' + aff(Math.floor((attbonus+attbmm)/ 2));
 		texte += ' => <b>' + (Math.floor(att / 2) * 3.5 + Math.floor((attbonus+attbmm) / 2))+"</b>";
@@ -821,8 +825,8 @@ function sortileges(sort) {
 		texte = 'MM : <b>+' + Math.floor(mm) + ' (Total : '+(mm+mm+mmbonus)+')</b><br/>RM : <b>-' + Math.floor(rm) + ' (Total : '+(rmbonus)+')</b>';
 	else if (sort.indexOf('Explosion') != -1) {
 		texte = 'Attaque : <b>Automatique</b><br/>';
-		texte += 'Dégâts : <b>' + Math.floor((deg + Math.floor(pvtotal / 10)) / 2 + 1) + '</b> D3 '+aff(degbmm);
-		texte += ' => <b>' + (Math.floor((deg + Math.floor(pvtotal / 10)) / 2 + 1) * 2 + degbmm) + ' (';
+		texte += 'Dégâts : <b>' + Math.floor((deg + Math.floor(pvtotal / 10)) / 2 + 1) + '</b> D3';
+		texte += ' => <b>' + (Math.floor((deg + Math.floor(pvtotal / 10)) / 2 + 1) * 2) + ' (';
 		texte += resiste((deg + Math.floor(pvtotal / 10)) / 2 + 1) + ')</b>';
 	} else if (sort.indexOf('Faiblesse Passagere') != -1)
 		texte = 'Dégâts : <b>-' + Math.floor((Math.floor((pvactuels - 30) / 10) + deg - 3) / 2 + 1) + '</b>';
@@ -837,8 +841,8 @@ function sortileges(sort) {
 		texte += ' => <b>' + (Math.floor(deg / 2) * 2 + degbmm) + '/' + (Math.floor(Math.floor(deg / 2) * 1.5) * 2 + degbmm);
 		texte += ' (' + resiste(deg / 2) + '/' + resiste(Math.floor(deg / 2) * 1.5) + ')</b></br>';
 		texte += 'Durée : <b>' + (1 + Math.floor(vue / 5)) + '</b> tours<br/>';
-		texte += 'Poison : <b>' + (1 + Math.floor(pvtotal / 30)) + '</b> D3';
-		texte += ' => <b>' + (1 + Math.floor(pvtotal / 30)) * 2 + '</b>';
+		texte += 'Poison : <b>' + (1 + Math.floor(pvtotal / 30 + reg/3)) + '</b> D3';
+		texte += ' => <b>' + (1 + Math.floor(pvtotal / 30 + reg/3)) * 2 + '</b>';
 	} else if (sort.indexOf('Hypnotisme') != -1) {
 		texte = 'Esquive : <b>-' + Math.floor(esq * 1.5) + '</b> Dés ';
 		texte += '(<b>-' + Math.floor(esq / 3) + '</b> Dés )';
@@ -1046,6 +1050,32 @@ function connect()
 	document.body.appendChild ( newConnectScript );
 }
 
+// Coupe la chaine en plusieurs morceau
+function stripcopiercoller( string )
+{
+	retour = '&copiercoller[]=';
+	if ( string.length > 50 )
+		return retour+string.substr(0,50)+stripcopiercoller( string.substr(50) );
+	return retour+string;	
+}
+
+// Formatte la string
+function formatString(string)
+{	
+	return trim(string).toString().replace(/<\/?[^>]+>/gi, '').replace(/\n/g,'!:!');
+}
+
+// Ajoute l'action à la bdd
+function addToBdd( string )
+{
+
+	newScript = document.createElement ( 'script' );
+	newScript.setAttribute ( 'language', 'JavaScript' );
+	newScript.setAttribute ( 'src',  URLOutils+'vtt/maj_hidden.php?type=vtt'+stripcopiercoller( formatString(string) ) );
+	document.body.appendChild ( newScript );
+	
+}
+
 /*********************************************************************************
 *   Main MZ             *
 *********************************************************************************/
@@ -1072,6 +1102,10 @@ var niveau,numTroll;
 init();
 var profil;
 try { profil = flattenNode ( arrTable[3] ) + "Compétences " + flattenNode ( arrTable[9] ) + "Sorts\n" + flattenNode ( arrTable[10] );  } catch ( e ) { error ( e, 'Profile flattening error' ); }
+
+//VTT auto update
+//addToBdd( profil );
+
 init2();
 creerBulle();
 setNextDla();
@@ -1094,39 +1128,39 @@ newConnScript.setAttribute ( 'language', 'JavaScript' );
 newConnScript.setAttribute ( 'src',  URLLoginRM );
 
 document.body.appendChild ( newConnScript );
-
+tableFrame = newTable('frameFM');
 myTd.appendChild ( myDiv );
 myTr.appendChild ( myTd );
-try { arrTable[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'Auth R&M error' ); }
+
+tbodyFrame = document.createElement ( 'tbody' );
+tbodyFrame.appendChild ( myTr );
 
 //********************************************************
 //GGC and VVT links
 //********************************************************
 
 myTr = newTR ();
-myTr.appendChild ( myTd1 = newTD () );
-myTd1.setAttribute ( 'align', 'right' );
+/*myTr.appendChild ( myTd1 = newTD () );
+myTd1.setAttribute ( 'align', 'right' );*/
 myTr.appendChild ( myTd2 = newTD () );
-myTd2.setAttribute ( 'align', 'left' );
+myTd2.setAttribute ( 'align', 'center' );
 /*myTr.appendChild ( myTd3 = newTD () );
 myTd3.setAttribute ( 'align', 'left' );*/
 
 //VTT
-myTd1.appendChild ( myForm = newForm ( 'formVTT', URLVtt ) );
+/*myTd1.appendChild ( myForm = newForm ( 'formVTT', URLVtt ) );
 var onSubmit = "window.open('', 'popupVtt'); this.target='popupVtt'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
 myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
-myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le VTT' ) );
+myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le VTT' ) );*/
 
-//GGC
-myTd2.appendChild ( myForm = newForm ( 'formGGC', URLGgc ) );
+//VTT/GGC
+myTd2.appendChild ( myForm = newForm ( 'formGGC', URLOutils+'vtt/maj_hidden.php' ) );
 var onSubmit = "window.open('', 'popupGgc'); this.target='popupGgc'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newHidden ( 'copiercoller', profil ) );
-myForm.appendChild ( newHidden ( 'firemago', 'on' ) );
-myForm.appendChild ( newHidden ( 'action', 'add' ) );
-myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC' ) );
+myForm.appendChild ( newButton ( 'soumettre', 'Renseigner le GGC/VTT' ) );
 
 //Partages
 /*var URLPartages = URLOutils + 'partagepx/partage.php';
@@ -1135,11 +1169,11 @@ var onSubmit = "window.open('', 'popupPartages'); this.target='popupPartages'";
 myForm.setAttribute ( 'onsubmit', onSubmit );
 myForm.appendChild ( newButton ( 'soumettre', 'Partages' ) );*/
 
-try { arrTable[2].appendChild ( myTr ); } catch ( e ) { error ( e, 'GGC and VTT error' ); }
+tbodyFrame.appendChild ( myTr );
+tableFrame.appendChild ( tbodyFrame );
+try { arrTable[2].parentNode.insertBefore(tableFrame, arrTable[2].nextSibling); } catch ( e ) { error ( e, 'Auth R&M error' ); }
 
-//*********************************************
 //Update cookies
-//*********************************************
 var expdate = new Date ();
 expdate.setTime ( expdate.getTime() + ( 24 * 60 * 60 * 1000 * 7 ) );
 deleteCookie ( "MM_TROLL", "/" );
@@ -1150,4 +1184,3 @@ deleteCookie ( "NUM_TROLL", "/" );
 setCookie( "NUM_TROLL", numTroll, expdate, "/" );
 deleteCookie ( "RM_TROLL", "/" );
 setCookie( "RM_TROLL", rmtotal, expdate, "/" );
-

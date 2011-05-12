@@ -1,163 +1,176 @@
-function getCookie ( name ) 
+var resultat = $('html>body>table>tbody>tr:eq(1)>td>table>tbody>tr>td:eq(1)>table>tbody>tr>td');
+
+// Type d'attaque
+if ( window.self.location.toString ().match(/Play_a_Attack.php/) && window.self.location.toString ().match(/NomSort/) )
 {
-  var dc = document.cookie;
-  var prefix = name + "=";
-  var begin = dc.indexOf ( "; " + prefix );
-  if ( begin == -1 ) 
-	{
-    begin = dc.indexOf ( prefix );
-    if ( begin != 0 ) return '';
-  } 
-	else { begin += 2; }
-  var end = document.cookie.indexOf ( ";", begin );
-  if ( end == -1 ) { end = dc.length; }
-  return unescape ( dc.substring ( begin + prefix.length, end ) );
+	catchSort();	
 }
 
-function getInfos()
+// Type d'attaque
+if ( window.self.location.toString ().match(/Play_a_Attack.php/) && window.self.location.toString ().match(/IdComp/) )
 {
-	var divList = document.getElementsByTagName( 'div' );
-	var comp = 2;
-	var male = true;
-	var nt = getCookie("NIV_TROLL");
-	var mm = getCookie("MM_TROLL");
- 
-	if ( nt == "" || divList.length <= 2 ) { return; }
-	if( divList[2].childNodes[0].nodeValue.indexOf( "Attaque Normale" ) != -1 ) { comp = 1; }
+	catchComp();	
+}
 
-	var pList = document.getElementsByTagName( 'p' );
-	var nom = pList[0].childNodes[0].nodeValue;
-	var i = 0;
-	var rmText = "";
-  
-	while( !nom || nom.indexOf("Vous avez attaqué un") != 0 )
-	{
-		i++;
-		if( i >= pList.length ) { return; }
-		nom = pList[i].childNodes[0].nodeValue;
-	}
+// Si l'attaque est réussi
+if ( resultat.html().match(/RÉUSSI/g) ) 
+{
+
+	processAttaque ( getCookie ( 'nomAttack' ).toString().replace(/\+/g,' '), "COMBAT" );
+	setCookie ( "nomAttack", "", '', '/' );
+
+}
+
+// Attaque sur une cible
+function processAttaque ( name, type )
+{
+
+	var attaque = formatString(strip_tags(resultat));		
+	var date = getDate();
+	var idCible = getIdCible(attaque)
 	
-	if ( nom.slice( 20, 21 ) == "e")
-	{
-		nom = nom.slice( 22, nom.indexOf( "(" ) -1 );
-		male = false;
-	}
-	else
-	{
-		nom	= nom.slice( 21, nom.indexOf( "(" ) -1 );
-	}
+	if ( attaque.match(/TUÉ/g) )
+		type = "MORT";			
+	if ( name.match(/Projectile Magique/) )	
+		name = "Projo";
+	if ( name.match(/Vampirisme/) )	
+		name = "Vampi";
+	if ( name.match(/Rafale Psychique/) )	
+		name = "RP";			
+	if ( name.match(/Griffe du Sorcier/) )	
+		name = "GdS";	
+	if ( name.match(/Explosion/) )	
+		name = "Explo";			
 	
-	for ( var j=i; j < pList.length; j++)
-	{
-		var texte = pList[j].childNodes[0].nodeValue;
-  	if ( texte && texte.indexOf( "Seuil de Résistance de la Cible" ) != -1 )
- 		{
-			var sr = pList[j].childNodes[0].nextSibling.childNodes[0].nodeValue;
-			sr = sr.slice( 0, sr.indexOf( "%" ) -1 );
-			var string = "";
-			if ( sr == 10 ) 
-			{
-				rmText = "type=inf&rm=" + Math.round ( ( sr*mm )/50 );
-				string = "\u2264 " + Math.round ( ( sr*mm )/50 );
-			} 
-			else if ( sr <= 50 ) 
-			{
-				rmText = "type=egal&rm=" + Math.round ( ( sr*mm )/50 );
-				string = Math.round ( ( sr*mm )/50 );
-			} 
-			else if ( sr < 90 )
-			{
-				rmText = "type=egal&rm=" + Math.round ( 50*mm/( 100-sr ) );
-				string = Math.round ( 50*mm/( 100-sr ) );
-			} 
-			else 
-			{
-				rmText = "type=sup&rm=" + Math.round ( 50*mm/( 100-sr ) ); 
-				string = "\u2265 " + Math.round ( 50*mm/( 100-sr ) ); 
-			}
-			pList[j].appendChild ( document.createElement ( 'br' ) );
-			pList[j].appendChild ( document.createTextNode ( 'RM approximative de la Cible.......: ' ) );
-			var myB = document.createElement ( 'b' );
-			myB.appendChild ( document.createTextNode ( string ) );
-			pList[j].appendChild ( myB );
+	addToBdd( type, name, attaque, date, idCible );
+
+}
+
+// Récupère le nom du sort
+function catchSort()
+{
+	
+	var button = document.getElementsByName('ActionForm')[0];	
+	button.addEventListener("click", function() {setCookie ( "nomAttack", window.self.location.toString ().match(/as_NomSort=[a-z|A-Z|\+]+/).toString ().replace(/as_NomSort=/,''), '', '/' );}, true);
+	
+}
+
+// Récupère le nom de la compétence
+function catchComp()
+{
+
+	var button = document.getElementsByName('ActionForm')[0];	
+	var idComp = window.self.location.toString ().match(/IdComp=\d+/).toString().match(/\d+/)*1;
+	var nom = "";
+	
+	switch(idComp){
+		
+		case 9 :
+			nom = "Attaque Précise";
+			break;		
+		case 6 :
+			nom = "Balayage";
+			break;		
+		case 1 :
+			nom = "BS";
+			break;		
+		case 14 :
+			nom = "Charger";
 			break;
-		}
-	}  
-	var bList = document.getElementsByTagName( 'b' );
-	for ( var i = 0; i < bList.length; i++ )
-	{
-		if(bList[i].childNodes[0].nodeValue=="TUÉ")
-		{
-			var nbPX = "";
-			for ( var j = i+1; j < bList.length; j++ )
-			{
-				if ( bList[j].childNodes[0].nodeValue.indexOf ( "PX" ) != -1)
-				{
-					nbPX = bList[j].childNodes[0].nodeValue;
-					break;
-				}
-			}
-			if ( nbPX == "" ) { return; }
+		case 8 :
+			nom = "CdB";
+			break;		
+		case 7 :
+			nom = "Frénésie";
+			break;
+		case 42 :
+			nom = "RotoBaffe";
+			break;
 		
-			nbPX = parseInt ( nbPX.slice ( 0, nbPX.indexOf ( "P" ) -1 ) );
-			
-			if ( !nbPX ) { nbPX = 0; }
-			
-			if( !male ) { chaine = "Elle"; }
-			
-			else { chaine = "Il"; }
-		
-			chaine += " était de niveau ";
-	
-			var niveau = (nbPX*1+2*nt-10-comp)/3;
-			if( comp > nbPX )
-			{
-				chaine += "inférieur ou égal à " + Math.floor ( niveau ) + ".";
-			}
-			else if( Math.floor ( niveau ) == niveau )
-			{
-				chaine += niveau + ".";
-				/*
-					var espace = document.createTextNode('\t');
-                	var myButton = document.createElement('input');
-                	myButton.setAttribute('type', 'button');
-                	myButton.setAttribute('class', 'mh_form_submit');
-                	myButton.setAttribute('id', 'CdmButton');
-                	myButton.setAttribute('value', "Participer au bestiaire");
-                	myButton.setAttribute('onmouseover', "this.style.cursor='pointer'");
-                	myButton.setAttribute('onclick', "window.open('" + pageNivURL + "?monstre=" + escape(nom) + "&niveau="+ escape(niveau)+"', 'popupCdm', 'width=400, height=240, toolbar=no, status=no, location=no, resizable=yes'); this.value='Merci de votre participation'; this.disabled = true;");
-			var bouton=document.getElementsByName('as_Action')[0]
-                	bouton.parentNode.insertBefore(espace,bouton);
-                	bouton.parentNode.insertBefore(myButton, espace);
-			*/
-			}
-			else
-			{
-				chaine = "Firemago n'est pas arrivé à calculer le niveau du monstre.";
-			}
-			bList[i].parentNode.insertBefore ( document.createElement ( "br" ), bList[i].nextSibling.nextSibling.nextSibling );
-			bList[i].parentNode.insertBefore ( document.createTextNode ( chaine ),bList[i].nextSibling.nextSibling.nextSibling );
-			//Pour le bouton de partage
-			var PXdistrib = nbPX - comp;
-			var espace = document.createTextNode('\t');
-			var myButton = document.createElement('input');
-			myButton.setAttribute('type', 'button');
-            myButton.setAttribute('class', 'mh_form_submit');
-            myButton.setAttribute('id', 'PartageButton');
-            myButton.setAttribute('value', "Partager les PX");
-			var URLPartages = URLOutils + 'partagepx/partage.php';
-            myButton.setAttribute('onclick', "window.open('" + URLPartages + "?distribpx=" + PXdistrib +"&troll=" + getCookie("NUM_TROLL") + "', 'popupPartages', 'width=" + ( screen.width - 150 ) + ", height=" + ( screen.height - 128) + ", toolbar=no, status=no, location=no, resizable=yes'); this.value='Partage effectué'; this.disabled = true;");
-			var bouton=document.getElementsByName('as_Action')[0];
-			bouton.parentNode.insertBefore(espace,bouton);
-            bouton.parentNode.insertBefore(myButton, espace);
-		}
 	}
+	setCookie ( "nomAttack", nom, '', '/' );
+	button.addEventListener("click", function() {setCookie ( "nomAttack", nom, '', '/' );}, true);
+	
 }
 
-//var debut = new Date();
-//var pageNivURL="http://resel.enst-bretagne.fr/club/mountyhall/script/v1/niveau_monstre_combat.php";
-getInfos();
-//var totaltab=document.getElementsByTagName( 'table' );
-//getDices();
-//var fin = new Date();
-//totaltab[totaltab.length-1].childNodes[1].childNodes[0].childNodes[1].appendChild( document.createTextNode( " - [Script exécuté en "+(( fin.getTime() - debut.getTime() )/1000)+" sec]"));
+// Ajoute l'action à la bdd
+function addToBdd( type, name, attaque, date, idCible )
+{
+
+	newScript = document.createElement ( 'script' );
+	newScript.setAttribute ( 'language', 'JavaScript' );
+	newScript.setAttribute ( 'src',  URLMessageProcessGGC+'?type='+type+'&nom='+name+'&date='+date+'&idCible='+idCible+'&idLanceur='+getCookie ('NUM_TROLL')+stripcopiercoller( attaque ) );
+	document.body.appendChild ( newScript );
+	
+}
+
+// Retire les Tags HTML en ajoutant de saut de ligne
+function strip_tags(element){
+
+	return element.html().replace(/<\/div>|<\/tr>|<p>|<\/p>|<\/li>|<\/form>|<\/div>|<\b>|<br>/g,'\n').replace(/<\/?[^>]+>/gi, '');
+
+}
+
+// Récupère l'id de la cible
+function getIdCible(text)
+{
+	var idCible = text.match(/\(\d+\)/g);	
+	if ( !idCible )
+		idCible = text.match(/N°\d+/);	
+	return idCible.toString().match(/\d+/);	
+}
+
+// retourne la date
+function getDate()
+{
+	return $('html>body>table>tbody>tr:eq(1)>td>table>tbody>tr>td:eq(1)>p>table>tbody>tr>td').text().match(/\[Heure Serveur :\s+\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2} GMT\+0100\s+\]/).toString().match(/\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}/).toString();
+}
+
+// Coupe la chaine en plusieurs morceau
+function stripcopiercoller( string )
+{
+	retour = '&copiercoller[]=';
+	if ( string.length > 50 )
+		return retour+string.substr(0,50)+stripcopiercoller( string.substr(50) );
+	return retour+string;	
+}
+
+// Formatte la string
+function formatString(string)
+{
+	return trim(string).toString().replace(/\+/g,'%2B').replace(/&gt;/g,'>').replace(/\n/g,'<|>');
+}
+
+// Trim et format la string
+function trim( string )
+{
+	return string.replace ( /<br>/g, "\n" ).replace(/^\s+/g, '').replace(/\s+$/g, '');
+}
+
+// Récupère un cookie
+function getCookie ( name ) {
+	var dc = document.cookie;
+	var prefix = name + "=";
+	var begin = dc.indexOf ( "; " + prefix );
+	if ( begin == -1 ) 
+	{
+		begin = dc.indexOf ( prefix );
+		if ( begin != 0 ) return '';
+	} 
+	else { begin += 2; }
+	var end = document.cookie.indexOf ( ";", begin );
+	if ( end == -1 ) { end = dc.length; }
+	return unescape ( dc.substring ( begin + prefix.length, end ) );
+}
+
+// Définie un cookie
+function setCookie ( name, value, expires, path, domain, secure ) {
+	var expdate = new Date ();
+	expdate.setTime ( expdate.getTime () + (24 * 60 * 60 * 1000 * 31 ) );
+	var curCookie = name + "=" + escape ( value ) +
+		( (expires) ? "; expires=" + expires.toGMTString () : "; expires=" + expdate.toGMTString () ) +
+		( (path) ? "; path=" + path : path ) +
+		( (domain) ? "; domain=" + domain : "" ) +
+		( (secure) ? "; secure" : "" );
+	document.cookie = curCookie;
+}

@@ -3,15 +3,8 @@
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <RDF:Description RDF:about="rdf:#$wiMHM3"
-                   em:version="2.6">
+                   em:version="3.0">
     <em:targetApplication RDF:resource="rdf:#$ziMHM3"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
-                   em:version="2.6"
-                   em:updateLink="http://outilsrm.free.fr/firemago/firemago.xpi"
-                   em:updateHash="sha1:f06d6197f67991159510bc5dc699d3c966e215ee"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAA1nug1Od0JOkvjcrS0NQU6vkxHoHqovM22IWkPhWP7Rk0L0q24MQodXW1zCE+ZSeALKkMI8A3KN2Q5OSiuLZ3k98h0+FI2HVPQgCMuGi9iLKETuPKTdv6Ifqj0ZbqgliIx8YadikSx+4x32ydLkRlXwKNs2kbrCN4vTqJHA9eHg">
-    <em:updates RDF:resource="rdf:#$viMHM3"/>
   </RDF:Description>
   <RDF:Seq RDF:about="rdf:#$viMHM3">
     <RDF:li RDF:resource="rdf:#$wiMHM3"/>
@@ -20,6 +13,13 @@
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="0.7"
                    em:maxVersion="4.*"
-                   em:updateHash="sha1:f06d6197f67991159510bc5dc699d3c966e215ee"
+                   em:updateHash="sha1:42cc99794c517ddef2a54a2944518c024211039b"
                    em:updateLink="http://outilsrm.free.fr/firemago/firemago.xpi" />
+  <RDF:Description RDF:about="urn:mozilla:extension:{b893fd2b-3295-a438-0ba7-cc3da42ba2e5}"
+                   em:version="3.0"
+                   em:updateLink="http://outilsrm.free.fr/firemago/firemago.xpi"
+                   em:updateHash="sha1:42cc99794c517ddef2a54a2944518c024211039b"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAEm/bX2TAHB/fbFmxiA1RMtRJIuPWzfG0XSt77FIc0KHMR6Qu9ErZWr1Pla+pzwql38ep+INUhcbuNjO1Si4fpGG05SFlqj/0YXWSh2So7ZSxiA12PctrOmDHknfR0KWwdML5v3cQPeOyVixMXXN0kpo/NgGVJgyiGiQiGWQVgNe">
+    <em:updates RDF:resource="rdf:#$viMHM3"/>
+  </RDF:Description>
 </RDF:RDF>
