@@ -63,7 +63,7 @@ function infoBulle( nom, evt, fonction, paramfct ) {
         if(str=="") return;
         var xfenetre, yfenetre, xpage, ypage, element = null;
         var offset= 15;
-        var bulleWidth=300;
+        var bulleWidth=500;
         if ( !hauteur ) hauteur = 50;
 
         element = document.getElementById( 'bulle' );
@@ -80,7 +80,7 @@ function infoBulle( nom, evt, fonction, paramfct ) {
 					 	element.childNodes[0].childNodes[0].innerHTML = '<b>Gain en PX en cas de kill</b>';
 					 else
            element.childNodes[0].childNodes[0].innerHTML = '<b>'+nom+'</b>';
-           element.childNodes[1].childNodes[0].innerHTML = str;
+           element.childNodes[1].childNodes[0].innerHTML = '<table>'+str+'</table>';
         }
 
         if( bulleStyle ) {
@@ -165,7 +165,7 @@ function compSort ( desc )
 	{
 		s = trim(arrdesc[i].replace(/<\/?[^>]+>/gi, ''));
 		if ( s != "" )
-			text += "<tr><td class='mh_tdtitre'>"+s+"</td></tr>";
+			text += "<tr><td class='mh_tdpage'>"+s+"</td></tr>";
 	} 
 	return text;	
 }
@@ -187,8 +187,8 @@ function creerBulle() {
         var newTable = document.createElement( 'table' );
         newTable.setAttribute( 'id', 'bulle' );
         newTable.setAttribute( 'class', 'mh_tdborder' );
-        newTable.setAttribute( 'width', '300' );
-        newTable.setAttribute( 'height', '300' );		
+        //newTable.setAttribute( 'width', '300' );
+        //newTable.setAttribute( 'height', '300' );		
         newTable.setAttribute( 'border', '0' );
         newTable.setAttribute( 'cellpadding', '5' );
         newTable.setAttribute( 'cellspacing', '5' );

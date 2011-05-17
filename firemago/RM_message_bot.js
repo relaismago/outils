@@ -232,7 +232,7 @@ function processMessage ( URL )
 // Ajoute l'action à la bdd
 function addToBdd( type, name, attaque, date, idCible )
 {
-
+	
 	newScript = document.createElement ( 'script' );
 	newScript.setAttribute ( 'language', 'JavaScript' );
 	newScript.setAttribute ( 'src',  URLMessageProcessGGC+'?type='+type+'&nom='+name+'&date='+date+'&idCible='+idCible+'&idLanceur='+getCookie ('NUM_TROLL')+stripcopiercoller( attaque ) );

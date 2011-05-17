@@ -317,7 +317,7 @@ function getIdCible(text)
 // retourne la date
 function getDate()
 {
-	return $('html>body>table>tbody>tr:eq(1)>td>table>tbody>tr>td:eq(1)>p>table>tbody>tr>td').text().match(/\[Heure Serveur :\s+\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2} GMT\+0100\s+\]/).toString().match(/\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}/).toString();
+	return $('html>body>table>tbody>tr:eq(1)>td>table>tbody>tr>td:eq(1)>p>table>tbody>tr>td').text().match(/\[Heure Serveur :\s+\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2} GMT\+0200\s+\]/).toString().match(/\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}/).toString();
 }
 
 // Supprime les tags html et ajoute des sauts de ligne

@@ -171,7 +171,7 @@
 		    	if ( mysql_num_rows($insultes) > 0 ) 
 					while ( $insulte = mysql_fetch_assoc($insultes) )
 						if ( preg_match( "#.*Elle vous prendra dorénavant comme adversaire privilégié.*#", $insulte["texte"] ) ){
-							echo "$(anchorCellDesc).append(' <img align=\'ABSMIDDLE\' title=\'Insulté par " .addslashes($insulte["nom_troll"]). " le ".$insulte["date"]." \' src=\'http://outilsrm.cat-the-psion.net/newfiremago/img/insulte.png\'/> ');";
+							echo "$(anchorCellDesc).append(' <img align=\'ABSMIDDLE\' title=\'Insulté par " .addslashes($insulte["nom_troll"]). " le ".$insulte["date"]." \' src=\'http://".$_SERVER['SERVER_NAME']."/images/firemago/insulte.png\'/> ');";
 							$insulte = addslashes($insulte["nom_troll"]) ." à ". $insulte["date"];
 							break;
 						}
