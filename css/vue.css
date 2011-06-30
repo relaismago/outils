@@ -86,7 +86,7 @@ TD.tableVue{
 }
 TD.tableVue.actif {
 	background-image: url("../images/fond-rouge.gif")
-	}
+}
 TD.tableVue.inconnu {
 	background-image: url("../images/fond-inconnu.gif")
 }
@@ -104,6 +104,18 @@ TD.tableVue.hhh {
 }
 TD.tableVue.hhhh {
 	background-image: url("../images/fond-48h.gif")
+}
+TD.mur {
+	background-image: url("../images/mur.png")
+}
+TD.mur.actif {
+	background-image: url("../images/fond-rouge.gif")
+}
+TD.couloir {
+	background-image: url("../images/couloir.png")
+}
+TD.couloir.actif {
+	background-image: url("../images/fond-rouge.gif")
 }
 .position {
 	background-color: #282843;

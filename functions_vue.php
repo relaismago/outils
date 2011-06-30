@@ -629,7 +629,7 @@ function afficherOptionsVue2d($info)
 
 function initVue2d($tab_cookies)
 {
-  $options = $_SESSION["options"];
+ 	$options = $_SESSION["options"];
 	$vue_taille_option = $options["vue_taille_option"];
 	$vue_zoom_option = $options["vue_zoom_option"];
 	$vue_max_pa_option = $options["vue_max_pa_option"];
@@ -666,7 +666,7 @@ function initVue2d($tab_cookies)
 	  $tab['y_position'] = $cY;
 	  $tab['z_position'] = $cZ;
 	 // $tab[id_troll] = $id_troll;
-		return $tab;
+	  return $tab;
 	}
 
   if (($id_troll == 0) && ($cX=="" || $cY == "" || $cZ == "")) { 	 
@@ -679,7 +679,7 @@ function initVue2d($tab_cookies)
 		$tabinfo = parseZone($id_troll,$cX,$cY,$cZ,$nCasesVue,$max_pa,$trolls_disparus);
 
 		$tabinfo['anim'] = $tab_cookies['anim'];
-	  $tabinfo['taille_niveau_z'] = $taille_niveau_z;
+	  	$tabinfo['taille_niveau_z'] = $taille_niveau_z;
 //		$tabinfo['taille_niveau_z'] = $taille_niveau_z;
 
 		return $tabinfo;
@@ -688,7 +688,6 @@ function initVue2d($tab_cookies)
 
 function afficher_vue2d($info) 
 {
-	
 	$zoom = $_REQUEST['zoom'];
 	$info['zoom'] = $zoom;
 
@@ -1112,7 +1111,7 @@ function vue2d_afficher_zone_centre($min_z,$max_z,$info)
 	for ($ay=$y_pos+$taille_vue; $ay>=$y_pos-$taille_vue; $ay--) {
 	  echo "<tr>\n";
 	  for ($ax=$x_pos-$taille_vue; $ax<=$x_pos+$taille_vue; $ax++) {
-			vue2d_afficher_zone_centre_td_start($x_pos,$y_pos,$z_pos,$ax,$ay,$wtab,$htab,$info['t_quadrillage'],$info['taille_vue']);
+			vue2d_afficher_zone_centre_td_start($x_pos,$y_pos,$z_pos,$ax,$ay,$wtab,$htab,$info['t_quadrillage'],$info['taille_vue'],$info['t_laby']);
 
 			$text = "";
 	  	for ($az=$max_z; $az>=$min_z; $az--) {
@@ -1146,10 +1145,18 @@ function vue2d_afficher_zone_centre($min_z,$max_z,$info)
 	}
 }
 
-function vue2d_afficher_zone_centre_td_start($x_pos,$y_pos,$z_pos,$ax,$ay,$wtab,$htab, $quadrillage,$taille)
+function vue2d_afficher_zone_centre_td_start($x_pos,$y_pos,$z_pos,$ax,$ay,$wtab,$htab, $quadrillage,$taille,$laby)
 {
-
-    echo "<td height=30 class='tableVue";
+	
+	if ($laby[$ax+100][$ay+100] ) {
+		foreach($laby[$ax+100][$ay+100] as $lab) {
+			$type = $lab['type'];
+			echo "<td height='30' class='$type";
+		}
+	}
+	else {
+    	echo "<td height=30 class='tableVue";
+	}
     if ( ($x_pos == $ax) && ($y_pos == $ay) ) 
 			echo " actif";
 
@@ -1540,6 +1547,7 @@ function vue2d_afficher_get_image_monstres($ax,$ay,$monstres,$min_z,$max_z,$zoom
 	}
 
 }
+
 
 function vue2d_afficher_get_image_lieux($ax,$ay,$lieux,$min_z,$max_z,$zoom,$anim)
 {

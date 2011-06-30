@@ -145,7 +145,7 @@
 		afficheAideVueTrollsDisparus();
 		
 		$js_id = "id_troll=\"+document.form_cockpit.id_troll.value";
-		echo " Rafraichir <input type='button' onClick='document.location.href=\"cockpit.php?refresh=s_public&$js_id' value='Auto' class='mh_form_submit' alt='Rafraichir la vue avec les scripts publics'> ";
+		echo " Rafraichir <input type='button' onClick='document.location.href=\"cockpit.php?refresh=s_public&$js_id' value='Auto' disabled class='mh_form_submit' alt='Rafraichir la vue avec les scripts publics'> ";
 		echo "<input type='button' onClick='document.location.href=\"cockpit.php?refresh=copie_colle&$js_id' value='Manuel' class='mh_form_submit'  alt='Rafraichir la vue avec un copi&eacute; coll&eacute;'>";
 
 	}

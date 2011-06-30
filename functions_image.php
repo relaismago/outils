@@ -94,11 +94,13 @@ function imgLieu($lieu)
 	elseif (preg_match("/Geyser.*/",$lieu[nom],$matches)) {
 		$img="geyser";
 	}
+	elseif (preg_match("/Entr.*/",$lieu[nom],$matches)) {
+		$img="portail";
+	}
 	elseif (preg_match("/Nid|Couvoir|Portail Démoniaque|Cocon|Porte d'Outre-monde/",$lieu[nom],$matches)) {
 		$img="oeuf";
-
-	} elseif (preg_match("/Tani.re de (.*)/",$lieu[nom],$matches)) {
-				 
+	}
+	elseif (preg_match("/Tani.re de (.*)/",$lieu[nom],$matches)) {		 
 		if ($matches[1] == "trõll") {
 			$img="taniere-vide";
 		} else {

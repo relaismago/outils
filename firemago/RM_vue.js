@@ -42,10 +42,12 @@ var hauteur = 50;
 var bulleStyle = null;
 creerBulle();
 
+tableLaby='';
 for (i=0; i<totaltab.length; i++) {
-	var ttab="";	
+	var ttab="";
 	try {ttab=totaltab[i].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].nodeValue;} catch (e) {}
-	if (ttab=="MA VUE") {var tableView = totaltab[i-1];}		
+	if (ttab=="MA VUE") {var tableView = totaltab[i-1];}
+	if (ttab=="Murs et Couloirs") {var tableLaby = totaltab[i-1].childNodes[1].childNodes;}
 	if (ttab=="MONSTRES ERRANTS") {var tableMonsters = totaltab[i-1].childNodes[1].childNodes;}	
 	if (ttab=="TROLLS") {var tableTrolls = totaltab[i-1].childNodes[1].childNodes;}			
 	if (ttab=="TRÉSORS"){var tableTreasures = totaltab[i-1].childNodes[1].childNodes;}			
@@ -1041,6 +1043,10 @@ function getVueScript ()
 {
 	var maChaine = "MA VUE\n";
 	maChaine += flattenNode (tableView.childNodes[1].childNodes[1].childNodes[3].childNodes[12]);
+	if (tableLaby !=''){
+		maChaine += "\nMurs et Couloirs\n";
+		maChaine += flattenNode ( tableLaby[0].parentNode );
+	}
 	maChaine += "\nMONSTRES ERRANTS\n";
 	maChaine += flattenNode ( tableMonsters[0].parentNode );
 	maChaine += "\nTROLLS\n";
@@ -1263,6 +1269,10 @@ function caracMonster ( monster, carac )
  	text += "<tr><td class='mh_tdtitre'>Chargement</td><td class='mh_tdpage'>" + arrCarac[21] + "</td></tr>";
  if ( arrCarac[22] != "")
  	text += "<tr><td class='mh_tdtitre'>B M</td><td class='mh_tdpage'>" + arrCarac[22] + "</td></tr>";
+ if ( arrCarac[23] != "")
+	 text += "<tr><td class='mh_tdtitre'>Vole</td><td class='mh_tdpage'>" + arrCarac[23] + "</td></tr>";
+ if ( arrCarac[24] != "")
+	 text += "<tr><td class='mh_tdtitre'>Sang froid</td><td class='mh_tdpage'>" + arrCarac[24] + "</td></tr>";
  if ( arrCarac[17] )
  {
  	text += "<tr><td class='mh_tdtitre'>Capacité</td><td class='mh_tdpage'>" + arrCarac[17] + " affecte " + arrCarac[18];

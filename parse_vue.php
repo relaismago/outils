@@ -35,12 +35,15 @@ if (!$fichvue) {
             <?php 
 	            die(" ");
 	            }	      
-				
+				$_SESSION['laby'] = 0;
 	            while ($line = fgets($fichvue, 1024)) {
 	                # Pour chaque ligne du fichier de vue :
 	                $line = trim($line);
 	                if ($line == "[haut]") {
 	                    $state = 1;
+	                } elseif (preg_match("/^Murs/", $line)) {
+	                	$_SESSION['laby'] = 1;
+	                    $state = 10;
 	                } elseif (preg_match("/^TROLLS/", $line)) {
 	                    $state = 20;
 	                } elseif (preg_match("/^MONSTRES ERRANTS/", $line)) {
@@ -67,6 +70,14 @@ if (!$fichvue) {
 	                        $fcache = fopen("vues/".$_REQUEST["id_troll"], "w");
 	                        $ip = getenv("REMOTE_ADDR");
 	                        fputs($fcache, "#COPYPASTE $ip\n");
+	                        fputs($fcache, "#DEBUT LABY\n");
+	                        if ($labs)
+	                            foreach ($labs_fichier as $objet) {    
+	                            	fputs($fcache, "$objet[type];$objet[x];$objet[y];$objet[z];\n");                       
+	                            }
+	                        // Puis on rajoute le troll lui même
+	                        
+	                        fputs($fcache, "#FIN LABY\n");
 	                        fputs($fcache, "#DEBUT TROLLS\n");
 	                        if ($trolls)
 	                            foreach ($trolls_fichier as $objet) {
@@ -107,6 +118,15 @@ if (!$fichvue) {
 	                        
 	                        $state = 3;
 	                        break;
+	                    case 10: # Labyrinthe
+	                        if (preg_match("/\d+[ \t]+([^\t]+)[ \t]+([-\d]+)[ \t]+([-\d]+)[ \t]+([-\d]+)/", $line, $parts)) {                     
+	                            list($tmp, $lab["type"], $lab["x"], $lab["y"], $lab["z"]) = $parts;                    
+	                            $lab["distance_pa"] = calcPA($lab["x"], $lab["y"], $lab["z"], $X, $Y, $Z);
+	                            $labs[$lab["x"] + 100][$lab["y"] + 100][] = $lab;
+	                            $labs_fichier[] = $lab;
+	                        }
+	                        break;    
+	                    
 	                    case 20: # Trolls
 	                        if (preg_match("/\d+[ \t]+(\d+)[ \t]+([^\t]+)[ \t]+(\d+)[ \t]+([^\t]+)[ \t]+([^\t]+)?[ \t]+([-\d]+)[ \t]+([-\d]+)[ \t]+([-\d]+)/", $line, $parts)) {
 	                            $troll["invisible"] = "";
@@ -155,7 +175,15 @@ if (!$fichvue) {
 	                        }
 	                        break;
 	                    case 70: # Position
-	                        if (preg_match("/Ma Position Actuelle est : X = (.+), Y = (.+), N = (.+)/", $line, $parts)) { # Position du troll
+	                	    if (preg_match("/Ma Position Actuelle est : X = (.+), Y = (.+), N = (.+) \[Le Labyrinthe (.+)\]/", $line, $parts)) { # Position du troll
+	                            $X = $parts[1];
+	                            $Y = $parts[2];
+	                            $Z = $parts[3];
+	                            $troll = array("x"=>$X, "y"=>$Y, "z"=>$Z, "nom"=>"moi", "id"=> - 1, "invisible"=>"invisible", "race"=>"troll", "niveau"=>0);
+	                            $trolls[$X + 100][$Y + 100][] = $troll;
+	                            $trolls_fichier[] = $troll;
+	                        }
+	                        elseif (preg_match("/Ma Position Actuelle est : X = (.+), Y = (.+), N = (.+)/", $line, $parts)) { # Position du troll
 	                            $X = $parts[1];
 	                            $Y = $parts[2];
 	                            $Z = $parts[3];
