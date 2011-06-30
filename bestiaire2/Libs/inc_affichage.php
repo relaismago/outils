@@ -398,6 +398,8 @@ function affiche_cdm_parsed(&$pcdm)
   print("<tr><td class='mh_tdtitre'><b>Bonus Malus  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['BM']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>CAPACITE</b></td><td class='mh_tdpage'>".$pcdm['capspe']."</td><td colspan=2 class='mh_tdpage'>".$pcdm['affecte']."</td></tr>");
   print("<tr><td class='mh_tdtitre'><b>Port&eacute;e  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['portee']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Vole  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['vole']."</td></tr>");
+  print("<tr><td class='mh_tdtitre'><b>Sang froid  </b></td><td class='mh_tdpage' colspan='3'>".$pcdm['sang']."</td></tr>");
   print("</table>");
   print("<br>");
   print("</body></html>");

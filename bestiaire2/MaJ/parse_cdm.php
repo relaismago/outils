@@ -220,6 +220,12 @@ if(isset($_POST['soumettre'])){
  	if(eregi('[ \t]*Port.e.+:(.+)',$lignes[$i],$resultat)){
 		$pcdm['portee'] = trim($resultat[1]);
 	}
+   	if(eregi('[ \t]*Vole.+:(.+)',$lignes[$i],$resultat)){
+		$pcdm['vole'] = trim($resultat[1]);
+	}
+    if(eregi('[ \t]*Sang froid.+:(.+)',$lignes[$i],$resultat)){
+		$pcdm['sang'] = trim($resultat[1]);
+	}
     
 	$i++;
   }
@@ -316,12 +322,14 @@ if(isset($_POST['soumettre'])){
   print("<INPUT TYPE=HIDDEN NAME=\"CAPSPE\" VALUE=\"".$pcdm['capspe']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"AFFECTE\" VALUE=\"".$pcdm['affecte']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"PORTEE\" VALUE=\"".$pcdm['portee']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"VOLE\" VALUE=\"".$pcdm['vole']."\"></INPUT>");
+  print("<INPUT TYPE=HIDDEN NAME=\"SANG\" VALUE=\"".$pcdm['sang']."\"></INPUT>");
   print("<INPUT TYPE=HIDDEN NAME=\"DATE\" VALUE=\"".$pcdm['date']."\"></INPUT>");
 //   print("<INPUT TYPE=HIDDEN NAME=\"SOURCE\" VALUE=\"".$pcdm['troll_nom']."\"></INPUT>");
   print("<INPUT TYPE=submit NAME=\"SUITE\" VALUE=\"Bestiaire\" class='mh_form_submit'></input>");
   print("<INPUT TYPE=submit NAME=\"SUITE\" VALUE=\"Autre CdM\" class='mh_form_submit'></input>");
   print("</form>");
-  print("<br>");
+  print("<br/>");
   print("</center>");
   print("</body></html>");
   

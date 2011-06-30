@@ -79,6 +79,8 @@ $pcdm['bm']=stripslashes($_POST['BM']);
 $pcdm['capspe']=stripslashes($_POST['CAPSPE']);
 $pcdm['affecte']=stripslashes($_POST['AFFECTE']);
 $pcdm['portee']=stripslashes($_POST['PORTEE']);
+$pcdm['vole']=stripslashes($_POST['VOLE']);
+$pcdm['sang']=stripslashes($_POST['SANG']);
 $pcdm['date']=stripslashes($_POST['DATE']);
 $pcdm['troll_nom']=stripslashes($_POST['SOURCE']);
 $pcdm['troll_id']=stripslashes($_POST['IDSOURCE']);
@@ -211,11 +213,13 @@ if(mysql_num_rows($query)==0)
   $cdm['capspe_cdm']        = $pcdm['capspe'];
   $cdm['affecte_cdm']     	= $pcdm['affecte'];
   $cdm['portee_cdm']        = $pcdm['portee'];
+  $cdm['vole_cdm']        	= $pcdm['vole'];
+  $cdm['sang_cdm']        	= $pcdm['sang'];
   $cdm['source_cdm']      	= $pcdm['troll_nom'];
   
   // on insère cette nouvelle cdm
-  $sql="INSERT INTO best_cdms(id_mh,id_race_cdm,id_template_cdm,id_age_cdm,id_monstre_cdm,nivmin_cdm,nivmax_cdm,pdvmin_cdm,pdvmax_cdm,blessure_cdm,attmin_cdm,attmax_cdm,esqmin_cdm,esqmax_cdm,degmin_cdm,degmax_cdm,regmin_cdm,regmax_cdm,armmin_cdm,armmax_cdm,vuemin_cdm,vuemax_cdm,mmmin_cdm,mmmax_cdm,rmmin_cdm,rmmax_cdm,nbatt_cdm,vitdep_cdm,vlc_cdm,attdist_cdm,etatdla_cdm,dlamin_cdm,dlamax_cdm,charge_cdm,bm_cdm,capspe_cdm,affecte_cdm,portee_cdm,source_cdm) ";
-  $sql .= "VALUES(\"".$cdm['id_mh']."\",\"".$cdm['id_race_cdm']."\",\"".$cdm['id_template_cdm']."\",\"".$cdm['id_age_cdm']."\",\"".$cdm['id_monstre_cdm']."\",\"".$cdm['nivmin_cdm']."\",\"".$cdm['nivmax_cdm']."\",\"".$cdm['pdvmin_cdm']."\",\"".$cdm['pdvmax_cdm']."\",\"".$cdm['blessure_cdm']."\",\"".$cdm['attmin_cdm']."\",\"".$cdm['attmax_cdm']."\",\"".$cdm['esqmin_cdm']."\",\"".$cdm['esqmax_cdm']."\",\"".$cdm['degmin_cdm']."\",\"".$cdm['degmax_cdm']."\",\"".$cdm['regmin_cdm']."\",\"".$cdm['regmax_cdm']."\",\"".$cdm['armmin_cdm']."\",\"".$cdm['armmax_cdm']."\",\"".$cdm['vuemin_cdm']."\",\"".$cdm['vuemax_cdm']."\",\"".$cdm['mmmin_cdm']."\",\"".$cdm['mmmax_cdm']."\",\"".$cdm['rmmin_cdm']."\",\"".$cdm['rmmax_cdm']."\",\"".$cdm['nbatt_cdm']."\",\"".$cdm['vitdep_cdm']."\",\"".$cdm['vlc_cdm']."\",\"".$cdm['attdist_cdm']."\",\"".$cdm['etatdla_cdm']."\",\"".$cdm['dlamin_cdm']."\",\"".$cdm['dlamax_cdm']."\",\"".$cdm['charge_cdm']."\",\"".$cdm['bm_cdm']."\",\"".$cdm['capspe_cdm']."\",\"".$cdm['affecte_cdm']."\",\"".$cdm['portee_cdm']."\",\"".$cdm['source_cdm']."\")";
+  $sql="INSERT INTO best_cdms(id_mh,id_race_cdm,id_template_cdm,id_age_cdm,id_monstre_cdm,nivmin_cdm,nivmax_cdm,pdvmin_cdm,pdvmax_cdm,blessure_cdm,attmin_cdm,attmax_cdm,esqmin_cdm,esqmax_cdm,degmin_cdm,degmax_cdm,regmin_cdm,regmax_cdm,armmin_cdm,armmax_cdm,vuemin_cdm,vuemax_cdm,mmmin_cdm,mmmax_cdm,rmmin_cdm,rmmax_cdm,nbatt_cdm,vitdep_cdm,vlc_cdm,attdist_cdm,etatdla_cdm,dlamin_cdm,dlamax_cdm,charge_cdm,bm_cdm,capspe_cdm,affecte_cdm,portee_cdm,vole_cdm,sang_cdm,source_cdm) ";
+  $sql .= "VALUES(\"".$cdm['id_mh']."\",\"".$cdm['id_race_cdm']."\",\"".$cdm['id_template_cdm']."\",\"".$cdm['id_age_cdm']."\",\"".$cdm['id_monstre_cdm']."\",\"".$cdm['nivmin_cdm']."\",\"".$cdm['nivmax_cdm']."\",\"".$cdm['pdvmin_cdm']."\",\"".$cdm['pdvmax_cdm']."\",\"".$cdm['blessure_cdm']."\",\"".$cdm['attmin_cdm']."\",\"".$cdm['attmax_cdm']."\",\"".$cdm['esqmin_cdm']."\",\"".$cdm['esqmax_cdm']."\",\"".$cdm['degmin_cdm']."\",\"".$cdm['degmax_cdm']."\",\"".$cdm['regmin_cdm']."\",\"".$cdm['regmax_cdm']."\",\"".$cdm['armmin_cdm']."\",\"".$cdm['armmax_cdm']."\",\"".$cdm['vuemin_cdm']."\",\"".$cdm['vuemax_cdm']."\",\"".$cdm['mmmin_cdm']."\",\"".$cdm['mmmax_cdm']."\",\"".$cdm['rmmin_cdm']."\",\"".$cdm['rmmax_cdm']."\",\"".$cdm['nbatt_cdm']."\",\"".$cdm['vitdep_cdm']."\",\"".$cdm['vlc_cdm']."\",\"".$cdm['attdist_cdm']."\",\"".$cdm['etatdla_cdm']."\",\"".$cdm['dlamin_cdm']."\",\"".$cdm['dlamax_cdm']."\",\"".$cdm['charge_cdm']."\",\"".$cdm['bm_cdm']."\",\"".$cdm['capspe_cdm']."\",\"".$cdm['affecte_cdm']."\",\"".$cdm['portee_cdm']."\",\"".$cdm['vole_cdm']."\",\"".$cdm['sang_cdm']."\",\"".$cdm['source_cdm']."\")";
   if(!mysql_query($sql,$db_vue_rm)){
     die("l'insertion de la cdm a échoué<br>$sql<br>");
   }
@@ -423,12 +427,14 @@ else
   $cdm['capspe_cdm']           =$pcdm['capspe'];
   $cdm['affecte_cdm']          =$pcdm['affecte'];
   $cdm['portee_cdm']          =$pcdm['portee'];
+  $cdm['vole_cdm']          =$pcdm['vole'];
+  $cdm['sang_cdm']          =$pcdm['sang'];
   $cdm['source_cdm']           =$pcdm['troll_nom'];
   $monstre['capspe_monstre']   =$pcdm['capspe'];
   $monstre['affecte_monstre']  =$pcdm['affecte'];
   $monstre['portee_monstre']  =$pcdm['portee'];
   if($cdmchange){ // la cdm a été ajustée, il faut modifier les données dans la base
-    $sql="UPDATE `best_cdms` SET `id_mh`=\"".$cdm['id_mh']."\",`id_race_cdm`=\"".$cdm['id_race_cdm']."\",`id_template_cdm`=\"".$cdm['id_template_cdm']."\",`id_age_cdm`=\"".$cdm['id_age_cdm']."\",`id_monstre_cdm`=\"".$cdm['id_monstre_cdm']."\",`nivmin_cdm`=\"".$cdm['nivmin_cdm']."\",`nivmax_cdm`=\"".$cdm['nivmax_cdm']."\",`pdvmin_cdm`=\"".$cdm['pdvmin_cdm']."\",`pdvmax_cdm`=\"".$cdm['pdvmax_cdm']."\",`blessure_cdm`=\"".$cdm['blessure_cdm']."\",`attmin_cdm`=\"".$cdm['attmin_cdm']."\",`attmax_cdm`=\"".$cdm['attmax_cdm']."\",`esqmin_cdm`=\"".$cdm['esqmin_cdm']."\",`esqmax_cdm`=\"".$cdm['esqmax_cdm']."\",`degmin_cdm`=\"".$cdm['degmin_cdm']."\",`degmax_cdm`=\"".$cdm['degmax_cdm']."\",`regmin_cdm`=\"".$cdm['regmin_cdm']."\",`regmax_cdm`=\"".$cdm['regmax_cdm']."\",`armmin_cdm`=\"".$cdm['armmin_cdm']."\",`armmax_cdm`=\"".$cdm['armmax_cdm']."\",`vuemin_cdm`=\"".$cdm['vuemin_cdm']."\",`vuemax_cdm`=\"".$cdm['vuemax_cdm']."\",`mmmin_cdm`=\"".$cdm['mmmin_cdm']."\",`mmmax_cdm`=\"".$cdm['mmmax_cdm']."\",`rmmin_cdm`=\"".$cdm['rmmin_cdm']."\",`rmmax_cdm`=\"".$cdm['rmmax_cdm']."\",`dlamin_cdm`=\"".$cdm['dlamin_cdm']."\",`dlamax_cdm`=\"".$cdm['dlamax_cdm']."\",`nbatt_cdm`=\"".$cdm['nbatt_cdm']."\",`vitdep_cdm`=\"".$cdm['vitdep_cdm']."\",`vlc_cdm`=\"".$cdm['vlc_cdm']."\",`attdist_cdm`=\"".$cdm['attdist_cdm']."\",`etatdla_cdm`=\"".$cdm['etatdla_cdm']."\",`charge_cdm`=\"".$cdm['charge_cdm']."\",`bm_cdm`=\"".$cdm['bm_cdm']."\",`capspe_cdm`=\"".$cdm['capspe_cdm']."\",`affecte_cdm`=\"".$cdm['affecte_cdm']."\",`portee_cdm`=\"".$cdm['portee_cdm']."\",`source_cdm`=\"".$cdm['source_cdm']."\" WHERE `id_cdm`=".$cdm['id_cdm']." LIMIT 1 ";
+    $sql="UPDATE `best_cdms` SET `id_mh`=\"".$cdm['id_mh']."\",`id_race_cdm`=\"".$cdm['id_race_cdm']."\",`id_template_cdm`=\"".$cdm['id_template_cdm']."\",`id_age_cdm`=\"".$cdm['id_age_cdm']."\",`id_monstre_cdm`=\"".$cdm['id_monstre_cdm']."\",`nivmin_cdm`=\"".$cdm['nivmin_cdm']."\",`nivmax_cdm`=\"".$cdm['nivmax_cdm']."\",`pdvmin_cdm`=\"".$cdm['pdvmin_cdm']."\",`pdvmax_cdm`=\"".$cdm['pdvmax_cdm']."\",`blessure_cdm`=\"".$cdm['blessure_cdm']."\",`attmin_cdm`=\"".$cdm['attmin_cdm']."\",`attmax_cdm`=\"".$cdm['attmax_cdm']."\",`esqmin_cdm`=\"".$cdm['esqmin_cdm']."\",`esqmax_cdm`=\"".$cdm['esqmax_cdm']."\",`degmin_cdm`=\"".$cdm['degmin_cdm']."\",`degmax_cdm`=\"".$cdm['degmax_cdm']."\",`regmin_cdm`=\"".$cdm['regmin_cdm']."\",`regmax_cdm`=\"".$cdm['regmax_cdm']."\",`armmin_cdm`=\"".$cdm['armmin_cdm']."\",`armmax_cdm`=\"".$cdm['armmax_cdm']."\",`vuemin_cdm`=\"".$cdm['vuemin_cdm']."\",`vuemax_cdm`=\"".$cdm['vuemax_cdm']."\",`mmmin_cdm`=\"".$cdm['mmmin_cdm']."\",`mmmax_cdm`=\"".$cdm['mmmax_cdm']."\",`rmmin_cdm`=\"".$cdm['rmmin_cdm']."\",`rmmax_cdm`=\"".$cdm['rmmax_cdm']."\",`dlamin_cdm`=\"".$cdm['dlamin_cdm']."\",`dlamax_cdm`=\"".$cdm['dlamax_cdm']."\",`nbatt_cdm`=\"".$cdm['nbatt_cdm']."\",`vitdep_cdm`=\"".$cdm['vitdep_cdm']."\",`vlc_cdm`=\"".$cdm['vlc_cdm']."\",`attdist_cdm`=\"".$cdm['attdist_cdm']."\",`etatdla_cdm`=\"".$cdm['etatdla_cdm']."\",`charge_cdm`=\"".$cdm['charge_cdm']."\",`bm_cdm`=\"".$cdm['bm_cdm']."\",`capspe_cdm`=\"".$cdm['capspe_cdm']."\",`affecte_cdm`=\"".$cdm['affecte_cdm']."\",`portee_cdm`=\"".$cdm['portee_cdm']."\",`vole_cdm`=\"".$cdm['vole_cdm']."\",`sang_cdm`=\"".$cdm['sang_cdm']."\",`source_cdm`=\"".$cdm['source_cdm']."\" WHERE `id_cdm`=".$cdm['id_cdm']." LIMIT 1 ";
     if(!mysql_query($sql,$db_vue_rm)){
       die("la modification de la cdm a échoué<br>$sql<br>");
     }
