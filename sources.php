@@ -9,11 +9,11 @@ function initSource()
 	echo "<br><br><br><br>";
 	afficher_titre_tableau('Les sources des outils '.RELAISMAGO);
 
-	$text = "Les outils ".RELAISMAGO." sont développés sous licence GPL.<br><br>";
-	$text .= "Vous pouvez obtenir les sources à <br>";
+	$text = "Les outils ".RELAISMAGO." sont dï¿½veloppï¿½s sous licence GPL.<br><br>";
+	$text .= "Vous pouvez obtenir les sources ï¿½ <br>";
 	$text .= "<a href='http://code.google.com/p/relaismago/'>http://code.google.com/p/relaismago/</a>";
 	$text .= "<br><br>Une documentation d'installation est disponible <a href='http://outils.relaismago.com/documentation/documentation.pdf'>Ici</a>";
-	$text .= " <br><br> Pour plus d'informations, contactez Bodéga (49145).";
+	$text .= " <br><br> Pour plus d'informations, contactez glupglup (51166).";
 
 	afficher_contenu_tableau($text);
 
