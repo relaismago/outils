@@ -41,7 +41,7 @@ require_once("Libs/inc_affichage.php");  // gestion de l'affichage
 global $best_races,$best_templates,$best_ages,$best_ages_nom,$best_ages_id,$best_racetemplate,$best_familles;
 global $db_vue_rm;
 
-if (isset($_GET['Niv'])) $Niv=stripslashes($_GET['Niv']); else $Niv="-1";
+if (isset($_GET['Niv']) && is_numeric($_GET['Niv'])) $Niv=stripslashes($_GET['Niv']); else $Niv="-1";
 
 print("<div align='center'>");
 print("<p>");

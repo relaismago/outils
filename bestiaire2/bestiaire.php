@@ -59,9 +59,9 @@ global $db_vue_rm;
 
 if (isset($_GET['Race']))     $Race       = stripslashes($_GET['Race']); else $Race="-1";
 if (isset($_GET['Template'])) $IDTemplate = stripslashes($_GET['Template']); else $IDTemplate="-1";
-if (isset($_GET['IDAge']))    $IDAge      = stripslashes($_GET['IDAge']); else $IDAge="-1";
+if (isset($_GET['IDAge']) && is_numeric($_GET['IDAge']))    $IDAge      = stripslashes($_GET['IDAge']); else $IDAge="-1";
 if (isset($_GET['Age']))      $Age        = stripslashes($_GET['Age']); else $Age="-1";
-if (isset($_GET['MH']))       $MH         = stripslashes($_GET['MH']); else $MH="-1";
+if (isset($_GET['MH']) && is_numeric($_GET['MH']))       $MH         = stripslashes($_GET['MH']); else $MH="-1";
 if (isset($_GET['Monstre']))  $Monstre    = stripslashes($_GET['Monstre']); else $Monstre="-1";
 
 //print("DEBUG 1. Race=$Race - Monstre=$Monstre - Template=$IDTemplate - Age=$IDAge - Age=Age  - Famille=$Famille<br>");
