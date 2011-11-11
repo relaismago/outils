@@ -101,7 +101,7 @@ function showToolbar()
 
   $pos = addItemMenu(false,true,'horsjeux',"Hors-Jeux","Hors-Jeux");
   $pos = addItemMenu(false,false,$pos,"Bugtrack", "Le Bugtrack des outils Relais&Mago", "/bugs.php");
-  $pos = addItemMenu(false,false,$pos,"Sources", "Les sources des outils Relais&Mago", "http://code.google.com/p/relaismago/");
+  $pos = addItemMenu(false,false,$pos,"Sources", "Les sources des outils Relais&Mago", "/sources.php");
 	
 	if ($_SESSION['admin'] == "authenticated") {
 	  $pos = addItemMenu(true,true,'administration',"Administration","Administration");
