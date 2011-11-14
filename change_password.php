@@ -66,7 +66,7 @@ function initChangePassword($act="")
 								<br>
 								Numéro de votre Troll <br>
 								<input type='textbox' name='id_troll'><br><br>
-								Nouveau mot de passe<br>
+								Nouveau mot de passe si possible différent de celui de MH<br>
 								<input type='password' name='new_password'><br><br>
 								<a href="http://sp.mountyhall.com/md5.php">Mot de passe restreint MH qui servira pour les appels aux scripts publics</a><br>
 								<input type='password' name='mh_password'><br><br>
@@ -90,6 +90,10 @@ function changeDbPassword()
   if ($_REQUEST[new_password] == "") {
   	$erreur .= "Le mot de passe doit contenir plusieurs caractères !<br>";
   }
+  
+  if ( strlen($md5_new) < 32 ) {
+  	$erreur .= "Le mot de passe restreint n'est pas bon !<br>";
+  } 
   
   $date=date("Y-m-d H-i-s");
   $date_less_24=date("Y-m-d H-i-s", mktime(date("H"), date("i"), date("s"), date("m")  , date("d")-1, date("Y")));
@@ -122,9 +126,9 @@ function changeDbPassword()
 	
   while ( ($line=fgets($fp)) && (!$error) ){
     if ($deb<1) {
-      if (strpos($line,"Erreur")!==false) {
+      if (strpos($line,"Erreur")!==false ) {
         $error=true;
-        if (strpos($line,"Erreur 3")!==false) {
+        if (strpos($line,"Erreur 3")!==false ) {
 
           $date=date("Y-m-d H-i-s");
           $tmpfile=fopen ("vues/list_mdp_error.txt","a");
