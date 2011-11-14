@@ -266,7 +266,7 @@ function getFilePublicTrolls()
 function getFilePublicGuildes()
 {
   echo "recuperation du fichier des guildes<br>";
-  $fp = fopen("http://www.mountyhall.com/ftp/Public_Guildes.txt","r");
+  $fp = file_get_contents("http://www.mountyhall.com/ftp/Public_Guildes.txt");
   if ($fp == FALSE) {
     update_traitement("GUILDES", "KO : erreur lors de l''appel du fichier du public");
     die ("Erreur lors de l'appel du fichier public sur le serveur FTP. Procédure de refresh stoppée");
@@ -611,7 +611,7 @@ function update_traitement($code,$etat) {
 }
 
 if (md5($_REQUEST['pass']) == MD5_PASS_EXTERNE) {
-	getFilePublicGuildes();
+	//getFilePublicGuildes();
 	getGuildeInFile(1);
 
 } else {
