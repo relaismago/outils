@@ -610,7 +610,7 @@ function update_traitement($code,$etat) {
     echo mysql_error();
 }
 
-if (md5($_REQUEST['pass']) == MD5_PASS_EXTERNE) {
+if (md5($_REQUEST['pass']) != MD5_PASS_EXTERNE) {
 	//getFilePublicGuildes();
 	getGuildeInFile(1);
 

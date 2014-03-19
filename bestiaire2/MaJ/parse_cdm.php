@@ -36,7 +36,7 @@ global $db_vue_rm, $best_templates, $best_races, $best_ages_nom, $best_ages_id, 
 if(isset($_POST['soumettre'])){
   $pcdm=array(); // parsed cdm
   $copiercoller=$_POST['copiercoller'];
-  $lignes = explode("\n", htmlspecialchars(stripslashes($copiercoller)));
+  $lignes = explode("\n", $copiercoller);
   $i=0;
   $j=0;
   $max_carac=99;

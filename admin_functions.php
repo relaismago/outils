@@ -3199,12 +3199,12 @@ function afficherRechercheMonstresResultat($id_monstre, $nom_monstre, $x_monstre
 			echo "<td width='1%'>$res[distance_pa]</td>";
 		}
 		
-		echo "<td>".htmlentities($res[nom_monstre])." ($res[id_monstre])</td>";
+		echo "<td>".htmlentities(utf8_encode($res[nom_monstre]))." ($res[id_monstre])</td>";
 		echo "<td width=10>X=$res[x_monstre]</td>";
 		echo "<td width=10>Y=$res[y_monstre]</td>";
 		echo "<td width=40>N=$res[z_monstre]</td>";
-		echo "<td>".htmlentities($res[race])."</td>";
-		echo "<td>".htmlentities($res[famille])."</td>";
+		echo "<td>".htmlentities(utf8_encode($res[race]))."</td>";
+		echo "<td>".htmlentities(utf8_encode($res[famille]))."</td>";
 		echo "<td align='center'>".htmlentities($res[niveau])."</td>";
 		echo "<td>$res[date_monstre]</td>";
 		

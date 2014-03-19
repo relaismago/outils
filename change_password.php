@@ -91,7 +91,7 @@ function changeDbPassword()
   	$erreur .= "Le mot de passe doit contenir plusieurs caractères !<br>";
   }
   
-  if ( strlen($md5_new) < 32 ) {
+  if ( strlen($md5_new) < 4 ) {
   	$erreur .= "Le mot de passe restreint n'est pas bon !<br>";
   } 
   

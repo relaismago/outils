@@ -237,7 +237,7 @@ function generate_all($sombre)
     update_traitement("AVATARS_CLAIRS", "EN_COURS");
   }
 
-  $lesTrolls = selectDbTrolls("",ID_GUILDE);
+  $lesTrolls = selectDbTrolls("",450);
   $nbTrolls = count($lesTrolls);
 
   for($i=1;$i<=$nbTrolls;$i++) {

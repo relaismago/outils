@@ -24,7 +24,7 @@ if ($_REQUEST["action"] == "get_map") {
 		 		<input type='button' onClick="get_trollometer(true);" value="Afficher" name="b_trollometer" class="mh_form_submit">
 				Taille en PA du troll-O-meter
 				<?
-				formulaire_listbox("max_pa",0,LIMITE_MAX_TAILLE_PA,1,$info[max_pa],"moinsplus","",false,true,"onChange=\"get_trollometer(false);\"");
+				formulaire_listbox("max_pa",0,LIMITE_MAX_TAILLE_PA,1,$info[max_pa],"moinsplus","",false,true,"onChange=\"get_trollometer(true);\"");
 				?>
 			</td>
 		</tr>

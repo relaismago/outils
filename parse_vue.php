@@ -44,7 +44,7 @@ if (!$fichvue) {
 	                } elseif (preg_match("/^Murs/", $line)) {
 	                	$_SESSION['laby'] = 1;
 	                    $state = 10;
-	                } elseif (preg_match("/^TROLLS/", $line)) {
+	                } elseif (preg_match("/^[-] 	TRÕLLS/", $line)) {
 	                    $state = 20;
 	                } elseif (preg_match("/^MONSTRES ERRANTS/", $line)) {
 	                    $state = 30;
@@ -131,7 +131,7 @@ if (!$fichvue) {
 	                        if (preg_match("/\d+[ \t]+(\d+)[ \t]+([^\t]+)[ \t]+(\d+)[ \t]+([^\t]+)[ \t]+([^\t]+)?[ \t]+([-\d]+)[ \t]+([-\d]+)[ \t]+([-\d]+)/", $line, $parts)) {
 	                            $troll["invisible"] = "";
 	                            $troll["malade"] = "";
-	                            
+	   				                         
 	                            list($tmp, $troll["id"], $troll["nom"], $troll["level"], $troll["race"], $troll["guilde"], $troll["x"], $troll["y"], $troll["z"]) = $parts;
 	                            
 	                            // On regarde si le troll est malade ou non

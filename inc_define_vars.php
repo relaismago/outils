@@ -53,13 +53,11 @@ define('GGT','2690,5246,7497,32065,42637');
 
 /*liste des grandes tanières*/
 define('GT_38965','La Bïblyohtek');
-define('GT_33931','Le Mag\'Hasin');
-define('GT_34111','La Taverne');
+define('GT_33931','Le Relais');
 
 /*positions des grandes tanières*/
 define('GT_POS_38965','-26 -80 -32');
-define('GT_POS_33931','-32 -51 -15');
-define('GT_POS_34111','-27 -30 -33');
+define('GT_POS_33931','-28 -59 -1');
 
 /*images des grandes tanières*/
 define('GT_IMG_38965','biblyohtek.gif');

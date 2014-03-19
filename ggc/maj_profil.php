@@ -34,8 +34,10 @@ switch($action) {
     case "add":
     
     //PARSAGE DU PROFIL
-    
-    $lignes = explode("\n", htmlspecialchars(stripslashes($copiercoller)));
+//    $copiercoller=str_replace("\r\n","\n",$copiercoller);
+//    $copiercoller=str_replace("\r","\n",$copiercoller);
+//    $copiercoller=str_replace("Position\n","Position",$copiercoller);
+    $lignes = explode("\n" , $copiercoller);
  	$i=0;
  	$j=0;
         $sorts=0;
@@ -60,14 +62,15 @@ switch($action) {
 			$troll_dla_reel_hh	= trim($resultat[1]);
 			$troll_dla_reel_mm	= trim($resultat[2]);
 		endif;
-		if(eregi('[ \t]*Position.+X =(.+) .+ Y = (.+) .+ N = (.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*.+X =(.+) .+ Y = (.+) .+ N = (.+)',$lignes[$i],$resultat)):
 			$troll_x = trim($resultat[1]);
 			$troll_y = trim($resultat[2]);
 			$troll_z = trim($resultat[3]);
 		endif;
-		if(eregi('[ \t]*Exp.+Niveau.+:[ \t]*(.+)\(.+PI\).+',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*.*Niveau.+:(.+)\(.+',$lignes[$i],$resultat)):
 			$troll_niveau	= trim($resultat[1]);
 		endif;
+
 		if(eregi('[ \t]*Actuels\.+:[ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_pv_act = trim($resultat[1]);
 		endif;
@@ -180,14 +183,25 @@ switch($action) {
     if($vtt=="vtt"){
     	//Affichage saisie vtt
     	AfficheConfirmation("Mise à jour du profil","Mise à jour du GGC réussie !","Le profil du Troll $troll_id est à jour !","" .
-    			"<form action='maj_vtt.php?id=".$id."' method='post'>" .
+//    			"<form action='maj_vtt.php?id=".$id."' method='post'>" .
+			"<form action='../vtt/completer_profil.php?id=".$id."' method='post'>" .
+
     					"<input type='hidden' name='copiercoller' value=\"$copiercoller\">" .
     					"<input type='submit' name='soumettre' value='Le VTT maintenant !' class='mh_form_submit'>" .
     					"</form>");
     }else{
     	//Affichage de la page de confirmation
 		AfficheConfirmation("Mise à jour du profil","Mise à jour réussie !","Le profil du Troll $troll_id est à jour !","<a href=groupe.php?id=$id>Retourner voir le groupe</a>");
+// var_dump($copiercoller);
+//echo "<BR>";
+//var_dump($lignes);
+
+
+
     }
+
+
+
     break;
 
 /*-----------------------------------------------------------------*/

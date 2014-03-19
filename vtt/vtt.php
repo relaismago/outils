@@ -100,7 +100,7 @@ echo "</form>";
 #======================
 # ecriture de la QUERY
 #======================
-$query = "SELECT *, -DLAH*60-DLAM as TDLA, VUE+VUEB as TVUE, REG*2+REGB as TREG, ATT*3.5+ATTB as TATT, ESQ*3.5+ESQB as TESQ, DEG*2+DEGB as TDEG, x_troll, y_troll, z_troll, race_troll, niveau_troll, "
+$query = "SELECT *, VUE+VUEB as TVUE, REG*2+REGB as TREG, ATT*3.5+ATTB as TATT, ESQ*3.5+ESQB as TESQ, DEG*2+DEGB as TDEG, x_troll, y_troll, z_troll, race_troll, niveau_troll, "
 				." ARM+ARMB as TARM, RM+RMB as TRM, MM+MMB as TMM, KILLs, DEADs,"
 				." (TO_DAYS(NOW()) - TO_DAYS(DateMaj)) as Peremption"
 				." from "._TABLEVTT_.", trolls"
@@ -230,7 +230,7 @@ while ( $row = mysql_fetch_array($query_result) )
   echo "onclick='return overlib(\"$text\", STICKY, CAPTION, \"Informations Personnelles\", CLOSECLICK, EXCLUSIVE);' ";
   echo "onmouseout=\"return nd();\">";
 	
-	echo htmlspecialchars($nom_blason);
+	echo $nom_blason;
 
   echo "</td>\n";
   echo "<td align=center>"; 

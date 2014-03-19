@@ -47,6 +47,7 @@ if ($TROLL<1) $TROLL=0;
 ###########################################
 function refreshVue($id, $auto=false)
 {
+
 	if (strlen($id) == 0) 
 		die("refreshVue : Pas d'id de troll");
 
@@ -327,7 +328,7 @@ function updateSeenTroll($id,$x,$y,$z,$date, $nCasesVue=-1, $malade='-', $auto, 
 	$sql .= " x_troll=$x, y_troll=$y, z_troll=$z, is_seen_troll='oui',";
 	$sql .= " date_troll='$date',";
 	$sql .= " maj_groupe_spec_troll='$grpspec',";
-	$sql .= " est_labyrinthe_troll=$laby,";
+	$sql .= " est_labyrinthe_troll='$laby',";
 	$sql .= " malade_troll='$malade' WHERE id_troll =$id";
 		
 	if ($DEV) echo "DEBUG updateSeenTroll() $sql <br>";
@@ -513,7 +514,7 @@ function updateDb_zone_to_not_view($type, $miniX, $maxiX, $miniY, $maxiY, $miniZ
 	$sql .= " AND y_$type <= $maxiY";
 	$sql .= " AND z_$type >= $miniZ";
 	$sql .= " AND z_$type <= $maxiZ";
-	$sql .= " AND est_labyrinthe_$type = $laby";
+	$sql .= " AND est_labyrinthe_$type = '$laby'";
 	$sql .= " AND is_seen_$type = 'oui')";
 	$sql .= " OR (date_$type < '$date_less_5d');";
 	
@@ -546,7 +547,7 @@ function deleteDb_zone($type, $miniX, $maxiX, $miniY, $maxiY, $miniZ, $maxiZ, $t
 	$sql .= " AND y_$type<=$maxiY";
 	$sql .= " AND z_$type>=$miniZ";
 	$sql .= " AND z_$type<=$maxiZ";
-	$sql .= " AND est_labyrinthe_$type=$laby";
+	$sql .= " AND est_labyrinthe_$type='$laby'";
 
 	// On ne doit pas supprimer les gowaps RM/tanieres RM
 	if ( !empty($tabRM) ) {
@@ -684,7 +685,7 @@ function showListeCache($id_troll="",$hidden=false)
 			else $selected="";
 
 			echo "<option value='$troll[id_troll]' $selected>";
-			echo htmlentities(stripslashes($troll[nom_troll]));
+			echo utf8_encode(stripslashes($troll[nom_troll]));
 			echo " ($troll[id_troll])</option>\n";
 			
 			if ($hidden)
@@ -869,7 +870,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	$sql .= " AND y_troll <= $maxiY";
 	$sql .= " AND z_troll >= $miniZ";
 	$sql .= " AND z_troll <= $maxiZ";
-	$sql .= " AND est_labyrinthe_troll = $laby";
+	$sql .= " AND est_labyrinthe_troll = '$laby'";
 	$sql .= " AND guilde_troll = id_guilde";
 	if ($trolls_disparus == "oui") {
 		$sql .= " AND (is_seen_troll = 'oui'";
@@ -914,7 +915,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	$sql .= " AND z_monstre >= $miniZ";
 	$sql .= " AND z_monstre <= $maxiZ";
 	$sql .= " AND is_seen_monstre = 'oui'";
-	$sql .= " AND est_labyrinthe_monstre = $laby";
+	$sql .= " AND est_labyrinthe_monstre = '$laby'";
 	
 	if ($DEV) echo "DEBUG parseZone() MONSTRES $sql <br>";
 	$res=mysql_query($sql, $db_vue_rm);
@@ -1052,7 +1053,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	$sql .= " AND y_tresor <= $maxiY";
 	$sql .= " AND z_tresor >= $miniZ";
 	$sql .= " AND z_tresor <= $maxiZ";
-	$sql .= " AND est_labyrinthe_tresor = $laby";
+	$sql .= " AND est_labyrinthe_tresor = '$laby'";
 	
 	if ($DEV) echo "DEBUG parseZone() TRESOR $sql <br>";
 	$res=mysql_query($sql, $db_vue_rm);
@@ -1083,7 +1084,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	$sql .= " AND y_lieu <= $maxiY";
 	$sql .= " AND z_lieu >= $miniZ";
 	$sql .= " AND z_lieu <= $maxiZ";
-	$sql .= " AND est_labyrinthe_lieu = $laby";
+	$sql .= " AND est_labyrinthe_lieu = '$laby'";
 	
 	if ($DEV) echo "DEBUG parseZone() LIEU $sql <br>";
 	$res=mysql_query($sql, $db_vue_rm);
@@ -1195,7 +1196,7 @@ function parseZone($id_troll,$cX='',$cY='',$cZ='',$nCasesVue='', $taille_distanc
 	$sql .= " AND z_champi >= $miniZ";
 	$sql .= " AND z_champi <= $maxiZ";
 	$sql .= " AND is_seen_champi ='oui'";
-	$sql .= " AND est_labyrinthe_champi = $laby";
+	$sql .= " AND est_labyrinthe_champi = '$laby'";
 
 	if ($DEV) echo "DEBUG parseZone() CHAMPI $sql <br>";
 	$res=mysql_query($sql, $db_vue_rm);
@@ -1556,7 +1557,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id,$refresh)
 				case 40: # TRESOR 
 					list($oId, $nom, $oX, $oY, $oZ) = split (";",$line);	
 					$laby = $_SESSION['laby'];
-					$sub_sql_tresor .= "($oId, '".addslashes($nom)."', $oX, $oY, $oZ, '$date',$laby),";
+					$sub_sql_tresor .= "($oId, '".addslashes($nom)."', $oX, $oY, $oZ, '$date','$laby'),";
 					$sub_sql_tresor_list_id .= "$oId OR id_tresor=";
 
 					$nb_tresor++;
@@ -1590,7 +1591,7 @@ function maj_vue_refresh($auto,$state,$maj_troll_id,$refresh)
 					if (!$isTaniereRm) {
 						if ((is_numeric($oX)) && (is_numeric($oY)) && (is_numeric($oZ))) {
 							$laby = $_SESSION['laby'];
-							$sub_sql_lieux .= "($oId, '".addslashes($nom)."', $oX, $oY, $oZ, '$date',$laby),";
+							$sub_sql_lieux .= "($oId, '".addslashes($nom)."', $oX, $oY, $oZ, '$date','$laby'),";
 							$sub_sql_lieux_list_id .= "$oId OR id_lieu=";
 						} else {
 							if (!$auto) {

@@ -16,8 +16,8 @@
 		echo mysql_error();
 		
 		// Retourne false si l'appel du script a été dépassé
-		if ( $nb["0"] >= 1 ){
-			echo "<tr class='mh_tdtitre' align='center'><td class='mh_tdpage'><h3>Le script public pour le Troll $id a été utilisé plus de 1 fois en moins de 24 heures.</h3></td></tr>";
+		if ( $nb["0"] >= 3 ){
+			echo "<tr class='mh_tdtitre' align='center'><td class='mh_tdpage'><h3>Le script public pour le Troll $id a été utilisé plus de de 3 fois en moins de 24 heures.</h3></td></tr>";
 			return false;
 		}		
 		

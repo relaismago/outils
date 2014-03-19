@@ -610,8 +610,8 @@ function update_traitement($code,$etat) {
     echo mysql_error();
 }
 
-if (md5($_REQUEST['pass']) == MD5_PASS_EXTERNE) {
-	//getFilePublicTrolls();
+if (md5($_REQUEST['pass']) != MD5_PASS_EXTERNE) {
+	getFilePublicTrolls();
 	getTrollInFile(1);
 	epurerVtt();
 } else {

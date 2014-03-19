@@ -121,7 +121,7 @@ switch($action) {
 /*	AFFICHAGE DU FORMULAIRE DE SAISIE DU PROFIL                    */
 /*-----------------------------------------------------------------*/
     default:
-	$lignes = explode("\n", htmlspecialchars(stripslashes($copiercoller)));
+	$lignes = explode("\n", $copiercoller);
  	$i=0;
  	$j=0;
         $sorts=0;
@@ -164,7 +164,7 @@ switch($action) {
 			$troll_reg_bm	= trim($resultat[2]);  
                 endif;
 		
-		if(eregi('[ \t]*Combat.+Atta.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Atta.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_att_base	= trim($resultat[1]);
 			$troll_att_bm	= trim($resultat[2]);
 		endif;
@@ -176,7 +176,7 @@ switch($action) {
 			$troll_deg_base	= trim($resultat[1]);
 			$troll_deg_bm	= trim($resultat[2]);
 		endif;
-		if(eregi('[ \t]*Armure\.+:[ \t]*([0-9]+)[ \t]+(.+)',$lignes[$i],$resultat)):
+		if(eregi('[ \t]*Armu.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_arm_base	= trim($resultat[1]);
 			$troll_arm_bm	= trim($resultat[2]);
 		endif;
@@ -194,7 +194,7 @@ switch($action) {
 			$troll_mm_base	= trim($resultat[1]);
 			$troll_mm_bm	= trim($resultat[2]);
 		endif;
-		if (eregi('[ \t]*Sorts[ \t]*', $lignes[$i], $resultat)):
+		if (eregi('[ \t]*Sortil.ges*', $lignes[$i], $resultat)):
 		  $sorts=1;
 		endif;
 		if(eregi('[ \t]*(.+)\(niveau.+:(.+)%\)[ \t]*(.+)+\(niveau.+:(.+)%\)',$lignes[$i],$resultat)):

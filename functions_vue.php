@@ -1283,7 +1283,7 @@ function vue2d_get_popup_trolls($ax,$ay,$az,$trolls)
 		if ($troll[z] == $az) {
 			//$nom=preg_replace("/'/","_",$troll[nom]);
 			$nom = addslashes($troll['nom']);
-			$nom = $nom;
+			$nom = utf8_encode($nom);
 			if ( ($nom == "moi") && ($troll['id'] == -1)) {
 				$nom = "Je suis l&agrave; !";
 				$text .= "<span class=trollText>".$nom;
@@ -1322,7 +1322,8 @@ function vue2d_get_popup_monstres($ax,$ay,$az,$monstres)
 		return;
 	foreach ($monstres[$ax+100][$ay+100] as $monstre) {
 		if ($monstre[z] == $az) {
-			$nom = htmlentities(addslashes($monstre['nom']));
+			$nom = addslashes($monstre['nom']);
+			$nom = utf8_encode($nom);
 			$text .= "<span class=streumText>".$nom." (<a href=#$monstre[id]></a>$monstre[id]) ";
 
 			// Si c'est un gowap de la guilde, on affiche le proprio
@@ -1369,8 +1370,8 @@ function vue2d_get_popup_lieux($ax,$ay,$az,$lieux)
 			} elseif (preg_match("/.*\((\d+)\)$/",chop($lieu['nom']),$matches)) {
 				$text .= "[GT] ";
 			}
-			$text .= htmlentities(addslashes(htmlentities($lieu['nom'])));
-//			$text .= " ($lieu[id]) "; 
+			$text .= addslashes(htmlentities(utf8_encode($lieu['nom'])));
+			$text .= " ($lieu[id]) "; 
 
 			// Si c'est une tanni&egrave;re de la guilde, on affiche le proprio
 			if ( userIsGuilde() ) {
@@ -1866,10 +1867,10 @@ function vue2d_afficher_trollometer_monstres($monstres,$max_pa,$ax,$ay,$az)
 							$text .= "<span class='white' ";
 							#$text .= vue2d_informations_monstres_popup($monstre,$ax,$ay,$az,$max_pa);
 							$text .= ">";
-							$text .= htmlentities(stripslashes($resultat[1]));
+							$text .= utf8_encode(stripslashes($resultat[1]));
 							$text .= "</span> ";
 						} else {
-							$text .= htmlentities(stripslashes($resultat[1]));
+							$text .= utf8_encode(stripslashes($resultat[1]));
 						}
 
 						if ( userIsGuilde() ) {
@@ -1884,11 +1885,11 @@ function vue2d_afficher_trollometer_monstres($monstres,$max_pa,$ax,$ay,$az)
 
 						$text .= "</td>";
 
-						$text .= "<td>[".htmlentities($resultat[2])."]</b></td>";
+						$text .= "<td>[".utf8_encode(stripslashes($resultat[2]))."]</b></td>";
 
 						if ( userIsGuilde() ) {
-							$text .= "<td>".htmlentities($monstre[famille])."</a></td>";
-//							$text .= "<td>$monstre[race]</a></td>";
+							$text .= "<td>".htmlentities(utf8_encode($monstre[famille]))."</a></td>";
+//							$text .= "<td>".utf8_encode($monstre[race])."</a></td>";
 							$text .= "<td>$monstre[niveau]</a></td>";
 
 							$text .= "<td nowrap><a href=\"/bestiaire2/bestiaire.php?$urle\" title='Acc&egrave;s Bestiaire'>";
@@ -1969,16 +1970,17 @@ function vue2d_afficher_trollometer_trolls($trolls,$max_pa)
 							$invi = " invisible";
 						else
 							$invi = "";
-
+						$nom = addslashes($troll['nom']);
+				                $nom = utf8_encode($nom);
 						//$text = "<tr class='objetsProches.ligne$invi'>";
 						$text = "<tr class='objetsProches.ligne$invi'>";
 						$text .= "<td nowrap>";
-						$text .= afficher_position($troll['x'],$troll['y'],$troll['z'],$troll['id'],$troll['nom']);
+						$text .= afficher_position($troll['x'],$troll['y'],$troll['z'],$troll['id'],$nom);
 						$text .= "</td>";
 						$text .= "<td nowrap>$troll[id]</td>";
 						
 						$text .= "<td nowrap class='objetsProches.ligne$c_troll$invi'><b>";
-						$text .= htmlentities(stripslashes($troll['nom']));
+						$text .= htmlentities(stripslashes($nom));
 						$text .= "</b></td>";
 
 						$text .= "<td nowrap title='$troll[race]'> ".substr($troll['race'],0,1)." </td>";
@@ -1987,10 +1989,10 @@ function vue2d_afficher_trollometer_trolls($trolls,$max_pa)
 						$text .= "<td class='objetsProches.ligne$c_guilde$invi'>";
 						if ( userIsGuilde() ) {
 							$text .= "<a href='engine_view.php?guilde=".$troll['guilde_troll']."' title='Fiche RG de la guilde'>";
-							$text .= stripslashes($troll['guilde']);
+							$text .= utf8_encode(stripslashes($troll['guilde']));
 							$text .= "</a>";
 						} else {
-							$text .= stripslashes($troll['guilde']);
+							$text .= utf8_encode(stripslashes($troll['guilde']));
 						}
 
 						$text .= "</td>";
@@ -2090,7 +2092,7 @@ function vue2d_afficher_trollometer_lieux($lieux,$max_pa)
 						$text .= "</td>";
 						$text .= "<td>$lieu[id]</td>";
 						$text .= "<td>";
-						$text .= htmlentities(stripslashes($lieu['nom']));
+						$text .= utf8_encode(stripslashes($lieu['nom']));
 						// Si c'est une tanni&egrave;re de la guilde, on affiche le proprio
 						if ( userIsGuilde() ) {
 							if ($lieu['nom_info'] != "" ) {

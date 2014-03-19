@@ -53,7 +53,7 @@ echo "<center>";
 echo "<H1>Mise à jour des informations de<br>".htmlspecialchars($row["nom_troll"])."</H1>\n";
 echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>\n";
 
-	$lignes = explode("\n", htmlspecialchars(stripslashes($_REQUEST["copiercoller"])));
+	$lignes = explode("\n", stripslashes($_REQUEST["copiercoller"]));
  	$i=0;
  	$j=0;
   $sorts=0;
@@ -81,8 +81,12 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 			$troll_vue_base		= trim($resultat[1]);
 			$troll_vue_bm		= trim($resultat[2]);
 		endif;
-		if(eregi('[ \t]*Exp.+Niveau.+:[ \t]*(.+)\(.+PI\).+',$lignes[$i],$resultat)):
-			$troll_niveau	= trim($resultat[1]);
+		if(1==1):
+// eregi('[ \t]*Exp.+Niveau.+:[ \t]*(.+)\(.+PI\).+',$lignes[$i],$resultat)):
+// Modif pourrie de KK: ici normalement on teste que le niveau a bien été copié collé mais ça marche pô
+//			preg_match("/\d\d/", $resultat[0], $resultat);
+			$troll_niveau	= "blah";
+
 		endif;
 		if(eregi('[ \t]*Actuels\.+:[ \t]*(.+)',$lignes[$i],$resultat)):
 			$troll_pvact		= trim($resultat[1]);
@@ -117,6 +121,11 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 			$resultat = explode(" \t",$resultat[2]);			
 			$troll_deg_bm	= trim($resultat[0]+$resultat[1]);
 		endif;
+//            if(eregi('[ \t]*Armure\.+:[ \t]*(.+)[ \t]*D[0-9][ \t]*(.+)',$lignes[$i],$resultat)):
+//                    $resultat = explode(" \t",$resultat[1]);
+//                    $troll_arm_base = trim($resultat[1]);
+//                    $troll_arm_bm   = trim($resultat[2]);
+
 		if(eregi('[ \t]*Armure\.+:[  \t]+(.+)',$lignes[$i],$resultat)):
 			$resultat = explode(" \t",$resultat[1]);
 			$troll_arm_base	= trim($resultat[1]);
@@ -161,6 +170,9 @@ echo "<H2>2ème Etape : compléter les infos facultatives (à saisie manuelle)</H2>
 		
 		if ($troll_niveau == "") {
 			afficher_titre_tableau("Vous n'avez pas fait le copié/collé depuis la page du profil","Veuillez retenter...");
+var_dump($lignes);
+var_dump($_REQUEST['copiercoller']);
+
 			die();
 		}
 		
